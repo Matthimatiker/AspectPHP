@@ -10,6 +10,8 @@
  * @since 16.10.2011
  */
 
+set_include_path(dirname(__FILE__) . '/library' . PATH_SEPARATOR . get_include_path());
+
 function autoload($class) {
     $file = str_replace(array('_', '\\'), '/', $class);
     $path = stream_resolve_include_path($file);
