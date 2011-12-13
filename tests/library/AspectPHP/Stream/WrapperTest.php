@@ -118,6 +118,10 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
         
     }
     
+    /**
+     * Ensures that the wrapper does not modify source code that
+     * contains errors.
+     */
     public function testWrapperDoesNotModifyCodeWithErrors() {
         
     }
