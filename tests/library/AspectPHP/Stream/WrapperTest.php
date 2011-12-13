@@ -118,6 +118,10 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
         
     }
     
+    public function testWrapperDoesNotModifyCodeWithErrors() {
+        
+    }
+    
 }
 
 ?>
