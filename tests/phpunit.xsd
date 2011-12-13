@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  - Defines a xml schema for PHPUnit xml configuration files as described in
+  - the official PHPUnit documentation at:
+  - http://www.phpunit.de/manual/current/en/appendixes.configuration.html
+  -
+  - @author Matthias Molitor <matthias@matthimatiker.de>
+  - @version $Rev$
+  - @since 02.03.2011
+  -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:element name="phpunit">
+    	<xsd:complexType>
+	        <xsd:sequence>
+	            <xsd:element name="testsuites" type="Testsuites" minOccurs="1" maxOccurs="1" />
+	            <xsd:element name="groups" type="Groups" minOccurs="0" maxOccurs="1" />
+	            <xsd:element name="filter" type="Filter" minOccurs="0" maxOccurs="1" />
+	            <xsd:element name="logging" type="Logging" minOccurs="0" maxOccurs="1" />
+	            <xsd:element name="listeners" type="Listeners" minOccurs="0" maxOccurs="1" />
+	            <xsd:element name="php" type="PhpSettings" minOccurs="0" maxOccurs="1" />
+	            <xsd:element name="selenium" type="Selenium" minOccurs="0" maxOccurs="1" />
+	        </xsd:sequence>
+	        <xsd:attribute name="backupGlobals" type="xsd:boolean" use="optional" />
+	        <xsd:attribute name="backupStaticAttributes" type="xsd:boolean" use="optional" />
+	        <xsd:attribute name="bootstrap" type="xsd:string" use="optional" />
+	        <xsd:attribute name="colors" type="xsd:boolean" use="optional" />
+	        <xsd:attribute name="convertErrorsToExceptions" type="xsd:boolean" use="optional" />
+	        <xsd:attribute name="convertNoticesToExceptions" type="xsd:boolean" use="optional" />
+	        <xsd:attribute name="convertWarningsToExceptions" type="xsd:boolean" use="optional" />
+	        <xsd:attribute name="processIsolation" type="xsd:boolean" use="optional" />
+	        <xsd:attribute name="stopOnFailure" type="xsd:boolean" use="optional" />
+	        <xsd:attribute name="syntaxCheck" type="xsd:boolean" use="optional" />
+	        <xsd:attribute name="testSuiteLoaderClass" type="xsd:string" use="optional" />
+	        <xsd:attribute name="testSuiteLoaderFile" type="xsd:string" use="optional" />
+	        <xsd:attribute name="strict" type="xsd:boolean" use="optional" />
+	        <xsd:attribute name="verbose" type="xsd:boolean" use="optional" />
+	    </xsd:complexType>
+    </xsd:element>
+
+    <!-- Test Suites -->
+    <xsd:complexType name="Testsuites">
+        <xsd:sequence>
+            <xsd:element name="testsuite" type="Testsuite" minOccurs="1" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Testsuite">
+        <xsd:sequence>
+            <xsd:element name="directory" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+            <xsd:element name="file" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+        <xsd:attribute name="name" type="xsd:string" use="required" />
+    </xsd:complexType>
+    
+    <!-- Groups -->
+    <xsd:complexType name="Groups">
+        <xsd:sequence>
+            <xsd:element name="include" type="GroupContainer" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="exclude" type="GroupContainer" minOccurs="0" maxOccurs="1" />
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="GroupContainer">
+        <xsd:sequence>
+            <xsd:element name="group" type="xsd:string" minOccurs="1" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <!-- Including and Excluding Files for Code Coverage  -->
+    <xsd:complexType name="Filter">
+        <xsd:sequence>
+            <xsd:element name="blacklist" type="FilterContainer" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="whitelist" type="FilterContainer" minOccurs="0" maxOccurs="1" />
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="FilterContainer">
+        <xsd:sequence>
+            <xsd:element name="directory" type="FilterDirectory" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="file" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+            <xsd:element name="exclude" type="FilterExclude" minOccurs="0" maxOccurs="1" />
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="FilterDirectory">
+        <!-- FilterDirectory supports the extension attribute and text. -->
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute name="suffix" type="xsd:string" use="required" />
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="FilterExclude">
+        <xsd:sequence>
+            <xsd:element name="directory" type="FilterDirectory" minOccurs="0" maxOccurs="unbounded" />
+            <xsd:element name="file" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <!-- Logging -->
+    <xsd:complexType name="Logging">
+        <xsd:sequence>
+            <xsd:element name="log" type="Log" minOccurs="1" maxOccurs="1" />
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Log">
+        <xsd:attribute name="type" type="xsd:string" use="required" />
+        <xsd:attribute name="target" type="xsd:string" use="required" />
+        <xsd:attribute name="charset" type="xsd:string" use="optional" />
+        <xsd:attribute name="yui" type="xsd:boolean" use="optional" />
+        <xsd:attribute name="highlight" type="xsd:boolean" use="optional" />
+        <xsd:attribute name="lowUpperBound" type="xsd:integer" use="optional" />
+        <xsd:attribute name="hightLowerBound" type="xsd:integer" use="optional" />
+        <xsd:attribute name="logIncompleteSkipped" type="xsd:boolean" use="optional" />
+    </xsd:complexType>
+    
+    <!-- Test Listeners -->
+    <xsd:complexType name="Listeners">
+    	<xsd:sequence>
+    		<xsd:element name="listener" type="Listener" minOccurs="1" maxOccurs="unbounded" />
+    	</xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Listener">
+    	<xsd:sequence>
+    		<xsd:element name="arguments" minOccurs="1" maxOccurs="1">
+    			<xsd:complexType>
+    				<xsd:group ref="ListenerArgumentData" minOccurs="0" maxOccurs="unbounded" />
+    			</xsd:complexType>
+    		</xsd:element>
+    	</xsd:sequence>
+    	<xsd:attribute name="class" type="xsd:string" use="required" />
+    	<xsd:attribute name="file" type="xsd:string" use="required" />
+    </xsd:complexType>
+    
+    <xsd:group name="ListenerArgumentData">
+    	<xsd:choice>
+	    	<xsd:element name="array" type="ListenerArgumentArray" />
+	   		<xsd:element name="integer" type="xsd:integer" />
+	   		<xsd:element name="string" type="xsd:string" />
+	   		<xsd:element name="double" type="xsd:double" />
+	   		<xsd:element name="null" type="Empty" />
+	   		<xsd:element name="object" type="ListenerArgumentObject" />
+   		</xsd:choice>
+    </xsd:group>
+    
+    <xsd:complexType name="ListenerArgumentArray">
+    	<xsd:sequence>
+    		<xsd:element name="element">
+    			<xsd:complexType>
+    				<xsd:group ref="ListenerArgumentData" minOccurs="0" maxOccurs="unbounded" />
+    				<xsd:attribute name="key" type="xsd:string" use="required" />
+    			</xsd:complexType>
+    		</xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="ListenerArgumentObject">
+    	<xsd:attribute name="class" type="xsd:string" use="required" />
+    </xsd:complexType>
+    
+    <!-- Setting PHP INI settings, Constants and Global Variables -->
+    <xsd:complexType name="PhpSettings">
+    	<xsd:sequence>
+    		<xsd:element name="includePath" type="xsd:string" minOccurs="0" maxOccurs="1" />
+    		<xsd:element name="ini" type="PhpSetting" minOccurs="0" maxOccurs="unbounded" />
+    		<xsd:element name="const" type="PhpSetting" minOccurs="0" maxOccurs="unbounded" />
+    		<xsd:element name="var" type="PhpSetting" minOccurs="0" maxOccurs="unbounded" />
+    		<xsd:element name="env" type="PhpSetting" minOccurs="0" maxOccurs="unbounded" />
+    		<xsd:element name="post" type="PhpSetting" minOccurs="0" maxOccurs="unbounded" />
+    		<xsd:element name="get" type="PhpSetting" minOccurs="0" maxOccurs="unbounded" />
+    		<xsd:element name="cookie" type="PhpSetting" minOccurs="0" maxOccurs="unbounded" />
+    		<xsd:element name="server" type="PhpSetting" minOccurs="0" maxOccurs="unbounded" />
+    		<xsd:element name="files" type="PhpSetting" minOccurs="0" maxOccurs="unbounded" />
+    		<xsd:element name="request" type="PhpSetting" minOccurs="0" maxOccurs="unbounded" />
+    	</xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="PhpSetting">
+    	<xsd:attribute name="name" type="xsd:string" use="required" />
+    	<xsd:attribute name="value" type="xsd:string" use="required" />
+    </xsd:complexType>
+    
+    <!-- Configuring Browsers for Selenium RC -->
+    <xsd:complexType name="Selenium">
+    	<xsd:sequence>
+    		<xsd:element name="browser" minOccurs="0" maxOccurs="unbounded">
+    			<xsd:complexType>
+    				<xsd:attribute name="name" type="xsd:string" use="required" />
+    				<xsd:attribute name="browser" type="xsd:string" use="required" />
+    				<xsd:attribute name="host" type="xsd:string" use="required" />
+    				<xsd:attribute name="port" type="xsd:integer" use="required" />
+    				<xsd:attribute name="timeout" type="xsd:integer" use="required" />
+    			</xsd:complexType>
+    		</xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+    
+    <!-- Defines an empty element like BR in HTML. -->
+    <xsd:complexType name="Empty">
+    </xsd:complexType>
+    
+</xsd:schema>

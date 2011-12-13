@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:noNamespaceSchemaLocation="phpunit.xsd" 
+         backupGlobals="false" 
+         backupStaticAttributes="false">
+
+	<testsuites>
+		<testsuite name="AspectPHP Test Suite">
+	        <directory>./library</directory>
+	    </testsuite>
+	</testsuites>
+
+ 	<!-- Filter for code coverage -->
+    <filter>
+        <whitelist>
+            <directory suffix=".php">../library</directory>
+            <directory suffix=".php">.</directory>
+        </whitelist>
+    </filter>
+    
+</phpunit>
