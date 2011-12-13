@@ -10,6 +10,9 @@
  * @since 16.10.2011
  */
 
+// Do not suppress error messages.
+error_reporting(E_ALL | E_STRICT);
+
 set_include_path(dirname(__FILE__) . '/library' . PATH_SEPARATOR . get_include_path());
 
 /**
