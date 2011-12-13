@@ -1,4 +1,4 @@
-== AspectP ==
+== AspectPHP ==
 
 AspectPHP adds Aspect Oriented Programming features to PHP.
 It allows hooking into most of the class methods that are not provided by the PHP Core.
