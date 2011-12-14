@@ -28,6 +28,30 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
  */
 class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
     
+    public function testIsRegisteredReturnsTrueIfStreamIsAlreadyRegistered() {
+        
+    }
+    
+    public function testIsRegisteredReturnsFalseIfStreamIsNotRegistered() {
+        
+    }
+    
+    public function testRegisterRegistersStream() {
+        
+    }
+    
+    public function testRegisterDoesNothingIfStreamIsAlreadyRegistered() {
+        
+    }
+    
+    public function testUnregisterRemovesRegisteredStream() {
+        
+    }
+    
+    public function testUnregisterDoesNothingIfStreamIsNotRegistered() {
+        
+    }
+    
     /**
      * Ensures that is_file() returns true if the given path points
      * to a existing file.
@@ -131,6 +155,13 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * classes.
      */
     public function testFileConstantIsUsableInLoadedFiles() {
+        
+    }
+    
+    /**
+     * Ensures that the wrapper does not modify files that do not contain classes.
+     */
+    public function testWrapperDoesNotModifyFilesThatDoNotContainClasses() {
         
     }
     
