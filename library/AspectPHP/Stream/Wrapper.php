@@ -48,6 +48,88 @@ class AspectPHP_Stream_Wrapper {
         
     }
     
+	/**
+     * Opens the code file and adds extension points.
+     *
+     * @param string $path
+     * @param string $mode
+     * @param integer $options
+     * @param string $openedPath
+     * @retgurn boolean
+     */
+    public function stream_open($path, $mode, $options, &$openedPath)
+    {
+        
+    }
+
+    /**
+     * Reads data from the stream.
+     *
+     * @param integer $count The number of bytes.
+     * @return string
+     */
+    public function stream_read($count)
+    {
+        
+    }
+
+
+    /**
+     * Returns the current position in the stream.
+     *
+     * @return integer
+     */
+    public function stream_tell()
+    {
+        
+    }
+
+
+    /**
+     * Checks if the current position points to the end of the stream.
+     *
+     * @return boolean
+     */
+    public function stream_eof()
+    {
+        
+    }
+
+
+    /**
+     * Returns meta data about the stream.
+     *
+     * @return array(mixed)
+     */
+    public function stream_stat()
+    {
+        
+    }
+
+	/**
+     * Returns meta data about the file.
+     *
+     * @param string $path
+     * @param integer $flags
+     * @return array(mixed)
+     */
+    public function url_stat($path , $flags)
+    {
+        
+    }
+
+    /**
+     * Sets the current position to a specific point in the stream.
+     *
+     * @param integer $offset
+     * @param integer $whence One of the SEEK_* contants.
+     * @return boolean True if changing the position was successful, false otherwise.
+     */
+    public function stream_seek($offset, $whence = SEEK_SET)
+    {
+        
+    }
+    
 }
 
 ?>
