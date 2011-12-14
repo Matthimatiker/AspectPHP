@@ -8,3 +8,19 @@ It allows hooking into most of the class methods that are not provided by the PH
 AspectPHP uses a custom stream wrapper to hook into the class loading process.
 It injects extension points and allows the registration of handler objects
 that are invoked when the method of the source object is called.
+
+=== Required classes ===
+* Stream
+  * Injects extension points
+* Manager
+  * Registers and unregisters aspects
+  * Handles calls to extension points
+* MethodData 
+  * Contains data about called methods
+    * Extension point
+    * Context
+    * Arguments
+    * Return value
+* Aspect (interface)
+  * Can be registered for extension points
+  * Will be called if extension point is notified
