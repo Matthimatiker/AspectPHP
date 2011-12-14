@@ -109,7 +109,7 @@ class AspectPHP_Stream_Wrapper {
 	/**
      * Returns meta data about the file.
      *
-     * @param string $path
+     * @param string $path The file path.
      * @param integer $flags
      * @return array(mixed)
      */
@@ -121,7 +121,7 @@ class AspectPHP_Stream_Wrapper {
     /**
      * Sets the current position to a specific point in the stream.
      *
-     * @param integer $offset
+     * @param integer $offset Offset in bytes.
      * @param integer $whence One of the SEEK_* contants.
      * @return boolean True if changing the position was successful, false otherwise.
      */
