@@ -21,14 +21,29 @@
  */
 class AspectPHP_Stream_Wrapper {
     
+    /**
+     * Registers the stream wrapper.
+     *
+     * Does nothing if the wrapper is already registered.
+     */
     public static function register() {
         
     }
     
+    /**
+     * Unregisters the stream wrapper.
+     *
+     * Does nothing if the wrapper is not registered.
+     */
     public static function unregister() {
         
     }
     
+    /**
+     * Checks if the stream wrapper is registered.
+     *
+     * @return boolean True if the wrapper is registered, false otherwise.
+     */
     public static function isRegistered() {
         
     }
