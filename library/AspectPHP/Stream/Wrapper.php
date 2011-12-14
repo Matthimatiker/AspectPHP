@@ -21,6 +21,18 @@
  */
 class AspectPHP_Stream_Wrapper {
     
+    public static function register() {
+        
+    }
+    
+    public static function unregister() {
+        
+    }
+    
+    public static function isRegistered() {
+        
+    }
+    
 }
 
 ?>
