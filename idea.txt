@@ -10,6 +10,7 @@ It injects extension points and allows the registration of handler objects
 that are invoked when the method of the source object is called.
 
 === Required classes ===
+
 * Stream
   * Injects extension points
 * Manager
