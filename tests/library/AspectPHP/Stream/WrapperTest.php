@@ -126,6 +126,14 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
         
     }
     
+    /**
+     * Ensures that the __FILE__ constant works correctly in loaded
+     * classes.
+     */
+    public function testFileConstantIsUsableInLoadedFiles() {
+        
+    }
+    
 }
 
 ?>
