@@ -153,6 +153,13 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
     }
     
     /**
+     * Ensures that static methods remain static.
+     */
+    public function testWrapperDoesNotRemoveStaticAttributeFromMethods() {
+        
+    }
+    
+    /**
      * Ensures that the wrapper does not suppress errors if invalid
      * code is loaded.
      */
