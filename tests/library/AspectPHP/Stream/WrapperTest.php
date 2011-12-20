@@ -98,7 +98,8 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * to a existing file.
      */
     public function testIsFileReturnsTrueIfFileExists() {
-        
+        $path = $this->toStream($this->getPath('Check.php'));
+        $this->assertTrue(is_file($path));
     }
     
     /**
@@ -106,14 +107,15 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * to a not existing file.
      */
     public function testIsFileReturnsFalseIfFileDoesNotExist() {
-        
+        $path = $this->toStream($this->getPath('Missing.php'));
+        $this->assertFalse(is_file($path));
     }
     
     /**
      * Checks if stat() returns valid data about the given file.
      */
     public function testStatReturnsCorrectFileData() {
-        
+        $this->markTestIncomplete('Not implemented yet.');
     }
     
     /**
