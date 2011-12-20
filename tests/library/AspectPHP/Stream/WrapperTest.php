@@ -29,17 +29,34 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
 class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
     
     /**
+     * See {@link PHPUnit_Framework_TestCase::setUp()} for details.
+     */
+    protected function setUp() {
+        parent::setUp();
+        AspectPHP_Stream_Wrapper::register();
+    }
+    
+    /**
+     * See {@link PHPUnit_Framework_TestCase::tearDown()} for details.
+     */
+    protected function tearDown() {
+        AspectPHP_Stream_Wrapper::unregister();
+        parent::tearDown();
+    }
+    
+    /**
      * Ensures that isRegistered() returns true if the stream is already registered.
      */
     public function testIsRegisteredReturnsTrueIfStreamIsAlreadyRegistered() {
-        
+        $this->assertTrue(AspectPHP_Stream_Wrapper::isRegistered());
     }
     
     /**
      * Ensures that isRegistered() returns false if the stream is not registered.
      */
     public function testIsRegisteredReturnsFalseIfStreamIsNotRegistered() {
-        
+        AspectPHP_Stream_Wrapper::unregister();
+        $this->assertFalse(AspectPHP_Stream_Wrapper::isRegistered());
     }
     
     /**
