@@ -80,6 +80,7 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      */
     public function testUnregisterRemovesRegisteredStream() {
         AspectPHP_Stream_Wrapper::unregister();
+        $streams = stream_get_wrappers();
         $this->assertNotContains(AspectPHP_Stream_Wrapper::NAME, $streams);
     }
     
