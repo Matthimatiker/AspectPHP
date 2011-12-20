@@ -122,28 +122,32 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * Ensures that is_writable() returns always false.
      */
     public function testIsWritableReturnsFalse() {
-        
+        $path = $this->toStream($this->getPath('Check.php'));
+        $this->assertFalse(is_writable($path));
     }
     
     /**
      * Ensures that the wrapper cannot be used to modify files.
      */
     public function testWrapperDoesNotAllowModifyingFiles() {
-        
+        $this->markTestIncomplete('Not implemented yet.');
     }
     
     /**
      * Checks if the wrapper modifies the loaded code.
      */
     public function testWrapperModifiesLoadedCode() {
-        
+        $path       = $this->getPath('Check.php');
+        $original   = file_get_contents($path);
+        $fromStream = file_get_contents($this->toStream($path));
+        $this->assertNotEquals($original, $fromStream);
     }
     
     /**
      * Checks if the wrapper generates valid PHP code.
      */
     public function testWrapperGeneratesValidCode() {
-        
+        $this->markTestIncomplete('Not implemented yet.');
     }
     
     /**
