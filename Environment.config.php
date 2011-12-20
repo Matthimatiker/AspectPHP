@@ -25,7 +25,7 @@ set_include_path(dirname(__FILE__) . '/library' . PATH_SEPARATOR . get_include_p
  * @return boolean False if the class was not loaded.
  */
 function autoload($class) {
-    $file = str_replace(array('_', '\\'), '/', $class);
+    $file = str_replace(array('_', '\\'), '/', $class) . '.php';
     $path = stream_resolve_include_path($file);
     if( $path === false) {
         return false;
