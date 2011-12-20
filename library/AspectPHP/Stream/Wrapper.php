@@ -22,6 +22,13 @@
 class AspectPHP_Stream_Wrapper {
     
     /**
+     * The name that is used to access the stream (name://...).
+     *
+     * @var string
+     */
+    const NAME = 'aspectphp';
+    
+    /**
      * Registers the stream wrapper.
      *
      * Does nothing if the wrapper is already registered.
