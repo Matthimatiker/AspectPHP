@@ -213,6 +213,24 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
         
     }
     
+    /**
+     * Returns the path to the test file with the given name.
+     *
+     * Example:
+     * <code>
+     * $path = $this->getPath('test.php');
+     * </code>
+     *
+     * Test files are located in the TestData directory.
+     * The method does not check if the requested file exists.
+     *
+     * @param string $testFile
+     * @return string
+     */
+    protected function getPath($testFile) {
+        return dirname(__FILE__) . '/TestData/' . $testFile;
+    }
+    
 }
 
 ?>
