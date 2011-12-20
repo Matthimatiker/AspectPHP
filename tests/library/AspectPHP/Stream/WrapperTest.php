@@ -63,28 +63,33 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * Checks if register() registers the stream.
      */
     public function testRegisterRegistersStream() {
-        
+        $streams = stream_get_wrappers();
+        $this->assertContains(AspectPHP_Stream_Wrapper::NAME, $streams);
     }
     
     /**
      * Ensures that register() does nothing if the stream is already registered.
      */
     public function testRegisterDoesNothingIfStreamIsAlreadyRegistered() {
-        
+        $this->setExpectedException(null);
+        AspectPHP_Stream_Wrapper::register();
     }
     
     /**
      * Checks if unregister() removes the registered stream.
      */
     public function testUnregisterRemovesRegisteredStream() {
-        
+        AspectPHP_Stream_Wrapper::unregister();
+        $this->assertNotContains(AspectPHP_Stream_Wrapper::NAME, $streams);
     }
     
     /**
      * Ensures that unregister() does nothing if the stream is not registered.
      */
     public function testUnregisterDoesNothingIfStreamIsNotRegistered() {
-        
+        $this->setExpectedException(null);
+        AspectPHP_Stream_Wrapper::unregister();
+        AspectPHP_Stream_Wrapper::unregister();
     }
     
     /**
