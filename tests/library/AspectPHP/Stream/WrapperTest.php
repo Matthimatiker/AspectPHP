@@ -231,6 +231,22 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
         return dirname(__FILE__) . '/TestData/' . $testFile;
     }
     
+    /**
+     * Adds the stream identifier to the given path.
+     *
+     * Example:
+     * <code>
+     * // Returns "aspectphp://path/to/file".
+     * $path = $this->toStream('path/to/file');
+     * </code>
+     *
+     * @param string $path
+     * @return string
+     */
+    protected function toStream($path) {
+        return AspectPHP_Stream_Wrapper::NAME . '://' . $path;
+    }
+    
 }
 
 ?>
