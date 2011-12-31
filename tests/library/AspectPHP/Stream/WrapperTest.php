@@ -269,6 +269,28 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
         return AspectPHP_Stream_Wrapper::NAME . '://' . $path;
     }
     
+    /**
+     * Stores the current include path.
+     */
+    protected function storeIncludePath() {
+        
+    }
+    
+    /**
+     * Restores the include path that was saved by storeIncludePath().
+     */
+    protected function restoreIncludePath() {
+        
+    }
+    
+    /**
+     * Sets the include path to the test data directory and uses the
+     * stream to load data from that path.
+     */
+    protected function changeIncludePath() {
+        
+    }
+    
 }
 
 ?>
