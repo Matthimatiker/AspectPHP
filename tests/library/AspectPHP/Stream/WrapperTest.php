@@ -241,7 +241,16 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * @return string
      */
     protected function getPath($testFile) {
-        return dirname(__FILE__) . '/TestData/' . $testFile;
+        return $this->getTestDataDirectory() . '/' . $testFile;
+    }
+    
+    /**
+     * Returns the path to the test data directory.
+     *
+     * @return string
+     */
+    protected function getTestDataDirectory() {
+        return dirname(__FILE__) . '/TestData';
     }
     
     /**
