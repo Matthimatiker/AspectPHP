@@ -220,6 +220,13 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
     }
     
     /**
+     * Enusres that the wrapper does not modify the line numbers of the original code.
+     */
+    public function testWrapperDoesNotChangeLineNumbers() {
+        
+    }
+    
+    /**
      * Returns the path to the test file with the given name.
      *
      * Example:
