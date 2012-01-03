@@ -29,10 +29,18 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
 class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
     
     /**
+     * The original include path.
+     *
+     * @var string
+     */
+    private $previousIncludePath = null;
+    
+    /**
      * See {@link PHPUnit_Framework_TestCase::setUp()} for details.
      */
     protected function setUp() {
         parent::setUp();
+        $this->storeIncludePath();
         AspectPHP_Stream_Wrapper::register();
     }
     
@@ -41,6 +49,7 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      */
     protected function tearDown() {
         AspectPHP_Stream_Wrapper::unregister();
+        $this->restoreIncludePath();
         parent::tearDown();
     }
     
@@ -273,14 +282,14 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * Stores the current include path.
      */
     protected function storeIncludePath() {
-        
+        $this->previousIncludePath = get_include_path();
     }
     
     /**
      * Restores the include path that was saved by storeIncludePath().
      */
     protected function restoreIncludePath() {
-        
+        set_include_path($this->previousIncludePath);
     }
     
     /**
@@ -288,7 +297,7 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * stream to load data from that path.
      */
     protected function changeIncludePath() {
-        
+        set_include_path($this->toStream($this->getTestDataDirectory()));
     }
     
 }
