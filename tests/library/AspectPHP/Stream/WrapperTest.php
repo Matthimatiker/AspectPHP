@@ -209,7 +209,9 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * by using the include path.
      */
     public function testWrapperCanBeUsedToIncludeFileFromIncludePath() {
-        
+        $this->changeIncludePath();
+        include('Stream/IncludeCheck/RelativePath.php');
+        $this->assertTrue(class_exists('Stream_IncludeCheck_RelativePath'), 'File not loaded.');
     }
     
     /**
