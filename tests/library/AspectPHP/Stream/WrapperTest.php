@@ -168,7 +168,13 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * Ensures that the wrapper cannot be used to modify files.
      */
     public function testWrapperDoesNotAllowModifyingFiles() {
-        $this->markTestIncomplete('Not implemented yet.');
+        $path = $this->getPath('WriteTest.txt');
+        // Ensures that the test file is empty.
+        file_put_contents($path, '');
+        // Suppress notices, otherwise PHPUnit would convert them to exceptions
+        // and stop test execution.
+        @file_put_contents($this->toStream($path), 'This should not be added.');
+        $this->assertEquals(0, filesize($path), 'File was modified.');
     }
     
     /**
