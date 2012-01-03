@@ -218,7 +218,11 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * Ensures that the wrapper does not change the original method names.
      */
     public function testWrapperDoesNotChangeOriginalMethodNames() {
-        $this->markTestIncomplete('Not implemented yet.');
+        $path = $this->getPath('Stream/ModificationCheck/MethodsNames.php');
+        include($this->toStream($path));
+        $this->assertClassExists('Stream_ModificationCheck_MethodsNames');
+        $message = 'Missing original method.';
+        $this->assertContains('customMethod', get_class_methods('Stream_ModificationCheck_MethodsNames'), $message);
     }
     
     /**
