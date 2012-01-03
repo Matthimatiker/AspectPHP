@@ -220,9 +220,7 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
     public function testWrapperDoesNotChangeOriginalMethodNames() {
         $path = $this->getPath('Stream/ModificationCheck/MethodsNames.php');
         include($this->toStream($path));
-        $this->assertClassExists('Stream_ModificationCheck_MethodsNames');
-        $message = 'Missing original method.';
-        $this->assertContains('customMethod', get_class_methods('Stream_ModificationCheck_MethodsNames'), $message);
+        $this->assertHasMethod('Stream_ModificationCheck_MethodsNames', 'customMethod');
     }
     
     /**
@@ -294,6 +292,18 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
             $this->assertEquals(12, $e->getLine(), 'Stream changed line numbers.');
             throw $e;
         }
+    }
+    
+    /**
+     * Asserts that the class $class has the method with the provided name.
+     *
+     * @param string $class
+     * @param string $method
+     */
+    protected function assertHasMethod($class, $method) {
+        $this->assertClassExists($class);
+        $message = 'Class "' . $class . '" does not provide the method "' . $method . '".';
+        $this->assertContains($method, get_class_methods($class), $message);
     }
     
     /**
