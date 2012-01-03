@@ -257,7 +257,12 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * classes.
      */
     public function testFileConstantIsUsableInLoadedFiles() {
-        $this->markTestIncomplete('Not implemented yet.');
+        $path = $this->getPath('Stream/FileConstant.php');
+        include($this->toStream($path));
+        $this->assertClassExists('Stream_FileConstant');
+        $check = new Stream_FileConstant();
+        $value = $check->file();
+        $this->assertEquals(realpath($path), realpath($value));
     }
     
     /**
