@@ -15,7 +15,7 @@ class Stream_FileConstant {
      *
      * @return string
      */
-    public function file() {
+    public function getFileConstant() {
         return __FILE__;
     }
     
