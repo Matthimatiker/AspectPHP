@@ -199,7 +199,9 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * if the full file path is passed.
      */
     public function testWrapperCanBeUsedToIncludeFileByFullPath() {
-        
+        $path = $this->getPath('Stream/IncludeCheck/FullPath.php');
+        include($this->toStream($path));
+        $this->assertTrue(class_exists('Stream_IncludeCheck_FullPath'), 'File not loaded.');
     }
     
     /**
