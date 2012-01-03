@@ -249,7 +249,13 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * Ensures that static methods remain static.
      */
     public function testWrapperDoesNotRemoveStaticAttributeFromMethods() {
-        $this->markTestIncomplete('Not implemented yet.');
+        $path = $this->getPath('Stream/ModificationCheck/Static.php');
+        include($this->toStream($path));
+        $class = 'Stream_ModificationCheck_Static';
+        
+        $this->assertHasMethod($class, 'myStaticMethod');
+        $privateMethod = new ReflectionMethod($class,  'myStaticMethod');
+        $this->assertTrue($privateMethod->isStatic(), 'Method is not static anymore.');
     }
     
     /**
