@@ -218,7 +218,7 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * Ensures that the wrapper does not change the original method names.
      */
     public function testWrapperDoesNotChangeOriginalMethodNames() {
-        
+        $this->markTestIncomplete('Not implemented yet.');
     }
     
     /**
@@ -226,14 +226,14 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * methods.
      */
     public function testWrapperDoesNotChangeMethodVisibility() {
-        
+        $this->markTestIncomplete('Not implemented yet.');
     }
     
     /**
      * Ensures that static methods remain static.
      */
     public function testWrapperDoesNotRemoveStaticAttributeFromMethods() {
-        
+        $this->markTestIncomplete('Not implemented yet.');
     }
     
     /**
@@ -241,7 +241,7 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * code is loaded.
      */
     public function testWrapperDoesNotSuppressErrors() {
-        
+        $this->markTestIncomplete('Not implemented yet.');
     }
     
     /**
@@ -249,7 +249,7 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * contains errors.
      */
     public function testWrapperDoesNotModifyCodeWithErrors() {
-        
+        $this->markTestIncomplete('Not implemented yet.');
     }
     
     /**
@@ -257,21 +257,21 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * classes.
      */
     public function testFileConstantIsUsableInLoadedFiles() {
-        
+        $this->markTestIncomplete('Not implemented yet.');
     }
     
     /**
      * Ensures that the wrapper does not modify files that do not contain classes.
      */
     public function testWrapperDoesNotModifyFilesThatDoNotContainClasses() {
-        
+        $this->markTestIncomplete('Not implemented yet.');
     }
     
     /**
      * Enusres that the wrapper does not modify the line numbers of the original code.
      */
     public function testWrapperDoesNotChangeLineNumbers() {
-        
+        $this->markTestIncomplete('Not implemented yet.');
     }
     
     /**
