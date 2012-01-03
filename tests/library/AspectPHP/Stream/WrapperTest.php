@@ -201,7 +201,7 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
     public function testWrapperCanBeUsedToIncludeFileByFullPath() {
         $path = $this->getPath('Stream/IncludeCheck/FullPath.php');
         include($this->toStream($path));
-        $this->assertTrue(class_exists('Stream_IncludeCheck_FullPath'), 'File not loaded.');
+        $this->assertClassExists('Stream_IncludeCheck_FullPath');
     }
     
     /**
@@ -211,7 +211,7 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
     public function testWrapperCanBeUsedToIncludeFileFromIncludePath() {
         $this->changeIncludePath();
         include('Stream/IncludeCheck/RelativePath.php');
-        $this->assertTrue(class_exists('Stream_IncludeCheck_RelativePath'), 'File not loaded.');
+        $this->assertClassExists('Stream_IncludeCheck_RelativePath');
     }
     
     /**
@@ -271,7 +271,27 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * Enusres that the wrapper does not modify the line numbers of the original code.
      */
     public function testWrapperDoesNotChangeLineNumbers() {
-        $this->markTestIncomplete('Not implemented yet.');
+        // Ensure that the test fails if the exception is not thrown.
+        $this->setExpectedException('RuntimeException');
+        include($this->toStream($this->getPath('Stream/ModificationCheck/LineNumber.php')));
+        $this->assertClassExists('Stream_ModificationCheck_LineNumber');
+        try {
+            $check = new Stream_ModificationCheck_LineNumber();
+            $check->lineNumber();
+        } catch(RuntimeException $e) {
+            $this->assertEquals(12, $e->getLine(), 'Stream changed line numbers.');
+            throw $e;
+        }
+    }
+    
+    /**
+     * Asserts that the class with the provided name was loaded.
+     *
+     * @param string $class
+     */
+    protected function assertClassExists($class) {
+        $message = 'The class "' . $class . '" was not loaded.';
+        $this->assertTrue(class_exists($class, false), $message);
     }
     
     /**
