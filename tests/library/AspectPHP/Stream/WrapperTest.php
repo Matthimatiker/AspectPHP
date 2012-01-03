@@ -228,7 +228,21 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * methods.
      */
     public function testWrapperDoesNotChangeMethodVisibility() {
-        $this->markTestIncomplete('Not implemented yet.');
+        $path = $this->getPath('Stream/ModificationCheck/Visibility.php');
+        include($this->toStream($path));
+        $class = 'Stream_ModificationCheck_Visibility';
+        
+        $this->assertHasMethod($class, 'myPrivateMethod');
+        $privateMethod = new ReflectionMethod($class,  'myPrivateMethod');
+        $this->assertTrue($privateMethod->isPrivate(), 'Method is not private anymore.');
+        
+        $this->assertHasMethod($class, 'myProtectedMethod');
+        $privateMethod = new ReflectionMethod($class,  'myProtectedMethod');
+        $this->assertTrue($privateMethod->isProtected(), 'Method is not protected anymore.');
+        
+        $this->assertHasMethod($class, 'myPublicMethod');
+        $privateMethod = new ReflectionMethod($class, 'myPublicMethod');
+        $this->assertTrue($privateMethod->isPublic(), 'Method is not public anymore.');
     }
     
     /**
