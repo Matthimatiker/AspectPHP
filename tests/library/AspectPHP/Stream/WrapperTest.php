@@ -107,7 +107,7 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * to a existing file.
      */
     public function testIsFileReturnsTrueIfFileExists() {
-        $path = $this->toStream($this->getPath('Check.php'));
+        $path = $this->toStream($this->getPath('Stream/IoCheck.php'));
         $this->assertTrue(is_file($path));
     }
     
@@ -131,7 +131,7 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * Ensures that is_writable() returns always false.
      */
     public function testIsWritableReturnsFalse() {
-        $path = $this->toStream($this->getPath('Check.php'));
+        $path = $this->toStream($this->getPath('Stream/IoCheck.php'));
         $this->assertFalse(is_writable($path));
     }
     
@@ -146,7 +146,7 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * Checks if the wrapper modifies the loaded code.
      */
     public function testWrapperModifiesLoadedCode() {
-        $path       = $this->getPath('Check.php');
+        $path       = $this->getPath('Stream/IoCheck.php');
         $original   = file_get_contents($path);
         $fromStream = file_get_contents($this->toStream($path));
         $this->assertNotEquals($original, $fromStream);
