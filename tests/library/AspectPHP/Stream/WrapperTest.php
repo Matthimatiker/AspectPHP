@@ -123,8 +123,37 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
     /**
      * Checks if stat() returns valid data about the given file.
      */
-    public function testStatReturnsCorrectFileData() {
-        $this->markTestIncomplete('Not implemented yet.');
+    public function testStatProvidesRequiredMetaData() {
+        $path = $this->toStream($this->getPath('Stream/IoCheck.php'));
+        $data = stat($stat);
+        $this->assertInternalType('array', $data);
+        // Check the required numerical and associative keys.
+        $this->assertArrayHasKey(0, $data);
+        $this->assertArrayHasKey('dev', $data);
+        $this->assertArrayHasKey(1, $data);
+        $this->assertArrayHasKey('ino', $data);
+        $this->assertArrayHasKey(2, $data);
+        $this->assertArrayHasKey('mode', $data);
+        $this->assertArrayHasKey(3, $data);
+        $this->assertArrayHasKey('nlink', $data);
+        $this->assertArrayHasKey(4, $data);
+        $this->assertArrayHasKey('uid', $data);
+        $this->assertArrayHasKey(5, $data);
+        $this->assertArrayHasKey('gid', $data);
+        $this->assertArrayHasKey(6, $data);
+        $this->assertArrayHasKey('rdev', $data);
+        $this->assertArrayHasKey(7, $data);
+        $this->assertArrayHasKey('size', $data);
+        $this->assertArrayHasKey(8, $data);
+        $this->assertArrayHasKey('atime', $data);
+        $this->assertArrayHasKey(9, $data);
+        $this->assertArrayHasKey('mtime', $data);
+        $this->assertArrayHasKey(10, $data);
+        $this->assertArrayHasKey('ctime', $data);
+        $this->assertArrayHasKey(11, $data);
+        $this->assertArrayHasKey('blksize', $data);
+        $this->assertArrayHasKey(12, $data);
+        $this->assertArrayHasKey('blocks', $data);
     }
     
     /**
