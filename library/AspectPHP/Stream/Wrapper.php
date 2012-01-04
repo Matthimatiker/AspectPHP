@@ -29,6 +29,27 @@ class AspectPHP_Stream_Wrapper {
     const NAME = 'aspectphp';
     
     /**
+     * The modified content of the opened file.
+     *
+     * @var string
+     */
+    protected $content = '';
+    
+    /**
+     * Current position in stream.
+     *
+     * @var integer
+     */
+    protected $position = 0;
+    
+    /**
+     * The stats of the opened file.
+     *
+     * @var array(string|integer=>string|integer)
+     */
+    protected $stats = null;
+    
+    /**
      * Registers the stream wrapper.
      *
      * Does nothing if the wrapper is already registered.
@@ -73,7 +94,13 @@ class AspectPHP_Stream_Wrapper {
      */
     public function stream_open($path, $mode, $options, &$openedPath)
     {
-        
+        $filePath = $this->removeScheme($path);
+        if( !is_file($filePath) ) {
+            return false;
+        }
+        $this->stats   = stat($filePath);
+        $this->content = file_get_contents($filePath);
+        return true;
     }
 
     /**
@@ -84,7 +111,9 @@ class AspectPHP_Stream_Wrapper {
      */
     public function stream_read($count)
     {
-        
+        $block = substr($this->content, $this->position, $count);
+        $this->position += strlen($block);
+        return $block;
     }
 
 
@@ -95,7 +124,7 @@ class AspectPHP_Stream_Wrapper {
      */
     public function stream_tell()
     {
-        
+        return $this->position;
     }
 
 
@@ -106,7 +135,7 @@ class AspectPHP_Stream_Wrapper {
      */
     public function stream_eof()
     {
-        
+        return $this->position >= $this->getContentLength();
     }
 
 
@@ -117,7 +146,7 @@ class AspectPHP_Stream_Wrapper {
      */
     public function stream_stat()
     {
-        
+        return $this->stats;
     }
 
 	/**
@@ -129,7 +158,8 @@ class AspectPHP_Stream_Wrapper {
      */
     public function url_stat($path , $flags)
     {
-        
+        $filePath = $this->removeScheme($path);
+        return stat($filePath);
     }
 
     /**
@@ -141,7 +171,53 @@ class AspectPHP_Stream_Wrapper {
      */
     public function stream_seek($offset, $whence = SEEK_SET)
     {
-        
+        switch( $whence ) {
+            case SEEK_SET:
+                if ($offset >= 0 && $offset < $this->getContentLength()) {
+                    $this->position = $offset;
+                    return true;
+                } else {
+                    return false;
+                }
+                break;
+            case SEEK_CUR:
+                if ($offset >= 0) {
+                    $this->position += $offset;
+                    return true;
+                } else {
+                    return false;
+                }
+                break;
+            case SEEK_END:
+                if ($this->getContentLength() + $offset >= 0) {
+                    $this->position = $this->getContentLength() + $offset;
+                    return true;
+                } else {
+                    return false;
+                }
+                break;
+            default:
+                return false;
+        }
+    }
+    
+    /**
+     * The length of the streamed content.
+     *
+     * @return integer
+     */
+    protected function getContentLength() {
+        return strlen($this->content);
+    }
+    
+    /**
+     * Removes the stream scheme from the given path.
+     *
+     * @param string $path
+     * @return string
+     */
+    protected function removeScheme($path) {
+        return substr($path, strlen(self::NAME . '://'));
     }
     
 }
