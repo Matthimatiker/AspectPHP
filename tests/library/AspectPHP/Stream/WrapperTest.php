@@ -181,7 +181,10 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * Checks if filesize() returns a valid value.
      */
     public function testStreamProvidesValidFileSize() {
-        
+        $original = $this->getPath('Stream/Size.php');
+        $stream   = $this->toStream($original);
+        // The stream adds code, therefore the filesize should increase compared to the original data.
+        $this->assertGreaterThan(filesize($original), filesize($stream), 'Invalid filesize provided.');
     }
     
     /**
