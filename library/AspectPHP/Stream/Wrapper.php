@@ -243,14 +243,14 @@ class AspectPHP_Stream_Wrapper {
                     if ( $braceCount === 1 ) {
                         // Method start.
                         // TODO: add injection point
-                        $token[1] = '{';
+                        $token[1] = '{ /* add start point */';
                     }
                 } elseif ($token[1] === '}') {
                     $braceCount--;
                     if( $braceCount === 0 ) {
                         // Method end.
                         // TODO: add injection point, think of return and throw!
-                        $token[1] = '}';
+                        $token[1] = '/* add end point */ }';
                         $inMethod = false;
                     }
                 }
