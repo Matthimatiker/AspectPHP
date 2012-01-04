@@ -331,8 +331,9 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      */
     protected function assertHasMethod($class, $method) {
         $this->assertClassExists($class);
-        $message = 'Class "' . $class . '" does not provide the method "' . $method . '".';
-        $this->assertContains($method, get_class_methods($class), $message);
+        $refelection = new ReflectionClass($class);
+        $message     = 'Class "' . $class . '" does not provide the method "' . $method . '".';
+        $this->assertTrue($refelection->hasMethod($method), $message);
     }
     
     /**
