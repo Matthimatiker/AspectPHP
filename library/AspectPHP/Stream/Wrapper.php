@@ -45,7 +45,7 @@ class AspectPHP_Stream_Wrapper {
     /**
      * The stats of the opened file.
      *
-     * @var array(string|integer=>string|integer)
+     * @var array(string|integer=>integer)
      */
     protected $stats = null;
     
@@ -98,7 +98,7 @@ class AspectPHP_Stream_Wrapper {
         if( !is_file($filePath) ) {
             return false;
         }
-        $this->stats   = stat($filePath);
+        $this->stats   = $this->getStats($path);
         $this->content = file_get_contents($filePath);
         return true;
     }
@@ -158,8 +158,7 @@ class AspectPHP_Stream_Wrapper {
      */
     public function url_stat($path , $flags)
     {
-        $filePath = $this->removeScheme($path);
-        return stat($filePath);
+        return $this->getStats($path);
     }
 
     /**
@@ -208,6 +207,23 @@ class AspectPHP_Stream_Wrapper {
      */
     protected function getContentLength() {
         return strlen($this->content);
+    }
+    
+    /**
+     * Returns the stats for the given file path.
+     *
+     * Example:
+     * <code>
+     * $stats = $this->getStats('aspectphp://path/to/my/file');
+     * </code>
+     *
+     * @param string $path The path including the stream scheme.
+     * @return array(string|integer=>integer)
+     */
+    protected function getStats($path) {
+        $filePath = $this->removeScheme($path);
+        $stats = stat($filePath);
+        return $stats;
     }
     
     /**
