@@ -273,7 +273,10 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * contains (compile) errors.
      */
     public function testWrapperDoesNotModifyCodeWithErrors() {
-        $this->markTestIncomplete('Not implemented yet.');
+        $path       = $this->getPath('Stream/ModificationCheck/CompileError.txt');
+        $original   = file_get_contents($path);
+        $fromStream = file_get_contents($this->toStream($path));
+        $this->assertEquals($original, $fromStream, 'Stream modified broken code.');
     }
     
     /**
