@@ -293,7 +293,8 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
         $this->assertClassExists('Stream_FileConstant');
         $check = new Stream_FileConstant();
         $value = $check->getFileConstant();
-        $this->assertEquals(realpath($path), realpath($value));
+        $message = '__FILE__ returned an invalid value: ' . $value;
+        $this->assertEquals(realpath($path), realpath($value), $message);
     }
     
     /**
