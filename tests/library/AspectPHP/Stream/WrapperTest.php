@@ -191,7 +191,11 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * Checks if the wrapper generates valid PHP code.
      */
     public function testWrapperGeneratesValidCode() {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->setExpectedException(null);
+        $path = $this->getPath('Stream/ModificationCheck/Valid.php');
+        // If invalid code is generated then the script will stop or
+        // an error or noticed will be thrown.
+        include($this->toStream($path));
     }
     
     /**
