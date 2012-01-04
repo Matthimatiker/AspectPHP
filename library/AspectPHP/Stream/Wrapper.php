@@ -158,7 +158,7 @@ class AspectPHP_Stream_Wrapper {
      */
     public function url_stat($path , $flags)
     {
-        return $this->getStats($path);
+        return $this->getStats($path, $flags);
     }
 
     /**
@@ -218,11 +218,17 @@ class AspectPHP_Stream_Wrapper {
      * </code>
      *
      * @param string $path The path including the stream scheme.
+     * @param integer $flags
      * @return array(string|integer=>integer)
      */
-    protected function getStats($path) {
-        $filePath = $this->removeScheme($path);
-        $stats = stat($filePath);
+    protected function getStats($path, $flags = 0) {
+        $suppressErrors = ($flags & STREAM_URL_STAT_QUIET) == STREAM_URL_STAT_QUIET;
+        $filePath       = $this->removeScheme($path);
+        if ($suppressErrors) {
+            $stats = @stat($filePath);
+        } else {
+            $stats = stat($filePath);
+        }
         return $stats;
     }
     
