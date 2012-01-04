@@ -34,7 +34,10 @@ class AspectPHP_Stream_Wrapper {
      * Does nothing if the wrapper is already registered.
      */
     public static function register() {
-        
+        if( self::isRegistered() ) {
+            return;
+        }
+        stream_wrapper_register(self::NAME, __CLASS__);
     }
     
     /**
@@ -43,7 +46,10 @@ class AspectPHP_Stream_Wrapper {
      * Does nothing if the wrapper is not registered.
      */
     public static function unregister() {
-        
+        if( !self::isRegistered() ) {
+            return;
+        }
+        stream_wrapper_unregister(self::NAME);
     }
     
     /**
@@ -52,7 +58,8 @@ class AspectPHP_Stream_Wrapper {
      * @return boolean True if the wrapper is registered, false otherwise.
      */
     public static function isRegistered() {
-        
+        $wrappers = stream_get_wrappers();
+        return in_array(self::NAME, $wrappers);
     }
     
 	/**
