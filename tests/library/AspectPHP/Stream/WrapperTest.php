@@ -107,7 +107,7 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * to a existing file.
      */
     public function testIsFileReturnsTrueIfFileExists() {
-        $path = $this->toStream($this->getPath('Stream/IoCheck.php'));
+        $path = $this->toStream($this->getPath('StreamCheck/Io.php'));
         $this->assertTrue(is_file($path));
     }
     
@@ -124,7 +124,7 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * Checks if stat() returns valid data about the given file.
      */
     public function testStatProvidesRequiredMetaData() {
-        $path = $this->toStream($this->getPath('Stream/IoCheck.php'));
+        $path = $this->toStream($this->getPath('StreamCheck/Io.php'));
         $data = stat($path);
         $this->assertInternalType('array', $data);
         // Check the required numerical and associative keys.
@@ -160,7 +160,7 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * Ensures that is_writable() returns always false.
      */
     public function testIsWritableReturnsFalse() {
-        $path = $this->toStream($this->getPath('Stream/IoCheck.php'));
+        $path = $this->toStream($this->getPath('StreamCheck/Io.php'));
         $this->assertFalse(is_writable($path));
     }
     
@@ -181,7 +181,7 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * Checks if filesize() returns a valid value.
      */
     public function testStreamProvidesValidFileSize() {
-        $original = $this->getPath('Stream/Size.php');
+        $original = $this->getPath('StreamCheck/Size.php');
         $stream   = $this->toStream($original);
         // The stream adds code, therefore the filesize should increase compared to the original data.
         $this->assertGreaterThan(filesize($original), filesize($stream), 'Invalid filesize provided.');
@@ -191,7 +191,7 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * Checks if the wrapper modifies the loaded code.
      */
     public function testWrapperModifiesLoadedCode() {
-        $path       = $this->getPath('Stream/IoCheck.php');
+        $path       = $this->getPath('StreamCheck/Io.php');
         $original   = file_get_contents($path);
         $fromStream = file_get_contents($this->toStream($path));
         $this->assertNotEquals($original, $fromStream);
@@ -202,7 +202,7 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      */
     public function testWrapperGeneratesValidCode() {
         $this->setExpectedException(null);
-        $path = $this->getPath('Stream/ModificationCheck/Valid.php');
+        $path = $this->getPath('StreamCheck/Modification/Valid.php');
         // If invalid code is generated then the script will stop or
         // an error or notice will be thrown.
         include($this->toStream($path));
@@ -213,9 +213,9 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * if the full file path is passed.
      */
     public function testWrapperCanBeUsedToIncludeFileByFullPath() {
-        $path = $this->getPath('Stream/IncludeCheck/FullPath.php');
+        $path = $this->getPath('StreamCheck/Include/FullPath.php');
         include($this->toStream($path));
-        $this->assertClassExists('Stream_IncludeCheck_FullPath');
+        $this->assertClassExists('StreamCheck_Include_FullPath');
     }
     
     /**
@@ -224,17 +224,17 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      */
     public function testWrapperCanBeUsedToIncludeFileFromIncludePath() {
         $this->changeIncludePath();
-        include('Stream/IncludeCheck/RelativePath.php');
-        $this->assertClassExists('Stream_IncludeCheck_RelativePath');
+        include('StreamCheck/Include/RelativePath.php');
+        $this->assertClassExists('StreamCheck_Include_RelativePath');
     }
     
     /**
      * Ensures that the wrapper does not change the original method names.
      */
     public function testWrapperDoesNotChangeOriginalMethodNames() {
-        $path = $this->getPath('Stream/ModificationCheck/MethodNames.php');
+        $path = $this->getPath('StreamCheck/Modification/MethodNames.php');
         include($this->toStream($path));
-        $this->assertHasMethod('Stream_ModificationCheck_MethodNames', 'customMethod');
+        $this->assertHasMethod('StreamCheck_Modification_MethodNames', 'customMethod');
     }
     
     /**
@@ -242,9 +242,9 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * methods.
      */
     public function testWrapperDoesNotChangeMethodVisibility() {
-        $path = $this->getPath('Stream/ModificationCheck/Visibility.php');
+        $path = $this->getPath('StreamCheck/Modification/Visibility.php');
         include($this->toStream($path));
-        $class = 'Stream_ModificationCheck_Visibility';
+        $class = 'StreamCheck_Modification_Visibility';
         
         $this->assertHasMethod($class, 'myPrivateMethod');
         $privateMethod = new ReflectionMethod($class,  'myPrivateMethod');
@@ -263,9 +263,9 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * Ensures that static methods remain static.
      */
     public function testWrapperDoesNotRemoveStaticAttributeFromMethods() {
-        $path = $this->getPath('Stream/ModificationCheck/Static.php');
+        $path = $this->getPath('StreamCheck/Modification/Static.php');
         include($this->toStream($path));
-        $class = 'Stream_ModificationCheck_Static';
+        $class = 'StreamCheck_Modification_Static';
         
         $this->assertHasMethod($class, 'myStaticMethod');
         $privateMethod = new ReflectionMethod($class,  'myStaticMethod');
@@ -278,7 +278,7 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      */
     public function testWrapperDoesNotSuppressErrors() {
         $this->setExpectedException('PHPUnit_Framework_Error_Notice');
-        $path = $this->getPath('Stream/ModificationCheck/Notice.php');
+        $path = $this->getPath('StreamCheck/Modification/Notice.php');
         include($this->toStream($path));
     }
     
@@ -287,7 +287,7 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * contains (compile) errors.
      */
     public function testWrapperDoesNotModifyCodeWithErrors() {
-        $path       = $this->getPath('Stream/ModificationCheck/CompileError.txt');
+        $path       = $this->getPath('StreamCheck/Modification/CompileError.txt');
         $original   = file_get_contents($path);
         $fromStream = file_get_contents($this->toStream($path));
         $this->assertEquals($original, $fromStream, 'Stream modified broken code.');
@@ -298,10 +298,10 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * classes.
      */
     public function testFileConstantIsUsableInLoadedFiles() {
-        $path = $this->getPath('Stream/FileConstant.php');
+        $path = $this->getPath('StreamCheck/FileConstant.php');
         include($this->toStream($path));
-        $this->assertClassExists('Stream_FileConstant');
-        $check = new Stream_FileConstant();
+        $this->assertClassExists('StreamCheck_FileConstant');
+        $check = new StreamCheck_FileConstant();
         $value = $check->getFileConstant();
         $message = '__FILE__ returned an invalid value: ' . $value;
         $this->assertEquals(realpath($path), realpath($value), $message);
@@ -311,7 +311,7 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * Ensures that the wrapper does not modify files that do not contain classes.
      */
     public function testWrapperDoesNotModifyFilesThatDoNotContainClasses() {
-        $path = $this->getPath('Stream/ModificationCheck/NoClass.php');
+        $path = $this->getPath('StreamCheck/Modification/NoClass.php');
         $original   = file_get_contents($path);
         $fromStream = file_get_contents($this->toStream($path));
         $this->assertEquals($original, $fromStream, 'Stream modified file without class.');
@@ -323,10 +323,10 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
     public function testWrapperDoesNotChangeLineNumbers() {
         // Ensure that the test fails if the exception is not thrown.
         $this->setExpectedException('RuntimeException');
-        include($this->toStream($this->getPath('Stream/ModificationCheck/LineNumber.php')));
-        $this->assertClassExists('Stream_ModificationCheck_LineNumber');
+        include($this->toStream($this->getPath('StreamCheck/Modification/LineNumber.php')));
+        $this->assertClassExists('StreamCheck_Modification_LineNumber');
         try {
-            $check = new Stream_ModificationCheck_LineNumber();
+            $check = new StreamCheck_Modification_LineNumber();
             $check->lineNumber();
         } catch(RuntimeException $e) {
             $this->assertEquals(12, $e->getLine(), 'Stream changed line numbers.');
