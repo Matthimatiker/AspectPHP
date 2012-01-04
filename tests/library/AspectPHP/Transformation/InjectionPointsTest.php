@@ -35,6 +35,8 @@ class AspectPHP_Transformation_InjectionPointsTest extends PHPUnit_Framework_Tes
     // does not remove static attribute from method
     // does not remove final attribute from method
     // does not change doc blocks
+    // does not change code that is not in a class
+    // handles multiple classes in one code block
     
 }
 
