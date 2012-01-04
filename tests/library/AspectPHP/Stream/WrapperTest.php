@@ -263,9 +263,9 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      * code is loaded.
      */
     public function testWrapperDoesNotSuppressErrors() {
-        $this->markTestIncomplete('Not implemented yet.');
-        // TODO: find correct exception class
-        $this->setExpectedException('PHPNotice');
+        $this->setExpectedException('PHPUnit_Framework_Error_Notice');
+        $path = $this->getPath('Stream/ModificationCheck/Notice.php');
+        include($this->toStream($path));
     }
     
     /**
