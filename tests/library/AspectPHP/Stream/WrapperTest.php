@@ -178,6 +178,13 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
     }
     
     /**
+     * Checks if filesize() returns a valid value.
+     */
+    public function testStreamProvidesValidFileSize() {
+        
+    }
+    
+    /**
      * Checks if the wrapper modifies the loaded code.
      */
     public function testWrapperModifiesLoadedCode() {
