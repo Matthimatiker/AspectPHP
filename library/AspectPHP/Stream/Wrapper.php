@@ -217,6 +217,8 @@ class AspectPHP_Stream_Wrapper {
      * $stats = $this->getStats('aspectphp://path/to/my/file');
      * </code>
      *
+     * @todo respect STREAM_URL_STAT_LINK flag if information about a link is required
+     *
      * @param string $path The path including the stream scheme.
      * @param integer $flags
      * @return array(string|integer=>integer)
