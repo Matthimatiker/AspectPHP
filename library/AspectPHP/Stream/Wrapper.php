@@ -69,7 +69,7 @@ class AspectPHP_Stream_Wrapper {
      * @param string $mode
      * @param integer $options
      * @param string $openedPath
-     * @retgurn boolean
+     * @return boolean
      */
     public function stream_open($path, $mode, $options, &$openedPath)
     {
