@@ -99,7 +99,7 @@ class AspectPHP_Stream_Wrapper {
             return false;
         }
         $this->stats   = $this->getStats($path);
-        $this->content = file_get_contents($filePath);
+        $this->content = $this->addInjectionPoints($filePath);
         return true;
     }
 
@@ -207,6 +207,35 @@ class AspectPHP_Stream_Wrapper {
      */
     protected function getContentLength() {
         return strlen($this->content);
+    }
+    
+    /**
+     * Loads the content from the given file and modifies the source
+     * code to add injection points.
+     *
+     * @param string $filePath
+     * @return string
+     */
+    protected function addInjectionPoints($filePath) {
+        
+        $source    = file_get_contents($filePath);
+        $fullPath  = realpath($filePath);
+        $tokens    = token_get_all($source);
+        $newSource = '';
+        foreach( $tokens as $token ) {
+            /* @var $token string|array(integer|string) */
+            if (is_string($token)) {
+                $newSource .= $token;
+                continue;
+            }
+            // Replace __FILE__ constants with the original file path.
+            if ($token[0] === T_FILE) {
+                $newSource .= "'$fullPath'";;
+                continue;
+            }
+            $newSource .= $token[1];
+        }
+        return $newSource;
     }
     
     /**
