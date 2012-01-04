@@ -194,7 +194,7 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
         $this->setExpectedException(null);
         $path = $this->getPath('Stream/ModificationCheck/Valid.php');
         // If invalid code is generated then the script will stop or
-        // an error or noticed will be thrown.
+        // an error or notice will be thrown.
         include($this->toStream($path));
     }
     
