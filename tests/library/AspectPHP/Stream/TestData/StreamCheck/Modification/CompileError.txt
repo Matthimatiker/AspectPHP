@@ -8,7 +8,7 @@
  * @version $Rev$
  * @since 04.01.2012
  */
-class CompileError {
+class StreamCheck_Modification_CompileError {
     
     /**
      * A valid dummy method.

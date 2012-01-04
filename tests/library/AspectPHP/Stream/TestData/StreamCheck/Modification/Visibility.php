@@ -8,7 +8,7 @@
  * @version $Rev$
  * @since 04.01.2012
  */
-class Stream_ModificationCheck_Visibility {
+class StreamCheck_Modification_Visibility {
     
     /**
      * A private method dummy.

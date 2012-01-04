@@ -1,6 +1,6 @@
 <?php
 
-class Stream_IncludeCheck_RelativePath {
+class StreamCheck_Include_RelativePath {
     
 }
 

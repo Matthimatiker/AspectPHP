@@ -8,7 +8,7 @@
  * @version $Rev$
  * @since 04.01.2012
  */
-class Stream_ModificationCheck_Valid {
+class StreamCheck_Modification_Valid {
     
     /**
      * A static vairable.

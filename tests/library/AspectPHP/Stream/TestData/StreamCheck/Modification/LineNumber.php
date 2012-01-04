@@ -1,6 +1,6 @@
 <?php
 
-class Stream_ModificationCheck_LineNumber {
+class StreamCheck_Modification_LineNumber {
     
     /**
      * Throws an exception that will be used to check the line number.

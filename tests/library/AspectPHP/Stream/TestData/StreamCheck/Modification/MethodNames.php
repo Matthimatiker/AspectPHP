@@ -8,7 +8,7 @@
  * @version $Rev$
  * @since 03.01.2012
  */
-class Stream_ModificationCheck_MethodNames {
+class StreamCheck_Modification_MethodNames {
     
     /**
      * A method dummy.

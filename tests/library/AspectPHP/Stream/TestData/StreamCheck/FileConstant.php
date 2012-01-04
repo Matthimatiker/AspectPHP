@@ -8,7 +8,7 @@
  * @version $Rev$
  * @since 03.01.2012
  */
-class Stream_FileConstant {
+class StreamCheck_FileConstant {
     
     /**
      * Returns the __FILE__ constant.

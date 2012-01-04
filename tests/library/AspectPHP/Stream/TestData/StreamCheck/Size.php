@@ -8,7 +8,7 @@
  * @version $Rev$
  * @since 04.01.2012
  */
-class Stream_Size {
+class StreamCheck_Size {
     
     /**
      * Method dummy.

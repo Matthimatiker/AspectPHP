@@ -1,6 +1,6 @@
 <?php
 
-class Stream_IncludeCheck_FullPath {
+class StreamCheck_Include_FullPath {
     
 }
 
