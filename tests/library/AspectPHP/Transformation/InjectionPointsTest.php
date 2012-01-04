@@ -24,6 +24,7 @@
 class AspectPHP_Transformation_InjectionPointsTest extends PHPUnit_Framework_TestCase {
     
     // TODO: add tests
+    // adds code
     // does not change context
     // does not suppress notices
     // does not suppress exceptions
@@ -33,6 +34,7 @@ class AspectPHP_Transformation_InjectionPointsTest extends PHPUnit_Framework_Tes
     // does not change visibility of private method
     // does not remove static attribute from method
     // does not remove final attribute from method
+    // does not change doc blocks
     
 }
 
