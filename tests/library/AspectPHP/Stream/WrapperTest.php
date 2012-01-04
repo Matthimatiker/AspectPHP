@@ -125,7 +125,7 @@ class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
      */
     public function testStatProvidesRequiredMetaData() {
         $path = $this->toStream($this->getPath('Stream/IoCheck.php'));
-        $data = stat($stat);
+        $data = stat($path);
         $this->assertInternalType('array', $data);
         // Check the required numerical and associative keys.
         $this->assertArrayHasKey(0, $data);
