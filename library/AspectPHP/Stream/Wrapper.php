@@ -225,13 +225,11 @@ class AspectPHP_Stream_Wrapper {
         foreach( $tokens as $token ) {
             /* @var $token string|array(integer|string) */
             if (is_string($token)) {
-                $newSource .= $token;
-                continue;
+                $token = array(-1, $token);
             }
             // Replace __FILE__ constants with the original file path.
             if ($token[0] === T_FILE) {
-                $newSource .= "'$fullPath'";
-                continue;
+                $token[1] = "'$fullPath'";
             }
             $newSource .= $token[1];
         }
