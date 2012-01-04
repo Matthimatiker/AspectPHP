@@ -1,6 +1,15 @@
 <?php
 
 /**
+ * StreamCheck_FileConstant
+ *
+ * @author Matthias Molitor <matthias@matthimatiker.de>
+ * @copyright Matthias Molitor 2012
+ * @version $Rev$
+ * @since 03.01.2012
+ */
+
+/**
  * This class is used to check if the __FILE__ constant is correct.
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>

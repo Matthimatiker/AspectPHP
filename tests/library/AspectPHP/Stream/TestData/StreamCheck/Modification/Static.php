@@ -1,6 +1,15 @@
 <?php
 
 /**
+ * StreamCheck_Modification_Static
+ *
+ * @author Matthias Molitor <matthias@matthimatiker.de>
+ * @copyright Matthias Molitor 2012
+ * @version $Rev$
+ * @since 04.01.2012
+ */
+
+/**
  * Class that is used to check the transformation of static methods.
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>

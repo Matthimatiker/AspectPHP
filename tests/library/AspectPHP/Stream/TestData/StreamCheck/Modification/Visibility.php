@@ -1,6 +1,15 @@
 <?php
 
 /**
+ * StreamCheck_Modification_Visibility
+ *
+ * @author Matthias Molitor <matthias@matthimatiker.de>
+ * @copyright Matthias Molitor 2012
+ * @version $Rev$
+ * @since 04.01.2012
+ */
+
+/**
  * Class that is used to perform method visibility checks.
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>

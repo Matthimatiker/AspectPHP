@@ -1,6 +1,15 @@
 <?php
 
 /**
+ * StreamCheck_Modification_Valid
+ *
+ * @author Matthias Molitor <matthias@matthimatiker.de>
+ * @copyright Matthias Molitor 2012
+ * @version $Rev$
+ * @since 04.01.2012
+ */
+
+/**
  * Class that is used to check if the stream creates valid code.
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
