@@ -27,6 +27,11 @@ that are invoked when the method of the source object is called.
   * Can be registered for extension points (or methods?)
   * Will be called if extension point is notified
   
+=== Refactoring ===
+
+* Rename AspectPHP_Stream_Wrapper to AspectPHP_Stream
+* Rename AspectPHP_Transformation_InjectionPoints to AspectPHP_Transformation_JoinPoints
+  
  === Misc ===
  
 The following should be implemented in a first version:
