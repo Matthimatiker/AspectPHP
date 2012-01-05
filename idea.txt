@@ -51,3 +51,6 @@ More ToDos:
 * set up website
   * with Zend Framework
   * extract Mol library from nasmol project
+* introduce coding standard
+  * configure CodeSniffer
+  * adjust formatting
