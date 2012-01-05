@@ -40,6 +40,9 @@ The following should be implemented in a first version:
   * before
   * after
   * handle exception
+* Replace constants to make AspectPHP as transparent as possible
+  * __FILE__
+  * __DIR__
    
 More ToDos:
 * set up ticket system
