@@ -98,4 +98,24 @@ class JoinPointsCheck_Transformation {
     public final function myFinalMethod() {
     }
     
+    /**
+     * Method that returns the received parameters.
+     *
+     * @param integer $first
+     * @param integer $second
+     * @return array(integer)
+     */
+    public function parameters($first, $second) {
+        return array($first, $second);
+    }
+    
+    /**
+     * Returns all received parameters.
+     *
+     * @return array(mixed)
+     */
+    public function variableParameters() {
+        return func_get_args();
+    }
+    
 }
