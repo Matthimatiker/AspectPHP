@@ -176,9 +176,10 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($method->isPrivate());
     }
     
-    // does not change visibility of public method
-    // does not change visibility of protected method
-    // does not change visibility of private method
+    public function testTransformationDoesNotAddPublicMethods() {
+        
+    }
+    
     // does not remove static attribute from method
     // does not remove final attribute from method
     // does not change doc blocks
