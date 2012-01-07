@@ -53,3 +53,12 @@ More ToDos:
 * introduce coding standard
   * configure CodeSniffer
   * adjust formatting
+  
+Snippet to output source tokens:
+$tokens = token_get_all($this->original);
+for ($i = 0; $i < count($tokens); $i++) {
+    if (is_array($tokens[$i])) {
+        $tokens[$i][0] = token_name($tokens[$i][0]);
+    }
+}
+var_dump($tokens);
