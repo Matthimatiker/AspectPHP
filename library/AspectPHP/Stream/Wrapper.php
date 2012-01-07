@@ -170,6 +170,7 @@ class AspectPHP_Stream_Wrapper {
      */
     public function stream_seek($offset, $whence = SEEK_SET)
     {
+        // TODO: simplify
         switch( $whence ) {
             case SEEK_SET:
                 if ($offset >= 0 && $offset < $this->getContentLength()) {
