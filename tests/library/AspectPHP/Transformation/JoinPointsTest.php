@@ -244,7 +244,14 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($original->getDocComment(), $transformed->getDocComment());
     }
     
-    // does not change code that is not in a class
+    /**
+     * Ensures that code that does not belong to a class is not changed during transformation.
+     */
+    public function testTransformationDoesNotChangeCodeThatDoesNotBelongToClass() {
+        $code = file_get_contents(dirname(__FILE__) . '/TestData/JoinPointsCheck/NoClass.php');
+        $this->assertEquals($code, $this->transformation->transform($code));
+    }
+    
     // handles multiple classes in one code block
     // advice invocation
     
