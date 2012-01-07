@@ -62,7 +62,9 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
             // We assume that the same input is always transformed into the same output.
             // Otherwise our test might be incorrect, because the execution is done only
             // once per process.
-            eval($this->transformed);
+            // Remove opening tag as eval does not accept it.
+            $code = substr($this->transformed, strlen('<?php'));
+            eval($code);
         }
     }
     
@@ -80,14 +82,16 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      * Ensures that transform() returns a string.
      */
     public function testTransformReturnsString() {
-        
+        $this->assertInternalType('string', $this->transformation->transform($this->original));
     }
     
     /**
      * Checks if the same input always leads to the same output.
      */
     public function testTransformIsDeterministic() {
-        
+        $first  = $this->transformation->transform($this->original);
+        $second = $this->transformation->transform($this->original);
+        $this->assertEquals($first, $second);
     }
     
     // TODO: add tests
