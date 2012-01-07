@@ -81,6 +81,12 @@ class JoinPointsCheck_Transformation {
     }
     
     /**
+     * A public method.
+     */
+    public function myPublicMethod() {
+    }
+    
+    /**
      * A protected method.
      */
     protected function myProtectedMethod() {

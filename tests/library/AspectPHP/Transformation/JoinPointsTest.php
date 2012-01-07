@@ -29,6 +29,13 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
 class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase {
     
     /**
+     * The name of the transformed class.
+     *
+     * @var string
+     */
+    const TRANSFORMED_CLASS = 'JoinPointsCheck_Transformation';
+    
+    /**
      * System under test.
      *
      * @var AspectPHP_Transformation_JoinPoints
@@ -64,7 +71,7 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
         $this->transformation = new AspectPHP_Transformation_JoinPoints();
         $this->original       = file_get_contents(dirname(__FILE__) . '/TestData/JoinPointsCheck/Transformation.php');
         $this->transformed    = $this->transformation->transform($this->original);
-        if( !class_exists('JoinPointsCheck_Transformation', false) ) {
+        if( !class_exists(self::TRANSFORMED_CLASS, false) ) {
             // We execute the transformed code to be able to use the reflection api for testing.
             // We assume that the same input is always transformed into the same output.
             // Otherwise our test might be incorrect, because the execution is done only
@@ -73,8 +80,8 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
             $code = substr($this->transformed, strlen('<?php'));
             eval($code);
         }
-        $message = 'Class "JoinPointsCheck_Transformation" is not available.';
-        $this->assertTrue(class_exists('JoinPointsCheck_Transformation', false), $message);
+        $message = 'Class "' . self::TRANSFORMED_CLASS . '" is not available.';
+        $this->assertTrue(class_exists(self::TRANSFORMED_CLASS, false), $message);
         $this->transformedInstance = new JoinPointsCheck_Transformation();
     }
     
@@ -145,6 +152,30 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(34, $this->transformedInstance->getLineNumber());
     }
     
+    /**
+     * Ensures that the transformation does not change the visibility of public methods.
+     */
+    public function testTransformationDoesNotChangeVisibilityOfPublicMethods() {
+        $method = $this->getMethodInfo('myPublicMethod');
+        $this->assertTrue($method->isPublic());
+    }
+    
+	/**
+     * Ensures that the transformation does not change the visibility of protected methods.
+     */
+    public function testTransformationDoesNotChangeVisibilityOfProtectedMethods() {
+        $method = $this->getMethodInfo('myProtectedMethod');
+        $this->assertTrue($method->isProtected());
+    }
+    
+	/**
+     * Ensures that the transformation does not change the visibility of private methods.
+     */
+    public function testTransformationDoesNotChangeVisibilityOfPrivateMethods() {
+        $method = $this->getMethodInfo('myPrivateMethod');
+        $this->assertTrue($method->isPrivate());
+    }
+    
     // does not change visibility of public method
     // does not change visibility of protected method
     // does not change visibility of private method
@@ -154,6 +185,26 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
     // does not change code that is not in a class
     // handles multiple classes in one code block
     // advice invocation
+    
+    /**
+     * Returns a reflection object that may be used to inspect the transformed class.
+     *
+     * @return ReflectionClass
+     */
+    protected function getClassInfo() {
+        return new ReflectionClass(self::TRANSFORMED_CLASS);
+    }
+    
+    /**
+     * Returns a reflection object that may be used to inspect the
+     * method $name in the transformed class.
+     *
+     * @param string $name
+     * @return ReflectionMethod
+     */
+    public function getMethodInfo($name) {
+        return $this->getClassInfo()->getMethod($name);
+    }
     
 }
 
