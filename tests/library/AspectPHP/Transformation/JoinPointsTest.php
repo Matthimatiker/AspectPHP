@@ -184,6 +184,23 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($method->isStatic());
     }
     
+	/**
+     * Ensures that the transformation does not remove the final attribute from methods.
+     */
+    public function testTransformationDoesNotRemoveFinalAttributeFromMethod() {
+        $method = $this->getMethodInfo('myFinalMethod');
+        $this->assertTrue($method->isFinal());
+    }
+    
+    /**
+     * Ensures that the transformation does not remove the final attribute
+     * from the class.
+     */
+    public function testTransformationDoesNotRemoveFinalAttributeFromClass() {
+        $class = $this->getClassInfo();
+        $this->assertTrue($class->isFinal());
+    }
+    
     /**
      * Ensures that the transformation does not add public methods to the class.
      *
@@ -203,8 +220,6 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
         
     }
     
-    // does not remove static attribute from method
-    // does not remove final attribute from method
     // does not change doc blocks
     // does not change code that is not in a class
     // handles multiple classes in one code block

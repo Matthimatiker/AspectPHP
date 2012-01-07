@@ -17,7 +17,7 @@
  * @version $Rev$
  * @since 07.01.2012
  */
-class JoinPointsCheck_Transformation {
+final class JoinPointsCheck_Transformation {
     
     /**
      * A static method.
