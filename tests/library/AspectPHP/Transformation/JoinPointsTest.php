@@ -35,8 +35,18 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      */
     protected $transformation = null;
     
+    /**
+     * The original code.
+     *
+     * @var string
+     */
     protected $original = null;
     
+    /**
+     * The transformed code.
+     *
+     * @var string
+     */
     protected $transformed = null;
     
     /**
@@ -48,6 +58,10 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
         $this->original       = file_get_contents(dirname(__FILE__) . '/TestData/JoinPointsCheck/Transformation.php');
         $this->transformed    = $this->transformation->transform($this->original);
         if( !class_exists('JoinPointsCheck_Transformation', false) ) {
+            // We execute the transformed code to be able to use the reflection api for testing.
+            // We assume that the same input is always transformed into the same output.
+            // Otherwise our test might be incorrect, because the execution is done only
+            // once per process.
             eval($this->transformed);
         }
     }
