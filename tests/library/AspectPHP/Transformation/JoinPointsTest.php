@@ -117,8 +117,7 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      * Ensures that the transformation does not change the method context ($this).
      */
     public function testTransformationDoesNotChangeContext() {
-        $object = new JoinPointsCheck_Transformation();
-        $this->assertSame($object, $object->getContext());
+        $this->assertSame($this->transformedInstance, $this->transformedInstance->getContext());
     }
     
     /**
@@ -126,8 +125,7 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      */
     public function testTransformedCodeDoesNotSuppressNotices() {
         $this->setExpectedException('PHPUnit_Framework_Error_Notice');
-        $object = new JoinPointsCheck_Transformation();
-        $object->triggerNotice();
+        $this->transformedInstance->triggerNotice();
         
     }
     
@@ -136,8 +134,7 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      */
     public function testTransformedCodeDoesNotSuppressExceptions() {
         $this->setExpectedException('RuntimeException');
-        $object = new JoinPointsCheck_Transformation();
-        $object->throwException();
+        $this->transformedInstance->throwException();
     }
     // does not change line numbers
     // does not change visibility of public method
