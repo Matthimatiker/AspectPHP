@@ -40,7 +40,7 @@ class JoinPointsCheck_Transformation {
      * @return JoinPointsCheck_Transformation
      */
     public function getContext() {
-        $this;
+        return $this;
     }
     
     /**

@@ -102,7 +102,14 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
         $this->assertGreaterThan(strlen($this->original), strlen($this->transformed), $message);
     }
     
-    // does not change context
+    /**
+     * Ensures that the transformation does not change the method context ($this).
+     */
+    public function testTransformationDoesNotChangeContext() {
+        $object = new JoinPointsCheck_Transformation();
+        $this->assertSame($object, $object->getContext());
+    }
+    
     // does not suppress notices
     // does not suppress exceptions
     // does not change line numbers
@@ -114,6 +121,7 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
     // does not change doc blocks
     // does not change code that is not in a class
     // handles multiple classes in one code block
+    // advice invocation
     
 }
 
