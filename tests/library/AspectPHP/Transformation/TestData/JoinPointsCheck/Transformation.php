@@ -76,7 +76,7 @@ class JoinPointsCheck_Transformation {
     /**
      * Returns the magic __FUNCTION__ constant.
      */
-    public function getFuncction() {
+    public function getFunction() {
         return __FUNCTION__;
     }
     
