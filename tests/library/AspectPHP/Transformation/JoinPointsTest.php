@@ -80,6 +80,12 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
             $code = substr($this->transformed, strlen('<?php'));
             eval($code);
         }
+        if( !class_exists(self::TRANSFORMED_CLASS . '_Original', false) ) {
+            // Rename the original class and execute the code to be able to use the reflection api.
+            $code = substr($this->transformed, strlen('<?php'));
+            $code = str_replace(self::TRANSFORMED_CLASS, self::TRANSFORMED_CLASS . '_Original', $code);
+            eval($code);
+        }
         $message = 'Class "' . self::TRANSFORMED_CLASS . '" is not available.';
         $this->assertTrue(class_exists(self::TRANSFORMED_CLASS, false), $message);
         $this->transformedInstance = new JoinPointsCheck_Transformation();
@@ -208,7 +214,10 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      * methods that arre available via webservice).
      */
     public function testTransformationDoesNotAddPublicMethods() {
-        
+        $original   = $this->getOriginalClassInfo()->getMethods(ReflectionMethod::IS_PUBLIC);
+        $transfomed = $this->getClassInfo()->getMethods(ReflectionMethod::IS_PUBLIC);
+        $message = 'Number of public methods in original and transformed class differs.';
+        $this->assertEquals(count($original), count($transfomed), $message);
     }
     
     /**
@@ -217,7 +226,10 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      * Additional protected methods might caus conflicts in sub classes.
      */
     public function testTransformationDoesNotAddProtectedMethods() {
-        
+        $original   = $this->getOriginalClassInfo()->getMethods(ReflectionMethod::IS_PROTECTED);
+        $transfomed = $this->getClassInfo()->getMethods(ReflectionMethod::IS_PROTECTED);
+        $message = 'Number of protected methods in original and transformed class differs.';
+        $this->assertEquals(count($original), count($transfomed), $message);
     }
     
     // does not change doc blocks
@@ -243,6 +255,15 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      */
     public function getMethodInfo($name) {
         return $this->getClassInfo()->getMethod($name);
+    }
+    
+	/**
+     * Returns a reflection object that may be used to inspect the original class.
+     *
+     * @return ReflectionClass
+     */
+    protected function getOriginalClassInfo() {
+        return new ReflectionClass(self::TRANSFORMED_CLASS . '_Original');
     }
     
 }
