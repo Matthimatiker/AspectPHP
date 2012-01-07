@@ -110,8 +110,24 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
         $this->assertSame($object, $object->getContext());
     }
     
-    // does not suppress notices
-    // does not suppress exceptions
+    /**
+     * Ensures that the transformed code does not suppress notices.
+     */
+    public function testTransformedCodeDoesNotSuppressNotices() {
+        $this->setExpectedException('PHPUnit_Framework_Error_Notice');
+        $object = new JoinPointsCheck_Transformation();
+        $object->triggerNotice();
+        
+    }
+    
+    /**
+     * Ensures that the transformed code does not suppress exceptions.
+     */
+    public function testTransformedCodeDoesNotSuppressExceptions() {
+        $this->setExpectedException('RuntimeException');
+        $object = new JoinPointsCheck_Transformation();
+        $object->throwException();
+    }
     // does not change line numbers
     // does not change visibility of public method
     // does not change visibility of protected method
