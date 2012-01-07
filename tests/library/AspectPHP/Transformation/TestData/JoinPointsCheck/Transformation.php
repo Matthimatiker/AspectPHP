@@ -30,7 +30,7 @@ class JoinPointsCheck_Transformation {
      *
      * @return integer
      */
-    public function lineNumber() {
+    public function getLineNumber() {
         return __LINE__;
     }
     

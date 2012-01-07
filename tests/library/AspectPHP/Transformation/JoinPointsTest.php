@@ -136,7 +136,15 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException('RuntimeException');
         $this->transformedInstance->throwException();
     }
-    // does not change line numbers
+    
+    /**
+     * Ensures that the transformation does not change the line numbers of
+     * the original code.
+     */
+    public function testTransformationDoesNotChangeLineNumbers() {
+        $this->assertEquals(34, $this->transformedInstance->getLineNumber());
+    }
+    
     // does not change visibility of public method
     // does not change visibility of protected method
     // does not change visibility of private method
