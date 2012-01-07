@@ -80,14 +80,14 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
             $code = substr($this->transformed, strlen('<?php'));
             eval($code);
         }
-        if( !class_exists(self::TRANSFORMED_CLASS . '_Original', false) ) {
-            // Rename the original class and execute the code to be able to use the reflection api.
-            $code = substr($this->transformed, strlen('<?php'));
-            $code = str_replace(self::TRANSFORMED_CLASS, self::TRANSFORMED_CLASS . '_Original', $code);
-            eval($code);
-        }
         $message = 'Class "' . self::TRANSFORMED_CLASS . '" is not available.';
         $this->assertTrue(class_exists(self::TRANSFORMED_CLASS, false), $message);
+        if( !class_exists($this->getOriginalClassName(), false) ) {
+            // Rename the original class and execute the code to be able to use the reflection api.
+            $code = substr($this->transformed, strlen('<?php'));
+            $code = str_replace(self::TRANSFORMED_CLASS, $this->getOriginalClassName(), $code);
+            eval($code);
+        }
         $this->transformedInstance = new JoinPointsCheck_Transformation();
     }
     
@@ -257,13 +257,22 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
         return $this->getClassInfo()->getMethod($name);
     }
     
+    /**
+     * Returns the name that is used for the original class.
+     *
+     * @return string
+     */
+    protected function getOriginalClassName() {
+        return self::TRANSFORMED_CLASS . '_Original';
+    }
+    
 	/**
      * Returns a reflection object that may be used to inspect the original class.
      *
      * @return ReflectionClass
      */
     protected function getOriginalClassInfo() {
-        return new ReflectionClass(self::TRANSFORMED_CLASS . '_Original');
+        return new ReflectionClass($this->getOriginalClassName());
     }
     
 }
