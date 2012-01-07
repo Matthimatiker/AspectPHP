@@ -176,7 +176,30 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($method->isPrivate());
     }
     
+    /**
+     * Ensures that the transformation does not remove the static attribute from methods.
+     */
+    public function testTransformationDoesNotRemoveStaticAttributeFromMethod() {
+        $method = $this->getMethodInfo('myStaticMethod');
+        $this->assertTrue($method->isStatic());
+    }
+    
+    /**
+     * Ensures that the transformation does not add public methods to the class.
+     *
+     * Public methods might be exposed when reflection is used (for example to find
+     * methods that arre available via webservice).
+     */
     public function testTransformationDoesNotAddPublicMethods() {
+        
+    }
+    
+    /**
+     * Ensures that the transformation does not add protected methods to the class.
+     *
+     * Additional protected methods might caus conflicts in sub classes.
+     */
+    public function testTransformationDoesNotAddProtectedMethods() {
         
     }
     
