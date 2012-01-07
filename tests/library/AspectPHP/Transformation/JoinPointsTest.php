@@ -313,12 +313,18 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
         $this->markTestSkipped('Not implemented yet.');
     }
     
-    protected function testTransformationDoesNotChangeInterfaces() {
-        
+    /**
+     * Ensures that the transformation does not change interface declarations.
+     */
+    public function testTransformationDoesNotChangeInterfaces() {
+        $this->markTestSkipped('Not implemented yet.');
     }
     
-    protected function testTransformationHandlesAbstractMethods() {
-        
+    /**
+     * Checks if the transformation can handle abstract methods.
+     */
+    public function testTransformationHandlesAbstractMethods() {
+        $this->markTestSkipped('Not implemented yet.');
     }
     
     // TODO:
