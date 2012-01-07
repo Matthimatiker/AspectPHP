@@ -289,6 +289,22 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('getFunction', $this->transformedInstance->getFunction());
     }
     
+    /**
+     * Ensures that the transformation works with methods whose visibility was not
+     * declared explicitly.
+     *
+     * For example:
+     * <code>
+     * class Demo {
+     *     function myMethod() {
+     *     }
+     * }
+     * </code>
+     */
+    public function testTransformationWorksWithMethodsWhoseVisibilityIsNotDeclaredExplicitly() {
+        $this->markTestSkipped('Not implemented yet.');
+    }
+    
     // TODO:
     // handles multiple classes in one code block
     // advice invocation
