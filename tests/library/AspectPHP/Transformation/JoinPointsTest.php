@@ -252,6 +252,14 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($code, $this->transformation->transform($code));
     }
     
+    public function testMethodsReceiveCorrectDeclaredParameters() {
+        
+    }
+    
+    public function testMethodsReceiveCorrectVariableParameters() {
+        
+    }
+    
     // handles multiple classes in one code block
     // advice invocation
     
