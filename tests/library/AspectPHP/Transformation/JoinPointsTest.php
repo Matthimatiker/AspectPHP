@@ -94,8 +94,14 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($first, $second);
     }
     
-    // TODO: add tests
-    // adds code
+    /**
+     * Tests if code is added by the transformation.
+     */
+    public function testTransformationAddsCode() {
+        $message = 'Code size did not increase as expected.';
+        $this->assertGreaterThan(strlen($this->original), strlen($this->transformed), $message);
+    }
+    
     // does not change context
     // does not suppress notices
     // does not suppress exceptions
