@@ -268,14 +268,23 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(array(3, 2, 1), $received);
     }
     
+    /**
+     * Checks if the __CLASS__ constant has the correct value.
+     */
     public function testClassConstantHasCorrectValue() {
         
     }
     
+    /**
+     * Checks if the __METHOD__ constant has the correct value.
+     */
     public function testMethodConstantHasCorrectValue() {
         
     }
     
+    /**
+     * Checks if the __FUNCTION__ constant has the correct value.
+     */
     public function testFunctionConstantHasCorrectValue() {
         
     }
