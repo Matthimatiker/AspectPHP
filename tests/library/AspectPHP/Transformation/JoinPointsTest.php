@@ -1,7 +1,7 @@
 <?php
 
 /**
- * AspectPHP_Transformation_InjectionPointsTest
+ * AspectPHP_Transformation_JoinPointsTest
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Transformation
@@ -21,7 +21,7 @@
  * @version $Rev$
  * @since 05.01.2012
  */
-class AspectPHP_Transformation_InjectionPointsTest extends PHPUnit_Framework_TestCase {
+class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase {
     
     // TODO: add tests
     // adds code

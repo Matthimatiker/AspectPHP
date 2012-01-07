@@ -1,7 +1,7 @@
 <?php
 
 /**
- * AspectPHP_Transformation_InjectionPoints
+ * AspectPHP_Transformation_JoinPoints
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Transformation
@@ -19,7 +19,7 @@
  * @version $Rev$
  * @since 05.01.2012
  */
-class AspectPHP_Transformation_InjectionPoints {
+class AspectPHP_Transformation_JoinPoints {
     
     /**
      * Transforms the source code.
