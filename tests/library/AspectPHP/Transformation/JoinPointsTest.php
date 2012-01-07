@@ -305,6 +305,14 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
         $this->markTestSkipped('Not implemented yet.');
     }
     
+    /**
+     * Ensures that the transformation works even if the provided code does
+     * not have any comment.
+     */
+    public function testTransformationWorksEvenIfCodeDoesNotHaveAnyComment() {
+        $this->markTestSkipped('Not implemented yet.');
+    }
+    
     // TODO:
     // handles multiple classes in one code block
     // advice invocation
