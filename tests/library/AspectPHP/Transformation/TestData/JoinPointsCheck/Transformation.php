@@ -105,6 +105,16 @@ final class JoinPointsCheck_Transformation {
     }
     
     /**
+     * Method with a doc block that contains some info.
+     *
+     * @param string $arg
+     * @return string
+     * @since 07.01.2012
+     */
+    public function myDocBlockMethod($arg) {
+    }
+    
+    /**
      * Method that returns the received parameters.
      *
      * @param integer $first

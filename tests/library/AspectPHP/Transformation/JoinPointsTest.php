@@ -232,7 +232,18 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(count($original), count($transfomed), $message);
     }
     
-    // does not change doc blocks
+    /**
+     * Ensures that the transformation does not change the doc blocks of the methods.
+     *
+     * The doc blocks might be used by scripts that rely on reflection and therefore
+     * should not be changed.
+     */
+    public function testTransformationDoesNotChangeMethodDocBlocks() {
+        $original    = $this->getOriginalMethodInfo('myDocBlockMethod');
+        $transformed = $this->getMethodInfo('myDocBlockMethod');
+        $this->assertEquals($original->getDocComment(), $transformed->getDocComment());
+    }
+    
     // does not change code that is not in a class
     // handles multiple classes in one code block
     // advice invocation
@@ -253,17 +264,8 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      * @param string $name
      * @return ReflectionMethod
      */
-    public function getMethodInfo($name) {
+    protected function getMethodInfo($name) {
         return $this->getClassInfo()->getMethod($name);
-    }
-    
-    /**
-     * Returns the name that is used for the original class.
-     *
-     * @return string
-     */
-    protected function getOriginalClassName() {
-        return self::TRANSFORMED_CLASS . '_Original';
     }
     
 	/**
@@ -273,6 +275,26 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      */
     protected function getOriginalClassInfo() {
         return new ReflectionClass($this->getOriginalClassName());
+    }
+    
+	/**
+     * Returns a reflection object that may be used to inspect the
+     * method $name in the original class.
+     *
+     * @param string $name
+     * @return ReflectionMethod
+     */
+    protected function getOriginalMethodInfo($name) {
+        return $this->getOriginalClassInfo()->getMethod($name);
+    }
+    
+	/**
+     * Returns the name that is used for the original class.
+     *
+     * @return string
+     */
+    protected function getOriginalClassName() {
+        return self::TRANSFORMED_CLASS . '_Original';
     }
     
 }
