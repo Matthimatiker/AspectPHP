@@ -76,7 +76,17 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
         parent::tearDown();
     }
     
+    /**
+     * Ensures that transform() returns a string.
+     */
     public function testTransformReturnsString() {
+        
+    }
+    
+    /**
+     * Checks if the same input always leads to the same output.
+     */
+    public function testTransformIsDeterministic() {
         
     }
     
