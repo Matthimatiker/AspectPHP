@@ -50,6 +50,13 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
     protected $transformed = null;
     
     /**
+     * An instance of the transformed class.
+     *
+     * @var JoinPointsCheck_Transformation
+     */
+    protected $transformedInstance = null;
+    
+    /**
      * See {@link PHPUnit_Framework_TestCase::setUp()} for details.
      */
     protected function setUp() {
@@ -66,15 +73,19 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
             $code = substr($this->transformed, strlen('<?php'));
             eval($code);
         }
+        $message = 'Class "JoinPointsCheck_Transformation" is not available.';
+        $this->assertTrue(class_exists('JoinPointsCheck_Transformation', false), $message);
+        $this->transformedInstance = new JoinPointsCheck_Transformation();
     }
     
     /**
      * See {@link PHPUnit_Framework_TestCase::tearDown()} for details.
      */
     protected function tearDown() {
-        $this->transformed    = null;
-        $this->original       = null;
-        $this->transformation = null;
+        $this->transformedInstance = null;
+        $this->transformed         = null;
+        $this->original            = null;
+        $this->transformation      = null;
         parent::tearDown();
     }
     
