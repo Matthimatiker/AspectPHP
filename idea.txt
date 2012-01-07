@@ -30,7 +30,6 @@ that are invoked when the method of the source object is called.
 === Refactoring ===
 
 * Rename AspectPHP_Stream_Wrapper to AspectPHP_Stream
-* Rename AspectPHP_Transformation_InjectionPoints to AspectPHP_Transformation_JoinPoints
   
  === Misc ===
  
