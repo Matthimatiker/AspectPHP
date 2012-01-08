@@ -135,6 +135,16 @@ final class JoinPointsCheck_Transformation {
         return func_get_args();
     }
     
+    /**
+     * A method with default parameter.
+     *
+     * @param string $param
+     * @return string The received parameter value.
+     */
+    public function defaultParameter($param = 'Demo') {
+        return $param;
+    }
+    
 }
 
 ?>

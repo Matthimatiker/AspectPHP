@@ -331,6 +331,13 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('static', JoinPointsCheck_Transformation::myStaticMethod());
     }
     
+    /**
+     * Ensures that methods receive the correct default parameters.
+     */
+    public function testMethodsReceiveDefaultParameters() {
+        $this->assertEquals('Demo', $this->transformedInstance->defaultParameter());
+    }
+    
     // TODO:
     // handles multiple classes in one code block
     // advice invocation
