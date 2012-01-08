@@ -109,6 +109,27 @@ class AspectPHP_JoinPoint {
     }
     
     /**
+     * Returns a callback to the method that will be or was invoked.
+     *
+     * @return array|string|Closure
+     */
+    public function getTarget() {
+        
+    }
+    
+    /**
+     * Sets the method that will be invoked.
+     *
+     * The provided argument must be a valid callback.
+     *
+     * @param array|string|Closure $callback
+     * @throws InvalidArgumentException If an invalid callback is provided.
+     */
+    public function setTarget($callback) {
+        
+    }
+    
+    /**
      * Returns the value that was returned by the called method.
      *
      * @return mixed|null
