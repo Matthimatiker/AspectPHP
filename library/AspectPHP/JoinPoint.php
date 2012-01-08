@@ -21,6 +21,20 @@
  */
 class AspectPHP_JoinPoint {
     
+    /**
+     * Creates a join point event.
+     *
+     * <code>
+     * $joinPoint = new AspectPHP_JoinPoint('MyClass::myMethod', array(1, 2, 3));
+     * </code>
+     *
+     * @param string $method The method.
+     * @param array(mixed) $arguments The arguments that were used to call the method.
+     */
+    public function __construct($method, $arguments) {
+        
+    }
+    
 }
 
 ?>
