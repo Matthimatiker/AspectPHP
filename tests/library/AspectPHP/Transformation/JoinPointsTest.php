@@ -76,17 +76,14 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
             // We assume that the same input is always transformed into the same output.
             // Otherwise our test might be incorrect, because the execution is done only
             // once per process.
-            // Remove opening tag as eval does not accept it.
-            $code = substr($this->transformed, strlen('<?php'));
-            eval($code);
+            $this->execute($this->transformed);
         }
         $message = 'Class "' . self::TRANSFORMED_CLASS . '" is not available.';
         $this->assertTrue(class_exists(self::TRANSFORMED_CLASS, false), $message);
         if( !class_exists($this->getOriginalClassName(), false) ) {
             // Rename the original class and execute the code to be able to use the reflection api.
-            $code = substr($this->transformed, strlen('<?php'));
-            $code = str_replace(self::TRANSFORMED_CLASS, $this->getOriginalClassName(), $code);
-            eval($code);
+            $code = str_replace(self::TRANSFORMED_CLASS, $this->getOriginalClassName(), $this->original);
+            $this->execute($code);
         }
         $this->transformedInstance = new JoinPointsCheck_Transformation();
     }
@@ -385,6 +382,19 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      */
     protected function getOriginalClassName() {
         return self::TRANSFORMED_CLASS . '_Original';
+    }
+    
+    /**
+     * Executes the given source code.
+     *
+     * @param string $code
+     */
+    protected function execute($code) {
+        // Remove opening tag as eval does not accept it.
+        if( strpos($code, '<?php') === 0 ) {
+            $code = substr($code, strlen('<?php'));
+        }
+        eval($code);
     }
     
 }
