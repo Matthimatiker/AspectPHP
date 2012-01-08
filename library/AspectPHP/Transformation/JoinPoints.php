@@ -39,6 +39,7 @@ class AspectPHP_Transformation_JoinPoints {
         $this->tokens    = token_get_all($source);
         $injectionPoints = array();
         $classToken      = -1;
+        $originalName    = null;
         foreach( $this->tokens as $index => $token ) {
             /* @var array(integer=>string|integer)|string */
             if( is_string($token) ) {
@@ -47,12 +48,13 @@ class AspectPHP_Transformation_JoinPoints {
             if( $token[0] === T_CLASS ) {
                 $classToken = $index;
             } elseif( $classToken !== -1 && $token[0] === T_FUNCTION ) {
-                $docComment = $this->findDocBlock($index);
-                $bodyStart  = $this->findBody($index);
-                $visibility = $this->findMethodVisibility($index);
-                $name       = $this->findMethodName($index);
-                $newName    = '_aspectPHP' . $this->tokens[$name][1];
-                $signature  = $this->between($docComment, $bodyStart - 1);
+                $docComment   = $this->findDocBlock($index);
+                $bodyStart    = $this->findBody($index);
+                $visibility   = $this->findMethodVisibility($index);
+                $name         = $this->findMethodName($index);
+                $originalName = $this->tokens[$name][1];
+                $newName      = '_aspectPHP' . $originalName;
+                $signature    = $this->between($docComment, $bodyStart - 1);
                 
                 $injectionPoints[] = $this->buildInjectionPoint($signature, $newName);
                 
@@ -60,6 +62,14 @@ class AspectPHP_Transformation_JoinPoints {
                 $this->tokens[$name][1]       = $newName;
                 $this->tokens[$visibility][0] = T_PRIVATE;
                 $this->tokens[$visibility][1] = 'private';
+            } elseif ($originalName !== null && $token[0] === T_METHOD_C) {
+                // Replace __METHOD__ constant.
+                $this->tokens[$index][0] = T_STRING;
+                $this->tokens[$index][1] = "__CLASS__ . '::{$originalName}'";
+            } elseif ($originalName !== null && $token[0] === T_FUNC_C) {
+                // Replace __FUNCTION__ constant.
+                $this->tokens[$index][0] = T_STRING;
+                $this->tokens[$index][1] = "'{$originalName}'";
             }
         }
         if( $classToken !== -1 ) {
