@@ -161,9 +161,11 @@ class AspectPHP_JoinPoint {
     /**
      * Sets the exception that was thrown by the method.
      *
-     * @param Exception $e
+     * If null is provided the previous exception is removed.
+     *
+     * @param Exception|null $e
      */
-    public function setException(Exception $e) {
+    public function setException($e) {
         
     }
     
