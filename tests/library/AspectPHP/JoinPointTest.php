@@ -31,9 +31,13 @@ class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase {
     // TODO
     // return value is null if not set
     // return value correct
+    // set return value fluent interface
     // exception null if not set
     // exception correct
+    // set exception accepts null
+    // set exception fluent interface
     // get arguments array
+    // get arguments fluent interface
     // get arguments correct
     // get arguments correct if default value
     // get argument by index correct
@@ -45,6 +49,7 @@ class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase {
     // context correct if object
     // context correct if string
     // default target correct
+    // set target fluent interface
     // set target throws exception if invalid callback
     // provided target correct
     
