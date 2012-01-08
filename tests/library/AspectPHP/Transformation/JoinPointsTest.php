@@ -78,13 +78,13 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
             // once per process.
             $this->execute($this->transformed);
         }
-        $message = 'Class "' . self::TRANSFORMED_CLASS . '" is not available.';
-        $this->assertTrue(class_exists(self::TRANSFORMED_CLASS, false), $message);
+        $this->assertClassExists(self::TRANSFORMED_CLASS);
         if( !class_exists($this->getOriginalClassName(), false) ) {
             // Rename the original class and execute the code to be able to use the reflection api.
             $code = str_replace(self::TRANSFORMED_CLASS, $this->getOriginalClassName(), $this->original);
             $this->execute($code);
         }
+        $this->assertClassExists($this->getOriginalClassName());
         $this->transformedInstance = new JoinPointsCheck_Transformation();
     }
     
@@ -334,6 +334,16 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
     // TODO:
     // handles multiple classes in one code block
     // advice invocation
+    
+    /**
+     * Asserts that the class is loaded.
+     *
+     * @param string $class
+     */
+    protected function assertClassExists($class) {
+        $message = 'Class "' . $class . '" is not available.';
+        $this->assertTrue(class_exists($class, false), $message);
+    }
     
     /**
      * Returns a reflection object that may be used to inspect the transformed class.
