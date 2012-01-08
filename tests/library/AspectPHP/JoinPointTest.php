@@ -28,6 +28,21 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
  */
 class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase {
     
+    // TODO
+    // return value is null if not set
+    // return value correct
+    // exception null if not set
+    // exception correct
+    // get arguments array
+    // get arguments correct
+    // get arguments correct if default value
+    // get argument by index correct
+    // get argument by index correct if default value
+    // get argument by name correct
+    // get argument by name correct if default value
+    // get class correct
+    // get method correct
+    
     /**
      * This method and its parameters are used to create a join point for testing.
      *
