@@ -44,6 +44,9 @@ class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase {
     // get method correct
     // context correct if object
     // context correct if string
+    // default target correct
+    // set target throws exception if invalid callback
+    // provided target correct
     
     /**
      * This method and its parameters are used to create a join point for testing.
