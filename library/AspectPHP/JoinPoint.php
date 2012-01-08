@@ -49,6 +49,7 @@ class AspectPHP_JoinPoint {
      * Sets the arguments that are used to call the method.
      *
      * @param array(mixed) $arguments The arguments that are used to call the method.
+     * @return AspectPHP_JoinPoint Provides a fluent interface.
      */
     public function setArguments($arguments) {
         
@@ -123,6 +124,7 @@ class AspectPHP_JoinPoint {
      * The provided argument must be a valid callback.
      *
      * @param array|string|Closure $callback
+     * @return AspectPHP_JoinPoint Provides a fluent interface.
      * @throws InvalidArgumentException If an invalid callback is provided.
      */
     public function setTarget($callback) {
@@ -142,6 +144,7 @@ class AspectPHP_JoinPoint {
      * Sets the return value.
      *
      * @param mixed $value
+     * @return AspectPHP_JoinPoint Provides a fluent interface.
      */
     public function setReturnValue($value) {
         
@@ -164,6 +167,7 @@ class AspectPHP_JoinPoint {
      * If null is provided the previous exception is removed.
      *
      * @param Exception|null $e
+     * @return AspectPHP_JoinPoint Provides a fluent interface.
      */
     public function setException($e) {
         
