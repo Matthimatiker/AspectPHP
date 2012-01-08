@@ -35,6 +35,42 @@ class AspectPHP_JoinPoint {
         
     }
     
+    public function getArguments() {
+        
+    }
+    
+    public function getArgument($nameOrIndex) {
+        
+    }
+    
+    public function getClass() {
+        
+    }
+    
+    public function getContext() {
+        
+    }
+    
+    public function setContext($context) {
+        
+    }
+    
+    public function getReturnValue() {
+        
+    }
+    
+    public function setReturnValue($value) {
+        
+    }
+    
+    public function getException() {
+        
+    }
+    
+    public function setException(Exception $e) {
+        
+    }
+    
 }
 
 ?>
