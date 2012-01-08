@@ -82,7 +82,7 @@ class AspectPHP_Transformation_JoinPoints {
     protected function buildInjectionPoint($signature, $callee) {
         $template = '%s {'                                                    . PHP_EOL
                   . '    $args = func_get_args();'                            . PHP_EOL
-                  . '    return call_user_func(array($this, \'%s\'), $args);' . PHP_EOL
+                  . '    return call_user_func_array(array($this, \'%s\'), $args);' . PHP_EOL
                   . '}'                                                       . PHP_EOL;
         return sprintf($template, $signature, $callee);
     }
