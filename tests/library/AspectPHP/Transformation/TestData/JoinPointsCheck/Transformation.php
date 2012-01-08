@@ -135,3 +135,5 @@ final class JoinPointsCheck_Transformation {
     }
     
 }
+
+?>
