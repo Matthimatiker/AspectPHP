@@ -54,9 +54,10 @@ class AspectPHP_Transformation_JoinPoints {
                 $name         = $this->findMethodName($index);
                 $originalName = $this->tokens[$name][1];
                 $newName      = '_aspectPHP' . $originalName;
+                $context      = ($this->findBetween($docComment, $bodyStart, T_STATIC) === -1) ? '$this' : '__CLASS__';
                 $signature    = $this->between($docComment, $bodyStart - 1);
                 
-                $injectionPoints[] = $this->buildInjectionPoint($signature, $newName);
+                $injectionPoints[] = $this->buildInjectionPoint($signature, $newName, $context);
                 
                 // Rename the original method and reduce the visibility.
                 $this->tokens[$name][1]       = $newName;
@@ -87,15 +88,16 @@ class AspectPHP_Transformation_JoinPoints {
      *
      * @param string $signature The method signature, including the doc comment.
      * @param string $callee Name of the method that will be called.
+     * @param string $context The method context. For example $this or __CLASS__.
      * @return string The code of the generated injection point method.
      */
-    protected function buildInjectionPoint($signature, $callee) {
+    protected function buildInjectionPoint($signature, $callee, $context) {
         $template = '    %s'                                                            . PHP_EOL
                   . '    {'                                                             . PHP_EOL
                   . '        $args = func_get_args();'                                  . PHP_EOL
-                  . '        return call_user_func_array(array($this, \'%s\'), $args);' . PHP_EOL
+                  . '        return call_user_func_array(array(%s, \'%s\'), $args);' . PHP_EOL
                   . '    }'                                                             . PHP_EOL;
-        return sprintf($template, $signature, $callee);
+        return sprintf($template, $signature, $context, $callee);
     }
     
     /**
@@ -116,6 +118,31 @@ class AspectPHP_Transformation_JoinPoints {
             }
         }
         return $code;
+    }
+    
+    /**
+     * Searches between $start and $end for a token of the given type
+     * and returns its index.
+     *
+     * Returns -1 if the token was not found.
+     *
+     * Example:
+     * <code>
+     * $index = $this->findBetween(10, 25, T_PUBLIC);
+     * </code>
+     *
+     * @param integer $start
+     * @param integer $end
+     * @param integer $type
+     * @return integer
+     */
+    protected function findBetween($start, $end, $type) {
+        for( $i = $start; $i <= $end; $i++ ) {
+            if( is_array($this->tokens[$i]) && $this->tokens[$i][0] === $type) {
+                return $i;
+            }
+        }
+        return -1;
     }
     
     /**
