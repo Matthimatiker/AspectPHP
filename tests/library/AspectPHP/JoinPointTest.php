@@ -42,6 +42,8 @@ class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase {
     // get argument by name correct if default value
     // get class correct
     // get method correct
+    // context correct if object
+    // context correct if string
     
     /**
      * This method and its parameters are used to create a join point for testing.
@@ -52,7 +54,9 @@ class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase {
      */
     protected function createJoinPoint($name, $register = true) {
         $arguments = func_get_args();
-        return new AspectPHP_JoinPoint(__METHOD__, $arguments);
+        $joinPoint = new AspectPHP_JoinPoint(__METHOD__, $this);
+        $joinPoint->setArguments($arguments);
+        return $joinPoint;
     }
     
 }

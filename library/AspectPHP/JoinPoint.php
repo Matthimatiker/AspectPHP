@@ -25,13 +25,14 @@ class AspectPHP_JoinPoint {
      * Creates a join point event.
      *
      * <code>
-     * $joinPoint = new AspectPHP_JoinPoint('MyClass::myMethod', array(1, 2, 3));
+     * $object    = new MyClass();
+     * $joinPoint = new AspectPHP_JoinPoint('MyClass::myMethod', $object);
      * </code>
      *
      * @param string $method The method.
-     * @param array(mixed) $arguments The arguments that were used to call the method.
+     * @param object|string $context The method context (object or class name).
      */
-    public function __construct($method, $arguments) {
+    public function __construct($method, $context) {
         
     }
     
@@ -41,6 +42,15 @@ class AspectPHP_JoinPoint {
      * @return array(mixed)
      */
     public function getArguments() {
+        
+    }
+    
+	/**
+     * Sets the arguments that are used to call the method.
+     *
+     * @param array(mixed) $arguments The arguments that are used to call the method.
+     */
+    public function setArguments($arguments) {
         
     }
     
@@ -95,15 +105,6 @@ class AspectPHP_JoinPoint {
      * @return object|string
      */
     public function getContext() {
-        
-    }
-    
-    /**
-     * Sets the method context.
-     *
-     * @param object|string $context
-     */
-    public function setContext($context) {
         
     }
     
