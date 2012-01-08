@@ -54,7 +54,7 @@ class AspectPHP_Transformation_JoinPoints {
                 $newName    = '_aspectPHP' . $this->tokens[$name][1];
                 $signature  = $this->between($docComment, $bodyStart - 1);
                 
-                $injectionPoints[] = $this->buildInjectionPoint($signature, $this->tokens[$name][1]);
+                $injectionPoints[] = $this->buildInjectionPoint($signature, $newName);
                 
                 // Rename the original method and reduce the visibility.
                 $this->tokens[$name][1]       = $newName;
