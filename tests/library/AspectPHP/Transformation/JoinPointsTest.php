@@ -74,7 +74,7 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
         if( !class_exists(self::TRANSFORMED_CLASS, false) ) {
             // We execute the transformed code to be able to use the reflection api for testing.
             // We assume that the same input is always transformed into the same output.
-            // Otherwise our test might be incorrect, because the execution is done only
+            // Otherwise our tests might be incorrect, because the execution is done only
             // once per process.
             $this->execute($this->transformed);
         }
