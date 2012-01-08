@@ -78,6 +78,15 @@ class AspectPHP_JoinPoint {
     }
     
     /**
+     * The name of the called method.
+     *
+     * @return string
+     */
+    public function getMethod() {
+        
+    }
+    
+    /**
      * Returns the context of the called method.
      *
      * The context is the object whose method is called or
