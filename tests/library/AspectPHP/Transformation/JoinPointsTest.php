@@ -155,7 +155,7 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      * the original code.
      */
     public function testTransformationDoesNotChangeLineNumbers() {
-        $this->assertEquals(34, $this->transformedInstance->getLineNumber());
+        $this->assertEquals(35, $this->transformedInstance->getLineNumber());
     }
     
     /**
@@ -325,6 +325,13 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      */
     public function testTransformationHandlesAbstractMethods() {
         $this->markTestSkipped('Not implemented yet.');
+    }
+    
+    /**
+     * Checks if static methods are callable after transformation.
+     */
+    public function testStaticMethodIsCallable() {
+        $this->assertEquals('static', JoinPointsCheck_Transformation::myStaticMethod());
     }
     
     // TODO:

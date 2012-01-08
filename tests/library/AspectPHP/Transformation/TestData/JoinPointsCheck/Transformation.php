@@ -23,6 +23,7 @@ final class JoinPointsCheck_Transformation {
      * A static method.
      */
     public static function myStaticMethod() {
+        return 'static';
     }
     
     /**
