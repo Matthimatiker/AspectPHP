@@ -29,59 +29,96 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
 class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase {
     
     /**
+     * System under test.
+     *
+     * @var AspectPHP_JoinPoint
+     */
+    protected $joinPoint = null;
+    
+    /**
+     * See {@link PHPUnit_Framework_TestCase::setUp()} for details.
+     */
+    protected function setUp() {
+        parent::setUp();
+        $this->joinPoint = $this->createJoinPoint('Bert', false);
+    }
+    
+    /**
+     * See {@link PHPUnit_Framework_TestCase::tearDown()} for details.
+     */
+    protected function tearDown() {
+        $this->joinPoint = null;
+        parent::tearDown();
+    }
+    
+    /**
      * Checks if getClass() returns the name of the class that contains the method.
      */
     public function testGetClassReturnsCorrectValue() {
-        
+        $this->assertEquals(__CLASS__, $this->joinPoint->getClass());
     }
     
     /**
      * Checks if getMethod() returns the name of the method.
      */
     public function testGetMethodReturnsCorrectValue() {
-        
+        $this->assertEquals('createJoinPoint', $this->joinPoint->getMethod());
     }
     
     /**
      * Ensures that getReturnValue() returns null if no value was provided.
      */
     public function testGetReturnValueReturnsNullIfNoValueWasProvided() {
-        
+        $this->assertNull($this->joinPoint->getReturnValue());
     }
     
     /**
      * Checks if getReturnsValue() returns the correct value.
      */
     public function testGetReturnValueReturnsCorrectValue() {
-        
+        $this->joinPoint->setReturnValue('Test');
+        $this->assertEquals('Test', $this->joinPoint->getReturnValue());
     }
     
     /**
      * Checks if setReturnsValue() provides a fluent interface.
      */
     public function testSetReturnValueProvidesFluentInterface() {
-        
+        $this->assertSame($this->joinPoint, $this->joinPoint->setReturnValue('Demo'));
     }
     
     /**
      * Ensures that getException() returns null if no exception was provided.
      */
     public function testGetExceptionReturnsNullIfNoExceptionWasProvided() {
-        
+        $this->assertNull($this->joinPoint->getException());
     }
     
     /**
      * Checks if getException() returns the correct exception object.
      */
     public function testGetExceptionReturnsCorrectObject() {
-        
+        $exception = new RuntimeException('Exception test.');
+        $this->joinPoint->setException($exception);
+        $this->assertSame($exception, $this->joinPoint->getException());
     }
     
     /**
      * Ensures that setException() accepts null.
      */
     public function testSetExceptionAcceptsNull() {
-        
+        $this->joinPoint->setException(new RuntimeException('Test.'));
+        $this->joinPoint->setException(null);
+        $this->assertNull($this->joinPoint->getException());
+    }
+    
+    /**
+     * Ensures that setException() throws an exception if an invalid argument
+     * is passed.
+     */
+    public function testSetExceptionThrowsExceptionIfInvalidArgumentIsProvided() {
+        $this->setExpectedException('InvalidArgumentException');
+        $this->joinPoint->setException(new stdClass());
     }
     
     /**
