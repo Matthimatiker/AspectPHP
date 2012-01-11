@@ -28,30 +28,124 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
  */
 class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase {
     
-    // TODO
-    // return value is null if not set
-    // return value correct
-    // set return value fluent interface
-    // exception null if not set
-    // exception correct
-    // set exception accepts null
-    // set exception fluent interface
-    // get arguments array
-    // get arguments fluent interface
-    // get arguments correct
-    // get arguments correct if default value
-    // get argument by index correct
-    // get argument by index correct if default value
-    // get argument by name correct
-    // get argument by name correct if default value
     // get class correct
+    public function testGetClassReturnsCorrectValue() {
+        
+    }
+    
     // get method correct
+    public function testGetMethodReturnsCorrectValue() {
+        
+    }
+    
+    // return value is null if not set
+    public function testGetReturnValueReturnsNullIfNoValueWasProvided() {
+        
+    }
+    
+    // return value correct
+    public function testGetReturnValueReturnsCorrectValue() {
+        
+    }
+    
+    // set return value fluent interface
+    public function testSetReturnValueProvidesFluentInterface() {
+        
+    }
+    
+    // exception null if not set
+    public function testGetExceptionReturnsNullIfNoExceptionWasProvided() {
+        
+    }
+    
+    // exception correct
+    public function testGetExceptionReturnsCorrectObject() {
+        
+    }
+    
+    // set exception accepts null
+    public function testSetExceptionAcceptsNull() {
+        
+    }
+    
+    // set exception fluent interface
+    public function testSetExceptionProvidesFluentInterface() {
+        
+    }
+    
+    // get arguments array
+    public function testGetArgumentsReturnsArray() {
+        
+    }
+    
+    // get arguments correct
+    public function testGetArgumentsReturnsCorrectValues() {
+        
+    }
+    
+    // get arguments correct if default value
+    public function testGetArgumentsReturnsCorrectValuesIfDefaultParameterIsUsed() {
+        
+    }
+    
+    // get argument by index correct
+    public function testGetArgumentReturnsCorrectValueByIndex() {
+        
+    }
+    
+    // get argument by index correct if default value
+    public function testGetArgumentReturnsCorrectValueByIndexIfDefaultParameterIsUsed() {
+        
+    }
+    
+    // get argument by name correct
+    public function testGetArgumentReturnsCorrectValueByName() {
+        
+    }
+    
+    // get argument by name correct if default value
+    public function testGetArgumentReturnsCorrectValueByNameIfDefaultParameterIsUsed() {
+    
+    }
+     
+    public function testGetArgumentThrowsExceptionIfParameterWithProvidedNameDoesNotExist() {
+        
+    }
+     
+    // set arguments fluent interface
+    public function testSetArgumentsProvidesFluentInterface() {
+        
+    }
+    
     // context correct if object
+    public function testGetContextReturnsCorrectObject() {
+        
+    }
+    
     // context correct if string
+    public function testGetContextReturnsCorrectValueIfClassNameWasProvided() {
+        
+    }
+    
     // default target correct
-    // set target fluent interface
-    // set target throws exception if invalid callback
+    public function testGetTargetReturnsCallablePerDefault() {
+        
+    }
+    
     // provided target correct
+    public function testGetTargetReturnsCorrectCallable() {
+        
+    }
+    
+    // set target fluent interface
+    public function testSetTargetProvidesFluentInterface() {
+        
+    }
+    
+    // set target throws exception if invalid callback
+    public function testSetTargetThrowsExceptionIfNoCallableIsProvided() {
+        
+    }
     
     /**
      * This method and its parameters are used to create a join point for testing.
