@@ -182,7 +182,9 @@ class AspectPHP_JoinPoint {
      * @throws InvalidArgumentException If an invalid callback is provided.
      */
     public function setTarget($callback) {
-        if( !is_callable($callback) ) {
+        // Check only the syntax of the callback as it will
+        // be called in another context.
+        if( !is_callable($callback, true) ) {
             throw new InvalidArgumentException('Callback expected.');
         }
         $this->target = $callback;
