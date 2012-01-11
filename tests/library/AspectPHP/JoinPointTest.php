@@ -220,7 +220,7 @@ class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase {
      * Checks if setArguments() provides a fluent interface.
      */
     public function testSetArgumentsProvidesFluentInterface() {
-        $this->assertSame($this->joinPoint, $this->joinPoint->getArguments());
+        $this->assertSame($this->joinPoint, $this->joinPoint->setArguments(array()));
     }
     
     /**
