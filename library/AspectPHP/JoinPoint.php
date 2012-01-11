@@ -22,18 +22,30 @@
 class AspectPHP_JoinPoint {
     
     /**
+     * The method context.
+     *
+     * Maybe an object instance or a class name for static methods.
+     *
+     * @var object|string
+     */
+    protected $context = null;
+    
+    protected $method = null;
+    
+    /**
      * Creates a join point event.
      *
      * <code>
      * $object    = new MyClass();
-     * $joinPoint = new AspectPHP_JoinPoint('MyClass::myMethod', $object);
+     * $joinPoint = new AspectPHP_JoinPoint('myMethod', $object);
      * </code>
      *
      * @param string $method The method.
      * @param object|string $context The method context (object or class name).
      */
     public function __construct($method, $context) {
-        
+        $this->method  = new ReflectionMethod($context, $method);
+        $this->context = $context;
     }
     
     /**
@@ -106,7 +118,7 @@ class AspectPHP_JoinPoint {
      * @return object|string
      */
     public function getContext() {
-        
+        return $this->context;
     }
     
     /**

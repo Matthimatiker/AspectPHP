@@ -279,7 +279,7 @@ class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase {
      */
     protected function createJoinPoint($name, $register = true) {
         $arguments = func_get_args();
-        $joinPoint = new AspectPHP_JoinPoint(__METHOD__, $this);
+        $joinPoint = new AspectPHP_JoinPoint(__FUNCTION__, $this);
         $joinPoint->setArguments($arguments);
         return $joinPoint;
     }
