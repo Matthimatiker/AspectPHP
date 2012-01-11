@@ -239,7 +239,7 @@ class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase {
      * Checks if getTarget() returns the provided callable.
      */
     public function testGetTargetReturnsCorrectCallable() {
-        $callable = array($this, 'createJoinPoint');
+        $callable = 'trim';
         $this->joinPoint->setTarget($callable);
         $this->assertSame($callable, $this->joinPoint->getTarget());
     }
