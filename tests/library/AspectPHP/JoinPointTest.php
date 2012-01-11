@@ -28,121 +28,176 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
  */
 class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase {
     
-    // get class correct
+    /**
+     * Checks if getClass() returns the name of the class that contains the method.
+     */
     public function testGetClassReturnsCorrectValue() {
         
     }
     
-    // get method correct
+    /**
+     * Checks if getMethod() returns the name of the method.
+     */
     public function testGetMethodReturnsCorrectValue() {
         
     }
     
-    // return value is null if not set
+    /**
+     * Ensures that getReturnValue() returns null if no value was provided.
+     */
     public function testGetReturnValueReturnsNullIfNoValueWasProvided() {
         
     }
     
-    // return value correct
+    /**
+     * Checks if getReturnsValue() returns the correct value.
+     */
     public function testGetReturnValueReturnsCorrectValue() {
         
     }
     
-    // set return value fluent interface
+    /**
+     * Checks if setReturnsValue() provides a fluent interface.
+     */
     public function testSetReturnValueProvidesFluentInterface() {
         
     }
     
-    // exception null if not set
+    /**
+     * Ensures that getException() returns null if no exception was provided.
+     */
     public function testGetExceptionReturnsNullIfNoExceptionWasProvided() {
         
     }
     
-    // exception correct
+    /**
+     * Checks if getException() returns the correct exception object.
+     */
     public function testGetExceptionReturnsCorrectObject() {
         
     }
     
-    // set exception accepts null
+    /**
+     * Ensures that setException() accepts null.
+     */
     public function testSetExceptionAcceptsNull() {
         
     }
     
-    // set exception fluent interface
+    /**
+     * Checks if setException() provides a fluent interface.
+     */
     public function testSetExceptionProvidesFluentInterface() {
         
     }
     
-    // get arguments array
+    /**
+     * Checks if getArguments() returns an array.
+     */
     public function testGetArgumentsReturnsArray() {
         
     }
     
-    // get arguments correct
+    /**
+     * Ensures that getArguments() returns correct values.
+     */
     public function testGetArgumentsReturnsCorrectValues() {
         
     }
     
-    // get arguments correct if default value
+    /**
+     * Ensures that getArguments() returns the correct values if a default
+     * parameter was used when the method was called.
+     */
     public function testGetArgumentsReturnsCorrectValuesIfDefaultParameterIsUsed() {
         
     }
     
-    // get argument by index correct
+    /**
+     * Checks if getArgument() returns the correct value for a given
+     * parameter index.
+     */
     public function testGetArgumentReturnsCorrectValueByIndex() {
         
     }
     
-    // get argument by index correct if default value
+    /**
+     * Ensures that getArgument() returns the correct value for a given parameter
+     * index if a default parameter was used.
+     */
     public function testGetArgumentReturnsCorrectValueByIndexIfDefaultParameterIsUsed() {
         
     }
     
-    // get argument by name correct
+    /**
+     * Checks if getArgument() returns the correct value for a given
+     * parameter name.
+     */
     public function testGetArgumentReturnsCorrectValueByName() {
         
     }
     
-    // get argument by name correct if default value
+    /**
+     * Ensures that getArgument() returns the correct value for a given parameter
+     * name if a default parameter was used.
+     */
     public function testGetArgumentReturnsCorrectValueByNameIfDefaultParameterIsUsed() {
     
     }
      
+    /**
+     * Ensures that getArgument() throws an exception if an invalid parameter name is
+     * provided.
+     */
     public function testGetArgumentThrowsExceptionIfParameterWithProvidedNameDoesNotExist() {
         
     }
      
-    // set arguments fluent interface
+    /**
+     * Checks if setArguments() provides a fluent interface.
+     */
     public function testSetArgumentsProvidesFluentInterface() {
         
     }
     
-    // context correct if object
+    /**
+     * Checks if getContext() returns the correct object.
+     */
     public function testGetContextReturnsCorrectObject() {
         
     }
     
-    // context correct if string
+    /**
+     * Ensures that getContext() returns the correct value if the class name was provided.
+     */
     public function testGetContextReturnsCorrectValueIfClassNameWasProvided() {
         
     }
     
-    // default target correct
+    /**
+     * Ensures that getTarget() returns a callable per default.
+     */
     public function testGetTargetReturnsCallablePerDefault() {
         
     }
     
-    // provided target correct
+    /**
+     * Checks if getTarget() returns the provided callable.
+     */
     public function testGetTargetReturnsCorrectCallable() {
         
     }
     
-    // set target fluent interface
+    /**
+     * Checks if setTarget() provides a fluent interface.
+     */
     public function testSetTargetProvidesFluentInterface() {
         
     }
     
-    // set target throws exception if invalid callback
+    /**
+     * Ensures that setTarget() throws an exception if no callable was provided.
+     */
     public function testSetTargetThrowsExceptionIfNoCallableIsProvided() {
         
     }
