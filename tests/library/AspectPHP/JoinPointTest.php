@@ -234,7 +234,7 @@ class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase {
      * Ensures that getContext() returns the correct value if the class name was provided.
      */
     public function testGetContextReturnsCorrectValueIfClassNameWasProvided() {
-        $joinPoint = new AspectPHP_JoinPoint(__METHOD__, __CLASS__);
+        $joinPoint = new AspectPHP_JoinPoint(__FUNCTION__, __CLASS__);
         $this->assertEquals(__CLASS__, $joinPoint->getContext());
     }
     
