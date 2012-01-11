@@ -136,7 +136,7 @@ class AspectPHP_JoinPoint {
      * @return string
      */
     public function getClass() {
-        return $this->method->getDeclaringClass()->name;
+        return $this->method->class;
     }
     
     /**
