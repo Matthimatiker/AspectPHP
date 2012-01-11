@@ -155,6 +155,16 @@ class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase {
     }
     
     /**
+     * Ensures that getArguments() returns also parameters that were not explicitly declared.
+     */
+    public function testGetArgumentsReturnsCorrectValuesIfVariableParametersAreAdded() {
+        $joinPoint = $this->createJoinPoint('Ernie', false, 1, 2, 3);
+        $arguments = $joinPoint->getArguments();
+        $expected  = array('Ernie', false, 1, 2, 3);
+        $this->assertEquals($expected, $arguments);
+    }
+    
+    /**
      * Checks if getArgument() returns the correct value for a given
      * parameter index.
      */
