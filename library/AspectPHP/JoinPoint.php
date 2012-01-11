@@ -120,13 +120,14 @@ class AspectPHP_JoinPoint {
      *
      * @param string|integer $nameOrIndex
      * @return mixed
-     * @throws InvalidArgumentException If an invalid parameter name is provided.
+     * @throws InvalidArgumentException If an invalid parameter name or index is provided.
      */
     public function getArgument($nameOrIndex) {
-        if( is_string($nameOrIndex) ) {
-            
+        $index = (is_string($nameOrIndex)) ? $this->getPositionFor($nameOrIndex) : $nameOrIndex;
+        if( $index >= $this->method->getNumberOfParameters() ) {
+            throw new InvalidArgumentException('Parameter #' . $index . ' was not declared.');
         }
-        return $this->arguments[$nameOrIndex];
+        return $this->arguments[$index];
     }
     
     /**
@@ -236,7 +237,7 @@ class AspectPHP_JoinPoint {
     }
     
     /**
-     * Returns the defautl parameter values for the method.
+     * Returns the default parameter values for the method.
      *
      * The position of the parameter is used as key, the default
      * parameter as value.
@@ -252,6 +253,22 @@ class AspectPHP_JoinPoint {
             }
         }
         return $defaults;
+    }
+    
+    /**
+     * Returns the position of the parameter with the given name.
+     *
+     * @param string $parameterName
+     * @return integer
+     */
+    protected function getPositionFor($parameterName) {
+        foreach( $this->method->getParameters() as $parameter) {
+            /* @var $parameter ReflectionParameter */
+            if( $parameter->getName() === $parameterName ) {
+                return $parameter->getPosition();
+            }
+        }
+        throw new InvalidArgumentException('Parameter with name "' . $parameterName . '" does not exist.');
     }
     
 }
