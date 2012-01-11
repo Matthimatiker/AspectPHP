@@ -125,21 +125,23 @@ class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase {
      * Checks if setException() provides a fluent interface.
      */
     public function testSetExceptionProvidesFluentInterface() {
-        
+        $this->assertSame($this->joinPoint, $this->joinPoint->setException(new RuntimeException('Test')));
     }
     
     /**
      * Checks if getArguments() returns an array.
      */
     public function testGetArgumentsReturnsArray() {
-        
+        $arguments = $this->joinPoint->getArguments();
+        $this->assertInternalType('array', $arguments);
     }
     
     /**
      * Ensures that getArguments() returns correct values.
      */
     public function testGetArgumentsReturnsCorrectValues() {
-        
+        $arguments = $this->joinPoint->getArguments();
+        $this->assertEquals(array('Bert', false), $arguments);
     }
     
     /**
@@ -147,7 +149,9 @@ class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase {
      * parameter was used when the method was called.
      */
     public function testGetArgumentsReturnsCorrectValuesIfDefaultParameterIsUsed() {
-        
+        $joinPoint = $this->createJoinPoint('Ernie');
+        $arguments = $joinPoint->getArguments();
+        $this->assertEquals(array('Ernie', true), $arguments);
     }
     
     /**
@@ -155,7 +159,7 @@ class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase {
      * parameter index.
      */
     public function testGetArgumentReturnsCorrectValueByIndex() {
-        
+        $this->assertEquals('Bert', $this->joinPoint->getArgument(0));
     }
     
     /**
@@ -163,7 +167,8 @@ class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase {
      * index if a default parameter was used.
      */
     public function testGetArgumentReturnsCorrectValueByIndexIfDefaultParameterIsUsed() {
-        
+         $joinPoint = $this->createJoinPoint('Ernie');
+         $this->assertEquals(true, $joinPoint->getArgument(1));
     }
     
     /**
@@ -171,7 +176,7 @@ class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase {
      * parameter name.
      */
     public function testGetArgumentReturnsCorrectValueByName() {
-        
+        $this->assertEquals('Bert', $this->joinPoint->getArgument('name'));
     }
     
     /**
@@ -179,15 +184,26 @@ class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase {
      * name if a default parameter was used.
      */
     public function testGetArgumentReturnsCorrectValueByNameIfDefaultParameterIsUsed() {
-    
+        $joinPoint = $this->createJoinPoint('Ernie');
+        $this->assertEquals(true, $joinPoint->getArgument('register'));
     }
-     
+    
+	/**
+     * Ensures that getArgument() throws an exception if an invalid parameter index is
+     * provided.
+     */
+    public function testGetArgumentThrowsExceptionIfParameterWithProvidedIndexDoesNotExist() {
+        $this->setExpectedException('InvalidArgumentException');
+        $this->joinPoint->getArgument(2);
+    }
+    
     /**
      * Ensures that getArgument() throws an exception if an invalid parameter name is
      * provided.
      */
     public function testGetArgumentThrowsExceptionIfParameterWithProvidedNameDoesNotExist() {
-        
+        $this->setExpectedException('InvalidArgumentException');
+        $this->joinPoint->getArgument('missing');
     }
      
     /**
