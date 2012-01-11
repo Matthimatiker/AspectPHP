@@ -227,6 +227,9 @@ class AspectPHP_JoinPoint {
      * @return AspectPHP_JoinPoint Provides a fluent interface.
      */
     public function setException($exception) {
+        if( $exception !== null && !($exception instanceof Exception) ) {
+            throw new InvalidArgumentException('Expected instance of Exception or null.');
+        }
         $this->exception = $exception;
         return $this;
     }
