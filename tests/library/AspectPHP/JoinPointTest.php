@@ -210,49 +210,54 @@ class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase {
      * Checks if setArguments() provides a fluent interface.
      */
     public function testSetArgumentsProvidesFluentInterface() {
-        
+        $this->assertSame($this->joinPoint, $this->joinPoint->getArguments());
     }
     
     /**
      * Checks if getContext() returns the correct object.
      */
     public function testGetContextReturnsCorrectObject() {
-        
+        $this->assertSame($this, $this->joinPoint->getContext());
     }
     
     /**
      * Ensures that getContext() returns the correct value if the class name was provided.
      */
     public function testGetContextReturnsCorrectValueIfClassNameWasProvided() {
-        
+        $joinPoint = new AspectPHP_JoinPoint(__METHOD__, __CLASS__);
+        $this->assertEquals(__CLASS__, $joinPoint->getContext());
     }
     
     /**
      * Ensures that getTarget() returns a callable per default.
      */
     public function testGetTargetReturnsCallablePerDefault() {
-        
+        $this->assertTrue(is_callable($this->joinPoint->getTarget()));
     }
     
     /**
      * Checks if getTarget() returns the provided callable.
      */
     public function testGetTargetReturnsCorrectCallable() {
-        
+        $callable = array($this, 'createJoinPoint');
+        $this->joinPoint->setTarget($callable);
+        $this->assertSame($callable, $this->joinPoint->getTarget());
     }
     
     /**
      * Checks if setTarget() provides a fluent interface.
      */
     public function testSetTargetProvidesFluentInterface() {
-        
+        $callable = array($this, 'createJoinPoint');
+        $this->assertSame($this->joinPoint, $this->joinPoint->setTarget($callable));
     }
     
     /**
      * Ensures that setTarget() throws an exception if no callable was provided.
      */
     public function testSetTargetThrowsExceptionIfNoCallableIsProvided() {
-        
+        $this->setExpectedException('InvalidArgumentException');
+        $this->joinPoint->setTarget(new stdClass());
     }
     
     /**
