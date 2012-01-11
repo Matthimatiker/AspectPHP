@@ -17,7 +17,7 @@ that are invoked when the method of the source object is called.
   * Registers and unregisters aspects
   * Handles calls to extension points
   * Should *not* be static (but might save registrations as static attribute)
-* MethodData (JoinPoint)
+* JoinPoint
   * Contains data about called methods
     * Extension point
     * Context
@@ -37,11 +37,12 @@ The following should be implemented in a first version:
 * Registering aspects via regular expression that matches methods
 * Support the following join points:
   * before
-  * after
-  * handle exception
+  * after returning
+  * after throwing
 * Replace constants to make AspectPHP as transparent as possible
   * __FILE__
   * __DIR__
+* Mark classes as compiled
    
 More ToDos:
 * set up ticket system
