@@ -30,7 +30,40 @@ class AspectPHP_JoinPoint {
      */
     protected $context = null;
     
+    /**
+     * The called method.
+     *
+     * @var ReflectionMethod
+     */
     protected $method = null;
+    
+    /**
+     * The provided method arguments.
+     *
+     * @var array(mixed)
+     */
+    protected $arguments = array();
+    
+    /**
+     * The return value.
+     *
+     * @var mixed
+     */
+    protected $returnValue = null;
+    
+    /**
+	 * The exeception that was thrown.
+	 *
+	 * @var Exception|null
+     */
+    protected $exception = null;
+    
+    /**
+     * The target method that will be called.
+     *
+     * @var mixed A callable.
+     */
+    protected $target = null;
     
     /**
      * Creates a join point event.
@@ -54,7 +87,7 @@ class AspectPHP_JoinPoint {
      * @return array(mixed)
      */
     public function getArguments() {
-        
+        return $this->arguments;
     }
     
 	/**
@@ -64,7 +97,8 @@ class AspectPHP_JoinPoint {
      * @return AspectPHP_JoinPoint Provides a fluent interface.
      */
     public function setArguments($arguments) {
-        
+        $this->arguments = $arguments;
+        return $this;
     }
     
     /**
@@ -88,7 +122,10 @@ class AspectPHP_JoinPoint {
      * @throws InvalidArgumentException If an invalid parameter name is provided.
      */
     public function getArgument($nameOrIndex) {
-        
+        if( is_string($nameOrIndex) ) {
+            
+        }
+        return $this->arguments[$nameOrIndex];
     }
     
     /**
@@ -97,7 +134,7 @@ class AspectPHP_JoinPoint {
      * @return string
      */
     public function getClass() {
-        
+        return $this->method->getDeclaringClass()->name;
     }
     
     /**
@@ -106,7 +143,7 @@ class AspectPHP_JoinPoint {
      * @return string
      */
     public function getMethod() {
-        
+        return $this->method->name;
     }
     
     /**
@@ -124,10 +161,13 @@ class AspectPHP_JoinPoint {
     /**
      * Returns a callback to the method that will be or was invoked.
      *
-     * @return array|string|Closure
+     * @return array|string|Closure A callback.
      */
     public function getTarget() {
-        
+        if( $this->target === null ) {
+            return array($this->getContext(), $this->getMethod());
+        }
+        return $this->target;
     }
     
     /**
@@ -140,7 +180,11 @@ class AspectPHP_JoinPoint {
      * @throws InvalidArgumentException If an invalid callback is provided.
      */
     public function setTarget($callback) {
-        
+        if( !is_callable($callback) ) {
+            throw new InvalidArgumentException('Callback expected.');
+        }
+        $this->target = $callback;
+        return $this;
     }
     
     /**
@@ -149,7 +193,7 @@ class AspectPHP_JoinPoint {
      * @return mixed|null
      */
     public function getReturnValue() {
-        
+        return $this->returnValue;
     }
     
     /**
@@ -159,7 +203,8 @@ class AspectPHP_JoinPoint {
      * @return AspectPHP_JoinPoint Provides a fluent interface.
      */
     public function setReturnValue($value) {
-        
+        $this->returnValue = $value;
+        return $this;
     }
     
     /**
@@ -170,7 +215,7 @@ class AspectPHP_JoinPoint {
      * @return Exception|null
      */
     public function getException() {
-        
+        return $this->exception;
     }
     
     /**
@@ -178,11 +223,12 @@ class AspectPHP_JoinPoint {
      *
      * If null is provided the previous exception is removed.
      *
-     * @param Exception|null $e
+     * @param Exception|null $exception
      * @return AspectPHP_JoinPoint Provides a fluent interface.
      */
-    public function setException($e) {
-        
+    public function setException($exception) {
+        $this->exception = $exception;
+        return $this;
     }
     
 }
