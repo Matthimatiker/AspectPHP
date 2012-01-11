@@ -97,7 +97,8 @@ class AspectPHP_JoinPoint {
      * @return AspectPHP_JoinPoint Provides a fluent interface.
      */
     public function setArguments($arguments) {
-        $this->arguments = $arguments;
+        
+        $this->arguments = $arguments + $this->getDefaultParameters();
         return $this;
     }
     
@@ -232,6 +233,25 @@ class AspectPHP_JoinPoint {
         }
         $this->exception = $exception;
         return $this;
+    }
+    
+    /**
+     * Returns the defautl parameter values for the method.
+     *
+     * The position of the parameter is used as key, the default
+     * parameter as value.
+     *
+     * @return array(integer=>mixed)
+     */
+    protected function getDefaultParameters() {
+        $defaults = array();
+        foreach( $this->method->getParameters() as $parameter) {
+            /* @var $parameter ReflectionParameter */
+            if( $parameter->isOptional() ) {
+                $defaults[$parameter->getPosition()] = $parameter->getDefaultValue();
+            }
+        }
+        return $defaults;
     }
     
 }
