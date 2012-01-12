@@ -1,7 +1,7 @@
 <?php
 
 /**
- * AspectPHP_Manager_Simple
+ * AspectPHP_Manager_Standard
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Manager
@@ -11,7 +11,7 @@
  */
 
 /**
- * Simple manager that stores registered aspects in memory.
+ * The default manager that stores registered aspects in memory.
  *
  * Registrations are lost if the manager object is destroyed.
  *
@@ -21,7 +21,7 @@
  * @version $Rev$
  * @since 12.01.2012
  */
-class AspectPHP_Manager_Simple implements AspectPHP_Manager {
+class AspectPHP_Manager_Standard implements AspectPHP_Manager {
     
     /**
      * @see AspectPHP_Manager::register()
