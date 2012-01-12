@@ -28,6 +28,29 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
  */
 class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase {
     
+    /**
+     * System under test.
+     *
+     * @var AspectPHP_Manager_Standard
+     */
+    protected $manager = null;
+    
+    /**
+     * See {@link PHPUnit_Framework_TestCase::setUp()} for details.
+     */
+    protected function setUp() {
+        parent::setUp();
+        $this->manager = new AspectPHP_Manager_Standard();
+    }
+    
+    /**
+     * See {@link PHPUnit_Framework_TestCase::tearDown()} for details.
+     */
+    protected function tearDown() {
+        $this->manager = null;
+        parent::tearDown();
+    }
+    
 }
 
 ?>
