@@ -51,6 +51,34 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase {
         parent::tearDown();
     }
     
+    public function testGetAspectsReturnsArray() {
+        
+    }
+    
+    public function testGetAspectsReturnsRegisteredAspects() {
+        
+    }
+    
+    public function testUnregisterRemovesGivenAspect() {
+        
+    }
+    
+    public function testUnregisterDoesNothingIfTheGivenAspectIsNotRegistered() {
+        
+    }
+    
+    public function testGetAspectsForReturnsArray() {
+        
+    }
+    
+    public function testGetAspectsForDoesNotReturnAspectsThatAreNotRegisteredForTheProvidedMethod() {
+        
+    }
+    
+    public function testGetAspectsForReturnsAspectsThatAreRegisteredForTheProvidedMethod() {
+        
+    }
+    
 }
 
 ?>
