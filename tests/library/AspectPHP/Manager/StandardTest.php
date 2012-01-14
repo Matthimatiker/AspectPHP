@@ -55,35 +55,51 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase {
      * Checks if getAspects() returns an array.
      */
     public function testGetAspectsReturnsArray() {
-        
+        $aspects = $this->manager->getAspects();
+        $this->assertInternalType('array', $aspects);
     }
     
     /**
      * Ensures that getAspects() returns the registered aspects.
      */
     public function testGetAspectsReturnsRegisteredAspects() {
-        
+        $first  = $this->createAspect();
+        $second = $this->createAspect();
+        $this->manager->register($first, __METHOD__);
+        $this->manager->register($first, __CLASS__ . '::setUp');
+        $aspects = $this->manager->getAspects();
+        $this->assertInternalType('array', $aspects);
+        $this->assertContains($first, $aspects);
+        $this->assertContains($second, $aspects);
     }
     
     /**
      * Checks if unregister() removes a registered aspect.
      */
     public function testUnregisterRemovesGivenAspect() {
-        
+        $aspect = $this->createAspect();
+        $this->manager->register($aspect, __METHOD__);
+        $this->manager->unregister($aspect);
+        $aspects = $this->manager->getAspects();
+        $this->assertInternalType('array', $aspects);
+        $this->assertEquals(0, count($aspects));
     }
     
     /**
      * Ensures that unregister() does nothing if the given aspect is not registered.
      */
     public function testUnregisterDoesNothingIfTheGivenAspectIsNotRegistered() {
-        
+        $this->setExpectedException(null);
+        $aspect = $this->createAspect();
+        $this->manager->unregister($aspect);
     }
     
     /**
      * Checks if getAspectsFor() returns an array.
      */
     public function testGetAspectsForReturnsArray() {
-        
+        $aspects = $this->manager->getAspectsFor(__METHOD__);
+        $this->assertInternalType('array', $aspects);
     }
     
     /**
@@ -91,14 +107,33 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase {
      * given method.
      */
     public function testGetAspectsForDoesNotReturnAspectsThatAreNotRegisteredForTheProvidedMethod() {
-        
+        $aspect = $this->createAspect();
+        $this->manager->register($this->createAspect(), __CLASS__ . '::a');
+        $this->manager->register($aspect, __CLASS__ . '::b');
+        $aspects = $this->manager->getAspectsFor(__CLASS__ . '::a');
+        $this->assertInternalType('array', $aspects);
+        $this->assertNotContains($aspect, $aspects);
     }
     
     /**
      * Ensures that getAspectsFor() returns aspects that are registered for the provided method.
      */
     public function testGetAspectsForReturnsAspectsThatAreRegisteredForTheProvidedMethod() {
-        
+        $aspect = $this->createAspect();
+        $this->manager->register($this->createAspect(), __CLASS__ . '::a');
+        $this->manager->register($aspect, __CLASS__ . '::b');
+        $aspects = $this->manager->getAspectsFor(__CLASS__ . '::b');
+        $this->assertInternalType('array', $aspects);
+        $this->assertContains($aspect, $aspects);
+    }
+    
+    /**
+     * Creates an aspect mock.
+     *
+     * @return AspectPHP_Aspect
+     */
+    protected function createAspect() {
+       return $this->getMock('AspectPHP_Aspect');
     }
     
 }
