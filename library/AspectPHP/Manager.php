@@ -26,10 +26,10 @@ interface AspectPHP_Manager {
      * Registers the given aspect for all method calls that match the
      * given pointcut expression.
      *
-     * @param string $pointcut
      * @param AspectPHP_Aspect $aspect
+     * @param string $pointcut
      */
-    public function register($pointcut, AspectPHP_Aspect $aspect);
+    public function register(AspectPHP_Aspect $aspect, $pointcut);
     
     /**
      * Unregisters the given aspect.

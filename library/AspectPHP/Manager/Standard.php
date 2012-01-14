@@ -26,10 +26,10 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager {
     /**
      * @see AspectPHP_Manager::register()
      *
-     * @param string $pointcut
      * @param AspectPHP_Aspect $aspect
+     * @param string $pointcut
      */
-    public function register($pointcut, AspectPHP_Aspect $aspect) {
+    public function register(AspectPHP_Aspect $aspect, $pointcut) {
         
     }
     
