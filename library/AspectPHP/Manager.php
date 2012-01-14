@@ -51,7 +51,7 @@ interface AspectPHP_Manager {
      * @param string $method
      * @return array(AspectPHP_Aspect)
      */
-    public function getMatchingAspects($method);
+    public function getAspectsFor($method);
     
 }
 

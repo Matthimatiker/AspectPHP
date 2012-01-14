@@ -24,6 +24,15 @@
 class AspectPHP_Manager_Standard implements AspectPHP_Manager {
     
     /**
+     * The registered aspects.
+     *
+     * The pointcut is used as key, the aspect object as value.
+     *
+     * @var array(string=>AspectPHP_Aspect)
+     */
+    protected $aspects = array();
+    
+    /**
      * @see AspectPHP_Manager::register()
      *
      * @param AspectPHP_Aspect $aspect
@@ -57,7 +66,7 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager {
      * @param string $method
      * @return array(AspectPHP_Aspect)
      */
-    public function getMatchingAspects($method) {
+    public function getAspectsFor($method) {
         
     }
     
