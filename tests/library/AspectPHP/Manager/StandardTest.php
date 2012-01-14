@@ -103,6 +103,17 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase {
     }
     
     /**
+     * Ensures that getAspectsFor() returns an empty array if no aspected is registered
+     * for the given method...uh yeah
+     */
+    public function testGetAspectsForReturnsEmptyArrayIfNoAspectIsRegisteredForMethod() {
+        $this->manager->register($this->createAspect(), __CLASS__ . '::a');
+        $aspects = $this->manager->getAspectsFor(__METHOD__);
+        $this->assertInternalType('array', $aspects);
+        $this->assertEquals(0, count($aspects));
+    }
+    
+    /**
      * Ensures that getAspectsFor() does not return aspects that are not registered for the
      * given method.
      */
