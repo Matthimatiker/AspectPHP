@@ -66,7 +66,7 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase {
         $first  = $this->createAspect();
         $second = $this->createAspect();
         $this->manager->register($first, __METHOD__);
-        $this->manager->register($first, __CLASS__ . '::setUp');
+        $this->manager->register($second, __CLASS__ . '::setUp');
         $aspects = $this->manager->getAspects();
         $this->assertInternalType('array', $aspects);
         $this->assertContains($first, $aspects, 'Missing first aspect.');
