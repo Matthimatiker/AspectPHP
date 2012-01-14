@@ -51,30 +51,52 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase {
         parent::tearDown();
     }
     
+    /**
+     * Checks if getAspects() returns an array.
+     */
     public function testGetAspectsReturnsArray() {
         
     }
     
+    /**
+     * Ensures that getAspects() returns the registered aspects.
+     */
     public function testGetAspectsReturnsRegisteredAspects() {
         
     }
     
+    /**
+     * Checks if unregister() removes a registered aspect.
+     */
     public function testUnregisterRemovesGivenAspect() {
         
     }
     
+    /**
+     * Ensures that unregister() does nothing if the given aspect is not registered.
+     */
     public function testUnregisterDoesNothingIfTheGivenAspectIsNotRegistered() {
         
     }
     
+    /**
+     * Checks if getAspectsFor() returns an array.
+     */
     public function testGetAspectsForReturnsArray() {
         
     }
     
+    /**
+     * Ensures that getAspectsFor() does not return aspects that are not registered for the
+     * given method.
+     */
     public function testGetAspectsForDoesNotReturnAspectsThatAreNotRegisteredForTheProvidedMethod() {
         
     }
     
+    /**
+     * Ensures that getAspectsFor() returns aspects that are registered for the provided method.
+     */
     public function testGetAspectsForReturnsAspectsThatAreRegisteredForTheProvidedMethod() {
         
     }
