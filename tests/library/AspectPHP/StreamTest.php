@@ -351,6 +351,13 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
     }
     
     /**
+     * Ensures that setManager() throws an exception if an invalid argument is passed.
+     */
+    public function testSetManagerThrowsExceptionIfInvalidArgumentIsProvided() {
+        
+    }
+    
+    /**
      * Ensures that hasManager() returns false if no aspect manager is available.
      */
     public function testHasManagerReturnsFalseIfNoManagerIsAvailable() {
