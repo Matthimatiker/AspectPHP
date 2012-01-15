@@ -29,7 +29,9 @@ that are invoked when the method of the source object is called.
   
 === Refactoring ===
 
---
+* extract method for retrieving aspects
+* add method for aspect handling
+* add aspect chain
   
  === Misc ===
  
