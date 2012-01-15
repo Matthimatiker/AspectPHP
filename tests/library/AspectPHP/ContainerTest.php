@@ -29,10 +29,18 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
 class AspectPHP_ContainerTest extends PHPUnit_Framework_TestCase {
     
     /**
+     * The previous aspect manager.
+     *
+     * @var AspectPHP_Manager|null
+     */
+    protected $previousManager = null;
+    
+    /**
      * See {@link PHPUnit_Framework_TestCase::setUp()} for details.
      */
     protected function setUp() {
         parent::setUp();
+        $this->storeManager();
         $this->resetManager();
     }
     
@@ -40,7 +48,7 @@ class AspectPHP_ContainerTest extends PHPUnit_Framework_TestCase {
      * See {@link PHPUnit_Framework_TestCase::tearDown()} for details.
      */
     protected function tearDown() {
-        $this->resetManager();
+        $this->restoreManager();
         parent::tearDown();
     }
     
@@ -98,6 +106,20 @@ class AspectPHP_ContainerTest extends PHPUnit_Framework_TestCase {
      */
     protected function resetManager() {
         AspectPHP_Container::setManager(null);
+    }
+    
+    /**
+     * Stores the current aspect manager.
+     */
+    protected function storeManager() {
+        $this->previousManager = (AspectPHP_Container::hasManager()) ? AspectPHP_Container::getManager() : null;
+    }
+    
+    /**
+     * Restores the previous aspect manager.
+     */
+    protected function restoreManager() {
+        AspectPHP_Container::setManager($this->previousManager);
     }
     
 }
