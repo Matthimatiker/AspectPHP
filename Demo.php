@@ -1,31 +1,38 @@
 <?php
 
+/**
+ * Demo
+ *
+ * @author Matthias Molitor <matthias@matthimatiker.de>
+ * @package AspectPHP
+ * @subpackage Example
+ * @copyright Matthias Molitor 2012
+ * @version $Rev$
+ * @since 16.01.2012
+ */
+
+/**
+ * Class for demonstration purposes.
+ *
+ * @author Matthias Molitor <matthias@matthimatiker.de>
+ * @package AspectPHP
+ * @subpackage Example
+ * @copyright Matthias Molitor 2012
+ * @version $Rev$
+ * @since 16.01.2012
+ */
 class Demo {
     
     /**
-     * Test.
+     * Outputs the given name.
      *
-     * @param string $greeting
+     * @param string $name
      */
-    public function test($greeting) {
-        
-    }
-    
-    protected function huhu() {
-        
+    public function sayHello($name) {
+        echo $name;
+        return $name;
     }
     
 }
-
-$source = file_get_contents(__FILE__);
-$tokens = token_get_all($source);
-$numberOfTokens = count($tokens);
-for( $i = 0; $i < $numberOfTokens; $i++ ) {
-    if (is_array($tokens[$i])) {
-        $tokens[$i][0] = token_name($tokens[$i][0]);
-    }
-}
-
-var_dump($tokens);
 
 ?>
