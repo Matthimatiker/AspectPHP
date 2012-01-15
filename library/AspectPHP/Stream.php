@@ -109,6 +109,15 @@ class AspectPHP_Stream {
         
     }
     
+    /**
+     * Checks if an aspect manager is available.
+     *
+     * @return boolean True if a manager is available, false otherwise.
+     */
+    public static function hasManager() {
+        
+    }
+    
 	/**
      * Opens the code file and adds extension points.
      *
