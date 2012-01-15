@@ -95,7 +95,7 @@ class AspectPHP_Stream {
      *
      * @param AspectPHP_Manager|null $manager
      */
-    public static function setManager(AspectPHP_Manager $manager) {
+    public static function setManager($manager) {
         
     }
     
