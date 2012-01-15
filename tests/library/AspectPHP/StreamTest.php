@@ -349,6 +349,20 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
     }
     
     /**
+     * Ensures that hasManager() returns false if no aspect manager is available.
+     */
+    public function testHasManagerReturnsFalseIfNoManagerIsAvailable() {
+        
+    }
+    
+    /**
+     * Ensures that hasManager() returns true if an aspect manager is available.
+     */
+    public function testHasManagerReturnsTrueIfManagerIsAvailable() {
+        
+    }
+    
+    /**
      * Asserts that the class $class has the method with the provided name.
      *
      * @param string $class
