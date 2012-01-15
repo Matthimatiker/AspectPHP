@@ -16,10 +16,12 @@
  */
 require_once(dirname(__FILE__) . '/Environment.config.php');
 
-set_include_path(get_include_path() . PATH_SEPARATOR . 'aspectphp://' . dirname(__FILE__));
+set_include_path('aspectphp://' . dirname(__FILE__) . PATH_SEPARATOR . get_include_path());
 
 $manager = new AspectPHP_Manager_Standard();
 AspectPHP_Container::setManager($manager);
+
+AspectPHP_Stream::register();
 
 class DemoAspect implements AspectPHP_Aspect {
     
