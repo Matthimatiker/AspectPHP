@@ -41,14 +41,14 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
     protected function setUp() {
         parent::setUp();
         $this->storeIncludePath();
-        AspectPHP_Stream_Wrapper::register();
+        AspectPHP_Stream::register();
     }
     
     /**
      * See {@link PHPUnit_Framework_TestCase::tearDown()} for details.
      */
     protected function tearDown() {
-        AspectPHP_Stream_Wrapper::unregister();
+        AspectPHP_Stream::unregister();
         $this->restoreIncludePath();
         parent::tearDown();
     }
@@ -57,15 +57,15 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
      * Ensures that isRegistered() returns true if the stream is already registered.
      */
     public function testIsRegisteredReturnsTrueIfStreamIsAlreadyRegistered() {
-        $this->assertTrue(AspectPHP_Stream_Wrapper::isRegistered());
+        $this->assertTrue(AspectPHP_Stream::isRegistered());
     }
     
     /**
      * Ensures that isRegistered() returns false if the stream is not registered.
      */
     public function testIsRegisteredReturnsFalseIfStreamIsNotRegistered() {
-        AspectPHP_Stream_Wrapper::unregister();
-        $this->assertFalse(AspectPHP_Stream_Wrapper::isRegistered());
+        AspectPHP_Stream::unregister();
+        $this->assertFalse(AspectPHP_Stream::isRegistered());
     }
     
     /**
@@ -73,7 +73,7 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
      */
     public function testRegisterRegistersStream() {
         $streams = stream_get_wrappers();
-        $this->assertContains(AspectPHP_Stream_Wrapper::NAME, $streams);
+        $this->assertContains(AspectPHP_Stream::NAME, $streams);
     }
     
     /**
@@ -81,16 +81,16 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
      */
     public function testRegisterDoesNothingIfStreamIsAlreadyRegistered() {
         $this->setExpectedException(null);
-        AspectPHP_Stream_Wrapper::register();
+        AspectPHP_Stream::register();
     }
     
     /**
      * Checks if unregister() removes the registered stream.
      */
     public function testUnregisterRemovesRegisteredStream() {
-        AspectPHP_Stream_Wrapper::unregister();
+        AspectPHP_Stream::unregister();
         $streams = stream_get_wrappers();
-        $this->assertNotContains(AspectPHP_Stream_Wrapper::NAME, $streams);
+        $this->assertNotContains(AspectPHP_Stream::NAME, $streams);
     }
     
     /**
@@ -98,8 +98,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
      */
     public function testUnregisterDoesNothingIfStreamIsNotRegistered() {
         $this->setExpectedException(null);
-        AspectPHP_Stream_Wrapper::unregister();
-        AspectPHP_Stream_Wrapper::unregister();
+        AspectPHP_Stream::unregister();
+        AspectPHP_Stream::unregister();
     }
     
     /**
@@ -397,7 +397,7 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
      * @return string
      */
     protected function toStream($path) {
-        return AspectPHP_Stream_Wrapper::NAME . '://' . $path;
+        return AspectPHP_Stream::NAME . '://' . $path;
     }
     
     /**
