@@ -1,7 +1,7 @@
 <?php
 
 /**
- * AspectPHP_Stream_Wrapper
+ * AspectPHP_Stream
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Stream
@@ -11,7 +11,7 @@
  */
 
 /**
- * Stream wrapper that adds injection points to loaded php classes.
+ * Stream that adds injection points to loaded php classes.
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Stream
@@ -19,7 +19,7 @@
  * @version $Rev$
  * @since 13.12.2011
  */
-class AspectPHP_Stream_Wrapper {
+class AspectPHP_Stream {
     
     /**
      * The name that is used to access the stream (name://...).

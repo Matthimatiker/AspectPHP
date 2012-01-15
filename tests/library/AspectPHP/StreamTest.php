@@ -1,7 +1,7 @@
 <?php
 
 /**
- * AspectPHP_Stream_WrapperTest
+ * AspectPHP_StreamTest
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Stream
@@ -26,7 +26,7 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
  * @version $Rev$
  * @since 13.12.2011
  */
-class AspectPHP_Stream_WrapperTest extends PHPUnit_Framework_TestCase {
+class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
     
     /**
      * The original include path.
