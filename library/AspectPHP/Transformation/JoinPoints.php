@@ -103,7 +103,8 @@ class AspectPHP_Transformation_JoinPoints {
                   . '        if( count($aspects) === 0 ) {'                                                . PHP_EOL
                   . '            return call_user_func_array(array(%2$s, \'%3$s\'), $args);'               . PHP_EOL
                   . '        }'                                                                            . PHP_EOL
-                  . '        $joinPoint = new AspectPHP_JoinPoint(__METHOD__, $args);'                     . PHP_EOL
+                  . '        $joinPoint = new AspectPHP_JoinPoint(__FUNCTION__, ' . $context . ');'        . PHP_EOL
+                  . '        $joinPoint->setArguments($args);'                                             . PHP_EOL
                   . '        foreach( $aspects as $aspect ) {'	                                           . PHP_EOL
                   . '            $aspect->before($joinPoint);'                                             . PHP_EOL
                   . '        }'                                                                            . PHP_EOL
