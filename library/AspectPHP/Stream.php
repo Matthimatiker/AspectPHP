@@ -29,6 +29,13 @@ class AspectPHP_Stream {
     const NAME = 'aspectphp';
     
     /**
+     * The object that manages the aspects.
+     *
+     * @var AspectPHP_Manager
+     */
+    protected static $manager = null;
+    
+    /**
      * The modified content of the opened file.
      *
      * @var string
@@ -81,6 +88,24 @@ class AspectPHP_Stream {
     public static function isRegistered() {
         $wrappers = stream_get_wrappers();
         return in_array(self::NAME, $wrappers);
+    }
+    
+    /**
+     * Sets the aspect manager.
+     *
+     * @param AspectPHP_Manager $manager
+     */
+    public static function setManager(AspectPHP_Manager $manager) {
+        
+    }
+    
+    /**
+     * Returns the registered aspect manager.
+     *
+     * @return AspectPHP_Manager|null
+     */
+    public static function getManager() {
+        
     }
     
 	/**
