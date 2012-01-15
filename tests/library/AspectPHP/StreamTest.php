@@ -41,6 +41,7 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
     protected function setUp() {
         parent::setUp();
         $this->storeIncludePath();
+        $this->resetManager();
         AspectPHP_Stream::register();
     }
     
@@ -49,6 +50,7 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
      */
     protected function tearDown() {
         AspectPHP_Stream::unregister();
+        $this->resetManager();
         $this->restoreIncludePath();
         parent::tearDown();
     }
@@ -448,6 +450,13 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
      */
     protected function changeIncludePath() {
         set_include_path($this->toStream($this->getTestDataDirectory()));
+    }
+    
+    /**
+     * Resets the aspect manager.
+     */
+    protected function resetManager() {
+        AspectPHP_Stream::setManager(null);
     }
     
 }
