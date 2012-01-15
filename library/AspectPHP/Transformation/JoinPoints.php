@@ -115,13 +115,13 @@ class AspectPHP_Transformation_JoinPoints {
                   . '            }'                                                                        . PHP_EOL
                   . '            return $joinPoint->getReturnValue();'                                     . PHP_EOL
                   . '        } catch(Exception $e) {'                                                      . PHP_EOL
-                  . '            $joinPoint->setException($e);'                                        . PHP_EOL
-                  . '            foreach( $aspects as $aspect ) {'	                                   . PHP_EOL
-                  . '                $aspect->afterThrowing($joinPoint);'                              . PHP_EOL
-                  . '            }'                                                                    . PHP_EOL
-                  . '            throw $e;'                                                            . PHP_EOL
-                  . '        }'                                                                        . PHP_EOL
-                  . '    }'                                                                            . PHP_EOL;
+                  . '            $joinPoint->setException($e);'                                            . PHP_EOL
+                  . '            foreach( $aspects as $aspect ) {'	                                       . PHP_EOL
+                  . '                $aspect->afterThrowing($joinPoint);'                                  . PHP_EOL
+                  . '            }'                                                                        . PHP_EOL
+                  . '            throw $e;'                                                                . PHP_EOL
+                  . '        }'                                                                            . PHP_EOL
+                  . '    }'                                                                                . PHP_EOL;
         return sprintf($template, $signature, $context, $callee);
     }
     
