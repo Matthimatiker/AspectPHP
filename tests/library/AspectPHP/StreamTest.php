@@ -334,15 +334,17 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
         }
     }
     
+    /**
+     * Ensures that getManager() throws an exception if no manager is available.
+     */
     public function testGetManagerThrowsExceptionIfNoManagerIsAvailable() {
         
     }
     
+    /**
+     * Checks if getManager() returns the provided aspect manager.
+     */
     public function testGetManagerReturnsProvidedManager() {
-        
-    }
-    
-    public function testSetManagerAcceptsNull() {
         
     }
     
