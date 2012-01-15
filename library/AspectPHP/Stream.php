@@ -93,7 +93,7 @@ class AspectPHP_Stream {
     /**
      * Sets the aspect manager.
      *
-     * @param AspectPHP_Manager $manager
+     * @param AspectPHP_Manager|null $manager
      */
     public static function setManager(AspectPHP_Manager $manager) {
         
@@ -102,7 +102,8 @@ class AspectPHP_Stream {
     /**
      * Returns the registered aspect manager.
      *
-     * @return AspectPHP_Manager|null
+     * @return AspectPHP_Manager
+     * @throws BadMethodCallException If no manager is available.
      */
     public static function getManager() {
         

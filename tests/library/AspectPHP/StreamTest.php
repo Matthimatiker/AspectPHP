@@ -334,6 +334,18 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
         }
     }
     
+    public function testGetManagerThrowsExceptionIfNoManagerIsAvailable() {
+        
+    }
+    
+    public function testGetManagerReturnsProvidedManager() {
+        
+    }
+    
+    public function testSetManagerAcceptsNull() {
+        
+    }
+    
     /**
      * Asserts that the class $class has the method with the provided name.
      *
