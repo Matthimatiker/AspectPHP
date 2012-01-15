@@ -218,43 +218,21 @@ class AspectPHP_Stream {
      * @return string
      */
     protected function addInjectionPoints($filePath) {
+        $source         = file_get_contents($filePath);
+        $transformation = new AspectPHP_Transformation_JoinPoints();
+        $source         = $transformation->transform($source);
         
-        $source     = file_get_contents($filePath);
+        // Replace __FILE__ constants with the original file path.
         $fullPath   = realpath($filePath);
         $tokens     = token_get_all($source);
         $newSource  = '';
-        $inMethod   = false;
-        $braceCount = 0;
         foreach( $tokens as $token ) {
             /* @var $token string|array(integer|string) */
             if( is_string($token) ) {
                 $token = array(-1, $token);
             }
-            // Replace __FILE__ constants with the original file path.
             if( $token[0] === T_FILE ) {
                 $token[1] = "'$fullPath'";
-            }
-            if( $token[0] === T_FUNCTION ) {
-                $inMethod   = true;
-                $braceCount = 0;
-            }
-            if( $inMethod ) {
-                if( $token[1] === '{' ) {
-                    $braceCount++;
-                    if ( $braceCount === 1 ) {
-                        // Method start.
-                        // TODO: add injection point
-                        $token[1] = '{ /* add start point */';
-                    }
-                } elseif ($token[1] === '}') {
-                    $braceCount--;
-                    if( $braceCount === 0 ) {
-                        // Method end.
-                        // TODO: add injection point, think of return and throw!
-                        $token[1] = '/* add end point */ }';
-                        $inMethod = false;
-                    }
-                }
             }
             $newSource .= $token[1];
         }
