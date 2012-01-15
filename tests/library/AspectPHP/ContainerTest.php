@@ -28,6 +28,78 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
  */
 class AspectPHP_ContainerTest extends PHPUnit_Framework_TestCase {
     
+    /**
+     * See {@link PHPUnit_Framework_TestCase::setUp()} for details.
+     */
+    protected function setUp() {
+        parent::setUp();
+        $this->resetManager();
+    }
+    
+    /**
+     * See {@link PHPUnit_Framework_TestCase::tearDown()} for details.
+     */
+    protected function tearDown() {
+        $this->resetManager();
+        parent::tearDown();
+    }
+    
+    /**
+     * Ensures that getManager() throws an exception if no manager is available.
+     */
+    public function testGetManagerThrowsExceptionIfNoManagerIsAvailable() {
+        $this->setExpectedException('BadMethodCallException');
+        AspectPHP_Container::getManager();
+    }
+    
+    /**
+     * Checks if getManager() returns the provided aspect manager.
+     */
+    public function testGetManagerReturnsProvidedManager() {
+        $manager = $this->createManager();
+        AspectPHP_Container::setManager($manager);
+        $this->assertSame($manager, AspectPHP_Container::getManager());
+    }
+    
+    /**
+     * Ensures that setManager() throws an exception if an invalid argument is passed.
+     */
+    public function testSetManagerThrowsExceptionIfInvalidArgumentIsProvided() {
+        $this->setExpectedException('InvalidArgumentException');
+        AspectPHP_Container::setManager(new stdClass());
+    }
+    
+    /**
+     * Ensures that hasManager() returns false if no aspect manager is available.
+     */
+    public function testHasManagerReturnsFalseIfNoManagerIsAvailable() {
+        $this->assertFalse(AspectPHP_Container::hasManager());
+    }
+    
+    /**
+     * Ensures that hasManager() returns true if an aspect manager is available.
+     */
+    public function testHasManagerReturnsTrueIfManagerIsAvailable() {
+        AspectPHP_Container::setManager($this->createManager());
+        $this->assertTrue(AspectPHP_Container::hasManager());
+    }
+    
+    /**
+     * Creates an aspect manager.
+     *
+     * @return AspectPHP_Manager
+     */
+    protected function createManager() {
+        return $this->getMock('AspectPHP_Manager');
+    }
+    
+	/**
+     * Resets the aspect manager.
+     */
+    protected function resetManager() {
+        AspectPHP_Container::setManager(null);
+    }
+    
 }
 
 ?>

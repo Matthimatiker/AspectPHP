@@ -41,7 +41,6 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
     protected function setUp() {
         parent::setUp();
         $this->storeIncludePath();
-        $this->resetManager();
         AspectPHP_Stream::register();
     }
     
@@ -50,7 +49,6 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
      */
     protected function tearDown() {
         AspectPHP_Stream::unregister();
-        $this->resetManager();
         $this->restoreIncludePath();
         parent::tearDown();
     }
@@ -337,46 +335,6 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
     }
     
     /**
-     * Ensures that getManager() throws an exception if no manager is available.
-     */
-    public function testGetManagerThrowsExceptionIfNoManagerIsAvailable() {
-        $this->setExpectedException('BadMethodCallException');
-        AspectPHP_Stream::getManager();
-    }
-    
-    /**
-     * Checks if getManager() returns the provided aspect manager.
-     */
-    public function testGetManagerReturnsProvidedManager() {
-        $manager = $this->createManager();
-        AspectPHP_Stream::setManager($manager);
-        $this->assertSame($manager, AspectPHP_Stream::getManager());
-    }
-    
-    /**
-     * Ensures that setManager() throws an exception if an invalid argument is passed.
-     */
-    public function testSetManagerThrowsExceptionIfInvalidArgumentIsProvided() {
-        $this->setExpectedException('InvalidArgumentException');
-        AspectPHP_Stream::setManager(new stdClass());
-    }
-    
-    /**
-     * Ensures that hasManager() returns false if no aspect manager is available.
-     */
-    public function testHasManagerReturnsFalseIfNoManagerIsAvailable() {
-        $this->assertFalse(AspectPHP_Stream::hasManager());
-    }
-    
-    /**
-     * Ensures that hasManager() returns true if an aspect manager is available.
-     */
-    public function testHasManagerReturnsTrueIfManagerIsAvailable() {
-        AspectPHP_Stream::setManager($this->createManager());
-        $this->assertTrue(AspectPHP_Stream::hasManager());
-    }
-    
-    /**
      * Asserts that the class $class has the method with the provided name.
      *
      * @param string $class
@@ -397,15 +355,6 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
     protected function assertClassExists($class) {
         $message = 'The class "' . $class . '" was not loaded.';
         $this->assertTrue(class_exists($class, false), $message);
-    }
-    
-    /**
-     * Creates an aspect manager.
-     *
-     * @return AspectPHP_Manager
-     */
-    protected function createManager() {
-        return $this->getMock('AspectPHP_Manager');
     }
     
     /**
@@ -471,13 +420,6 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
      */
     protected function changeIncludePath() {
         set_include_path($this->toStream($this->getTestDataDirectory()));
-    }
-    
-    /**
-     * Resets the aspect manager.
-     */
-    protected function resetManager() {
-        AspectPHP_Stream::setManager(null);
     }
     
 }
