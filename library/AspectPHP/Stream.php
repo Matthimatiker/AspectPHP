@@ -116,7 +116,6 @@ class AspectPHP_Stream {
         return $block;
     }
 
-
     /**
      * Returns the current position in the stream.
      *
@@ -127,7 +126,6 @@ class AspectPHP_Stream {
         return $this->position;
     }
 
-
     /**
      * Checks if the current position points to the end of the stream.
      *
@@ -137,7 +135,6 @@ class AspectPHP_Stream {
     {
         return $this->position >= $this->getContentLength();
     }
-
 
     /**
      * Returns meta data about the stream.
@@ -251,10 +248,10 @@ class AspectPHP_Stream {
      *
      * @param string $path The path including the stream scheme.
      * @param integer $flags
-     * @return array(string|integer=>integer)
+     * @return array(string|integer=>integer)|false
      */
     protected function getStats($path, $flags = 0) {
-        $suppressErrors = ($flags & STREAM_URL_STAT_QUIET) == STREAM_URL_STAT_QUIET;
+        $suppressErrors = ($flags & STREAM_URL_STAT_QUIET) === STREAM_URL_STAT_QUIET;
         $filePath       = $this->removeScheme($path);
         if ($suppressErrors) {
             $stats = @stat($filePath);
