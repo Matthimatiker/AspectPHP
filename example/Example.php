@@ -14,7 +14,7 @@
 /**
  * Initialize environment.
  */
-require_once(dirname(__FILE__) . '/Environment.config.php');
+require_once(dirname(__FILE__) . '/../Environment.config.php');
 
 $manager = new AspectPHP_Manager_Standard();
 AspectPHP_Container::setManager($manager);
