@@ -21,6 +21,17 @@
  */
 class AspectPHP_Environment {
     
+    /**
+     * Activates AspectPHP.
+     *
+     * Returns the manager that can be used to register aspects.
+     *
+     * @return AspectPHP_Manager
+     */
+    public function activate() {
+        
+    }
+    
 }
 
 ?>
