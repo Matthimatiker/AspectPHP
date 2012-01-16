@@ -248,7 +248,7 @@ class AspectPHP_Stream {
      *
      * @param string $path The path including the stream scheme.
      * @param integer $flags
-     * @return array(string|integer=>integer)|false
+     * @return array(string|integer=>integer)
      */
     protected function getStats($path, $flags = 0) {
         $filePath = $this->removeScheme($path);
