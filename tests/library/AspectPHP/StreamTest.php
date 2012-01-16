@@ -157,6 +157,15 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
     }
     
     /**
+     * Ensures that stat() returns false if the provided file does not exist.
+     */
+    public function testStatReturnsFalseIfFileDoesNotExist() {
+        $path = $this->toStream($this->getPath('Missing.php'));
+        $stats = stat($path);
+        $this->assertFalse($stats);
+    }
+    
+    /**
      * Ensures that is_writable() returns always false.
      */
     public function testIsWritableReturnsFalse() {
