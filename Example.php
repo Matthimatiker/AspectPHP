@@ -55,6 +55,10 @@ class DemoAspect implements AspectPHP_Aspect {
 $manager->register(new DemoAspect(), 'Demo::sayHello');
 
 $demo = new Demo();
+// Should output:
+// before sayHello
+// Hello Matthias!
+// after sayHello
 $demo->sayHello('Matthias');
 
 ?>
