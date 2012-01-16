@@ -253,22 +253,7 @@ class AspectPHP_Stream {
     protected function getStats($path, $flags = 0) {
         $filePath = $this->removeScheme($path);
         if( !file_exists($filePath) ) {
-            $stats = array(
-            	'dev'     => 0,
-            	'ino'     => 0,
-				'mode'    => 0777,
-            	'nlink'   => 0,
-            	'uid'     => 0,
-            	'gid'     => 0,
-            	'rdev'    => 0,
-            	'size'    => 0,
-            	'atime'   => 0,
-            	'mtime'   => 0,
-            	'ctime'   => 0,
-            	'blksize' => 0,
-            	'blocks'  => 0
-            );
-            return $stats;
+            return $this->getDummyStats();
         }
         $suppressErrors = ($flags & STREAM_URL_STAT_QUIET) === STREAM_URL_STAT_QUIET;
         if ($suppressErrors) {
@@ -277,6 +262,29 @@ class AspectPHP_Stream {
             $stats = stat($filePath);
         }
         return $stats;
+    }
+    
+    /**
+     * Returns dummy values for stat() calls.
+     *
+     * @return array(string=>integer(
+     */
+    protected function getDummyStats() {
+        return array(
+        	'dev'     => 0,
+        	'ino'     => 0,
+			'mode'    => 0777,
+        	'nlink'   => 0,
+        	'uid'     => 0,
+        	'gid'     => 0,
+        	'rdev'    => 0,
+        	'size'    => 0,
+        	'atime'   => 0,
+        	'mtime'   => 0,
+        	'ctime'   => 0,
+        	'blksize' => 0,
+        	'blocks'  => 0
+        );
     }
     
     /**
