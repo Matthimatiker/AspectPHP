@@ -113,7 +113,7 @@ class AspectPHP_Transformation_ReplaceTest extends PHPUnit_Framework_TestCase {
             T_CLOSE_TAG => 'close'
         );
         $this->transformation->setRules($rules);
-        $this->assertEquals('open close', $this->transformation->transform('<?php ?>'));
+        $this->assertEquals('open close', $this->transformation->transform('<?php  ?>'));
     }
     
 }
