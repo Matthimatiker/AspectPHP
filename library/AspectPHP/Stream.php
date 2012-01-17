@@ -238,23 +238,12 @@ class AspectPHP_Stream {
      * @return string
      */
     protected function compile($source) {
-        $transformation = new AspectPHP_Transformation_JoinPoints();
-        $source         = $transformation->transform($source);
-        
-        // Replace __FILE__ constants with the original file path.
-        $tokens     = token_get_all($source);
-        $newSource  = '';
-        foreach( $tokens as $token ) {
-            /* @var $token string|array(integer|string) */
-            if( is_string($token) ) {
-                $token = array(-1, $token);
-            }
-            if( $token[0] === T_FILE ) {
-                $token[1] = "'{$this->path}'";
-            }
-            $newSource .= $token[1];
-        }
-        return $newSource;
+        $compile = new AspectPHP_Transformation_JoinPoints();
+        $source  = $compile->transform($source);
+        $replace = new AspectPHP_Transformation_Replace();
+        $replace->setRules(array(T_FILE =>  "'{$this->path}'"));
+        $source = $replace->transform($source);
+        return $source;
     }
     
     /**
