@@ -22,6 +22,15 @@
 class AspectPHP_Transformation_Replace {
     
     /**
+     * The replacement rules.
+     *
+     * Assigns replacement values to token types.
+     *
+     * @var array(integer=>string)
+     */
+    protected $rules = array();
+    
+    /**
      * Specifies the replacement rules.
      *
      * The given map contains the replacement rules.
@@ -36,7 +45,7 @@ class AspectPHP_Transformation_Replace {
      * @param array(integer=>string) $map
      */
     public function setRules(array $map) {
-        
+        $this->rules = $map;
     }
     
     /**
@@ -46,7 +55,22 @@ class AspectPHP_Transformation_Replace {
      * @return string
      */
     public function transform($source) {
-        
+        $tokens    = token_get_all($source);
+        $newSource = '';
+        foreach( $tokens as $token ) {
+            /* @var $token string|array(integer|string) */
+            if( is_string($token) ) {
+                $newSource .= $token;
+                continue;
+            }
+            if( isset($this->rules[$token[0]]) ) {
+                // Replace the token.
+                $newSource .= $this->rules[$token[0]];
+                continue;
+            }
+            $newSource .= $token[1];
+        }
+        return $newSource;
     }
     
 }
