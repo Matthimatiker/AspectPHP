@@ -12,6 +12,11 @@
  */
 
 /**
+ * Initializes the test environment.
+ */
+require_once(dirname(__FILE__) . '/bootstrap.php');
+
+/**
  * Tests the replace transformation.
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
@@ -44,6 +49,26 @@ class AspectPHP_Transformation_ReplaceTest extends PHPUnit_Framework_TestCase {
     protected function tearDown() {
         $this->transformation = null;
         parent::tearDown();
+    }
+    
+    public function testTransformationDoesNothingIfNoRulesWereProvided() {
+        
+    }
+    
+    public function testTransformationReplacesSpecifiedTokens() {
+        
+    }
+    
+    public function testTransformationReplacesAllTokenOccurences() {
+        
+    }
+    
+    public function testTransformationDoesNotUseRulesThatWereOverwritten() {
+        
+    }
+    
+    public function testTransformationUsesCorrectReplacementValues() {
+        
     }
     
 }
