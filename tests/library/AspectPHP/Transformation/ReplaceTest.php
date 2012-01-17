@@ -55,35 +55,59 @@ class AspectPHP_Transformation_ReplaceTest extends PHPUnit_Framework_TestCase {
      * Ensures that the provided source code is not modified if no rules were provided.
      */
     public function testTransformationDoesNothingIfNoRulesWereProvided() {
-        
+        $source = '<?php ?>';
+        $this->assertEquals($source, $this->transformation->transform($source));
     }
     
     /**
      * Checks if the transformation replaces the specified tokens.
      */
     public function testTransformationReplacesSpecifiedTokens() {
-        
+        $rules = array(
+            T_OPEN_TAG => ''
+        );
+        $this->transformation->setRules($rules);
+        $this->assertNotContains('<?php', $this->transformation->transform('<?php ?>'));
     }
     
     /**
      * Ensures that the transformation replaces all occurences of the provided tokens.
      */
     public function testTransformationReplacesAllTokenOccurences() {
-        
+        $source = '<?php function hello() {} function bye() {} ?>';
+        $rules = array(
+            T_FUNCTION => ''
+        );
+        $transformed = $this->transformation->transform($source);
+        $this->assertNotContains('function', $transformed);
     }
     
     /**
      * Ensures that the transformation does not use rules that were overwritten.
      */
     public function testTransformationDoesNotUseRulesThatWereOverwritten() {
-        
+        $rules = array(
+            T_OPEN_TAG => ''
+        );
+        $this->transformation->setRules($rules);
+        $rules = array(
+            T_CLOSE_TAG => ''
+        );
+        $this->transformation->setRules($rules);
+        // The T_OPEN_TAG rule was overwritten, therefore "<?php" should not be replaced.
+        $this->assertContains('<?php', $this->transformation->transform('<?php ?>'));
     }
     
     /**
      * Checks if the correct replacement values are used.
      */
     public function testTransformationUsesCorrectReplacementValues() {
-        
+        $rules = array(
+            T_OPEN_TAG  => 'open',
+            T_CLOSE_TAG => 'close'
+        );
+        $this->transformation->setRules($rules);
+        $this->assertEquals('open close', $this->transformation->transform('<?php ?>'));
     }
     
 }
