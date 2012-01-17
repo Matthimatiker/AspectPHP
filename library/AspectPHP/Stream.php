@@ -107,7 +107,7 @@ class AspectPHP_Stream {
         }
         $this->path    = realpath($filePath);
         $this->stats   = $this->getStats($path);
-        $this->content = $this->addInjectionPoints($this->path);
+        $this->content = $this->buildContent();
         return true;
     }
 
@@ -216,25 +216,32 @@ class AspectPHP_Stream {
     }
     
     /**
-     * Loads the content from the given file and modifies the source
-     * code to add injection points.
+     * Builds the content for the opened file.
      *
-     * @param string $filePath
      * @return string
      */
-    protected function addInjectionPoints($filePath) {
-        $source = file_get_contents($filePath);
-        if( $this->isFrameworkFile($filePath) ) {
+    protected function buildContent() {
+        $source = file_get_contents($this->path);
+        if( $this->isFrameworkFile($this->path) ) {
             // Do not modify framework files.
             // Some of the framework files are reponsible for code transformations.
             // So trying to modify these classes results in a fatal error (class not found).
             return $source;
         }
+        return $this->compile($source);
+    }
+    
+    /**
+     * Modifies the given source code to inject join point handling.
+     *
+     * @param string $source
+     * @return string
+     */
+    protected function compile($source) {
         $transformation = new AspectPHP_Transformation_JoinPoints();
         $source         = $transformation->transform($source);
         
         // Replace __FILE__ constants with the original file path.
-        $fullPath   = realpath($filePath);
         $tokens     = token_get_all($source);
         $newSource  = '';
         foreach( $tokens as $token ) {
@@ -243,7 +250,7 @@ class AspectPHP_Stream {
                 $token = array(-1, $token);
             }
             if( $token[0] === T_FILE ) {
-                $token[1] = "'$fullPath'";
+                $token[1] = "'{$this->path}'";
             }
             $newSource .= $token[1];
         }
