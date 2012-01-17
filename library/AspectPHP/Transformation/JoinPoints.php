@@ -134,11 +134,17 @@ class AspectPHP_Transformation_JoinPoints {
      * $code = $this->getCode('buildInjectionPoint');
      * </code>
      *
-     * @param string $method
+     * @param string $name The method name.
      * @return string
      */
-    protected function getCode($method) {
-        
+    protected function getCode($name) {
+        $method       = new ReflectionMethod(__CLASS__, $name);
+        $docBlock     = $method->getDocComment();
+        $fullSource   = file($method->getFileName());
+        $linesOfCode  = $method->getEndLine() - $method->getStartLine() + 1;
+        $methodSource = array_slice($fullSource, $method->getStartLine() - 1, $linesOfCode);
+        $methodSource = implode('', $methodSource);
+        return '    ' . $docBlock . PHP_EOL . $methodSource;
     }
     
     /**
