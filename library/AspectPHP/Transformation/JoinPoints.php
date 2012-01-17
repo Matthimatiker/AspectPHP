@@ -271,6 +271,54 @@ class AspectPHP_Transformation_JoinPoints {
         }
         return -1;
     }
+
+    /**
+     * Handles method calls.
+     *
+     * Contains logic regarding the aspect and join point handling.
+     *
+     * This method is injected into all compiled classes. Otherwise it
+     * would not be possible to forward to its private methods.
+     *
+     * @param string $method The name of the method.
+     * @param object|string $context The context of the method call.
+     * @param array(mixed) $args The method arguments.
+     * @return mixed
+     * @throws Exception If the original method or a join point throws an exception.
+     */
+    private static function _aspectPHPInternalHandleCall($method, $context, $args) {
+        if( AspectPHP_Container::hasManager() ) {
+            $aspects = AspectPHP_Container::getManager()->getAspectsFor(__METHOD__);
+        } else {
+            $aspects = array();
+        }
+        $args = func_get_args();
+        if( count($aspects) === 0 ) {
+            return call_user_func_array(array($method, $context), $args);
+        }
+        $joinPoint = new AspectPHP_JoinPoint($method, $context);
+        $joinPoint->setArguments($args);
+        foreach( $aspects as $aspect ) {
+            /* @var $aspect AspectPHP_Aspect */
+            $aspect->before($joinPoint);
+        }
+        try {
+            $returnValue = call_user_func_array(array($method, $context), $args);
+            $joinPoint->setReturnValue($returnValue);
+            foreach( $aspects as $aspect ) {
+                /* @var $aspect AspectPHP_Aspect */
+                $aspect->afterReturning($joinPoint);
+            }
+            return $joinPoint->getReturnValue();
+        } catch(Exception $e) {
+            $joinPoint->setException($e);
+            foreach( $aspects as $aspect ) {
+                /* @var $aspect AspectPHP_Aspect */
+                $aspect->afterThrowing($joinPoint);
+            }
+            throw $e;
+        }
+    }
     
 }
 
