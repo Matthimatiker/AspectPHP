@@ -24,9 +24,13 @@ class AspectPHP_Transformation_Replace {
     /**
      * Creates the transformation class.
      *
+     * The given map specifies the replacement rules.
+     * The token type (for example T_WHITESPACE) is used as key,
+     * the replacement as value.
+     *
      * @param array(integer=>string) $map
      */
-    public function __construct($map) {
+    public function __construct(array $map) {
         
     }
     
