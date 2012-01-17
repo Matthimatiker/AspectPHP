@@ -80,6 +80,7 @@ class AspectPHP_Transformation_ReplaceTest extends PHPUnit_Framework_TestCase {
         $rules = array(
             T_FUNCTION => ''
         );
+        $this->transformation->setRules($rules);
         $transformed = $this->transformation->transform($source);
         $this->assertInternalType('string', $transformed);
         $this->assertNotContains('function', $transformed);
