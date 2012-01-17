@@ -29,6 +29,13 @@ class AspectPHP_Stream {
     const NAME = 'aspectphp';
     
     /**
+     * The path of the opened file.
+     *
+     * @var string
+     */
+    protected $path = null;
+    
+    /**
      * The modified content of the opened file.
      *
      * @var string
@@ -98,8 +105,9 @@ class AspectPHP_Stream {
         if( !is_file($filePath) ) {
             return false;
         }
+        $this->path    = realpath($filePath);
         $this->stats   = $this->getStats($path);
-        $this->content = $this->addInjectionPoints($filePath);
+        $this->content = $this->addInjectionPoints($this->path);
         return true;
     }
 
@@ -215,7 +223,13 @@ class AspectPHP_Stream {
      * @return string
      */
     protected function addInjectionPoints($filePath) {
-        $source         = file_get_contents($filePath);
+        $source = file_get_contents($filePath);
+        if( $this->isFrameworkFile($filePath) ) {
+            // Do not modify framework files.
+            // Some of the framework files are reponsible for code transformations.
+            // So trying to modify these classes results in a fatal error (class not found).
+            return $source;
+        }
         $transformation = new AspectPHP_Transformation_JoinPoints();
         $source         = $transformation->transform($source);
         
@@ -234,6 +248,17 @@ class AspectPHP_Stream {
             $newSource .= $token[1];
         }
         return $newSource;
+    }
+    
+    /**
+     * Checks if the given file belongs to the AspectPHP framework.
+     *
+     * @param string $path
+     * @return string
+     */
+    protected function isFrameworkFile($path) {
+        $frameworkDirectory = dirname(__FILE__);
+        return strpos($path, $frameworkDirectory) === 0;
     }
     
     /**
