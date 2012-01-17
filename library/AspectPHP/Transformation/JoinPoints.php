@@ -127,6 +127,21 @@ class AspectPHP_Transformation_JoinPoints {
     }
     
     /**
+     * Returns the source code of the given method including its doc block.
+     *
+     * Example:
+     * <code>
+     * $code = $this->getCode('buildInjectionPoint');
+     * </code>
+     *
+     * @param string $method
+     * @return string
+     */
+    protected function getCode($method) {
+        
+    }
+    
+    /**
      * Merges the tokens between $start and $end (inclusive) and
      * return the code as string.
      *
