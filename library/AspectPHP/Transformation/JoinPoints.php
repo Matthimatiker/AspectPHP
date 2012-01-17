@@ -134,6 +134,9 @@ class AspectPHP_Transformation_JoinPoints {
      * $code = $this->getCode('buildInjectionPoint');
      * </code>
      *
+     * @todo move to custom class
+     * @todo introduce caching
+     *
      * @param string $name The method name.
      * @return string
      */
