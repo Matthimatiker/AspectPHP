@@ -67,7 +67,9 @@ class AspectPHP_Transformation_ReplaceTest extends PHPUnit_Framework_TestCase {
             T_OPEN_TAG => ''
         );
         $this->transformation->setRules($rules);
-        $this->assertNotContains('<?php', $this->transformation->transform('<?php ?>'));
+        $transformed = $this->transformation->transform('<?php ?>');
+        $this->assertInternalType('string', $transformed);
+        $this->assertNotContains('<?php', $transformed);
     }
     
     /**
@@ -79,6 +81,7 @@ class AspectPHP_Transformation_ReplaceTest extends PHPUnit_Framework_TestCase {
             T_FUNCTION => ''
         );
         $transformed = $this->transformation->transform($source);
+        $this->assertInternalType('string', $transformed);
         $this->assertNotContains('function', $transformed);
     }
     
@@ -95,7 +98,9 @@ class AspectPHP_Transformation_ReplaceTest extends PHPUnit_Framework_TestCase {
         );
         $this->transformation->setRules($rules);
         // The T_OPEN_TAG rule was overwritten, therefore "<?php" should not be replaced.
-        $this->assertContains('<?php', $this->transformation->transform('<?php ?>'));
+        $transformed = $this->transformation->transform('<?php ?>');
+        $this->assertInternalType('string', $transformed);
+        $this->assertContains('<?php', $transformed);
     }
     
     /**
