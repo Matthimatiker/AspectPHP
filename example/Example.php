@@ -16,12 +16,14 @@
  */
 require_once(dirname(__FILE__) . '/../Environment.config.php');
 
-$manager = new AspectPHP_Manager_Standard();
-AspectPHP_Container::setManager($manager);
-AspectPHP_Stream::register();
+// Add example directory to include path.
+set_include_path(dirname(__FILE__) . PATH_SEPARATOR . get_include_path());
 
-set_include_path('aspectphp://' . dirname(__FILE__) . PATH_SEPARATOR . get_include_path());
+// Initialize the AspectPHP environment.
+$environment = new AspectPHP_Environment();
+$environment->initialize();
 
+$manager = $environment->getManager();
 $manager->register(new DemoAspect(), 'Demo::sayHello');
 
 $demo = new Demo();
