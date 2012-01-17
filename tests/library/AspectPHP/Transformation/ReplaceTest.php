@@ -51,22 +51,37 @@ class AspectPHP_Transformation_ReplaceTest extends PHPUnit_Framework_TestCase {
         parent::tearDown();
     }
     
+    /**
+     * Ensures that the provided source code is not modified if no rules were provided.
+     */
     public function testTransformationDoesNothingIfNoRulesWereProvided() {
         
     }
     
+    /**
+     * Checks if the transformation replaces the specified tokens.
+     */
     public function testTransformationReplacesSpecifiedTokens() {
         
     }
     
+    /**
+     * Ensures that the transformation replaces all occurences of the provided tokens.
+     */
     public function testTransformationReplacesAllTokenOccurences() {
         
     }
     
+    /**
+     * Ensures that the transformation does not use rules that were overwritten.
+     */
     public function testTransformationDoesNotUseRulesThatWereOverwritten() {
         
     }
     
+    /**
+     * Checks if the correct replacement values are used.
+     */
     public function testTransformationUsesCorrectReplacementValues() {
         
     }
