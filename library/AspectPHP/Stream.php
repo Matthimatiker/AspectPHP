@@ -241,7 +241,7 @@ class AspectPHP_Stream {
         $compile = new AspectPHP_Transformation_JoinPoints();
         $source  = $compile->transform($source);
         $replace = new AspectPHP_Transformation_Replace();
-        $replace->setRules(array(T_FILE =>  "'{$this->path}'"));
+        $replace->setRules(array(T_FILE => "'{$this->path}'"));
         $source = $replace->transform($source);
         return $source;
     }
