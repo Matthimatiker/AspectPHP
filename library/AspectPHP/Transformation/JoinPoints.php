@@ -293,7 +293,6 @@ class AspectPHP_Transformation_JoinPoints {
         } else {
             $aspects = array();
         }
-        $args = func_get_args();
         if( count($aspects) === 0 ) {
             return call_user_func_array(array($context, $compiledMethod), $args);
         }
