@@ -76,6 +76,8 @@ class AspectPHP_Transformation_JoinPoints {
         if( $classToken !== -1 ) {
             $body = $this->findBody($classToken);
             $end  = $this->findClosingBrace($body);
+            // Inject method that handles method calls.
+            $injectionPoints[] = $this->getCode('_aspectPHPInternalHandleCall');
             // Inject new methods at the end of the class body.
             $injectedCode = implode(PHP_EOL, $injectionPoints);
             $source = $this->between(0, $end - 1) . $injectedCode . $this->between($end, count($this->tokens) - 1);
@@ -94,34 +96,8 @@ class AspectPHP_Transformation_JoinPoints {
     protected function buildInjectionPoint($signature, $callee, $context) {
         $template = '    %1$s'                                                                             . PHP_EOL
                   . '    {'                                                                                . PHP_EOL
-                  . '        if( AspectPHP_Container::hasManager() ) {'                                    . PHP_EOL
-                  . '            $aspects = AspectPHP_Container::getManager()->getAspectsFor(__METHOD__);' . PHP_EOL
-                  . '        } else {'                                                                     . PHP_EOL
-                  . '            $aspects = array();'                                                      . PHP_EOL
-                  . '        }'                                                                            . PHP_EOL
                   . '        $args = func_get_args();'                                                     . PHP_EOL
-                  . '        if( count($aspects) === 0 ) {'                                                . PHP_EOL
-                  . '            return call_user_func_array(array(%2$s, \'%3$s\'), $args);'               . PHP_EOL
-                  . '        }'                                                                            . PHP_EOL
-                  . '        $joinPoint = new AspectPHP_JoinPoint(__FUNCTION__, ' . $context . ');'        . PHP_EOL
-                  . '        $joinPoint->setArguments($args);'                                             . PHP_EOL
-                  . '        foreach( $aspects as $aspect ) {'	                                           . PHP_EOL
-                  . '            $aspect->before($joinPoint);'                                             . PHP_EOL
-                  . '        }'                                                                            . PHP_EOL
-                  . '        try {'                                                                        . PHP_EOL
-                  . '            $returnValue = call_user_func_array(array(%2$s, \'%3$s\'), $args);'       . PHP_EOL
-                  . '            $joinPoint->setReturnValue($returnValue);'                                . PHP_EOL
-                  . '            foreach( $aspects as $aspect ) {'	                                       . PHP_EOL
-                  . '                $aspect->afterReturning($joinPoint);'                                 . PHP_EOL
-                  . '            }'                                                                        . PHP_EOL
-                  . '            return $joinPoint->getReturnValue();'                                     . PHP_EOL
-                  . '        } catch(Exception $e) {'                                                      . PHP_EOL
-                  . '            $joinPoint->setException($e);'                                            . PHP_EOL
-                  . '            foreach( $aspects as $aspect ) {'	                                       . PHP_EOL
-                  . '                $aspect->afterThrowing($joinPoint);'                                  . PHP_EOL
-                  . '            }'                                                                        . PHP_EOL
-                  . '            throw $e;'                                                                . PHP_EOL
-                  . '        }'                                                                            . PHP_EOL
+                  . '        return self::_aspectPHPInternalHandleCall(__FUNCTION__, \'%3$s\', %2$s, $args);' . PHP_EOL
                   . '    }'                                                                                . PHP_EOL;
         return sprintf($template, $signature, $context, $callee);
     }
@@ -304,21 +280,22 @@ class AspectPHP_Transformation_JoinPoints {
      * This method is injected into all compiled classes. Otherwise it
      * would not be possible to forward to its private methods.
      *
-     * @param string $method The name of the method.
+     * @param string $method The name of the called method.
+     * @param string $compiledMethod The name of the method that will be called internally.
      * @param object|string $context The context of the method call.
      * @param array(mixed) $args The method arguments.
      * @return mixed
      * @throws Exception If the original method or a join point throws an exception.
      */
-    private static function _aspectPHPInternalHandleCall($method, $context, $args) {
+    private static function _aspectPHPInternalHandleCall($method, $compiledMethod, $context, $args) {
         if( AspectPHP_Container::hasManager() ) {
-            $aspects = AspectPHP_Container::getManager()->getAspectsFor(__METHOD__);
+            $aspects = AspectPHP_Container::getManager()->getAspectsFor(__CLASS__ . '::' . $method);
         } else {
             $aspects = array();
         }
         $args = func_get_args();
         if( count($aspects) === 0 ) {
-            return call_user_func_array(array($method, $context), $args);
+            return call_user_func_array(array($context, $compiledMethod), $args);
         }
         $joinPoint = new AspectPHP_JoinPoint($method, $context);
         $joinPoint->setArguments($args);
@@ -327,7 +304,7 @@ class AspectPHP_Transformation_JoinPoints {
             $aspect->before($joinPoint);
         }
         try {
-            $returnValue = call_user_func_array(array($method, $context), $args);
+            $returnValue = call_user_func_array(array($context, $compiledMethod), $args);
             $joinPoint->setReturnValue($returnValue);
             foreach( $aspects as $aspect ) {
                 /* @var $aspect AspectPHP_Aspect */
