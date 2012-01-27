@@ -19,7 +19,7 @@
  * @version $Rev$
  * @since 27.01.2012
  */
-class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable {
+class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAggregate  {
     
     /**
      * Creates an analyzer.
@@ -78,6 +78,15 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable {
      * @return integer
      */
     public function count() {
+        
+    }
+    
+    /**
+     * Returns an iterator that is used to loop over the tokens.
+     *
+     * @return Traversable
+     */
+    public function getIterator () {
         
     }
     
