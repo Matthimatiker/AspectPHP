@@ -19,7 +19,7 @@
  * @version $Rev$
  * @since 27.01.2012
  */
-class AspectPHP_Code_TokenAnalyzer implements ArrayAccess {
+class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable {
     
     /**
      * Creates an analyzer.
@@ -69,6 +69,15 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess {
      * @throws BadMethodCallException Always throws an exception.
      */
     public function offsetUnset($offset) {
+        
+    }
+    
+    /**
+     * Returns the number of tokens.
+     *
+     * @return integer
+     */
+    public function count() {
         
     }
     
