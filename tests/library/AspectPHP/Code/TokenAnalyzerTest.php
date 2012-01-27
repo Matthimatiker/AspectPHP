@@ -28,6 +28,46 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
  */
 class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
     
+    public function testCountReturnsNumberOfTokens() {
+        
+    }
+    
+    public function testOffsetExistsReturnsFalseIfIndexDoesNotExist() {
+        
+    }
+    
+    public function testOffsetExistsReturnsTrueIfExistingIndexIsProvided() {
+        
+    }
+    
+    public function testOffsetGetThrowsExceptionIfIndexDoesNotExist() {
+        
+    }
+    
+    public function testOffsetGetReturnsCorrectToken() {
+        
+    }
+    
+    public function testOffsetSetThrowsException() {
+        
+    }
+    
+    public function testOffsetUnsetThrowsException() {
+        
+    }
+    
+    public function testGetIteratorReturnsTraversable() {
+        
+    }
+    
+    public function testIteratingOverTokensIsPossible() {
+        
+    }
+    
+    public function testToStringReturnsOriginalSourceCode() {
+        
+    }
+    
 }
 
 ?>
