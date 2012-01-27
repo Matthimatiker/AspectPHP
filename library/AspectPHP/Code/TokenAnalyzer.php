@@ -31,30 +31,30 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
     }
     
     /**
-     * Searches for the first token after $offset that meets the given requirements.
+     * Searches for the first token after $index that meets the given requirements.
      *
      * See {@link findBetween()} for details about the search options.
      *
      * @param integer|string $type
-     * @param integer $offset
+     * @param integer $index
      * @param array(integer|string) $stopAt
      * @return integer
      */
-    public function findNext($type, $offset, array $stopAt = array()) {
+    public function findNext($type, $index, array $stopAt = array()) {
         
     }
     
     /**
-     * Searches for the first token before $offset that meets the given requirements.
+     * Searches for the first token before $index that meets the given requirements.
      *
      * See {@link findBetween()} for details about the search options.
      *
      * @param integer|string $type
-     * @param integer $offset
+     * @param integer $index
      * @param array(integer|string) $stopAt
      * @return integer
      */
-    public function findPrevious($type, $offset, array $stopAt = array()) {
+    public function findPrevious($type, $index, array $stopAt = array()) {
         
     }
     /**
