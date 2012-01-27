@@ -94,11 +94,11 @@ class AspectPHP_Transformation_JoinPoints {
      * @return string The code of the generated injection point method.
      */
     protected function buildInjectionPoint($signature, $callee, $context) {
-        $template = '    %1$s'                                                                             . PHP_EOL
-                  . '    {'                                                                                . PHP_EOL
-                  . '        $args = func_get_args();'                                                     . PHP_EOL
+        $template = '    %1$s'                                                                                . PHP_EOL
+                  . '    {'                                                                                   . PHP_EOL
+                  . '        $args = func_get_args();'                                                        . PHP_EOL
                   . '        return self::_aspectPHPInternalHandleCall(__FUNCTION__, \'%3$s\', %2$s, $args);' . PHP_EOL
-                  . '    }'                                                                                . PHP_EOL;
+                  . '    }'                                                                                   . PHP_EOL;
         return sprintf($template, $signature, $context, $callee);
     }
     
