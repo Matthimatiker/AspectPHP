@@ -68,6 +68,39 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
         
     }
     
+    public function testFindBetweenReturnsCorrectValueIfTokenWasNotFound() {
+        
+    }
+    
+    public function testFindBetweenReturnsCorrectIndex() {
+        
+    }
+    
+    public function testFindBetweenIncludesStartIndex() {
+        
+    }
+    
+    public function testFindBetweenIncludesEndIndex() {
+        
+    }
+    
+    public function testFindBetweenSearchesInDescendingOrderIfStartIsGreaterThanEnd() {
+        
+    }
+    
+    public function testFindBetweenReturnsCorrectValueIfStopTokenIsEncountered() {
+        
+    }
+    
+    
+    public function testFindBetweenThrowsExceptionIfInvalidStartIndexIsProvided() {
+        
+    }
+    
+    public function testFindBetweenThrowsExceptionIfInvalidEndIndexIsProvided() {
+        
+    }
+    
 }
 
 ?>
