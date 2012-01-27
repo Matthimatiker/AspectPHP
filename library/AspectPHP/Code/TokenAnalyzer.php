@@ -31,6 +31,58 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
     }
     
     /**
+     * Searches for the first token after $offset that meets the given requirements.
+     *
+     * See {@link findBetween()} for details about the search options.
+     *
+     * @param integer|string $type
+     * @param integer $offset
+     * @param array(integer|string) $stopAt
+     * @return integer
+     */
+    public function findNext($type, $offset, array $stopAt = array()) {
+        
+    }
+    
+    /**
+     * Searches for the first token before $offset that meets the given requirements.
+     *
+     * See {@link findBetween()} for details about the search options.
+     *
+     * @param integer|string $type
+     * @param integer $offset
+     * @param array(integer|string) $stopAt
+     * @return integer
+     */
+    public function findPrevious($type, $offset, array $stopAt = array()) {
+        
+    }
+    /**
+     * Searches between $start and $end for the given token type.
+     *
+     * The method returns -1 if the token was not found and the index
+     * of the result token otherwise.
+     *
+     * The given type can be a type constant (for example T_FUNCTION) or a
+     * token string (for example "{" or ";").
+     *
+     * If $start is greater than $end the search will be executed in descending
+     * order. Otherwise ascending order will be used.
+     *
+     * Optionally an array of stop types may be specified via $stopAt.
+     * If one of these types is found during the search then -1 will be returned.
+     *
+     * @param integer|string $type The search token.
+     * @param integer $start The start index.
+     * @param integer $end The end index.
+     * @param array(integer|string) $stopAt List of tokens that will stop the search process.
+     * @return integer The index of the result token or -1 if none was found.
+     */
+    public function findBetween($type, $start, $end, array $stopAt = array()) {
+        
+    }
+    
+    /**
      * Checks if the token with the given offset exists.
      *
      * @param integer $offset
