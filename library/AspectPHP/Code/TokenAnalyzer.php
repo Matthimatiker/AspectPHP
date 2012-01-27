@@ -72,6 +72,13 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
      * Optionally an array of stop types may be specified via $stopAt.
      * If one of these types is found during the search then -1 will be returned.
      *
+     * Example:
+     * <code>
+     * // Search the first 50 tokens for a "function" token. Stop if
+     * // a class declaration ("class") is encountered.
+     * $index = $analyzer->findBetween(T_FUNCTION, 0, 49, array(T_CLASS));
+     * </code>
+     *
      * @param integer|string $type The search token.
      * @param integer $start The start index.
      * @param integer $end The end index.
