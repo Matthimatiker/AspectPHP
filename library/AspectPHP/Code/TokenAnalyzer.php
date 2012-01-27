@@ -83,6 +83,17 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
     }
     
     /**
+     * Searches for the opening/closing brace that belongs to the brace at $index.
+     *
+     * @param integer $index The index of the brace token.
+     * @return integer The index of the matchimng brace or -1.
+     * @throws InvalidArgumentException If the provided index does not belong to a brace token.
+     */
+    public function findMatchingBrace($index) {
+        
+    }
+    
+    /**
      * Checks if the token with the given offset exists.
      *
      * @param integer $offset
