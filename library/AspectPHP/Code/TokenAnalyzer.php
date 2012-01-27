@@ -77,6 +77,9 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
      * // Search the first 50 tokens for a "function" token. Stop if
      * // a class declaration ("class") is encountered.
      * $index = $analyzer->findBetween(T_FUNCTION, 0, 49, array(T_CLASS));
+     * if ($index !== -1) {
+     *     $token = $analyzer[$index];
+     * }
      * </code>
      *
      * @param integer|string $type The search token.
@@ -93,8 +96,8 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
     /**
      * Searches for the opening/closing brace that belongs to the brace at $index.
      *
-     * @param integer $index The index of the brace token.
-     * @return integer The index of the matchimng brace or -1.
+     * @param integer $index Index of the brace token.
+     * @return integer Index of the matching brace or -1.
      * @throws InvalidArgumentException If the provided index does not belong to a brace token.
      */
     public function findMatchingBrace($index) {
