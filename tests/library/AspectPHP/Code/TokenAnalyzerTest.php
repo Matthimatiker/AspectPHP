@@ -117,6 +117,10 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
         
     }
     
+    public function testFindNextThrowsExceptionIfInvalidIndexIsProvided() {
+        
+    }
+    
     public function testFindPreviousReturnsCorrectValue() {
         
     }
@@ -130,6 +134,30 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testFindPreviousReturnsCorrectValueIfStopTokenIsEncountered() {
+        
+    }
+    
+    public function testFindPreviousThrowsExceptionIfInvalidIndexIsProvided() {
+        
+    }
+    
+    public function testFindMatchingBraceReturnsCorrectIndexIfBracesAreNotNested() {
+        
+    }
+    
+    public function testFindMatchingBraceReturnsCorrectIndexIfBracesAreNested() {
+        
+    }
+    
+    public function testFindMatchingBraceReturnsCorrectClosingBrace() {
+        
+    }
+    
+    public function testFindMatchingBraceThrowsExceptionIfNoBraceIndexIsProvided() {
+        
+    }
+    
+    public function testFindMatchingBraceThrowsExceptionIfNoMatchingBraceWasFound() {
         
     }
     
