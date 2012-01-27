@@ -101,6 +101,38 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
         
     }
     
+    public function testFindNextReturnsCorrectValue() {
+        
+    }
+    
+    public function testFindNextReturnsCorrectValueIfTokenWasNotFound() {
+        
+    }
+    
+    public function testFindNextDoesNotIncludeStartIndex() {
+        
+    }
+    
+    public function testFindNextReturnsCorrectValueIfStopTokenIsEncountered() {
+        
+    }
+    
+    public function testFindPreviousReturnsCorrectValue() {
+        
+    }
+    
+    public function testFindPreviousReturnsCorrectValueIfTokenWasNotFound() {
+        
+    }
+    
+    public function testFindPreviousDoesNotIncludeStartIndex() {
+        
+    }
+    
+    public function testFindPreviousReturnsCorrectValueIfStopTokenIsEncountered() {
+        
+    }
+    
 }
 
 ?>
