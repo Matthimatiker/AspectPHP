@@ -153,6 +153,10 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
         
     }
     
+    public function testFindMatchingBraceSupportsParentheses() {
+        
+    }
+    
     public function testFindMatchingBraceThrowsExceptionIfNoBraceIndexIsProvided() {
         
     }
