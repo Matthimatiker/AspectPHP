@@ -90,6 +90,15 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
         
     }
     
+    /**
+     * Returns the source code that is analyzed.
+     *
+     * @return string
+     */
+    public function __toString() {
+        
+    }
+    
 }
 
 ?>
