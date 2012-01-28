@@ -105,7 +105,13 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
         
     }
     
-    // TODO: token not in range
+    /**
+     * Ensures that findBetween() returns -1 if the search token not in the defined
+     * index range.
+     */
+    public function testFindBetweenReturnsCorrectValueIfSearchTokenIsNotInRange() {
+        
+    }
     
     /**
      * Checks if findBetween() returns the correct token index.
@@ -251,7 +257,13 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
         
     }
     
-    // TODO: opening brace
+    /**
+     * Checks if findMatchingBrace() returns the correct opening brace if the index
+     * of a closing brace is provided.
+     */
+    public function testFindMatchingBraceReturnsCorrectOpeningBrace() {
+        
+    }
     
     /**
      * Checks if findMatchingBrace() supports parentheses ("(" and ")").
@@ -260,7 +272,13 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
         
     }
     
-    // TODO: invalid index
+    /**
+     * Ensures that findMatchingBrace() throws an exception if an invalid index
+     * is provided.
+     */
+    public function testFindMatchingBraceThrowsExceptionIfInvalidIndexIsProvided() {
+        
+    }
     
     /**
      * Ensures that findMatchingBrace() throws an exception if the provided index
