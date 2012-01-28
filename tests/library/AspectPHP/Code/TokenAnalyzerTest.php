@@ -111,7 +111,9 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
      * Ensures that the magic __toString() method returns the original source code.
      */
     public function testToStringReturnsOriginalSourceCode() {
-        
+        $source = file_get_contents(__FILE__);
+        $analyzer = $this->create($source);
+        $this->assertEquals($source, (string)$analyzer);
     }
     
     /**
@@ -316,10 +318,15 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
     /**
      * Creates an analyzer that works with the provided tokens.
      *
-     * @param array(string|array) $tokens
+     * @param array(string|array)|string $tokensOrSource
      * @return AspectPHP_Code_TokenAnalyzer
      */
-    protected function create(array $tokens) {
+    protected function create($tokensOrSource) {
+        if( is_array($tokensOrSource) ) {
+            $tokens = $tokensOrSource;
+        } else {
+            $tokens = token_get_all($tokensOrSource);
+        }
         return new AspectPHP_Code_TokenAnalyzer($tokens);
     }
     
