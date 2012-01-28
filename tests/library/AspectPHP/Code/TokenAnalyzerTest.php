@@ -32,63 +32,79 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
      * Checks if count() returns the number of tokens.
      */
     public function testCountReturnsNumberOfTokens() {
-        
+        $analyzer = $this->create(array('1', '2'));
+        $this->assertEquals(2, count($analyzer));
     }
     
     /**
      * Enures that offsetExists() returns false if the given token index does not exist.
      */
     public function testOffsetExistsReturnsFalseIfIndexDoesNotExist() {
-        
+        $analyzer = $this->create(array('1', '2'));
+        $this->assertFalse(isset($analyzer[2]));
     }
     
     /**
      * Ensures that offsetExists() returns true if the provided token index exists.
      */
     public function testOffsetExistsReturnsTrueIfExistingIndexIsProvided() {
-        
+        $analyzer = $this->create(array('1', '2'));
+        $this->assertTrue(isset($analyzer[1]));
     }
     
     /**
      * Ensures that offsetGet() throws an exception if the given index does not exist.
      */
     public function testOffsetGetThrowsExceptionIfIndexDoesNotExist() {
-        
+        $this->setExpectedException('InvalidArgumentException');
+        $analyzer = $this->create(array('1', '2'));
+        $analyzer[2];
     }
     
     /**
      * Checks if offsetGet() returns the correct token.
      */
     public function testOffsetGetReturnsCorrectToken() {
-        
+        $analyzer = $this->create(array('1', '2'));
+        $this->assertEquals('1', $analyzer[0]);
     }
     
     /**
      * Ensures that offsetSet() throws an exception.
      */
     public function testOffsetSetThrowsException() {
-        
+        $this->setExpectedException('BadMethodCallException');
+        $analyzer = $this->create(array('1', '2'));
+        $analyzer[0] = '3';
     }
     
     /**
      * Ensures that offsetUnset() throws an exception.
      */
     public function testOffsetUnsetThrowsException() {
-        
+        $this->setExpectedException('BadMethodCallException');
+        $analyzer = $this->create(array('1', '2'));
+        unset($analyzer[0]);
     }
     
     /**
      * Checks if getIterator() returns an instance of Traversable.
      */
     public function testGetIteratorReturnsTraversable() {
-        
+        $analyzer = $this->create(array('1', '2'));
+        $iterator = $analyzer->getIterator();
+        $this->assertInstanceOf('Traversable', $iterator);
     }
     
     /**
      * Checks if the analyzer supports an iteration over the tokens.
      */
     public function testIteratingOverTokensIsPossible() {
-        
+        $tokens   = array('1', '2');
+        $analyzer = $this->create($tokens);
+        foreach( $analyzer as $token ) {
+            $this->assertContains($token, $tokens);
+        }
     }
     
     /**
@@ -295,6 +311,16 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
      */
     public function testFindMatchingBraceThrowsExceptionIfNoMatchingBraceWasFound() {
         
+    }
+    
+    /**
+     * Creates an analyzer that works with the provided tokens.
+     *
+     * @param array(string|array) $tokens
+     * @return AspectPHP_Code_TokenAnalyzer
+     */
+    protected function create(array $tokens) {
+        return new AspectPHP_Code_TokenAnalyzer($tokens);
     }
     
 }
