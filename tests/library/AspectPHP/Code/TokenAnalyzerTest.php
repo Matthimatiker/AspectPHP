@@ -373,6 +373,16 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
         return new AspectPHP_Code_TokenAnalyzer($tokens);
     }
     
+    /**
+     * Returns a token in array format.
+     *
+     * @param integer $type One of the T_* constants.
+     * @param string $value The string value.
+     */
+    protected function createToken($type, $value) {
+        return array($type, $value, 42);
+    }
+    
 }
 
 ?>
