@@ -328,7 +328,7 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
      */
     public function testFindPreviousDoesNotSearchTokensBeforeProvidedIndex() {
         $analyzer = $this->create(array('1', '2', '3'));
-        $this->assertEquals(-1, $analyzer->findNext('3', 1));
+        $this->assertEquals(-1, $analyzer->findPrevious('3', 1));
     }
     
     /**
@@ -336,7 +336,7 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
      */
     public function testFindPreviousReturnsIndexOfFirstMatch() {
         $analyzer = $this->create(array('2', '2', '1'));
-        $this->assertEquals(1, $analyzer->findNext('2', 2));
+        $this->assertEquals(1, $analyzer->findPrevious('2', 2));
     }
     
     /**
