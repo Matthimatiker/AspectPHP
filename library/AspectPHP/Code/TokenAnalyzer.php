@@ -22,6 +22,17 @@
 class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAggregate  {
     
     /**
+     * Contains opening braces as key and corresponding
+     * closing braces as value.
+     *
+     * @var array(string=>string)
+     */
+    protected static $braces = array(
+        '{' => '}',
+        '(' => ')'
+    );
+    
+    /**
      * The tokens that are analyzed.
      *
      * @var array(array(integer|string)|string)
@@ -193,11 +204,43 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
      * Searches for the opening/closing brace that belongs to the brace at $index.
      *
      * @param integer $index Index of the brace token.
-     * @return integer Index of the matching brace or -1.
+     * @return integer Index of the matching brace.
      * @throws InvalidArgumentException If the provided index does not belong to a brace token.
+     * @throws RuntimeException If no matching brace was found. It is assumed that the tokenized code is not valid.
      */
     public function findMatchingBrace($index) {
-        
+        $this->assertIsIndex($index);
+        if (!$this->isOneTypeOf($index, self::$braces) && !$this->isOneTypeOf($index, array_keys(self::$braces))) {
+            $message = 'Token at position ' . $index . ' does not contain a brace.';
+            throw new InvalidArgumentException($message);
+        }
+        $brace = $this->tokens[$index];
+        if( isset(self::$braces[$brace]) ) {
+            // Token contains an opening brace.
+            $correspondingBrace = self::$braces[$brace];
+            $stopIndex = count($this);
+            $step = 1;
+        } else {
+            // Token contains a closing brace.
+            $braces = array_flip(self::$braces);
+            $correspondingBrace = $braces[$brace];
+            $stopIndex = -1;
+            $step = -1;
+        }
+        $braceCount = 1;
+        for( $i = $index + $step; $i !== $stopIndex; $i += $step ) {
+            if( $this->isOfType($i, $brace) ) {
+                $braceCount++;
+            } elseif( $this->isOfType($i, $correspondingBrace) ) {
+                $braceCount--;
+                if( $braceCount === 0) {
+                    return $i;
+                }
+            }
+        }
+        $template = 'No matching brace found for "%s" at %s. Is the tokenized source code valid?';
+        $message  = sprintf($template, $brace, $index);
+        throw new RuntimeException($message);
     }
     
     /**
