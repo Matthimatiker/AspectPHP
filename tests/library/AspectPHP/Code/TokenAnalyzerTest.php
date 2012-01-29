@@ -264,8 +264,22 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
         $analyzer->findNext('5', -1);
     }
     
-    // TODO findNext() does not search before offset
-    // TODO findNext() first match
+    /**
+     * Ensures that findNext() does not search tokens before the provided
+     * index.
+     */
+    public function testFindNextDoesNotSearchTokensBeforeProvidedIndex() {
+        $analyzer = $this->create(array('1', '2', '3'));
+        $this->assertEquals(-1, $analyzer->findNext('1', 1));
+    }
+    
+    /**
+     * Checks if findNext() returns the index of the first match.
+     */
+    public function testFindNextReturnsIndexOfFirstMatch() {
+        $analyzer = $this->create(array('1', '2', '2'));
+        $this->assertEquals(1, $analyzer->findNext('2', 0));
+    }
     
     /**
      * Checks if findPrevious() returns the index of the result token.
@@ -308,8 +322,22 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
         $analyzer->findPrevious('2', 3);
     }
     
-    // TODO findPrevious() does not search after offset
-    // TODO findPrevious() first match
+	/**
+     * Ensures that findPrevious() does not search tokens after the provided
+     * index.
+     */
+    public function testFindPreviousDoesNotSearchTokensBeforeProvidedIndex() {
+        $analyzer = $this->create(array('1', '2', '3'));
+        $this->assertEquals(-1, $analyzer->findNext('3', 1));
+    }
+    
+    /**
+     * Checks if findPrevious() returns the index of the first match.
+     */
+    public function testFindPreviousReturnsIndexOfFirstMatch() {
+        $analyzer = $this->create(array('2', '2', '1'));
+        $this->assertEquals(1, $analyzer->findNext('2', 2));
+    }
     
     /**
      * Ensures that findMatchingBrace() returns the correct token index if the
