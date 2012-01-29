@@ -138,69 +138,6 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
     }
     
     /**
-     * Checks if the type of the token at position $index equals one
-     * of the types that were specified in $types.
-     *
-     * @param integer $index
-     * @param array(integer|string) $types
-     * @return boolean True if the token types matches one of the specified types, false otherwise.
-     */
-    protected function isOneTypeOf($index, array $types) {
-         foreach( $types as $type ) {
-             /* @var $type integer|string */
-             if( $this->isOfType($index, $type) ) {
-                 return true;
-             }
-         }
-         return false;
-    }
-    
-    /**
-     * Checks if the token at position $index is of type $type.
-     *
-     * @param integer $index
-     * @param integer|string $type
-     * @return boolean True if the token is of the specified type, false otherwise.
-     */
-    protected function isOfType($index, $type) {
-        if( is_int($type) ) {
-            // T_* constant provided as type.
-            if( !is_array($this->tokens[$index]) ) {
-                return false;
-            }
-            return $type === $this->tokens[$index][0];
-        }
-        // Character provided as type.
-        return $type === $this->tokens[$index];
-    }
-    
-    /**
-     * Asserts that $index is a valid token index.
-     *
-     * Throws an exception if an invalid index is provided.
-     *
-     * @param integer $index
-     * @throws InvalidArgumentException If an invalid index is passed.
-     */
-    protected function assertIsIndex($index) {
-        if( !$this->isIndex($index) ) {
-            $template = '"%s" is not a valid token position. Expected value between %s and %s.';
-            $message = sprintf($template, $index, 0, count($this) - 1);
-            throw new InvalidArgumentException($message);
-        }
-    }
-    
-    /**
-     * Checks if the provided integer is a valid token index.
-     *
-     * @param integer $index
-     * @return boolean True if $index is a valid token index, false otherwise.
-     */
-    protected function isIndex($index) {
-        return isset($this->tokens[$index]);
-    }
-    
-    /**
      * Searches for the opening/closing brace that belongs to the brace at $index.
      *
      * @param integer $index Index of the brace token.
@@ -320,6 +257,69 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
             }
         }
         return $sourceCode;
+    }
+    
+	/**
+     * Checks if the type of the token at position $index equals one
+     * of the types that were specified in $types.
+     *
+     * @param integer $index
+     * @param array(integer|string) $types
+     * @return boolean True if the token types matches one of the specified types, false otherwise.
+     */
+    protected function isOneTypeOf($index, array $types) {
+         foreach( $types as $type ) {
+             /* @var $type integer|string */
+             if( $this->isOfType($index, $type) ) {
+                 return true;
+             }
+         }
+         return false;
+    }
+    
+    /**
+     * Checks if the token at position $index is of type $type.
+     *
+     * @param integer $index
+     * @param integer|string $type
+     * @return boolean True if the token is of the specified type, false otherwise.
+     */
+    protected function isOfType($index, $type) {
+        if( is_int($type) ) {
+            // T_* constant provided as type.
+            if( !is_array($this->tokens[$index]) ) {
+                return false;
+            }
+            return $type === $this->tokens[$index][0];
+        }
+        // Character provided as type.
+        return $type === $this->tokens[$index];
+    }
+    
+    /**
+     * Asserts that $index is a valid token index.
+     *
+     * Throws an exception if an invalid index is provided.
+     *
+     * @param integer $index
+     * @throws InvalidArgumentException If an invalid index is passed.
+     */
+    protected function assertIsIndex($index) {
+        if( !$this->isIndex($index) ) {
+            $template = '"%s" is not a valid token position. Expected value between %s and %s.';
+            $message = sprintf($template, $index, 0, count($this) - 1);
+            throw new InvalidArgumentException($message);
+        }
+    }
+    
+    /**
+     * Checks if the provided integer is a valid token index.
+     *
+     * @param integer $index
+     * @return boolean True if $index is a valid token index, false otherwise.
+     */
+    protected function isIndex($index) {
+        return isset($this->tokens[$index]);
     }
     
 }
