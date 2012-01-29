@@ -287,7 +287,8 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
      * braces are not nested.
      */
     public function testFindMatchingBraceReturnsCorrectIndexIfBracesAreNotNested() {
-        
+         $analyzer = $this->create(array('{', '2', '}'));
+         $this->assertEquals(2, $analyzer->findMatchingBrace(0));
     }
     
     /**
@@ -295,15 +296,17 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
      * braces are nested.
      */
     public function testFindMatchingBraceReturnsCorrectIndexIfBracesAreNested() {
-        
+        $analyzer = $this->create(array('{', '{', '2', '}', '}'));
+        $this->assertEquals(4, $analyzer->findMatchingBrace(0));
     }
     
     /**
      * Checks if findMatchingBrace() distinguishes between the different brace
      * types and returns the correct closing brace.
      */
-    public function testFindMatchingBraceReturnsCorrectClosingBrace() {
-        
+    public function testFindMatchingBraceReturnsClosingBraceOfCorrectType() {
+        $analyzer = $this->create(array('{', '(', '2', ')', '}'));
+        $this->assertEquals(4, $analyzer->findMatchingBrace(0));
     }
     
     /**
@@ -311,14 +314,16 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
      * of a closing brace is provided.
      */
     public function testFindMatchingBraceReturnsCorrectOpeningBrace() {
-        
+        $analyzer = $this->create(array('{', '{', '2', '}', '}'));
+        $this->assertEquals(0, $analyzer->findMatchingBrace(4));
     }
     
     /**
      * Checks if findMatchingBrace() supports parentheses ("(" and ")").
      */
     public function testFindMatchingBraceSupportsParentheses() {
-        
+        $analyzer = $this->create(array('{', '(', '2', ')', '}'));
+        $this->assertEquals(3, $analyzer->findMatchingBrace(1));
     }
     
     /**
@@ -326,7 +331,9 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
      * is provided.
      */
     public function testFindMatchingBraceThrowsExceptionIfInvalidIndexIsProvided() {
-        
+        $this->setExpectedException('InvalidArgumentException');
+        $analyzer = $this->create(array('{', '2', '}'));
+        $analyzer->findMatchingBrace(-1);
     }
     
     /**
@@ -334,7 +341,9 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
      * does not belong to a brace token.
      */
     public function testFindMatchingBraceThrowsExceptionIfNoBraceIndexIsProvided() {
-        
+        $this->setExpectedException('InvalidArgumentException');
+        $analyzer = $this->create(array('{', '2', '}'));
+        $analyzer->findMatchingBrace(1);
     }
     
     /**
@@ -343,7 +352,10 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
      * No matching braces may be explained by incorrect source code.
      */
     public function testFindMatchingBraceThrowsExceptionIfNoMatchingBraceWasFound() {
-        
+        $this->setExpectedException('RuntimeException');
+        // Create analyzer with invalid brace configuration.
+        $analyzer = $this->create(array('{', '{', '}'));
+        $analyzer->findMatchingBrace(0);
     }
     
     /**
