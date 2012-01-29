@@ -279,6 +279,9 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
         $analyzer->findPrevious('2', 3);
     }
     
+    // TODO findPrevious() does not search after offset
+    // TODO findPrevious() first match
+    
     /**
      * Ensures that findMatchingBrace() returns the correct token index if the
      * braces are not nested.
