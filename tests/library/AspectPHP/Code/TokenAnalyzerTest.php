@@ -196,35 +196,41 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
      * Checks if findNext() returns the index of the result token.
      */
     public function testFindNextReturnsCorrectValue() {
-        
+        $analyzer = $this->create(array('1', '2', '3'));
+        $this->assertEquals(2, $analyzer->findNext('3', 0));
     }
     
     /**
      * Ensures that findNext() returns -1 if no token was found.
      */
     public function testFindNextReturnsCorrectValueIfTokenWasNotFound() {
-        
+        $analyzer = $this->create(array('1', '2', '3'));
+        $this->assertEquals(-1, $analyzer->findNext('4', 0));
     }
     
     /**
      * Ensures that findNext() does not search the provided start index.
      */
     public function testFindNextDoesNotIncludeStartIndex() {
-        
+        $analyzer = $this->create(array('1', '2', '3'));
+        $this->assertEquals(-1, $analyzer->findNext('1', 0));
     }
     
     /**
      * Ensures that findNext() returns -1 if a stop token is found during search.
      */
     public function testFindNextReturnsCorrectValueIfStopTokenIsEncountered() {
-        
+        $analyzer = $this->create(array('1', '2', '3'));
+        $this->assertEquals(-1, $analyzer->findNext('3', 0, array('2')));
     }
     
     /**
      * Ensures that findNext() throws an exception if an invalid index is provided.
      */
     public function testFindNextThrowsExceptionIfInvalidIndexIsProvided() {
-        
+        $this->setExpectedException('InvalidArgumentException');
+        $analyzer = $this->create(array('1', '2', '3'));
+        $analyzer->findNext('5', -1);
     }
     
     /**
