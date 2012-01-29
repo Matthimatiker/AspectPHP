@@ -22,12 +22,19 @@
 class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAggregate  {
     
     /**
+     * The tokens that are analyzed.
+     *
+     * @var array(array(integer|string)|string)
+     */
+    protected $tokens = null;
+    
+    /**
      * Creates an analyzer.
      *
      * @param array(array|string) $tokens The tokenized source code.
      */
     public function __construct(array $tokens) {
-        
+        $this->tokens = $tokens;
     }
     
     /**
@@ -111,7 +118,7 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
      * @return boolean
      */
     public function offsetExists($offset) {
-        
+        return isset($this->tokens[$offset]);
     }
     
     /**
@@ -122,7 +129,10 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
      * @throws InvalidArgumentException If the token with the provided offset does not exist.
      */
     public function offsetGet($offset) {
-        
+        if( !isset($this[$offset]) ) {
+            throw new InvalidArgumentException('"' . $offset . '" is not a valid offset.');
+        }
+        return $this->tokens[$offset];
     }
     
     /**
@@ -133,7 +143,7 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
      * @throws BadMethodCallException Always throws an exception.
      */
     public function offsetSet($offset, $value) {
-        
+        throw new BadMethodCallException('Modifying tokens is not supported.');
     }
     
     /**
@@ -143,7 +153,7 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
      * @throws BadMethodCallException Always throws an exception.
      */
     public function offsetUnset($offset) {
-        
+        throw new BadMethodCallException('Deleting tokens is not supported.');
     }
     
     /**
@@ -152,7 +162,7 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
      * @return integer
      */
     public function count() {
-        
+        return count($this->tokens);
     }
     
     /**
@@ -161,7 +171,7 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
      * @return Traversable
      */
     public function getIterator () {
-        
+        return new ArrayIterator($this->tokens);
     }
     
     /**
@@ -170,7 +180,16 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
      * @return string
      */
     public function __toString() {
-        
+        $sourceCode     = '';
+        $numberOfTokens = count($this);
+        for( $i = 0; $i <= $numberOfTokens - 1; $i++) {
+            if( is_string($this->tokens[$i]) ) {
+                $sourceCode .= $this->tokens[$i];
+            } else {
+                $sourceCode .= $this->tokens[$i][1];
+            }
+        }
+        return $sourceCode;
     }
     
 }
