@@ -192,6 +192,8 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
         $analyzer->findBetween('2', 0, 42);
     }
     
+    // TODO findBetween() works with array tokens
+    
     /**
      * Checks if findNext() returns the index of the result token.
      */
@@ -232,6 +234,8 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
         $analyzer = $this->create(array('1', '2', '3'));
         $analyzer->findNext('5', -1);
     }
+    
+    // TODO findNext() does not search before offset
     
     /**
      * Checks if findPrevious() returns the index of the result token.
