@@ -192,7 +192,36 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
         $analyzer->findBetween('2', 0, 42);
     }
     
-    // TODO findBetween() works with array tokens
+    /**
+     * Ensures that findBetween() is able to work with tokens in array format.
+     */
+    public function testFindBetweenWorksWithArrayTokens() {
+        $tokens = array(
+            $this->createToken(T_PUBLIC, 'public'),
+            $this->createToken(T_FUNCTION, 'function'),
+            $this->createToken(T_STRING, 'hello')
+        );
+        $analyzer = $this->create($tokens);
+        $this->assertEquals(1, $analyzer->findBetween(T_FUNCTION, 0, 2));
+    }
+    
+    /**
+     * Ensures that findBetween() returns the index of the first matching token when
+     * searching in ascending order.
+     */
+    public function testFindBetweenReturnsFirstMatchingTokenWhenSearchingInAscendingOrder() {
+        $analyzer = $this->create(array('1', '2', '2', '2', '1'));
+        $this->assertEquals(1, $analyzer->findBetween('2', 0, 4));
+    }
+    
+    /**
+     * Ensures that findBetween() returns the index of the first matching token when
+     * searching in descending order.
+     */
+    public function testFindBetweenReturnsFirstMatchingTokenWhenSearchingInDescendingOrder() {
+        $analyzer = $this->create(array('1', '2', '2', '2', '1'));
+        $this->assertEquals(3, $analyzer->findBetween('2', 4, 0));
+    }
     
     /**
      * Checks if findNext() returns the index of the result token.
