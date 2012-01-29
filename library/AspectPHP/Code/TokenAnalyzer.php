@@ -97,7 +97,94 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
      * @throws InvalidArgumentException If invalid $start or $end indexes are used.
      */
     public function findBetween($type, $start, $end, array $stopAt = array()) {
+        $this->assertIsIndex($start);
+        $this->assertIsIndex($end);
         
+        $step = 1;
+        if( $start > $end ) {
+            // Search in descending order.
+            $step = -1;
+        }
+        
+        for( $index = $start; ; $index += $step ) {
+            if( $this->isOfType($index, $type)) {
+                return $index;
+            }
+            if( $this->isOneTypeOf($index, $stopAt)) {
+                // Stop token encountered.
+                return -1;
+            }
+            if ($index === $end) {
+                // Last search index reached.
+                break;
+            }
+        }
+        
+        // Token not found in range.
+        return -1;
+    }
+    
+    /**
+     * Checks if the type of the token at position $index equals one
+     * of the types that were specified in $types.
+     *
+     * @param integer $index
+     * @param array(integer|string) $types
+     * @return boolean True if the token types matches one of the specified types, false otherwise.
+     */
+    protected function isOneTypeOf($index, array $types) {
+         foreach( $types as $type ) {
+             /* @var $type integer|string */
+             if( $this->isOfType($index, $type) ) {
+                 return true;
+             }
+         }
+         return false;
+    }
+    
+    /**
+     * Checks if the token at position $index is of type $type.
+     *
+     * @param integer $index
+     * @param integer|string $type
+     * @return boolean True if the token is of the specified type, false otherwise.
+     */
+    protected function isOfType($index, $type) {
+        if( is_int($type) ) {
+            // T_* constant provided as type.
+            if( !is_array($this->tokens[$index]) ) {
+                return false;
+            }
+            return $type === $this->tokens[$index][0];
+        }
+        // Character provided as type.
+        return $type === $this->tokens[$index];
+    }
+    
+    /**
+     * Asserts that $index is a valid token index.
+     *
+     * Throws an exception if an invalid index is provided.
+     *
+     * @param integer $index
+     * @throws InvalidArgumentException If an invalid index is passed.
+     */
+    protected function assertIsIndex($index) {
+        if( !$this->isIndex($index) ) {
+            $template = '"%s" is not a valid token position. Expected value between %s and %s.';
+            $message = sprintf($template, $index, 0, count($this) - 1);
+            throw new InvalidArgumentException($message);
+        }
+    }
+    
+    /**
+     * Checks if the provided integer is a valid token index.
+     *
+     * @param integer $index
+     * @return boolean True if $index is a valid token index, false otherwise.
+     */
+    protected function isIndex($index) {
+        return isset($this->tokens[$index]);
     }
     
     /**
@@ -118,7 +205,7 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
      * @return boolean
      */
     public function offsetExists($offset) {
-        return isset($this->tokens[$offset]);
+        return $this->isIndex($offset);
     }
     
     /**
@@ -129,9 +216,7 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
      * @throws InvalidArgumentException If the token with the provided offset does not exist.
      */
     public function offsetGet($offset) {
-        if( !isset($this[$offset]) ) {
-            throw new InvalidArgumentException('"' . $offset . '" is not a valid offset.');
-        }
+        $this->assertIsIndex($offset);
         return $this->tokens[$offset];
     }
     
