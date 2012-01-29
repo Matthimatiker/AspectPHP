@@ -189,7 +189,7 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
     public function testFindBetweenThrowsExceptionIfInvalidEndIndexIsProvided() {
         $this->setExpectedException('InvalidArgumentException');
         $analyzer = $this->create(array('1', '2', '3'));
-        $analyzer->findBetween('2', 0, 42);
+        $analyzer->findBetween('5', 0, 42);
     }
     
     /**
