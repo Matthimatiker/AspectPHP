@@ -120,7 +120,8 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
      * Ensures that findBetween() returns -1 if no token was found.
      */
     public function testFindBetweenReturnsCorrectValueIfTokenWasNotFound() {
-        
+        $analyzer = $this->create(array('1', '2', '3'));
+        $this->assertEquals(-1, $analyzer->findBetween('4', 0, 2));
     }
     
     /**
@@ -128,28 +129,32 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
      * index range.
      */
     public function testFindBetweenReturnsCorrectValueIfSearchTokenIsNotInRange() {
-        
+        $analyzer = $this->create(array('1', '2', '3'));
+        $this->assertEquals(-1, $analyzer->findBetween('3', 0, 1));
     }
     
     /**
      * Checks if findBetween() returns the correct token index.
      */
     public function testFindBetweenReturnsCorrectIndex() {
-        
+        $analyzer = $this->create(array('1', '2', '3'));
+        $this->assertEquals(1, $analyzer->findBetween('2', 0, 2));
     }
     
     /**
      * Checks if findBetween() searches the token at the start index.
      */
     public function testFindBetweenIncludesStartIndex() {
-        
+        $analyzer = $this->create(array('1', '2', '3'));
+        $this->assertEquals(0, $analyzer->findBetween('1', 0, 2));
     }
     
     /**
      * Checks if findBetween() searches the token at the end index.
      */
     public function testFindBetweenIncludesEndIndex() {
-        
+        $analyzer = $this->create(array('1', '2', '3'));
+        $this->assertEquals(2, $analyzer->findBetween('3', 0, 2));
     }
     
     /**
@@ -157,28 +162,34 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
      * greater than the end index.
      */
     public function testFindBetweenSearchesInDescendingOrderIfStartIsGreaterThanEnd() {
-        
+        $analyzer = $this->create(array('1', '2', '3', '4', '3', '2', '1'));
+        $this->assertEquals(2, $analyzer->findBetween('3', 3, 0));
     }
     
     /**
      * Ensures that findBetween() returns -1 if a stop token is encountered during search.
      */
     public function testFindBetweenReturnsCorrectValueIfStopTokenIsEncountered() {
-        
+        $analyzer = $this->create(array('1', '2', '3'));
+        $this->assertEquals(-1, $analyzer->findBetween('3', 0, 2, array('2')));
     }
     
     /**
      * Ensures that findBetween() throws an exception if an invalid start index is provided.
      */
     public function testFindBetweenThrowsExceptionIfInvalidStartIndexIsProvided() {
-        
+        $this->setExpectedException('InvalidArgumentException');
+        $analyzer = $this->create(array('1', '2', '3'));
+        $analyzer->findBetween('2', -1, 2);
     }
     
     /**
      * Ensures that findBetween() throws an exception if an invalid end index is provided.
      */
     public function testFindBetweenThrowsExceptionIfInvalidEndIndexIsProvided() {
-        
+        $this->setExpectedException('InvalidArgumentException');
+        $analyzer = $this->create(array('1', '2', '3'));
+        $analyzer->findBetween('2', 0, 42);
     }
     
     /**
