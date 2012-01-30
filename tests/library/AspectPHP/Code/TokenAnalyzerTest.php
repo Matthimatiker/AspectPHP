@@ -281,7 +281,13 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals(1, $analyzer->findNext('2', 0));
     }
     
-    // TODO next() accepts last index
+    /**
+     * Checks if findNext() is able to handle the last index.
+     */
+    public function testFindNextCanHandleLastIndex() {
+        $analyzer = $this->create(array('1', '2', '3'));
+        $this->assertEquals(-1, $analyzer->findNext('5', 2));
+    }
     
     /**
      * Checks if findPrevious() returns the index of the result token.
@@ -341,7 +347,13 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals(1, $analyzer->findPrevious('2', 2));
     }
     
-    // TODO previous() accepts first index
+	/**
+     * Checks if findPrevious() is able to handle the first index.
+     */
+    public function testFindPreviousCanHandleFirstIndex() {
+        $analyzer = $this->create(array('1', '2', '3'));
+        $this->assertEquals(-1, $analyzer->findPrevious('5', 0));
+    }
     
     /**
      * Ensures that findMatchingBrace() returns the correct token index if the
