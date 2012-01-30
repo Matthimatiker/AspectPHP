@@ -60,6 +60,9 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
      */
     public function findNext($type, $index, array $stopAt = array()) {
         $this->assertIsIndex($index);
+        if( $index === count($this) - 1 ) {
+            return -1;
+        }
         return $this->findBetween($type, $index + 1, count($this) - 1, $stopAt);
     }
     
@@ -75,6 +78,9 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
      */
     public function findPrevious($type, $index, array $stopAt = array()) {
         $this->assertIsIndex($index);
+        if( $index === 0 ) {
+            return -1;
+        }
         return $this->findBetween($type, $index - 1, 0, $stopAt);
     }
     /**
