@@ -147,7 +147,7 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
      */
     public function findMatchingBrace($index) {
         $this->assertIsIndex($index);
-        if (!$this->isOneTypeOf($index, self::$braces) && !$this->isOneTypeOf($index, array_keys(self::$braces))) {
+        if( !$this->isBrace($index) ) {
             $message = 'Token at position ' . $index . ' does not contain a brace.';
             throw new InvalidArgumentException($message);
         }
@@ -257,6 +257,36 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
             }
         }
         return $sourceCode;
+    }
+    
+    /**
+     * Checks if the token at position $index is a brace.
+     *
+     * @param integer $index
+     * @return boolean True if the token is a brace, false otherwise.
+     */
+    protected function isBrace($index) {
+        return $this->isOpeningBrace($index) || $this->isClosingBrace($index);
+    }
+    
+    /**
+     * Checks if the token at position $index is an opening brace.
+     *
+     * @param integer $index
+     * @return boolean True if the token is an opening brace, false otherwise.
+     */
+    protected function isOpeningBrace($index) {
+        return $this->isOneTypeOf($index, array_keys(self::$braces));
+    }
+    
+    /**
+     * Checks if the token at position $index is a closing brace.
+     *
+     * @param integer $index
+     * @return boolean True if the token is a closing brace, false otherwise.
+     */
+    protected function isClosingBrace($index) {
+        return $this->isOneTypeOf($index, self::$braces);
     }
     
 	/**
