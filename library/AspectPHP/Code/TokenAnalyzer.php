@@ -151,16 +151,14 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
             $message = 'Token at position ' . $index . ' does not contain a brace.';
             throw new InvalidArgumentException($message);
         }
-        $brace = $this->tokens[$index];
+        $brace              = $this->tokens[$index];
+        $correspondingBrace = $this->getCorrespondingBrace($brace);
         if( isset(self::$braces[$brace]) ) {
             // Token contains an opening brace.
-            $correspondingBrace = self::$braces[$brace];
             $stopIndex = count($this);
             $step = 1;
         } else {
             // Token contains a closing brace.
-            $braces = array_flip(self::$braces);
-            $correspondingBrace = $braces[$brace];
             $stopIndex = -1;
             $step = -1;
         }
@@ -287,6 +285,30 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
      */
     protected function isClosingBrace($index) {
         return $this->isOneTypeOf($index, self::$braces);
+    }
+    
+    /**
+     * Returns the opening/closing brace that belongs to the given brace.
+     *
+     * Example:
+     * <code>
+     * // Returns "}":
+     * $this->getCorrespondingBrace('{');
+     * // Returns "(":
+     * $this->getCorrespondingBrace(')');
+     * </code>
+     *
+     * @param string $brace
+     * @return string
+     */
+    protected function getCorrespondingBrace($brace) {
+        if( isset(self::$braces[$brace]) ) {
+            // Opening brace provided.
+            return self::$braces[$brace];
+        }
+        // Return the corresponding opening brace.
+        $braces = array_flip(self::$braces);
+        return $braces[$brace];
     }
     
 	/**
