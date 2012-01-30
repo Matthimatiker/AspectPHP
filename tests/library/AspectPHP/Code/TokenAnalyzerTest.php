@@ -432,6 +432,41 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
     }
     
     /**
+     * Ensures that the constructor throws an exception if an empty
+     * token list is provided.
+     */
+    public function testConstructorThrowsExceptionIfTokenListIsEmpty() {
+        $this->setExpectedException('InvalidArgumentException');
+        new AspectPHP_Code_TokenAnalyzer(array());
+    }
+    
+    /**
+     * Checks if the analyzer automatically tokenizes provided source code.
+     */
+    public function testAnalyzerAutomaticallyConvertsSourceCodeIntoTokens() {
+        $analyzer = new AspectPHP_Code_TokenAnalyzer('<?php ?>');
+        $this->assertEquals(2, count($analyzer));
+    }
+    
+    /**
+     * Ensures that the constructor throws an exception if empty source code
+     * is provided.
+     */
+    public function testConstructorThrowsExceptionIfEmptySourceStringIsProvided() {
+        $this->setExpectedException('InvalidArgumentException');
+        new AspectPHP_Code_TokenAnalyzer('');
+    }
+    
+    /**
+     * Ensures that the constructor throws an exception if an unsupported
+     * argument type is provided,
+     */
+    public function testConstructorThrowsExceptionIfInvalidArgumentIsProvided() {
+        $this->setExpectedException('InvalidArgumentException');
+        new AspectPHP_Code_TokenAnalyzer(new stdClass());
+    }
+    
+    /**
      * Creates an analyzer that works with the provided tokens.
      *
      * @param array(string|array)|string $tokensOrSource
