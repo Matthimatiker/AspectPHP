@@ -13,6 +13,9 @@
 /**
  * Analyzes tokenized source code.
  *
+ * The analyzer provides methods that simplify searching for specific tokens
+ * in the provided token list.
+ *
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Code
  * @copyright Matthias Molitor 2012
@@ -41,6 +44,19 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
     
     /**
      * Creates an analyzer.
+     *
+     * Create an analyzer from token list:
+     * <code>
+     * $code     = '<?php ?>';
+     * $tokens   = token_get_all($code);
+     * $analyzer = new AspectPHP_Code_TokenAnalyzer($tokens);
+     * </code>
+     *
+     * Create an analyzer from source code:
+     * <code>
+     * $code     = '<?php ?>';
+     * $analyzer = new AspectPHP_Code_TokenAnalyzer($code);
+     * </code>
      *
      * @param array(array|string)|string $tokensOrSource The tokenized source code or the source code itself.
      * @throws InvalidArgumentException If an empty token list is provided.
