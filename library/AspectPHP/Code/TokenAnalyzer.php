@@ -119,17 +119,14 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
             $step = -1;
         }
         
-        for( $index = $start; ; $index += $step ) {
+        $lastIndex = $end + $step;
+        for( $index = $start; $index !== $lastIndex; $index += $step ) {
             if( $this->isOfType($index, $type)) {
                 return $index;
             }
             if( $this->isOneTypeOf($index, $stopAt)) {
                 // Stop token encountered.
                 return -1;
-            }
-            if ($index === $end) {
-                // Last search index reached.
-                break;
             }
         }
         
@@ -156,11 +153,11 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
         if( isset(self::$braces[$brace]) ) {
             // Token contains an opening brace.
             $stopIndex = count($this);
-            $step = 1;
+            $step      = 1;
         } else {
             // Token contains a closing brace.
             $stopIndex = -1;
-            $step = -1;
+            $step      = -1;
         }
         $braceCount = 1;
         for( $i = $index + $step; $i !== $stopIndex; $i += $step ) {
