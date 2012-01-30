@@ -42,9 +42,22 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
     /**
      * Creates an analyzer.
      *
-     * @param array(array|string) $tokens The tokenized source code.
+     * @param array(array|string)|string $tokensOrSource The tokenized source code or the source code itself.
+     * @throws InvalidArgumentException If an empty token list is provided.
      */
-    public function __construct(array $tokens) {
+    public function __construct($tokensOrSource) {
+        $tokens = array();
+        if( is_string($tokensOrSource) ) {
+            // Source code provided.
+            $tokens = token_get_all($tokensOrSource);
+        } elseif( is_array($tokensOrSource) ) {
+            // Token array provided.
+            $tokens = $tokensOrSource;
+        }
+        if( count($tokens) === 0 ) {
+            $message = 'Expected non-empty token list or source code.';
+            throw new InvalidArgumentException($message);
+        }
         $this->tokens = $tokens;
     }
     
