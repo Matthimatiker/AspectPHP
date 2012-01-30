@@ -112,6 +112,7 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
         }
         return $this->findBetween($type, $index - 1, 0, $stopAt);
     }
+    
     /**
      * Searches between $start and $end (inclusively) for the given token type.
      *
