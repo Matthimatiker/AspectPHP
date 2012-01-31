@@ -250,7 +250,7 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * Checks if methods receive the prameters that were declared in the signature.
+     * Checks if methods receive the parameters that were declared in the signature.
      */
     public function testMethodsReceiveCorrectDeclaredParameters() {
         $received = $this->transformedInstance->parameters(42, 7);
