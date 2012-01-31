@@ -69,7 +69,7 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
     protected function setUp() {
         parent::setUp();
         $this->transformation = new AspectPHP_Transformation_JoinPoints();
-        $this->original       = file_get_contents(dirname(__FILE__) . '/TestData/JoinPointsCheck/Transformation.php');
+        $this->original       = $this->getContent('Transformation.php');
         $this->transformed    = $this->transformation->transform($this->original);
         if( !class_exists(self::TRANSFORMED_CLASS, false) ) {
             // We execute the transformed code to be able to use the reflection api for testing.
@@ -245,7 +245,7 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      * Ensures that code that does not belong to a class is not changed during transformation.
      */
     public function testTransformationDoesNotChangeCodeThatDoesNotBelongToClass() {
-        $code = file_get_contents(dirname(__FILE__) . '/TestData/JoinPointsCheck/NoClass.php');
+        $code = $this->getContent('NoClass.php');
         $this->assertEquals($code, $this->transformation->transform($code));
     }
     
@@ -412,6 +412,21 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
             $code = substr($code, strlen('<?php'));
         }
         eval($code);
+    }
+    
+    /**
+     * Returns the content of the test data file $file in TestData/JoinPointsCheck.
+     *
+     * Example:
+     * <code>
+     * $content = $this->getContent('Transformation.php');
+     * </code>
+     *
+     * @param string $file The file name.
+     * @return string
+     */
+    protected function getContent($file) {
+        return file_get_contents(dirname(__FILE__) . '/TestData/JoinPointsCheck/' . $file);
     }
     
 }
