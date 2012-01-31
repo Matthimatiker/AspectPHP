@@ -299,7 +299,9 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      * </code>
      */
     public function testTransformationWorksWithMethodsWhoseVisibilityIsNotDeclaredExplicitly() {
-        $this->markTestSkipped('Not implemented yet.');
+        $this->setExpectedException(null);
+        $source = $this->getContent('NoVisibility.php');
+        $this->transformation->transform($source);
     }
     
     /**
@@ -307,21 +309,33 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      * not have any comment.
      */
     public function testTransformationWorksEvenIfCodeDoesNotHaveAnyComment() {
-        $this->markTestSkipped('Not implemented yet.');
+        $this->setExpectedException(null);
+        $source      = $this->getContent('NoDocComment.php');
+        $transformed = $this->transformation->transform($source);
+        $this->execute($transformed);
+        $reflection = new ReflectionMethod('JoinPointsCheck_NoDocComment', 'undocumentedMethod');
+        $this->assertFalse($reflection->getDocComment());
     }
     
     /**
      * Ensures that the transformation does not change interface declarations.
      */
     public function testTransformationDoesNotChangeInterfaces() {
-        $this->markTestSkipped('Not implemented yet.');
+        $this->setExpectedException(null);
+        $source      = $this->getContent('WithInterfaces.php');
+        $transformed = $this->transformation->transform($source);
+        $this->execute($transformed);
+        $reflection = new ReflectionClass('JoinPointsCheck_WithInterfaces');
+        $this->assertContains('Countable', $reflection->getInterfaceNames());
     }
     
     /**
      * Checks if the transformation can handle abstract methods.
      */
     public function testTransformationHandlesAbstractMethods() {
-        $this->markTestSkipped('Not implemented yet.');
+        $this->setExpectedException(null);
+        $source = $this->getContent('AbstractMethod.php');
+        $this->transformation->transform($source);
     }
     
     /**
@@ -405,6 +419,7 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      * Executes the given source code.
      *
      * @param string $code
+     * @return false
      */
     protected function execute($code) {
         // Remove opening tag as eval does not accept it.
