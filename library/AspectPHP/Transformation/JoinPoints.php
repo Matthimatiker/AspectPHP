@@ -78,7 +78,6 @@ class AspectPHP_Transformation_JoinPoints {
             $this->tokens[$visibility][0] = T_PRIVATE;
             $this->tokens[$visibility][1] = 'private';
             
-            
             // Replace __METHOD__ constants.
             $methodConstants = $this->findAll(T_METHOD_C, $index);
             foreach( $methodConstants as $constantIndex ) {
