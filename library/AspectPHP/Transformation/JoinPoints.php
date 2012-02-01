@@ -46,8 +46,6 @@ class AspectPHP_Transformation_JoinPoints {
         $this->tokens    = token_get_all($source);
         $this->analyzer  = new AspectPHP_Code_TokenAnalyzer($this->tokens);
         $injectionPoints = array();
-        $classToken      = -1;
-        $originalName    = null;
         
         $classToken = $this->analyzer->findNext(T_CLASS, 0);
         if( $classToken === -1 ) {
