@@ -72,8 +72,9 @@ class AspectPHP_Transformation_JoinPoints {
             
             $injectionPoints[] = $this->buildInjectionPoint($signature, $newName, $context);
             
-            // Rename the original method and reduce the visibility.
+            // Rename the original method...
             $this->tokens[$name][1]       = $newName;
+            // ... and reduce its visibility.
             $this->tokens[$visibility][0] = T_PRIVATE;
             $this->tokens[$visibility][1] = 'private';
             
