@@ -57,9 +57,12 @@ class AspectPHP_Transformation_JoinPoints {
         $index = $classToken;
         while( ($index = $this->analyzer->findNext(T_FUNCTION, $index)) !== -1 ) {
             // We found a "function" keyword at position $index.
-            
+            $bodyStart = $this->findBody($index);
+            if( $bodyStart === -1 ) {
+                // No body, might be an abstract method.
+                continue;
+            }
             $docComment   = $this->findDocBlock($index);
-            $bodyStart    = $this->findBody($index);
             $visibility   = $this->findMethodVisibility($index);
             $name         = $this->findMethodName($index);
             $originalName = $this->tokens[$name][1];
