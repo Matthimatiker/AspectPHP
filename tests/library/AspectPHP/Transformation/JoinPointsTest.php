@@ -300,8 +300,9 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      */
     public function testTransformationWorksWithMethodsWhoseVisibilityIsNotDeclaredExplicitly() {
         $this->setExpectedException(null);
-        $source = $this->getContent('NoVisibility.php');
-        $this->transformation->transform($source);
+        $source      = $this->getContent('NoVisibility.php');
+        $transformed = $this->transformation->transform($source);
+        $this->execute($transformed);
     }
     
     /**
@@ -334,8 +335,9 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      */
     public function testTransformationHandlesAbstractMethods() {
         $this->setExpectedException(null);
-        $source = $this->getContent('AbstractMethod.php');
-        $this->transformation->transform($source);
+        $source      = $this->getContent('AbstractMethod.php');
+        $transformed = $this->transformation->transform($source);
+        $this->execute($transformed);
     }
     
     /**
