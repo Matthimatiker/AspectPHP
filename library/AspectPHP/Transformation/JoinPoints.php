@@ -75,14 +75,19 @@ class AspectPHP_Transformation_JoinPoints {
             $this->tokens[$visibility][1] = 'private';
             
             
-//            // Replace __METHOD__ constant.
-//            $this->tokens[$index][0] = T_STRING;
-//            $this->tokens[$index][1] = "__CLASS__ . '::{$originalName}'";
-//
-//
-//            // Replace __FUNCTION__ constant.
-//            $this->tokens[$index][0] = T_STRING;
-//            $this->tokens[$index][1] = "'{$originalName}'";
+            // Replace __METHOD__ constants.
+            $methodConstants = $this->findAll(T_METHOD_C, $index);
+            foreach( $methodConstants as $constantIndex ) {
+                $this->tokens[$constantIndex][0] = T_STRING;
+                $this->tokens[$constantIndex][1] = "__CLASS__ . '::{$originalName}'";
+            }
+
+            // Replace __FUNCTION__ constants.
+            $functionConstants = $this->findAll(T_FUNC_C, $index);
+            foreach( $functionConstants as $constantIndex ) {
+                $this->tokens[$constantIndex][0] = T_STRING;
+                $this->tokens[$constantIndex][1] = "'{$originalName}'";
+            }
         }
         
         $body = $this->findBody($classToken);
@@ -94,6 +99,29 @@ class AspectPHP_Transformation_JoinPoints {
         $source = $this->between(0, $end - 1) . $injectedCode . $this->between($end, count($this->tokens) - 1);
             
         return $source;
+    }
+    
+    /**
+     * Finds all tokens of the given type in the body of the provided function.
+     *
+     * @param integer|string $type
+     * @param integer $functionIndex
+     * @return array(integer) The indexes of the matches.
+     */
+    protected function findAll($type, $functionIndex) {
+        $matches = array();
+        $start   = $this->findBody($functionIndex);
+        $end     = $this->analyzer->findMatchingBrace($start);
+        while($start < $end) {
+            $index = $this->analyzer->findBetween($type, $start, $end);
+            if( $index === -1 ) {
+                // No token found.
+                break;
+            }
+            $matches[] = $index;
+            $start = $index + 1;
+        }
+        return $matches;
     }
     
     /**
