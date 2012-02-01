@@ -100,7 +100,7 @@ class AspectPHP_Transformation_JoinPoints {
         // Inject new methods at the end of the class body.
         $injectedCode = implode(PHP_EOL, $injectionPoints);
         $source = $this->between(0, $end - 1) . $injectedCode . $this->between($end, count($this->tokens) - 1);
-            
+        
         return $source;
     }
     
