@@ -29,6 +29,13 @@ class AspectPHP_Transformation_JoinPoints {
     protected $tokens = array();
     
     /**
+     * The analyzer that is currently used to inspect the tokens.
+     *
+     * @var AspectPHP_Code_TokenAnalyzer
+     */
+    protected $analyzer = null;
+    
+    /**
      * Transforms the source code.
      *
      * @param string $source
@@ -37,52 +44,66 @@ class AspectPHP_Transformation_JoinPoints {
     public function transform($source) {
         // TODO: extract token analyzer class
         $this->tokens    = token_get_all($source);
+        $this->analyzer  = new AspectPHP_Code_TokenAnalyzer($this->tokens);
         $injectionPoints = array();
         $classToken      = -1;
         $originalName    = null;
-        foreach( $this->tokens as $index => $token ) {
-            /* @var array(integer=>string|integer)|string */
-            if( is_string($token) ) {
-                continue;
-            }
-            if( $token[0] === T_CLASS ) {
-                $classToken = $index;
-            } elseif( $classToken !== -1 && $token[0] === T_FUNCTION ) {
-                $docComment   = $this->findDocBlock($index);
-                $bodyStart    = $this->findBody($index);
-                $visibility   = $this->findMethodVisibility($index);
-                $name         = $this->findMethodName($index);
-                $originalName = $this->tokens[$name][1];
-                $newName      = '_aspectPHP' . $originalName;
-                $context      = ($this->findBetween($docComment, $bodyStart, T_STATIC) === -1) ? '$this' : '__CLASS__';
-                $signature    = $this->between($docComment, $bodyStart - 1);
-                
-                $injectionPoints[] = $this->buildInjectionPoint($signature, $newName, $context);
-                
-                // Rename the original method and reduce the visibility.
-                $this->tokens[$name][1]       = $newName;
-                $this->tokens[$visibility][0] = T_PRIVATE;
-                $this->tokens[$visibility][1] = 'private';
-            } elseif ($originalName !== null && $token[0] === T_METHOD_C) {
-                // Replace __METHOD__ constant.
-                $this->tokens[$index][0] = T_STRING;
-                $this->tokens[$index][1] = "__CLASS__ . '::{$originalName}'";
-            } elseif ($originalName !== null && $token[0] === T_FUNC_C) {
-                // Replace __FUNCTION__ constant.
-                $this->tokens[$index][0] = T_STRING;
-                $this->tokens[$index][1] = "'{$originalName}'";
-            }
+        
+        $classToken = $this->analyzer->findNext(T_CLASS, 0);
+        if( $classToken === -1 ) {
+            // No class found.
+            return $source;
         }
-        if( $classToken !== -1 ) {
-            $body = $this->findBody($classToken);
-            $end  = $this->findClosingBrace($body);
-            // Inject method that handles method calls.
-            $injectionPoints[] = $this->getCode('_aspectPHPInternalHandleCall');
-            // Inject new methods at the end of the class body.
-            $injectedCode = implode(PHP_EOL, $injectionPoints);
-            $source = $this->between(0, $end - 1) . $injectedCode . $this->between($end, count($this->tokens) - 1);
+        $index = $classToken;
+        while( ($index = $this->analyzer->findNext(T_FUNCTION, $index)) !== -1 ) {
+            // We found a "function" keyword at position $index.
+            
+            $docComment   = $this->findDocBlock($index);
+            $bodyStart    = $this->findBody($index);
+            $visibility   = $this->findMethodVisibility($index);
+            $name         = $this->findMethodName($index);
+            $originalName = $this->tokens[$name][1];
+            $newName      = '_aspectPHP' . $originalName;
+            $context      = ($this->isStatic($index)) ? '__CLASS__' : '$this';
+            $signature    = $this->between($docComment, $bodyStart - 1);
+            
+            $injectionPoints[] = $this->buildInjectionPoint($signature, $newName, $context);
+            
+            // Rename the original method and reduce the visibility.
+            $this->tokens[$name][1]       = $newName;
+            $this->tokens[$visibility][0] = T_PRIVATE;
+            $this->tokens[$visibility][1] = 'private';
+            
+            
+//            // Replace __METHOD__ constant.
+//            $this->tokens[$index][0] = T_STRING;
+//            $this->tokens[$index][1] = "__CLASS__ . '::{$originalName}'";
+//
+//
+//            // Replace __FUNCTION__ constant.
+//            $this->tokens[$index][0] = T_STRING;
+//            $this->tokens[$index][1] = "'{$originalName}'";
         }
+        
+        $body = $this->findBody($classToken);
+        $end  = $this->analyzer->findMatchingBrace($body);
+        // Inject method that handles method calls.
+        $injectionPoints[] = $this->getCode('_aspectPHPInternalHandleCall');
+        // Inject new methods at the end of the class body.
+        $injectedCode = implode(PHP_EOL, $injectionPoints);
+        $source = $this->between(0, $end - 1) . $injectedCode . $this->between($end, count($this->tokens) - 1);
+            
         return $source;
+    }
+    
+    /**
+     * Checks if the function at position $functionIndex is static.
+     *
+     * @param integer $functionIndex
+     * @return boolean True if the function is static, false otherwise.
+     */
+    protected function isStatic($functionIndex) {
+        return $this->analyzer->findPrevious(T_STATIC, $functionIndex, array(T_DOC_COMMENT, ';', '{', '}')) !== -1;
     }
     
     /**
@@ -179,13 +200,7 @@ class AspectPHP_Transformation_JoinPoints {
      * @return integer
      */
     protected function findMethodName($functionIndex) {
-        $numberOfTokens = count($this->tokens);
-        for( $i = $functionIndex + 1; $numberOfTokens; $i++ ) {
-            if( is_array($this->tokens[$i]) && $this->tokens[$i][0] === T_STRING ) {
-                return $i;
-            }
-        }
-        return -1;
+        return $this->analyzer->findNext(T_STRING, $functionIndex);
     }
     
     /**
@@ -196,17 +211,10 @@ class AspectPHP_Transformation_JoinPoints {
      * @return integer
      */
     protected function findMethodVisibility($functionIndex) {
-        $visibilities = array(
-            T_PUBLIC,
-            T_PROTECTED,
-            T_PRIVATE
-        );
-        for( $i = $functionIndex - 1; $i >= 0; $i-- ) {
-            if( is_array($this->tokens[$i]) && in_array($this->tokens[$i][0], $visibilities) ) {
-                return $i;
-            }
-        }
-        return -1;
+        $public    = $this->analyzer->findPrevious(T_PUBLIC, $functionIndex, array('{', '}', ';'));
+        $protected = $this->analyzer->findPrevious(T_PROTECTED, $functionIndex, array('{', '}', ';'));
+        $private   = $this->analyzer->findPrevious(T_PRIVATE, $functionIndex, array('{', '}', ';'));
+        return max($public, $protected, $private);
     }
     
     /**
@@ -217,12 +225,7 @@ class AspectPHP_Transformation_JoinPoints {
      * @return integer
      */
     protected function findDocBlock($functionIndex) {
-        for( $i = $functionIndex - 1; $i >= 0; $i-- ) {
-            if( is_array($this->tokens[$i]) && $this->tokens[$i][0] === T_DOC_COMMENT ) {
-                return $i;
-            }
-        }
-        return -1;
+        return $this->analyzer->findPrevious(T_DOC_COMMENT, $functionIndex, array('{', '}', ';'));
     }
     
     /**
@@ -232,13 +235,7 @@ class AspectPHP_Transformation_JoinPoints {
      * @return integer
      */
     protected function findBody($index) {
-        $numberOfTokens = count($this->tokens);
-        for( $i = $index + 1; $numberOfTokens; $i++ ) {
-            if( is_string($this->tokens[$i]) && $this->tokens[$i] === '{' ) {
-                return $i;
-            }
-        }
-        return -1;
+        return $this->analyzer->findNext('{', $index, array(';'));
     }
     
     /**
