@@ -138,14 +138,18 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
      * }
      * </code>
      *
-     * @param integer|string $type The search token.
+     *
+     *
+     * @param integer|string|array(integer|string) $typeOrTypes The search token.
      * @param integer $start The start index.
      * @param integer $end The end index.
      * @param array(integer|string) $stopAt List of tokens that will stop the search process.
      * @return integer The index of the result token or -1 if none was found.
      * @throws InvalidArgumentException If invalid $start or $end indexes are used.
      */
-    public function findBetween($type, $start, $end, array $stopAt = array()) {
+    public function findBetween($typeOrTypes, $start, $end, array $stopAt = array()) {
+        // TODO add support for multiple types
+        $type = $typeOrTypes;
         $this->assertIsIndex($start);
         $this->assertIsIndex($end);
         
