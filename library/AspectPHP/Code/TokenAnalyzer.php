@@ -138,7 +138,12 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
      * }
      * </code>
      *
-     *
+     * Also a list of search token types can be provided. The analyzer will
+     * return the first token that matches any of the types:
+     * <code>
+     * // Searches for the index of the first T_FUNCTION or T_CLASS token.
+     * $index = $analyzer->findBetween(array(T_FUNCTION, T_CLASS), 0, 49);
+     * </code>
      *
      * @param integer|string|array(integer|string) $typeOrTypes The search token.
      * @param integer $start The start index.
