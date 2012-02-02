@@ -19,6 +19,12 @@
  */
 class StreamCheck_Io {
     
+    /**
+     * An example method.
+     *
+     * @param string $test
+     * @return string
+     */
     public function demo($test) {
         return $test;
     }
