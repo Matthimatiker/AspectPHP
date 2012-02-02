@@ -228,6 +228,10 @@ class AspectPHP_Stream {
             // So trying to modify these classes results in a fatal error (class not found).
             return $source;
         }
+        if( empty($source) ) {
+            // No content find, therefore compiling is not required.
+            return $source;
+        }
         return $this->compile($source);
     }
     
