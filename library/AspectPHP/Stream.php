@@ -228,10 +228,6 @@ class AspectPHP_Stream {
             // So trying to modify these classes results in a fatal error (class not found).
             return $source;
         }
-        if( empty($source) ) {
-            // No content find, therefore compiling is not required.
-            return $source;
-        }
         return $this->compile($source);
     }
     
@@ -242,6 +238,10 @@ class AspectPHP_Stream {
      * @return string
      */
     protected function compile($source) {
+        if( empty($source) ) {
+            // No content find, therefore compiling is not required.
+            return $source;
+        }
         $compile = new AspectPHP_Transformation_JoinPoints();
         $source  = $compile->transform($source);
         $replace = new AspectPHP_Transformation_Replace();

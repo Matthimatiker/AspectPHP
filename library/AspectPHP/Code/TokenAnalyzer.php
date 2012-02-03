@@ -175,7 +175,7 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
             }
         }
         
-        // Token not found in range.
+        // No token found within range.
         return -1;
     }
     
