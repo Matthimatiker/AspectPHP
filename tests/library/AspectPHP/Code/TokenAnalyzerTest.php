@@ -661,7 +661,9 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
      * the provided criteria.
      */
     public function testFindAllBetweenWorksIfLastTokenMatches() {
-        
+        $this->setExpectedException(null);
+        $analyzer = $this->create(array('1', '2', '3', '4', '5'));
+        $analyzer->findAllBetween('5', 0, 4);
     }
     
     /**
@@ -669,7 +671,8 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
      * and the first of the analyzed tokens (at position 0) matches the provided criteria.
      */
     public function testFindAllBetweenWorksIfFirstTokenMatchesAndSearchIsProcessedInDescendingOrder() {
-        
+        $analyzer = $this->create(array('1', '2', '3', '4', '5'));
+        $analyzer->findAllBetween('1', 4, 0);
     }
     
     /**
