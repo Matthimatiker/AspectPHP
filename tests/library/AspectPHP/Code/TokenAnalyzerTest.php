@@ -638,7 +638,7 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
      * start index.
      */
     public function testFindAllBetweenDoesNotSearchBeforeStartIndex() {
-        $analyzer = $this->create(array('1', '2', '3', '2', '1'));
+        $analyzer = $this->create(array('1', '2', '3', '4', '5'));
         $tokens   = $analyzer->findAllBetween('1', 1, 4);
         $this->assertInternalType('array', $tokens);
         $this->assertNotContains(0, $tokens);
@@ -649,8 +649,8 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
      * end index.
      */
     public function testFindAllBetweenDoesNotSearchAfterEndIndex() {
-        $analyzer = $this->create(array('1', '2', '3', '2', '1'));
-        $tokens   = $analyzer->findAllBetween('1', 0, 3);
+        $analyzer = $this->create(array('1', '2', '3', '4', '5'));
+        $tokens   = $analyzer->findAllBetween('5', 0, 3);
         $this->assertInternalType('array', $tokens);
         $this->assertNotContains(4, $tokens);
     }
