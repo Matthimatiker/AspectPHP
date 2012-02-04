@@ -198,7 +198,17 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
      */
     public function findAllBetween($typeOrTypes, $start, $end, array $stopAt = array())
     {
-        
+        $matches   = array();
+        $direction = ($start < $end) ? 1 : -1;
+        while( ($index = $this->findBetween($typeOrTypes, $start, $end, $stopAt)) !== -1 ) {
+            $matches[] = $index;
+            $start     = $index + $direction;
+            if( !$this->isIndex($start) ) {
+                // The calculated index is out of bounds, therefore stop search process.
+                break;
+            }
+        }
+        return $matches;
     }
     
     /**
