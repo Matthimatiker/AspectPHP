@@ -497,7 +497,9 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
      * is provided.
      */
     public function testFindAllBetweenThrowsExceptionIfInvalidStartIndexIsProvided() {
-        
+        $this->setExpectedException('InvalidArgumentException');
+        $analyzer = $this->create(array('1', '2', '3', '4', '5'));
+        $analyzer->findAllBetween('3', -1, 3);
     }
     
     /**
@@ -505,7 +507,9 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
      * is provided.
      */
     public function testFindAllBetweenThrowsExceptionIfInvalidEndIndexIsProvided() {
-        
+        $this->setExpectedException('InvalidArgumentException');
+        $analyzer = $this->create(array('1', '2', '3', '4', '5'));
+        $analyzer->findAllBetween('3', 0, 6);
     }
     
     /**
