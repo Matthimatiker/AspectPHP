@@ -509,28 +509,37 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
     public function testFindAllBetweenThrowsExceptionIfInvalidEndIndexIsProvided() {
         $this->setExpectedException('InvalidArgumentException');
         $analyzer = $this->create(array('1', '2', '3', '4', '5'));
-        $analyzer->findAllBetween('3', 0, 6);
+        $analyzer->findAllBetween('3', 0, 5);
     }
     
     /**
      * Checks if findAllBetween() returns an array.
      */
     public function testFindAllBetweenReturnsArray() {
-        
+        $analyzer = $this->create(array('1', '2', '3', '4', '5'));
+        $tokens = $analyzer->findAllBetween('3', 0, 4);
+        $this->assertInternalType('array', $tokens);
     }
     
     /**
      * Ensures that findAllBetween() returns an empty array if no token was found.
      */
     public function testFindAllBetweenReturnsEmptyArrayIfNoTokenWasFound() {
-        
+        $analyzer = $this->create(array('1', '2', '3', '4', '5'));
+        $tokens = $analyzer->findAllBetween('6', 0, 4);
+        $this->assertInternalType('array', $tokens);
+        $this->assertEquals(0, count($tokens));
     }
     
 	/**
      * Checks if findAllBetween() returns the correct token indexes.
      */
     public function testFindAllBetweenReturnsCorrectTokenIndexes() {
-        
+        $analyzer = $this->create(array('1', '2', '3', '2', '1'));
+        $tokens = $analyzer->findAllBetween('2', 0, 4);
+        $this->assertInternalType('array', $tokens);
+        $this->assertContains(1, $tokens);
+        $this->assertContains(3, $tokens);
     }
     
     /**
@@ -538,14 +547,24 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
      * the given token type.
      */
     public function testFindAllBetweenDoesNotReturnsIndexesOfTokensThatDoNotMatchTheGivenType() {
-        
+        $analyzer = $this->create(array('1', '2', '3', '2', '1'));
+        $tokens = $analyzer->findAllBetween('2', 0, 4);
+        $this->assertInternalType('array', $tokens);
+        $this->assertNotContains(0, $tokens);
+        $this->assertNotContains(2, $tokens);
+        $this->assertNotContains(4, $tokens);
     }
     
     /**
      * Ensures that findAllBetween() stops searching if a stop token is encountered.
      */
     public function testFindAllBetweenStopsSearchingIfStopTokenIsEncountered() {
-        
+        $analyzer = $this->create(array('1', '2', '3', '2', '1'));
+        $tokens = $analyzer->findAllBetween('2', 0, 4, array('3'));
+        $this->assertInternalType('array', $tokens);
+        $this->assertContains(1, $tokens);
+        // Stop token is encountered before token 3.
+        $this->assertNotContains(3, $tokens);
     }
     
     /**
