@@ -201,10 +201,12 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
         $matches   = array();
         $direction = ($start < $end) ? 1 : -1;
         $current   = $start;
+        $minIndex  = min($start, $end);
+        $maxIndex  = max($start, $end);
         while( ($index = $this->findBetween($typeOrTypes, $current, $end, $stopAt)) !== -1 ) {
             $matches[] = $index;
             $current   = $index + $direction;
-            if( $current > max($start, $end) || $current < min($start, $end) ) {
+            if( $current < $minIndex || $current > $maxIndex  ) {
                 // The calculated index is out of bounds, therefore stop search process.
                 break;
             }
