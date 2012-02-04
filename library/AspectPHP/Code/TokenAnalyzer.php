@@ -180,7 +180,15 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
     }
     
     /**
+     * Returns the indexes of all matching tokens between $start and $end.
      *
+     * Example:
+     * <code>
+     * // Returns the indexes of all "function" and "class" tokens
+     * // in the analyzed source code.
+     * $types = array(T_FUNCTION, T_CLASS);
+     * $tokens = $analyzer->findAllBetween($types, 0, count($analyzer) - 1);
+     * </code>
      *
      * @param integer|string|array(integer|string) $typeOrTypes The search token or tokens.
      * @param integer $start The start index.
