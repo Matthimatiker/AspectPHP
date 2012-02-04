@@ -82,17 +82,17 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
      *
      * See {@link findBetween()} for details about the search options.
      *
-     * @param integer|string $type
+     * @param integer|string|array(integer|string) $typeOrTypes
      * @param integer $index
      * @param array(integer|string) $stopAt
      * @return integer
      */
-    public function findNext($type, $index, array $stopAt = array()) {
+    public function findNext($typeOrTypes, $index, array $stopAt = array()) {
         $this->assertIsIndex($index);
         if( $index === count($this) - 1 ) {
             return -1;
         }
-        return $this->findBetween($type, $index + 1, count($this) - 1, $stopAt);
+        return $this->findBetween($typeOrTypes, $index + 1, count($this) - 1, $stopAt);
     }
     
     /**
@@ -100,17 +100,17 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
      *
      * See {@link findBetween()} for details about the search options.
      *
-     * @param integer|string $type
+     * @param integer|string|array(integer|string) $typeOrTypes
      * @param integer $index
      * @param array(integer|string) $stopAt
      * @return integer
      */
-    public function findPrevious($type, $index, array $stopAt = array()) {
+    public function findPrevious($typeOrTypes, $index, array $stopAt = array()) {
         $this->assertIsIndex($index);
         if( $index === 0 ) {
             return -1;
         }
-        return $this->findBetween($type, $index - 1, 0, $stopAt);
+        return $this->findBetween($typeOrTypes, $index - 1, 0, $stopAt);
     }
     
     /**
