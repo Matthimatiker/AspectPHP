@@ -113,16 +113,7 @@ class AspectPHP_Transformation_JoinPoints {
         $matches = array();
         $start   = $this->findBody($functionIndex);
         $end     = $this->analyzer->findMatchingBrace($start);
-        while($start < $end) {
-            $index = $this->analyzer->findBetween($type, $start, $end);
-            if( $index === -1 ) {
-                // No token found.
-                break;
-            }
-            $matches[] = $index;
-            $start = $index + 1;
-        }
-        return $matches;
+        return $this->analyzer->findAllBetween($type, $start, $end);
     }
     
     /**
@@ -240,10 +231,12 @@ class AspectPHP_Transformation_JoinPoints {
      * @return integer
      */
     protected function findMethodVisibility($functionIndex) {
-        $public    = $this->analyzer->findPrevious(T_PUBLIC, $functionIndex, array('{', '}', ';'));
-        $protected = $this->analyzer->findPrevious(T_PROTECTED, $functionIndex, array('{', '}', ';'));
-        $private   = $this->analyzer->findPrevious(T_PRIVATE, $functionIndex, array('{', '}', ';'));
-        return max($public, $protected, $private);
+        $visibilities = array(
+            T_PUBLIC,
+            T_PROTECTED,
+            T_PRIVATE
+        );
+        return $this->analyzer->findPrevious($visibilities, $functionIndex, array('{', '}', ';'));
     }
     
     /**
