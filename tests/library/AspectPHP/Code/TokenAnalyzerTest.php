@@ -223,6 +223,18 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals(3, $analyzer->findBetween('2', 4, 0));
     }
     
+    public function testFindBetweenSupportsSearchingForMultipleTypes() {
+        
+    }
+    
+    public function testFindBetweenReturnsFirstMatchingTokenIfMultipleTypesAreProvided() {
+        
+    }
+    
+    public function testFindBetweenReturnsFirstMatchingTokenWhenSearchingForMultipleTokensInDescendingOrder() {
+        
+    }
+    
     /**
      * Checks if findNext() returns the index of the result token.
      */
