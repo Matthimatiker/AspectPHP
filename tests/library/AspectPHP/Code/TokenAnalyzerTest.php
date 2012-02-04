@@ -655,10 +655,19 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
         $this->assertNotContains(4, $tokens);
     }
     
+    /**
+     * Ensures that findAllBetween() works if the search is processed in ascending order
+     * and the last of the analyzed tokens (at position count($analyzer) - 1) matches
+     * the provided criteria.
+     */
     public function testFindAllBetweenWorksIfLastTokenMatches() {
         
     }
     
+    /**
+     * Ensures that findAllBetween() works if the search is processed in descending order
+     * and the first of the analyzed tokens (at position 0) matches the provided criteria.
+     */
     public function testFindAllBetweenWorksIfFirstTokenMatchesAndSearchIsProcessedInDescendingOrder() {
         
     }
