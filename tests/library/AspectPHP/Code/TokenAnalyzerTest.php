@@ -530,6 +530,14 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
     }
     
     /**
+     * Ensures that findAllBetween() does not return indexes of tokens that do not match
+     * the given token type.
+     */
+    public function testFindAllBetweenDoesNotReturnsIndexesOfTokensThatDoNotMatchTheGivenType() {
+        
+    }
+    
+    /**
      * Ensures that findAllBetween() stops searching if a stop token is encountered.
      */
     public function testFindAllBetweenStopsSearchingIfStopTokenIsEncountered() {
