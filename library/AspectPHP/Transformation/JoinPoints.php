@@ -42,7 +42,6 @@ class AspectPHP_Transformation_JoinPoints {
      * @return string The transformed code.
      */
     public function transform($source) {
-        // TODO: extract token analyzer class
         $this->tokens    = token_get_all($source);
         $this->analyzer  = new AspectPHP_Code_TokenAnalyzer($this->tokens);
         $injectionPoints = array();
