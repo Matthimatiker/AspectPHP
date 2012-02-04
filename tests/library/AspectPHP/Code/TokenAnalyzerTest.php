@@ -676,6 +676,17 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
     }
     
     /**
+     * Ensures that findAllBetween() does not search tokens that are not in the specified
+     * range even if the token right before the end is matching.
+     */
+    public function testFindAllDoesNotSearchTokenAfterEndIndexEvenIfPreviousTokenMatches() {
+        $analyzer = $this->create(array('1', '2', '3', '4', '4'));
+        $tokens   = $analyzer->findAllBetween('4', 0, 4);
+        $this->assertInternalType('array', $tokens);
+        $this->assertNotContains(4, $tokens);
+    }
+    
+    /**
      * Creates an analyzer that works with the provided tokens.
      *
      * @param array(string|array)|string $tokensOrSource
