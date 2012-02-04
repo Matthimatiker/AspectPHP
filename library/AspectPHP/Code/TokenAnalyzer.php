@@ -153,8 +153,7 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
      * @throws InvalidArgumentException If invalid $start or $end indexes are used.
      */
     public function findBetween($typeOrTypes, $start, $end, array $stopAt = array()) {
-        // TODO add support for multiple types
-        $type = $typeOrTypes;
+        $types = is_array($typeOrTypes) ? $typeOrTypes : array($typeOrTypes);
         $this->assertIsIndex($start);
         $this->assertIsIndex($end);
         
@@ -166,7 +165,7 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
         
         $lastIndex = $end + $step;
         for( $index = $start; $index !== $lastIndex; $index += $step ) {
-            if( $this->isOfType($index, $type)) {
+            if( $this->isOneTypeOf($index, $types)) {
                 return $index;
             }
             if( $this->isOneTypeOf($index, $stopAt)) {
