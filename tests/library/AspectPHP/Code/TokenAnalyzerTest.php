@@ -492,6 +492,42 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
         new AspectPHP_Code_TokenAnalyzer(new stdClass());
     }
     
+    public function testFindAllBetweenThrowsExceptionIfInvalidStartIndexIsProvided() {
+        
+    }
+    
+    public function testFindAllBetweenThrowsExceptionIfInvalidEndIndexIsProvided() {
+        
+    }
+    
+    public function testFindAllBetweenReturnsArray() {
+        
+    }
+    
+    public function testFindAllBetweenReturnsEmptyArrayIfNoTokenWasFound() {
+        
+    }
+    
+    public function testFindAllBetweenStopsSearchingIfStopTokenIsEncountered() {
+        
+    }
+    
+    public function testFindAllBetweenReturnsIndexesInAscendingOrderIfStartIsLessThanEnd() {
+        
+    }
+    
+    public function testFindAllBetweenReturnsIndexesInDescendingOrderIfStartIsGreaterThanEnd() {
+        
+    }
+    
+    public function testFindAllBetweenReturnsCorrectIndexesWhenSearchingInDescendingOrderAndStopTokenIsEncountered() {
+        
+    }
+    
+    public function testFindAllBetweenSupportsSearchingForMultipleTokenTypes() {
+        
+    }
+    
     /**
      * Creates an analyzer that works with the provided tokens.
      *
