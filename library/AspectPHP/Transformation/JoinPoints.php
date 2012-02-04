@@ -187,31 +187,6 @@ class AspectPHP_Transformation_JoinPoints {
     }
     
     /**
-     * Searches between $start and $end for a token of the given type
-     * and returns its index.
-     *
-     * Returns -1 if the token was not found.
-     *
-     * Example:
-     * <code>
-     * $index = $this->findBetween(10, 25, T_PUBLIC);
-     * </code>
-     *
-     * @param integer $start
-     * @param integer $end
-     * @param integer $type
-     * @return integer
-     */
-    protected function findBetween($start, $end, $type) {
-        for( $i = $start; $i <= $end; $i++ ) {
-            if( is_array($this->tokens[$i]) && $this->tokens[$i][0] === $type) {
-                return $i;
-            }
-        }
-        return -1;
-    }
-    
-    /**
      * Returns the index of the token that contains the name of the
      * method that is declared by the given function token.
      *
@@ -257,37 +232,6 @@ class AspectPHP_Transformation_JoinPoints {
      */
     protected function findBody($index) {
         return $this->analyzer->findNext('{', $index, array(';'));
-    }
-    
-    /**
-     * Returns the index of the brace that close the brace at index $braceIndex.
-     *
-     * @param integer $braceIndex
-     */
-    protected function findClosingBrace($braceIndex) {
-        $closingBraces = array(
-            '(' => ')',
-            '{' => '}'
-        );
-        $openingBrace = $this->tokens[$braceIndex];
-        $closingBrace = $closingBraces[$openingBrace];
-        
-        $braceCount     = 1;
-        $numberOfTokens = count($this->tokens);
-        for( $i = $braceIndex + 1; $numberOfTokens; $i++ ) {
-            if( !is_string($this->tokens[$i]) ) {
-                continue;
-            }
-            if( $this->tokens[$i] === $openingBrace ) {
-                $braceCount++;
-            } elseif( $this->tokens[$i] === $closingBrace ) {
-                $braceCount--;
-                if ($braceCount === 0) {
-                    return $i;
-                }
-            }
-        }
-        return -1;
     }
 
     /**
