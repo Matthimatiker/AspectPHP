@@ -227,7 +227,8 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
      * Checks if findBetween() supports searching for multiple tokens.
      */
     public function testFindBetweenSupportsSearchingForMultipleTypes() {
-        
+        $analyzer = $this->create(array('1', '2', '2', '2', '3'));
+        $this->assertNotEquals(-1, $analyzer->findBetween(array('2', '3'), 0, 4));
     }
     
     /**
@@ -235,7 +236,8 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
      * provided types.
      */
     public function testFindBetweenReturnsFirstMatchingTokenIfMultipleTypesAreProvided() {
-        
+        $analyzer = $this->create(array('1', '2', '2', '2', '3'));
+        $this->assertEquals(1, $analyzer->findBetween(array('3', '2'), 0, 4));
     }
     
     /**
@@ -243,7 +245,8 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
      * in descending order.
      */
     public function testFindBetweenReturnsFirstMatchingTokenWhenSearchingForMultipleTokensInDescendingOrder() {
-        
+        $analyzer = $this->create(array('1', '2', '2', '2', '3'));
+        $this->assertEquals(3, $analyzer->findBetween(array('1', '2'), 4, 0));
     }
     
     /**
