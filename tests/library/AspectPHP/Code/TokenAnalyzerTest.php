@@ -655,6 +655,14 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
         $this->assertNotContains(4, $tokens);
     }
     
+    public function testFindAllBetweenWorksIfLastTokenMatches() {
+        
+    }
+    
+    public function testFindAllBetweenWorksIfFirstTokenMatchesAndSearchIsProcessedInDescendingOrder() {
+        
+    }
+    
     /**
      * Creates an analyzer that works with the provided tokens.
      *
