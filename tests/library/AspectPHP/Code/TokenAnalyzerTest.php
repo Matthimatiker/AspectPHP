@@ -598,6 +598,18 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
     }
     
     /**
+     * Ensures that findAllBetween() returns the correct indexes when searching in
+     * descending order.
+     */
+    public function testFindAllBetweenReturnsCorrectIndexesWhenSearchingInDescendingOrder() {
+        $analyzer = $this->create(array('1', '2', '3', '2', '1'));
+        $tokens   = $analyzer->findAllBetween('2', 4, 0);
+        $this->assertInternalType('array', $tokens);
+        $this->assertContains(1, $tokens);
+        $this->assertContains(3, $tokens);
+    }
+    
+    /**
      * Checks if findAllBetween() returns the correct token indexes when searching in descending order
      * and a stop token is encountered.
      */
