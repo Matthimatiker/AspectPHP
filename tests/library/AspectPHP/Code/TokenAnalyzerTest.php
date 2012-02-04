@@ -492,38 +492,77 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
         new AspectPHP_Code_TokenAnalyzer(new stdClass());
     }
     
+    /**
+     * Ensures that findAllBetween() throws an exception if an invalid start index
+     * is provided.
+     */
     public function testFindAllBetweenThrowsExceptionIfInvalidStartIndexIsProvided() {
         
     }
     
+    /**
+     * Ensures that findAllBetween() throws an exception if an invalid end index
+     * is provided.
+     */
     public function testFindAllBetweenThrowsExceptionIfInvalidEndIndexIsProvided() {
         
     }
     
+    /**
+     * Checks if findAllBetween() returns an array.
+     */
     public function testFindAllBetweenReturnsArray() {
         
     }
     
+    /**
+     * Ensures that findAllBetween() returns an empty array if no token was found.
+     */
     public function testFindAllBetweenReturnsEmptyArrayIfNoTokenWasFound() {
         
     }
     
+	/**
+     * Checks if findAllBetween() returns the correct token indexes.
+     */
+    public function testFindAllBetweenReturnsCorrectTokenIndexes() {
+        
+    }
+    
+    /**
+     * Ensures that findAllBetween() stops searching if a stop token is encountered.
+     */
     public function testFindAllBetweenStopsSearchingIfStopTokenIsEncountered() {
         
     }
     
+    /**
+     * Ensures that findAllBetween() returns the indexes in ascending order if start index
+     * is smaller than end index.
+     */
     public function testFindAllBetweenReturnsIndexesInAscendingOrderIfStartIsLessThanEnd() {
         
     }
     
+    /**
+     * Ensures that findAllBetween() returns the indexes in descending order if start index
+     * is greater than end index.
+     */
     public function testFindAllBetweenReturnsIndexesInDescendingOrderIfStartIsGreaterThanEnd() {
         
     }
     
+    /**
+     * Checks if findAllBetween() returns the correct token indexes when searching in descending order
+     * and a stop token is encountered.
+     */
     public function testFindAllBetweenReturnsCorrectIndexesWhenSearchingInDescendingOrderAndStopTokenIsEncountered() {
         
     }
     
+    /**
+     * Checks if findAllBetween() supports searching for multiple types.
+     */
     public function testFindAllBetweenSupportsSearchingForMultipleTokenTypes() {
         
     }
