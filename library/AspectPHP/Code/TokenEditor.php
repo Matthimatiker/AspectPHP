@@ -22,13 +22,24 @@
 class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
     
     /**
+     * A list of queued changes.
+     *
+     * Each change is represented by a stdClass object
+     * that contains at least the attributes "type" and
+     * "refIndex".
+     *
+     * @var array(integer=>stdClass)
+     */
+    protected $changes = array();
+    
+    /**
      * Replaces the token at position $index with $newToken.
      *
      * @param integer $index
      * @param string|array(integer|string) $newToken
      */
     public function replace($index, $newToken) {
-        
+        $change = new stdClass();
     }
     
     /**
@@ -54,13 +65,31 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
      * Commits all pending changes.
      */
     public function commit() {
-        
+        $this->applyChanges();
     }
     
     /**
      * Discards all queued changes.
      */
     public function discard() {
+        $this->changes = array();
+    }
+    
+    /**
+     * Applies all queued changes.
+     */
+    protected function applyChanges() {
+        
+    }
+    
+    /**
+     * Compares the given change sets by reference index.
+     *
+     * @param stdClass $left
+     * @param stdClass $right
+     * @return integer
+     */
+    private function compareByRefIndex(stdClass $left, stdClass $right) {
         
     }
     
