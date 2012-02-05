@@ -146,42 +146,61 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * is provided.
      */
     public function testInsertBeforeThrowsExceptionIfInvalidIndexIsProvided() {
-        
+        $this->setExpectedException('InvalidArgumentException');
+        $this->editor->insertBefore(-1, array('7'));
     }
     
     /**
      * Ensures that insertBefore() does not modify the tokens before commit() is called.
      */
     public function testInsertBeforeDoesNotChangeTokensIfChangesAreNotCommitted() {
-        
+        $numberOfTokens = count($this->editor);
+        $this->editor->insertBefore(1, array('7'));
+        $this->assertEquals($numberOfTokens, count($this->editor));
     }
     
     /**
      * Checks if insertBefore() adds the tokens after commit.
      */
     public function testInsertBeforeAddsTokensAfterCommit() {
-       
+        $numberOfTokens = count($this->editor);
+        $this->editor->insertBefore(0, array('0'));
+        $this->editor->commit();
+        $this->assertEquals($numberOfTokens + 1, count($this->editor));
     }
     
     /**
      * Checks if insertBefore() adds the tokens at the correct position.
      */
     public function testInsertBeforeAddsTokensAtCorrectPositionAfterCommit() {
-       
+       $this->editor->insertBefore(1, array('8', '9'));
+       $this->editor->commit();
+       $this->assertEquals('8', $this->editor[1]);
+       $this->assertEquals('9', $this->editor[2]);
     }
     
     /**
      * Ensures that discard() removes pending changes.
      */
     public function testDiscardRemovesPreviousChangeRequests() {
-        
+        $this->editor->replace(0, '9');
+        $this->editor->discard();
+        $this->editor->replace(1, '8');
+        $this->editor->commit();
+        // The first change was discarded...
+        $this->assertNotEquals('9', $this->editor[0]);
+        // ... but the second was committed.
+        $this->assertEquals('8', $this->editor[1]);
     }
     
     /**
      * Checks if the magic method __toString() returns the modified source code.
      */
     public function testToStringReturnsModifiedSourceCode() {
-        
+        $this->editor->replace(0, '0');
+        $this->editor->commit();
+        $source = (string)$this->editor;
+        $this->assertEquals('02345', $source);
     }
     
     /**
