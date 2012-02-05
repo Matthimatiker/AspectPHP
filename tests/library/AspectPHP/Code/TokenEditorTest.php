@@ -62,14 +62,16 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * Ensures that discard() does nothing if no pending changes are available.
      */
     public function testDiscardDoesNothingIfThereAreNoPendingChanges() {
-        
+        $this->setExpectedException(null);
+        $this->editor->discard();
     }
     
     /**
      * Ensures that commit() does nothing if no pending changes are available.
      */
     public function testCommitDoesNothingIfThereAreNoPendingChanges() {
-        
+        $this->setExpectedException(null);
+        $this->editor->commit();
     }
     
     /**
@@ -77,21 +79,25 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * is provided.
      */
     public function testReplaceThrowsExceptionIfInvalidIndexIsProvided() {
-        
+        $this->setExpectedException('InvalidArgumentException');
+        $this->editor->replace(-1, '7');
     }
     
     /**
      * Ensures that replace() does not modify the tokens before commit() is called.
      */
     public function testReplaceDoesNotChangeTokensIfChangesAreNotCommitted() {
-        
+        $this->editor->replace(0, '7');
+        $this->assertNotEquals('7', $this->editor[0]);
     }
     
     /**
      * Checks if replace() changes the token after commit.
      */
     public function testReplaceChangesTokenContentAfterCommit() {
-        
+        $this->editor->replace(0, '7');
+        $this->editor->commit();
+        $this->assertEquals('7', $this->editor[0]);
     }
     
     /**
@@ -99,21 +105,27 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * is provided.
      */
     public function testRemoveThrowsExceptionIfInvalidIndexIsProvided() {
-        
+        $this->setExpectedException('InvalidArgumentException');
+        $this->editor->remove(-1);
     }
     
     /**
      * Ensures that remove() does not modify the tokens before commit() is called.
      */
     public function testRemoveDoesNotChangeTokensIfChangesAreNotCommitted() {
-        
+        $numberOfTokens = count($this->editor);
+        $this->editor->remove(4);
+        $this->assertEquals($numberOfTokens, count($this->editor));
     }
     
     /**
      * Checks if remove() deletes the token after commit.
      */
     public function testRemoveDeletesTokenAfterCommit() {
-        
+        $numberOfTokens = count($this->editor);
+        $this->editor->remove(4);
+        $this->editor->commit();
+        $this->assertEquals($numberOfTokens - 1, count($this->editor));
     }
     
     /**
