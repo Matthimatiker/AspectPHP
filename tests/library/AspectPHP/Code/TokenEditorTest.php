@@ -215,6 +215,19 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('02cd34ab5', $source);
     }
     
+    /**
+     * Ensures that the editor does not apply the same changes
+     * twice.
+     */
+    public function testEditorDoesNotApplyChangesTwice() {
+        $this->editor->insertBefore(0, array('0'));
+        $this->editor->commit();
+        $source = (string)$this->editor;
+        // Calling commit() again should not modify the tokens.
+        $this->editor->commit();
+        $this->assertEquals($source, (string)$this->editor);
+    }
+    
 }
 
 ?>
