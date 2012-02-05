@@ -39,7 +39,9 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
      * @param string|array(integer|string) $newToken
      */
     public function replace($index, $newToken) {
-        $change = new stdClass();
+        $change = $this->createChange('replace', $index);
+        $change->newToken = $newToken;
+        $this->registerChange($change);
     }
     
     /**
@@ -80,6 +82,30 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
      */
     protected function applyChanges() {
         
+    }
+    
+    /**
+     * Creates a new change set.
+     *
+     * @param string $type The type of the change.
+     * @param integer $refIndex The reference index.
+     * @return stdClass
+     */
+    protected function createChange($type, $refIndex) {
+        $this->assertIsIndex($refIndex);
+        $change = new stdClass();
+        $change->type     = $type;
+        $change->refIndex = $refIndex;
+        return $change;
+    }
+    
+    /**
+     * Registers a change set that will be applied with the next commit.
+     *
+     * @param stdClass $change
+     */
+    protected function registerChange(stdClass $change) {
+        $this->changes[] = $change;
     }
     
     /**
