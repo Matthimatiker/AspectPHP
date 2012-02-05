@@ -50,7 +50,8 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
      * @param integer $index
      */
     public function remove($index) {
-        
+        $change = $this->createChange('remove', $index);
+        $this->registerChange($change);
     }
     
     /**
@@ -60,7 +61,9 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
      * @param array(string|array(integer|string)) $tokens A list of tokens.
      */
     public function insertBefore($index, array $tokens) {
-        
+        $change = $this->createChange('insertBefore', $index);
+        $change->tokens = $tokens;
+        $this->registerChange($change);
     }
     
     /**
