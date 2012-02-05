@@ -28,6 +28,58 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
  */
 class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
     
+    public function testDiscardDoesNothingIfThereAreNoPendingChanges() {
+        
+    }
+    
+    public function testCommitDoesNothingIfThereAreNoPendingChanges() {
+        
+    }
+    
+    public function testReplaceThrowsExceptionIfInvalidIndexIsProvided() {
+        
+    }
+    
+    public function testReplaceDoesNotChangeTokensIfChangesAreNotCommitted() {
+        
+    }
+    
+    public function testReplaceChangesTokenContentAfterCommit() {
+        
+    }
+    
+    public function testRemoveThrowsExceptionIfInvalidIndexIsProvided() {
+        
+    }
+    
+    public function testRemoveDoesNotChangeTokensIfChangesAreNotCommitted() {
+        
+    }
+    
+    public function testRemoveDeletesTokenAfterCommit() {
+        
+    }
+    
+    public function testInsertBeforeThrowsExceptionIfInvalidIndexIsProvided() {
+        
+    }
+    
+    public function testInsertBeforeDoesNotChangeTokensIfChangesAreNotCommitted() {
+        
+    }
+    
+    public function testInsertBeforeAddsTokensAfterCommit() {
+       
+    }
+    
+    public function testInsertBeforeAddsTokensAtCorrectPositionAfterCommit() {
+       
+    }
+    
+    public function testDiscardRemovesPreviousChangeRequests() {
+        
+    }
+    
 }
 
 ?>
