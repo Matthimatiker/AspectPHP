@@ -29,6 +29,36 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
 class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
     
     /**
+     * System under test.
+     *
+     * @var AspectPHP_Code_TokenEditor
+     */
+    protected $editor = null;
+    
+    /**
+     * See {@link PHPUnit_Framework_TestCase::setUp()} for details.
+     */
+    protected function setUp() {
+        parent::setUp();
+        $tokens = array(
+        	'1',
+        	'2',
+        	'3',
+        	'4',
+        	'5'
+        );
+        $this->editor = new AspectPHP_Code_TokenEditor($tokens);
+    }
+    
+    /**
+     * See {@link PHPUnit_Framework_TestCase::tearDown()} for details.
+     */
+    protected function tearDown() {
+        $this->editor = null;
+        parent::tearDown();
+    }
+    
+    /**
      * Ensures that discard() does nothing if no pending changes are available.
      */
     public function testDiscardDoesNothingIfThereAreNoPendingChanges() {
