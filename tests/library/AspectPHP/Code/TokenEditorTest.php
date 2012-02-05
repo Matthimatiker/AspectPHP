@@ -129,6 +129,19 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
     }
     
     /**
+     * Ensures that the editor rearranges the token indexes if a token in
+     * the middle of the source is removed.
+     */
+    public function testEditorRearrangesIndexesAfterRemovingToken() {
+        $this->editor->remove(2);
+        $this->editor->commit();
+        $this->assertEquals('1', $this->editor[0]);
+        $this->assertEquals('2', $this->editor[1]);
+        $this->assertEquals('4', $this->editor[2]);
+        $this->assertEquals('5', $this->editor[3]);
+    }
+    
+    /**
      * Ensures that insertBefore() throws an exception if an invalid index
      * is provided.
      */
