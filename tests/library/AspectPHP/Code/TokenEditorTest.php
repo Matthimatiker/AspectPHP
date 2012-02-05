@@ -207,7 +207,12 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * Checks if multiple pending changes are applied correctly.
      */
     public function testMultipleQueuedChangesAreAppliedCorrectly() {
-        
+        $this->editor->replace(0, '0');
+        $this->editor->insertBefore(4, array('a', 'b'));
+        $this->editor->insertBefore(2, array('c', 'd'));
+        $this->editor->commit();
+        $source = (string)$this->editor;
+        $this->assertEquals('02cd34ab5', $source);
     }
     
 }
