@@ -41,6 +41,16 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
     }
     
     /**
+     * Inserts the given token list before the given position.
+     *
+     * @param integer $index The referenced position.
+     * @param array(string|array(integer|string)) $tokens A list of tokens.
+     */
+    public function insertBefore($index, array $tokens) {
+        
+    }
+    
+    /**
      * Commits all pending changes.
      */
     public function commit() {
