@@ -428,8 +428,8 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
         if( strpos($code, '<?php') === 0 ) {
             $code = substr($code, strlen('<?php'));
         }
-        $result = @eval($code);
-        $this->assertTrue($result !== false, print_r(error_get_last(), true));
+        $result = eval($code);
+        $this->assertTrue($result !== false);
     }
     
     /**
