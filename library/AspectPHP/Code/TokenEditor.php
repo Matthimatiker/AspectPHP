@@ -35,7 +35,10 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
     /**
      * Replaces the token at position $index with $newToken.
      *
-     * @param integer $index
+     * If a list of indexes is provided then all tokens will be replaced
+     * by $newToken.
+     *
+     * @param integer|array(integer) $index
      * @param string|array(integer|string) $newToken
      */
     public function replace($index, $newToken) {
@@ -48,7 +51,10 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
     /**
      * Removes the token at position $index.
      *
-     * @param integer $index
+     * If a list of indexes is provided then all tokens
+     * will be removed.
+     *
+     * @param integer|array(integer) $index
      */
     public function remove($index) {
         $change = $this->createChange('remove', $index);
