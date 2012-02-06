@@ -70,23 +70,42 @@ class AspectPHP_Transformation_JoinPoints {
             $injectionPoints[] = $this->buildInjectionPoint($signature, $newName, $context);
             
             // Rename the original method...
-            $this->tokens[$name][1]       = $newName;
+            $nameToken    = $this->editor[$name];
+            $nameToken[1] = $newName;
+            $this->editor->replace($name, $nameToken);
+            
             // ... and reduce its visibility.
-            $this->tokens[$visibility][0] = T_PRIVATE;
-            $this->tokens[$visibility][1] = 'private';
+            if( $visibility === -1 ) {
+                // Visibility was not defined explicity.
+                $visibilityToken = array(
+                    T_PRIVATE,
+                    'private',
+                    0
+                );
+                $this->editor->insertBefore($index, array($visibility));
+            } else {
+                $visibilityToken = $this->editor[$visibility];
+                $visibilityToken[0] = T_PRIVATE;
+                $visibilityToken[1] = 'private';
+                $this->editor->replace($visibility, $visibilityToken);
+            }
             
             // Replace __METHOD__ constants.
             $methodConstants = $this->findAll(T_METHOD_C, $index);
             foreach( $methodConstants as $constantIndex ) {
-                $this->tokens[$constantIndex][0] = T_STRING;
-                $this->tokens[$constantIndex][1] = "__CLASS__ . '::{$originalName}'";
+                $constantToken    = $this->editor[$constantIndex];
+                $constantToken[0] = T_STRING;
+                $constantToken[1] = "__CLASS__ . '::{$originalName}'";
+                $this->editor->replace($constantIndex, $constantToken);
             }
 
             // Replace __FUNCTION__ constants.
             $functionConstants = $this->findAll(T_FUNC_C, $index);
             foreach( $functionConstants as $constantIndex ) {
-                $this->tokens[$constantIndex][0] = T_STRING;
-                $this->tokens[$constantIndex][1] = "'{$originalName}'";
+                $constantToken    = $this->editor[$constantIndex];
+                $constantToken[0] = T_STRING;
+                $constantToken[1] = "'{$originalName}'";
+                $this->editor->replace($constantIndex, $constantToken);
             }
         }
         
@@ -96,9 +115,11 @@ class AspectPHP_Transformation_JoinPoints {
         $injectionPoints[] = $this->getCode('_aspectPHPInternalHandleCall');
         // Inject new methods at the end of the class body.
         $injectedCode = implode(PHP_EOL, $injectionPoints);
-        $source = $this->between(0, $end - 1) . $injectedCode . $this->between($end, count($this->editor) - 1);
+        $this->editor->insertBefore($end, array($injectedCode));
         
-        return $source;
+        $this->editor->commit();
+        
+        return (string)$this->editor;
     }
     
     /**
@@ -177,10 +198,10 @@ class AspectPHP_Transformation_JoinPoints {
     protected function between($start, $end) {
         $code = '';
         for( $i = $start; $i <= $end; $i++) {
-            if( is_string($this->tokens[$i]) ) {
-                $code .= $this->tokens[$i];
+            if( is_string($this->editor[$i]) ) {
+                $code .= $this->editor[$i];
             } else {
-                $code .= $this->tokens[$i][1];
+                $code .= $this->editor[$i][1];
             }
         }
         return $code;
