@@ -324,7 +324,7 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
     public function __toString() {
         $sourceCode     = '';
         $numberOfTokens = count($this);
-        for( $i = 0; $i <= $numberOfTokens - 1; $i++) {
+        for( $i = 0; $i < $numberOfTokens; $i++) {
             if( is_string($this->tokens[$i]) ) {
                 $sourceCode .= $this->tokens[$i];
             } else {
