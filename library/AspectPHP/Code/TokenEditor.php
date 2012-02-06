@@ -84,7 +84,64 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
      * Applies all queued changes.
      */
     protected function applyChanges() {
-        
+        // The changes are sorted by refIndex and are applied in
+        // ascending order. That allows us to handle the index
+        // drift that may occur.
+        usort($this->changes, array($this, 'compareByRefIndex'));
+        // $delta contains the index drift from all previous changes.
+        $delta = 0;
+        foreach( $this->changes as $change ) {
+            /* @var $change stdClass */
+            $change->refIndex += $delta;
+            $delta += call_user_func($this->getApplyMethod($change), $change);
+        }
+    }
+    
+    /**
+     * Replaces the token that is denoted by the change.
+     *
+     * @param stdClass $change
+     * @return integer The index drift.
+     */
+    protected function applyReplace(stdClass $change) {
+        $this->tokens[$change->refIndex] = $change->newToken;
+        return 0;
+    }
+    
+    /**
+     * Removes the token that is denoted by the change.
+     *
+     * @param stdClass $change
+     * @return integer The index drift.
+     */
+    protected function applyRemove(stdClass $change) {
+        unset($this->tokens[$change->refIndex]);
+        // Normalize the keys.
+        $this->tokens = array_values($this->tokens);
+        return -1;
+    }
+    
+    /**
+     * Inserts the given tokens in front of the reference index.
+     *
+     * @param stdClass $change
+     * @return integer The index drift.
+     */
+    protected function applyInsertBefore(stdClass $change) {
+        $tokens = $change->tokens;
+        array_splice($this->tokens, $change->refIndex, 0, $tokens);
+        return count($tokens);
+    }
+    
+    /**
+     * Returns a callback to the method that is responsible for
+     * applying the provided change.
+     *
+     * @param stdClass $change
+     * @return array A callback.
+     */
+    protected function getApplyMethod(stdClass $change) {
+        return array($this, 'apply' . ucfirst($change->type));
     }
     
     /**
@@ -119,7 +176,7 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
      * @return integer
      */
     private function compareByRefIndex(stdClass $left, stdClass $right) {
-        
+        return $left->refIndex - $right->refIndex;
     }
     
 }
