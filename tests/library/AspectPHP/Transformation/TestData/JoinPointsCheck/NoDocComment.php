@@ -17,7 +17,7 @@
  * @version $Rev$
  * @since 31.01.2012
  */
-class JoinPointsCheck_NoDocComments {
+class JoinPointsCheck_NoDocComment {
     
     public function undocumentedMethod() {
         
