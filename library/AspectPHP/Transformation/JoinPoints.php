@@ -31,7 +31,7 @@ class AspectPHP_Transformation_JoinPoints {
     /**
      * The analyzer that is currently used to inspect the tokens.
      *
-     * @var AspectPHP_Code_TokenAnalyzer
+     * @var AspectPHP_Code_TokenEditor
      */
     protected $editor = null;
     
@@ -43,7 +43,7 @@ class AspectPHP_Transformation_JoinPoints {
      */
     public function transform($source) {
         $this->tokens = token_get_all($source);
-        $this->editor = new AspectPHP_Code_TokenAnalyzer($this->tokens);
+        $this->editor = new AspectPHP_Code_TokenEditor($this->tokens);
         $injectionPoints = array();
         
         $classToken = $this->editor->findNext(T_CLASS, 0);
