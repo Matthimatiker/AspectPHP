@@ -53,13 +53,14 @@ class AspectPHP_Transformation_JoinPoints {
                 // No body, might be an abstract method.
                 continue;
             }
-            $docComment   = $this->findDocBlock($index);
-            $visibility   = $this->findMethodVisibility($index);
-            $name         = $this->findMethodName($index);
-            $originalName = $this->editor[$name][1];
-            $newName      = '_aspectPHP' . $originalName;
-            $context      = ($this->isStatic($index)) ? '__CLASS__' : '$this';
-            $signature    = $this->between($docComment, $bodyStart - 1);
+            $docComment     = $this->findDocBlock($index);
+            $visibility     = $this->findMethodVisibility($index);
+            $name           = $this->findMethodName($index);
+            $originalName   = $this->editor[$name][1];
+            $newName        = '_aspectPHP' . $originalName;
+            $context        = ($this->isStatic($index)) ? '__CLASS__' : '$this';
+            $signatureStart = $this->findSignatureStart($index);
+            $signature      = $this->between($signatureStart, $bodyStart - 1);
             
             $injectionPoint = $this->buildInjectionPoint($signature, $newName, $context);
             $this->editor->insertBefore($classEnd, array($injectionPoint));
@@ -109,6 +110,26 @@ class AspectPHP_Transformation_JoinPoints {
         $this->editor->commit();
         
         return (string)$this->editor;
+    }
+    
+    /**
+     * Searches for the token that begins the signature of the given function.
+     *
+     * @param integer $functionIndex The function index.
+     * @return integer
+     */
+    protected function findSignatureStart($functionIndex) {
+        $signatureTypes = array(
+            T_DOC_COMMENT,
+            T_PUBLIC,
+            T_PROTECTED,
+            T_PRIVATE,
+            T_STATIC,
+            T_FINAL
+        );
+        $stopTokens = array(';', '{', '}');
+        $tokens     = $this->editor->findAllBetween($signatureTypes, $functionIndex - 1, 0, $stopTokens);
+        return min($tokens);
     }
     
     /**
