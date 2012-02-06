@@ -69,6 +69,19 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
     }
     
     /**
+     * Renames classes, interfaces, methods etc.
+     *
+     * Expects the position of the T_STRING token that contains the name.
+     *
+     * @param integer $index Position of a T_STRING token.
+     * @param string $newName
+     * @throws InvalidArgumentException If no T_STRING token is specified.
+     */
+    public function rename($index, $newName) {
+        
+    }
+    
+    /**
      * Commits all pending changes.
      */
     public function commit() {
