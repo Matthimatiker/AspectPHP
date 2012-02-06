@@ -25,8 +25,8 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
      * A list of queued changes.
      *
      * Each change is represented by a stdClass object
-     * that contains at least the attributes "type" and
-     * "refIndex".
+     * that contains at least the attributes "type",
+     * "refIndex" and "modifiesRef".
      *
      * @var array(integer=>stdClass)
      */
@@ -40,7 +40,8 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
      */
     public function replace($index, $newToken) {
         $change = $this->createChange('replace', $index);
-        $change->newToken = $newToken;
+        $change->newToken    = $newToken;
+        $change->modifiesRef = true;
         $this->registerChange($change);
     }
     
@@ -51,6 +52,7 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
      */
     public function remove($index) {
         $change = $this->createChange('remove', $index);
+        $change->modifiesRef = true;
         $this->registerChange($change);
     }
     
@@ -156,8 +158,9 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
     protected function createChange($type, $refIndex) {
         $this->assertIsIndex($refIndex);
         $change = new stdClass();
-        $change->type     = $type;
-        $change->refIndex = $refIndex;
+        $change->type        = $type;
+        $change->refIndex    = $refIndex;
+        $change->modifiesRef = false;
         return $change;
     }
     
@@ -167,6 +170,19 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
      * @param stdClass $change
      */
     protected function registerChange(stdClass $change) {
+        if( $change->modifiesRef ) {
+            // The last change that modifies a token overwrites
+            // previous modification requests for that token.
+            $numberOfChanges = count($this->changes);
+            for( $i = 0; $i < $numberOfChanges; $i++ ) {
+                if($this->changes[$i]->modifiesRef && $this->changes[$i]->refIndex === $change->refIndex) {
+                    // Overwrite the old modification request.
+                    $this->changes[$i] = $change;
+                    return;
+                }
+            }
+        }
+        // Append change.
         $this->changes[] = $change;
     }
     
