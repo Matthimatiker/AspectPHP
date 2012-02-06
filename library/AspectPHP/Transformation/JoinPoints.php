@@ -33,7 +33,7 @@ class AspectPHP_Transformation_JoinPoints {
      *
      * @var AspectPHP_Code_TokenAnalyzer
      */
-    protected $analyzer = null;
+    protected $editor = null;
     
     /**
      * Transforms the source code.
@@ -42,17 +42,17 @@ class AspectPHP_Transformation_JoinPoints {
      * @return string The transformed code.
      */
     public function transform($source) {
-        $this->tokens    = token_get_all($source);
-        $this->analyzer  = new AspectPHP_Code_TokenAnalyzer($this->tokens);
+        $this->tokens = token_get_all($source);
+        $this->editor = new AspectPHP_Code_TokenAnalyzer($this->tokens);
         $injectionPoints = array();
         
-        $classToken = $this->analyzer->findNext(T_CLASS, 0);
+        $classToken = $this->editor->findNext(T_CLASS, 0);
         if( $classToken === -1 ) {
             // No class found.
             return $source;
         }
         $index = $classToken;
-        while( ($index = $this->analyzer->findNext(T_FUNCTION, $index)) !== -1 ) {
+        while( ($index = $this->editor->findNext(T_FUNCTION, $index)) !== -1 ) {
             // We found a "function" keyword at position $index.
             $bodyStart = $this->findBody($index);
             if( $bodyStart === -1 ) {
@@ -91,7 +91,7 @@ class AspectPHP_Transformation_JoinPoints {
         }
         
         $body = $this->findBody($classToken);
-        $end  = $this->analyzer->findMatchingBrace($body);
+        $end  = $this->editor->findMatchingBrace($body);
         // Inject method that handles method calls.
         $injectionPoints[] = $this->getCode('_aspectPHPInternalHandleCall');
         // Inject new methods at the end of the class body.
@@ -111,8 +111,8 @@ class AspectPHP_Transformation_JoinPoints {
     protected function findAll($type, $functionIndex) {
         $matches = array();
         $start   = $this->findBody($functionIndex);
-        $end     = $this->analyzer->findMatchingBrace($start);
-        return $this->analyzer->findAllBetween($type, $start, $end);
+        $end     = $this->editor->findMatchingBrace($start);
+        return $this->editor->findAllBetween($type, $start, $end);
     }
     
     /**
@@ -122,7 +122,7 @@ class AspectPHP_Transformation_JoinPoints {
      * @return boolean True if the function is static, false otherwise.
      */
     protected function isStatic($functionIndex) {
-        return $this->analyzer->findPrevious(T_STATIC, $functionIndex, array(T_DOC_COMMENT, ';', '{', '}')) !== -1;
+        return $this->editor->findPrevious(T_STATIC, $functionIndex, array(T_DOC_COMMENT, ';', '{', '}')) !== -1;
     }
     
     /**
@@ -194,7 +194,7 @@ class AspectPHP_Transformation_JoinPoints {
      * @return integer
      */
     protected function findMethodName($functionIndex) {
-        return $this->analyzer->findNext(T_STRING, $functionIndex);
+        return $this->editor->findNext(T_STRING, $functionIndex);
     }
     
     /**
@@ -210,7 +210,7 @@ class AspectPHP_Transformation_JoinPoints {
             T_PROTECTED,
             T_PRIVATE
         );
-        return $this->analyzer->findPrevious($visibilities, $functionIndex, array('{', '}', ';'));
+        return $this->editor->findPrevious($visibilities, $functionIndex, array('{', '}', ';'));
     }
     
     /**
@@ -221,7 +221,7 @@ class AspectPHP_Transformation_JoinPoints {
      * @return integer
      */
     protected function findDocBlock($functionIndex) {
-        return $this->analyzer->findPrevious(T_DOC_COMMENT, $functionIndex, array('{', '}', ';'));
+        return $this->editor->findPrevious(T_DOC_COMMENT, $functionIndex, array('{', '}', ';'));
     }
     
     /**
@@ -231,7 +231,7 @@ class AspectPHP_Transformation_JoinPoints {
      * @return integer
      */
     protected function findBody($index) {
-        return $this->analyzer->findNext('{', $index, array(';'));
+        return $this->editor->findNext('{', $index, array(';'));
     }
 
     /**
