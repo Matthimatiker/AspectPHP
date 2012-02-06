@@ -95,6 +95,8 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
             $change->refIndex += $delta;
             $delta += call_user_func($this->getApplyMethod($change), $change);
         }
+        // Remove the applied changes.
+        $this->discard();
     }
     
     /**
