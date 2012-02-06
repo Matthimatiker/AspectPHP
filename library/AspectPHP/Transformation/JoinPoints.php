@@ -44,13 +44,15 @@ class AspectPHP_Transformation_JoinPoints {
     public function transform($source) {
         $this->tokens = token_get_all($source);
         $this->editor = new AspectPHP_Code_TokenEditor($this->tokens);
-        $injectionPoints = array();
         
         $classToken = $this->editor->findNext(T_CLASS, 0);
         if( $classToken === -1 ) {
             // No class found.
             return $source;
         }
+        $body = $this->findBody($classToken);
+        $classEnd = $this->editor->findMatchingBrace($body);
+        
         $index = $classToken;
         while( ($index = $this->editor->findNext(T_FUNCTION, $index)) !== -1 ) {
             // We found a "function" keyword at position $index.
@@ -67,7 +69,8 @@ class AspectPHP_Transformation_JoinPoints {
             $context      = ($this->isStatic($index)) ? '__CLASS__' : '$this';
             $signature    = $this->between($docComment, $bodyStart - 1);
             
-            $injectionPoints[] = $this->buildInjectionPoint($signature, $newName, $context);
+            $injectionPoint = $this->buildInjectionPoint($signature, $newName, $context);
+            $this->editor->insertBefore($classEnd, array($injectionPoint));
             
             // Rename the original method...
             $nameToken    = $this->editor[$name];
@@ -109,13 +112,7 @@ class AspectPHP_Transformation_JoinPoints {
             }
         }
         
-        $body = $this->findBody($classToken);
-        $end  = $this->editor->findMatchingBrace($body);
-        // Inject method that handles method calls.
-        $injectionPoints[] = $this->getCode('_aspectPHPInternalHandleCall');
-        // Inject new methods at the end of the class body.
-        $injectedCode = implode(PHP_EOL, $injectionPoints);
-        $this->editor->insertBefore($end, array($injectedCode));
+        $this->editor->insertBefore($classEnd, array($this->getCode('_aspectPHPInternalHandleCall')));
         
         $this->editor->commit();
         
