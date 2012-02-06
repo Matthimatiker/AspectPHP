@@ -42,7 +42,7 @@ class AspectPHP_Transformation_JoinPoints {
             // No class found.
             return $source;
         }
-        $body = $this->findBody($classToken);
+        $body     = $this->findBody($classToken);
         $classEnd = $this->editor->findMatchingBrace($body);
         
         $index = $classToken;
