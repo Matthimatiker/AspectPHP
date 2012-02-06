@@ -228,6 +228,14 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($source, (string)$this->editor);
     }
     
+    /**
+     * If multiple changes are competing for the modification of the
+     * same token then the last one will be applied.
+     */
+    public function testLastChangeThatModifiesTokenIsApplied() {
+        
+    }
+    
 }
 
 ?>
