@@ -220,7 +220,7 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * twice.
      */
     public function testEditorDoesNotApplyChangesTwice() {
-        $this->editor->insertBefore(0, array('0'));
+        $this->editor->insertBefore(0, array('a'));
         $this->editor->commit();
         $source = (string)$this->editor;
         // Calling commit() again should not modify the tokens.
