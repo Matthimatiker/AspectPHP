@@ -233,7 +233,11 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * same token then the last one will be applied.
      */
     public function testLastChangeThatModifiesTokenIsApplied() {
-        
+        $this->editor->replace(0, 'a');
+        $this->editor->remove(0);
+        $this->editor->replace(0, 'b');
+        $this->editor->commit();
+        $this->assertEquals('b2345', (string)$this->editor);
     }
     
 }
