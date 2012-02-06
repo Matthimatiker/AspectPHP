@@ -64,7 +64,7 @@ class AspectPHP_Transformation_JoinPoints {
             $docComment   = $this->findDocBlock($index);
             $visibility   = $this->findMethodVisibility($index);
             $name         = $this->findMethodName($index);
-            $originalName = $this->tokens[$name][1];
+            $originalName = $this->editor[$name][1];
             $newName      = '_aspectPHP' . $originalName;
             $context      = ($this->isStatic($index)) ? '__CLASS__' : '$this';
             $signature    = $this->between($docComment, $bodyStart - 1);
