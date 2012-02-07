@@ -11,7 +11,7 @@
  */
 
 /**
- * Class that hold the global aspect manager object.
+ * Class that holds the global aspect manager object.
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP
