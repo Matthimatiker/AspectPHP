@@ -88,21 +88,19 @@ class AspectPHP_Transformation_JoinPoints {
             
             // Replace __METHOD__ constants.
             $methodConstants = $this->findAll(T_METHOD_C, $index);
-            foreach( $methodConstants as $constantIndex ) {
-                $constantToken    = $this->editor[$constantIndex];
-                $constantToken[0] = T_STRING;
-                $constantToken[1] = "__CLASS__ . '::{$originalName}'";
-                $this->editor->replace($constantIndex, $constantToken);
-            }
+            $newContent = array(
+                T_STRING,
+                "__CLASS__ . '::{$originalName}'"
+            );
+            $this->editor->replace($methodConstants, $newContent);
 
             // Replace __FUNCTION__ constants.
             $functionConstants = $this->findAll(T_FUNC_C, $index);
-            foreach( $functionConstants as $constantIndex ) {
-                $constantToken    = $this->editor[$constantIndex];
-                $constantToken[0] = T_STRING;
-                $constantToken[1] = "'{$originalName}'";
-                $this->editor->replace($constantIndex, $constantToken);
-            }
+            $newContent = array(
+                T_STRING,
+                "'{$originalName}'"
+            );
+            $this->editor->replace($functionConstants, $newContent);
         }
         
         $this->editor->insertBefore($classEnd, array($this->getCode('_aspectPHPInternalHandleCall')));
