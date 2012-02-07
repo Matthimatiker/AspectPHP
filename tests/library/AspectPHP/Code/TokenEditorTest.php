@@ -296,6 +296,14 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
     }
     
     /**
+     * Ensures that rename() does not modify the token before the changes
+     * are committed.
+     */
+    public function testRenameDoesNotModifyTokenIfChangesAreNotCommitted() {
+        
+    }
+    
+    /**
      * Checks if rename changes the content of the token.
      */
     public function testRenameChangesTokenContentAfterCommit() {
