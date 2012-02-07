@@ -120,14 +120,32 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('a', $this->editor[1]);
     }
     
+    /**
+     * Ensures that replace() keeps the line number of the original token if the
+     * new token does not provide one.
+     *
+     * Example:
+     * <code>
+     * $editor->replace(5, array(T_STRING, 'hello'));
+     * </code>
+     */
     public function testReplaceKeepsOriginalLineNumberIfNewTokenDoesNotProvideOne() {
         
     }
     
+    /**
+     * Ensures that replace() inserts a dummy line number if the new token does
+     * not provide one and there is also none defined in the original token (that
+     * is the case if the token is a string, for example a brace).
+     */
     public function testReplaceInsertsDummyLineNumberIfOriginalNumberIsNotAvailable() {
         
     }
     
+    /**
+     * Ensures that replace() uses the line number of the new token if
+     * it is available.
+     */
     public function testReplaceUsesProvidedLineNumber() {
         
     }
