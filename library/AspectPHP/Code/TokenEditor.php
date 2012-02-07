@@ -101,8 +101,10 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
             $message = 'Expected token of type T_STRING.';
             throw new InvalidArgumentException($message);
         }
-        $newContent    = $this[$index];
-        $newContent[1] = $newName;
+        $newContent = array(
+            T_STRING,
+            $newName
+        );
         $this->replace($index, $newContent);
     }
     
