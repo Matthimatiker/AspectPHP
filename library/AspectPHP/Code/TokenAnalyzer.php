@@ -444,11 +444,11 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
     /**
      * Checks if the provided integer is a valid token index.
      *
-     * @param integer $index
+     * @param integer|mixed $index
      * @return boolean True if $index is a valid token index, false otherwise.
      */
     protected function isIndex($index) {
-        return isset($this->tokens[$index]);
+        return is_int($index) && isset($this->tokens[$index]);
     }
     
 }
