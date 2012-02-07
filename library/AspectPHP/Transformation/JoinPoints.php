@@ -66,10 +66,7 @@ class AspectPHP_Transformation_JoinPoints {
             $this->editor->insertBefore($classEnd, array($injectionPoint));
             
             // Rename the original method...
-            $nameToken    = $this->editor[$name];
-            $nameToken[1] = $newName;
-            $this->editor->replace($name, $nameToken);
-            
+            $this->editor->rename($name, $newName);
             // ... and reduce its visibility.
             if( $visibility === -1 ) {
                 // Visibility was not defined explicity.
