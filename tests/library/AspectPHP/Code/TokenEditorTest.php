@@ -47,7 +47,7 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
         	'4',
         	'5'
         );
-        $this->editor = new AspectPHP_Code_TokenEditor($tokens);
+        $this->editor = $this->createEditor($tokens);
     }
     
     /**
@@ -284,7 +284,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * Ensures that rename() throws an exception if an invalid index is provided.
      */
     public function testRenameThrowsExceptionIfInvalidIndexIsProvided() {
-        
+        $this->setExpectedException('InvalidArgumentException');
+        $this->editor->rename(-1, 'test');
     }
     
     /**
@@ -292,7 +293,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * to a token of invalid type.
      */
     public function testRenameThrowsExceptionIfTokenOfInvalidTypeIsProvided() {
-        
+        $this->setExpectedException('InvalidArgumentException');
+        $this->editor->rename(1, 'test');
     }
     
     /**
@@ -300,14 +302,33 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * are committed.
      */
     public function testRenameDoesNotModifyTokenIfChangesAreNotCommitted() {
-        
+        $tokens = array(
+            array(
+                T_STRING,
+                'myName',
+                1
+            )
+        );
+        $this->editor = $this->createEditor($tokens);
+        $this->editor->rename(0, 'test');
+        $this->assertEquals('myName', $this->editor[0][1]);
     }
     
     /**
      * Checks if rename changes the content of the token.
      */
     public function testRenameChangesTokenContentAfterCommit() {
-        
+        $tokens = array(
+            array(
+                T_STRING,
+                'myName',
+                1
+            )
+        );
+        $this->editor = $this->createEditor($tokens);
+        $this->editor->rename(0, 'test');
+        $this->editor->commit();
+        $this->assertEquals('test', $this->editor[0][1]);
     }
     
     /**
@@ -315,7 +336,27 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * provided token.
      */
     public function testRenameKeepsLineNumberOfToken() {
-        
+        $tokens = array(
+            array(
+                T_STRING,
+                'myName',
+                1
+            )
+        );
+        $this->editor = $this->createEditor($tokens);
+        $this->editor->rename(0, 'test');
+        $this->editor->commit();
+        $this->assertEquals(1, $this->editor[0][2]);
+    }
+    
+    /**
+     * Uses the given tokens to create an editor.
+     *
+     * @param array(string|array(string|integer)) $tokens
+     * @return AspectPHP_Code_TokenEditor
+     */
+    protected function createEditor(array $tokens) {
+        return new AspectPHP_Code_TokenEditor($tokens);
     }
     
 }
