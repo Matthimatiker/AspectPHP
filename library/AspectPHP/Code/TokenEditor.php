@@ -84,7 +84,14 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
      * @throws InvalidArgumentException If no T_STRING token is specified.
      */
     public function rename($index, $newName) {
-        
+        $this->assertIsIndex($index);
+        if( !$this->isOfType($index, T_STRING) ) {
+            $message = 'Expected token of type T_STRING.';
+            throw new InvalidArgumentException($message);
+        }
+        $newContent    = $this[$index];
+        $newContent[1] = $newName;
+        $this->replace($index, $newContent);
     }
     
     /**
