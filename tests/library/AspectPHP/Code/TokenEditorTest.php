@@ -310,6 +310,14 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
         
     }
     
+    /**
+     * Checks if rename() keeps the original line number of the
+     * provided token.
+     */
+    public function testRenameKeepsLineNumberOfToken() {
+        
+    }
+    
 }
 
 ?>
