@@ -280,6 +280,18 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('b2345', (string)$this->editor);
     }
     
+    public function testRenameThrowsExceptionIfInvalidIndexIsProvided() {
+        
+    }
+    
+    public function testRenameThrowsExceptionIfTokenOfInvalidTypeIsProvided() {
+        
+    }
+    
+    public function testRenameChangesTokenContent() {
+        
+    }
+    
 }
 
 ?>
