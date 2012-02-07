@@ -45,6 +45,10 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
         $indexes = is_array($indexOrIndexes) ? $indexOrIndexes : array($indexOrIndexes);
         foreach( $indexes as $index ) {
             /* @var $index integer */
+            if( is_array($newToken) && !isset($newToken[2]) ) {
+                // Token does not contain a line number.
+                $newToken[2] = is_array($this[$index]) ? $this[$index][2] : 0;
+            }
             $change = $this->createChange('replace', $index);
             $change->newToken    = $newToken;
             $change->modifiesRef = true;
