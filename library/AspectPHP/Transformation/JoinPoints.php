@@ -120,10 +120,11 @@ class AspectPHP_Transformation_JoinPoints {
             T_PROTECTED,
             T_PRIVATE,
             T_STATIC,
-            T_FINAL
+            T_FINAL,
+            T_FUNCTION
         );
         $stopTokens = array(';', '{', '}');
-        $tokens     = $this->editor->findAllBetween($signatureTypes, $functionIndex - 1, 0, $stopTokens);
+        $tokens     = $this->editor->findAllBetween($signatureTypes, $functionIndex, 0, $stopTokens);
         return min($tokens);
     }
     
