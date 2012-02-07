@@ -4,7 +4,7 @@
  * Configures the environment.
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
- * @package AspectP
+ * @package AspectPHP
  * @copyright Matthias Molitor 2011
  * @version $Rev$
  * @since 16.10.2011
