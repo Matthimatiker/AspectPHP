@@ -303,11 +303,7 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      */
     public function testRenameDoesNotModifyTokenIfChangesAreNotCommitted() {
         $tokens = array(
-            array(
-                T_STRING,
-                'myName',
-                1
-            )
+            $this->createTextToken()
         );
         $this->editor = $this->createEditor($tokens);
         $this->editor->rename(0, 'test');
@@ -319,11 +315,7 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      */
     public function testRenameChangesTokenContentAfterCommit() {
         $tokens = array(
-            array(
-                T_STRING,
-                'myName',
-                1
-            )
+            $this->createTextToken()
         );
         $this->editor = $this->createEditor($tokens);
         $this->editor->rename(0, 'test');
@@ -337,11 +329,7 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      */
     public function testRenameKeepsLineNumberOfToken() {
         $tokens = array(
-            array(
-                T_STRING,
-                'myName',
-                1
-            )
+            $this->createTextToken()
         );
         $this->editor = $this->createEditor($tokens);
         $this->editor->rename(0, 'test');
@@ -357,6 +345,20 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      */
     protected function createEditor(array $tokens) {
         return new AspectPHP_Code_TokenEditor($tokens);
+    }
+    
+    /**
+     * Creates a token of type T_STRING.
+     *
+     * @return array(integer|string)
+     */
+    protected function createTextToken() {
+        $token = array(
+            T_STRING,
+            'myName',
+            1
+        );
+        return $token;
     }
     
 }
