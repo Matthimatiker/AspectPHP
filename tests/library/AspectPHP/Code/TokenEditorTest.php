@@ -130,7 +130,15 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * </code>
      */
     public function testReplaceKeepsOriginalLineNumberIfNewTokenDoesNotProvideOne() {
-        
+        $this->editor = $this->createEditor(array($this->createTextToken()));
+        $newToken = array(
+            T_STRING,
+            'test'
+        );
+        $this->editor->replace(0, $newToken);
+        $this->editor->commit();
+        $this->assertTrue(isset($this->editor[0][2]));
+        $this->assertEquals(1, $this->editor[0][2]);
     }
     
     /**
@@ -139,7 +147,13 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * is the case if the token is a string, for example a brace).
      */
     public function testReplaceInsertsDummyLineNumberIfOriginalNumberIsNotAvailable() {
-        
+        $newToken = array(
+            T_STRING,
+            'test'
+        );
+        $this->editor->replace(0, $newToken);
+        $this->editor->commit();
+        $this->assertTrue(isset($this->editor[0][2]));
     }
     
     /**
@@ -147,7 +161,15 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * it is available.
      */
     public function testReplaceUsesProvidedLineNumber() {
-        
+        $this->editor = $this->createEditor(array($this->createTextToken()));
+        $newToken = array(
+            T_STRING,
+            'test',
+            42
+        );
+        $this->editor->replace(0, $newToken);
+        $this->editor->commit();
+        $this->assertEquals(42, $this->editor[0][2]);
     }
     
     /**
