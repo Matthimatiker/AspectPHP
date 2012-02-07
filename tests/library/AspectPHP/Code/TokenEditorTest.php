@@ -105,7 +105,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * indexes contains invalid values.
      */
     public function testReplaceThrowsExceptionIfListWithInvalidIndexIsProvided() {
-        
+        $this->setExpectedException('InvalidArgumentException');
+        $this->editor->replace(array(2, -1), 'n');
     }
     
 	/**
@@ -113,7 +114,10 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * in the list.
      */
     public function testReplaceSubstitutesAllProvidedTokensAfterCommit() {
-        
+        $this->editor->replace(array(0, 1), 'a');
+        $this->editor->commit();
+        $this->assertEquals('a', $this->editor[0]);
+        $this->assertEquals('a', $this->editor[1]);
     }
     
     /**
@@ -149,14 +153,19 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * indexes contains invalid values.
      */
     public function testRemoveThrowsExceptionIfListWithInvalidIndexIsProvided() {
-        
+        $this->setExpectedException('InvalidArgumentException');
+        $this->editor->remove(array(2, -1));
     }
     
     /**
      * Checks if remove() deletes all tokens whose indexes were provided in the list.
      */
     public function testRemoveDeletesAllProvidedTokensAfterCommit() {
-        
+        $numberOfTokens = count($this->editor);
+        $tokensToDelete = array(1, 2);
+        $this->editor->remove($tokensToDelete);
+        $this->editor->commit();
+        $this->assertEquals($numberOfTokens - count($tokensToDelete), count($this->editor));
     }
     
     /**
