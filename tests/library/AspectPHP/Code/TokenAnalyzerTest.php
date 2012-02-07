@@ -37,11 +37,20 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
     }
     
     /**
-     * Enures that offsetExists() returns false if the given token index does not exist.
+     * Ensures that offsetExists() returns false if the given token index does not exist.
      */
     public function testOffsetExistsReturnsFalseIfIndexDoesNotExist() {
         $analyzer = $this->create(array('1', '2'));
         $this->assertFalse(isset($analyzer[2]));
+    }
+    
+    /**
+     * Ensures that offsetExists() returns false if the provided value
+     * is not an integer.
+     */
+    public function testOffsetExistsReturnsFalseIfNoIntegerIsProvided() {
+        $analyzer = $this->create(array('1', '2'));
+        $this->assertFalse(isset($analyzer[new stdClass()]));
     }
     
     /**
