@@ -33,33 +33,41 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
     protected $changes = array();
     
     /**
-     * Replaces the token at position $index with $newToken.
+     * Replaces the token at position $indexOrIndexes with $newToken.
      *
      * If a list of indexes is provided then all tokens will be replaced
      * by $newToken.
      *
-     * @param integer|array(integer) $index
+     * @param integer|array(integer) $indexOrIndexes
      * @param string|array(integer|string) $newToken
      */
-    public function replace($index, $newToken) {
-        $change = $this->createChange('replace', $index);
-        $change->newToken    = $newToken;
-        $change->modifiesRef = true;
-        $this->registerChange($change);
+    public function replace($indexOrIndexes, $newToken) {
+        $indexes = is_array($indexOrIndexes) ? $indexOrIndexes : array($indexOrIndexes);
+        foreach( $indexes as $index ) {
+            /* @var $index integer */
+            $change = $this->createChange('replace', $index);
+            $change->newToken    = $newToken;
+            $change->modifiesRef = true;
+            $this->registerChange($change);
+        }
     }
     
     /**
-     * Removes the token at position $index.
+     * Removes the token at position $indexOrIndexes.
      *
      * If a list of indexes is provided then all tokens
      * will be removed.
      *
-     * @param integer|array(integer) $index
+     * @param integer|array(integer) $indexOrIndexes
      */
-    public function remove($index) {
-        $change = $this->createChange('remove', $index);
-        $change->modifiesRef = true;
-        $this->registerChange($change);
+    public function remove($indexOrIndexes) {
+        $indexes = is_array($indexOrIndexes) ? $indexOrIndexes : array($indexOrIndexes);
+        foreach( $indexes as $index ) {
+            /* @var $index integer */
+            $change = $this->createChange('remove', $index);
+            $change->modifiesRef = true;
+            $this->registerChange($change);
+        }
     }
     
     /**
