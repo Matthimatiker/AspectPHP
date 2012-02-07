@@ -120,6 +120,18 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('a', $this->editor[1]);
     }
     
+    public function testReplaceKeepsOriginalLineNumberIfNewTokenDoesNotProvideOne() {
+        
+    }
+    
+    public function testReplaceInsertsDummyLineNumberIfOriginalNumberIsNotAvailable() {
+        
+    }
+    
+    public function testReplaceUsesProvidedLineNumber() {
+        
+    }
+    
     /**
      * Ensures that remove() throws an exception if an invalid index
      * is provided.
