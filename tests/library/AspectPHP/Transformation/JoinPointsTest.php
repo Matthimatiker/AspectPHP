@@ -341,6 +341,17 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * Ensures that the transformation is able to handle methods that do not
+     * contain a doc comment and whose visibility is not explicitly defined.
+     */
+    public function testTransformationHandlesMethodsWithoutCommentAndVisibility() {
+        $this->setExpectedException(null);
+        $source      = $this->getContent('NoDocCommentAndNoVisibility.php');
+        $transformed = $this->transformation->transform($source);
+        $this->execute($transformed);
+    }
+    
+    /**
      * Checks if static methods are callable after transformation.
      */
     public function testStaticMethodIsCallable() {
