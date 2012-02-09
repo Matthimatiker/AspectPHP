@@ -13,6 +13,33 @@
 /**
  * Pointcut that uses regular expressions to match methods.
  *
+ * The pointcut automatically adds expression delimiters:
+ * /^[...]$/
+ * Where [...] is the provided expression.
+ *
+ *
+ * Here are some usage examples.
+ *
+ * Match all show() methods:
+ * <code>
+ * $pointcut = new AspectPHP_Pointcut_RegExp('.*::show');
+ * </code>
+ *
+ * Match all methods of the class "MyClass":
+ * <code>
+ * $pointcut = new AspectPHP_Pointcut_RegExp('MyClass::.*');
+ * </code>
+ *
+ * Match all test() methods in the package Example\Demo:
+ * <code>
+ * $pointcut = new AspectPHP_Pointcut_RegExp('Example\Demo\.*::test');
+ * </code>
+ *
+ * Match all getName() and setName() methods:
+ * <code>
+ * $pointcut = new AspectPHP_Pointcut_RegExp('.*::(get|set)Name');
+ * </code>
+ *
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Pointcut
  * @copyright Matthias Molitor 2012
