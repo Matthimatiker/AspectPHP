@@ -28,6 +28,44 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
  */
 class AspectPHP_Pointcut_RegExpTest extends PHPUnit_Framework_TestCase {
     
+    public function testConstructorThrowsExceptionIfEmptyStringIsProvided() {
+        
+    }
+    
+    public function testConstructorThrowsExceptionIfNoStringIsProvided() {
+        
+    }
+    
+    public function testMatchesReturnsBoolean() {
+        
+    }
+    
+    public function testMatchesReturnsTrueIfExpressionMatchesMethod() {
+        
+    }
+    
+    public function testMatchesReturnsFalseIfExpressionDoesNotMatchMethod() {
+        
+    }
+    
+    public function testMatchesReturnsTrueIfExpressionMatchesNamespacedClass() {
+        
+    }
+    
+    public function testMatchesReturnsTrueIfExpressionDoesNotMatchNamespacedClass() {
+        
+    }
+    
+    /**
+     * Uses the given expression to create a pointcut.
+     *
+     * @param string $expression
+     * @return AspectPHP_Pointcut_RegExp
+     */
+    protected function create($expression) {
+        
+    }
+    
 }
 
 ?>
