@@ -22,6 +22,16 @@
 class AspectPHP_Pointcut_RegExp implements AspectPHP_Pointcut {
     
     /**
+     * Creates a pointcut that uses the given regular expression.
+     *
+     * @param string $expression
+     * @throws InvalidArgumentException If no valid expression is provided.
+     */
+    public function __construct($expression) {
+        
+    }
+    
+    /**
      * @see AspectPHP_Pointcut::matches()
      *
      * @param string $method
