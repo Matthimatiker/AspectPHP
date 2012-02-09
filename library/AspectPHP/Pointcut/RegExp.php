@@ -49,13 +49,24 @@
 class AspectPHP_Pointcut_RegExp implements AspectPHP_Pointcut {
     
     /**
+     * The regular expression that is used to check the methods.
+     *
+     * @var string
+     */
+    protected $regExp = null;
+    
+    /**
      * Creates a pointcut that uses the given regular expression.
      *
      * @param string $expression
      * @throws InvalidArgumentException If no valid expression is provided.
      */
     public function __construct($expression) {
-        
+        if( !is_string($expression) || empty($expression) ) {
+            $message = 'Expected regular expression (non-empty string).';
+            throw new InvalidArgumentException($message);
+        }
+        $this->regExp = $this->toRegExp($expression);
     }
     
     /**
@@ -65,7 +76,24 @@ class AspectPHP_Pointcut_RegExp implements AspectPHP_Pointcut {
      * @return boolean
      */
     public function matches($method) {
-        
+        return preg_match($this->regExp, $method) === 1;
+    }
+    
+    /**
+     * Converts the given expression to a real regular expression.
+     *
+     * @param string $expression
+     * @return string
+     */
+    protected function toRegExp($expression) {
+        // Escape namespace and class/method separators.
+        $replacePairs = array(
+        	'\\' => '\\\\',
+            '::' => '\:\:'
+        );
+        $regExp = str_replace(array_keys($replacePairs), array_values($replacePairs), $expression);
+        $regExp = '/^' . $regExp . '$/';
+        return $regExp;
     }
     
 }
