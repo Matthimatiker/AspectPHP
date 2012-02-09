@@ -15,7 +15,6 @@
  * Initializes the test environment.
  */
 require_once(dirname(__FILE__) . '/bootstrap.php');
-
 /**
  * Tests the regular expression pointcut.
  *
@@ -33,21 +32,23 @@ class AspectPHP_Pointcut_RegExpTest extends PHPUnit_Framework_TestCase {
      * is provided.
      */
     public function testConstructorThrowsExceptionIfEmptyStringIsProvided() {
-        
+        $this->setExpectedException('InvalidArgumentException');
+        new AspectPHP_Pointcut_RegExp('');
     }
     
     /**
      * Ensures that the constructor throws an exception if no string is provided.
      */
     public function testConstructorThrowsExceptionIfNoStringIsProvided() {
-        
+        $this->setExpectedException('InvalidArgumentException');
+        new AspectPHP_Pointcut_RegExp(new stdClass());
     }
     
     /**
      * Checks if matches() returns a boolean value.
      */
     public function testMatchesReturnsBoolean() {
-        
+        $this->assertInternalType('boolean', $this->create('.*')->matches(__METHOD__));
     }
     
     /**
@@ -55,7 +56,7 @@ class AspectPHP_Pointcut_RegExpTest extends PHPUnit_Framework_TestCase {
      * the provided method.
      */
     public function testMatchesReturnsTrueIfExpressionMatchesMethod() {
-        
+        $this->assertMatches(__CLASS__ . '::.*', __METHOD__);
     }
     
     /**
@@ -63,7 +64,7 @@ class AspectPHP_Pointcut_RegExpTest extends PHPUnit_Framework_TestCase {
      * the provided method.
      */
     public function testMatchesReturnsFalseIfExpressionDoesNotMatchMethod() {
-        
+        $this->assertNotMatches('AnotherClass::.*', __METHOD__);
     }
     
     /**
@@ -71,7 +72,7 @@ class AspectPHP_Pointcut_RegExpTest extends PHPUnit_Framework_TestCase {
      * whose class uses a namespace.
      */
     public function testMatchesReturnsTrueIfExpressionMatchesNamespacedClass() {
-        
+        $this->assertMatches('Demo\Package\.*::show', 'Demo\Package\MyClass::show');
     }
     
     /**
@@ -79,7 +80,29 @@ class AspectPHP_Pointcut_RegExpTest extends PHPUnit_Framework_TestCase {
      * whose class uses a namespace.
      */
     public function testMatchesReturnsTrueIfExpressionDoesNotMatchNamespacedClass() {
-        
+        $this->assertNotMatches('Demo\Package\.*::show', 'Demo\AnotherPackage\MyClass::show');
+    }
+    
+    /**
+     * Asserts that the given expression matches the provided method.
+     *
+     * @param string $expression
+     * @param string $method
+     */
+    protected function assertMatches($expression, $method) {
+        $message = '"' . $expression . '" does not match "' . $method . '".';
+        $this->assertTrue($this->create($expression)->matches($method), $message);
+    }
+    
+    /**
+     * Asserts that the given expression does not match the provided method.
+     *
+     * @param string $expression
+     * @param string $method
+     */
+    protected function assertNotMatches($expression, $method) {
+        $message = '"' . $expression . '" matches "' . $method . '".';
+        $this->assertFalse($this->create($expression)->matches($method), $message);
     }
     
     /**
@@ -89,7 +112,7 @@ class AspectPHP_Pointcut_RegExpTest extends PHPUnit_Framework_TestCase {
      * @return AspectPHP_Pointcut_RegExp
      */
     protected function create($expression) {
-        
+        return new AspectPHP_Pointcut_RegExp($expression);
     }
     
 }
