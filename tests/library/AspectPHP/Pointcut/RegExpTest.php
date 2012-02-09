@@ -28,30 +28,56 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
  */
 class AspectPHP_Pointcut_RegExpTest extends PHPUnit_Framework_TestCase {
     
+    /**
+     * Ensures that the constructor throws an exception if an empty string
+     * is provided.
+     */
     public function testConstructorThrowsExceptionIfEmptyStringIsProvided() {
         
     }
     
+    /**
+     * Ensures that the constructor throws an exception if no string is provided.
+     */
     public function testConstructorThrowsExceptionIfNoStringIsProvided() {
         
     }
     
+    /**
+     * Checks if matches() returns a boolean value.
+     */
     public function testMatchesReturnsBoolean() {
         
     }
     
+    /**
+     * Ensures that matches() returns true if the expression matches
+     * the provided method.
+     */
     public function testMatchesReturnsTrueIfExpressionMatchesMethod() {
         
     }
     
+    /**
+     * Ensures that matches() returns false if the expression does not match
+     * the provided method.
+     */
     public function testMatchesReturnsFalseIfExpressionDoesNotMatchMethod() {
         
     }
     
+    /**
+     * Ensures that matches() returns true if the expression matches a method
+     * whose class uses a namespace.
+     */
     public function testMatchesReturnsTrueIfExpressionMatchesNamespacedClass() {
         
     }
     
+    /**
+     * Ensures that matches() returns false if the expression does not match a method
+     * whose class uses a namespace.
+     */
     public function testMatchesReturnsTrueIfExpressionDoesNotMatchNamespacedClass() {
         
     }
