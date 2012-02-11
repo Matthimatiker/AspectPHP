@@ -26,12 +26,13 @@ class AspectPHP_Code_Extractor {
      *
      * Example:
      * <code>
+     * // Source contains something like "public function myMethod() {[...]".
      * $source = $extractor->getSource('MyClass::myMethod');
      * </code>
      *
-     * @param string $method
-     * @return string
-     * @throws InvalidArgumentException
+     * @param string $method The method identifier.
+     * @return string The extracted source code.
+     * @throws InvalidArgumentException If the method does not exist.
      */
     public function getSource($method) {
         
