@@ -22,7 +22,12 @@
 class AspectPHP_Code_Extractor {
     
     /**
+     * Returns the source code of the given method.
      *
+     * Example:
+     * <code>
+     * $source = $extractor->getSource('MyClass::myMethod');
+     * </code>
      *
      * @param string $method
      * @return string
