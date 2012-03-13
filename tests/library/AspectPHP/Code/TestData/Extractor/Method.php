@@ -22,10 +22,13 @@ class Extractor_Method
     
     /**
      * A method with doc block.
+     *
+     * @param integer $value
+     * @return integer
      */
-    public function withDocBlock()
+    public function withDocBlock($value = 7)
     {
-        $a = 42 - 7;
+        $a = 42 - $value;
         return $a;
     }
     
