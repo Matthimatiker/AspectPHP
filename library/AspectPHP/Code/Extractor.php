@@ -37,12 +37,27 @@ class AspectPHP_Code_Extractor {
     public function getSource($methodIdentifier)
     {
         $reflection   = $this->toReflectionObject($methodIdentifier);
-        $docBlock     = $reflection->getDocComment();
-        $fullSource   = file($reflection->getFileName());
-        $linesOfCode  = $reflection->getEndLine() - $reflection->getStartLine() + 1;
-        $methodSource = array_slice($fullSource, $reflection->getStartLine() - 1, $linesOfCode);
-        $methodSource = implode('', $methodSource);
-        return '    ' . $docBlock . PHP_EOL . rtrim($methodSource);
+        return $this->extractCode($reflection);
+        
+    }
+    
+    /**
+     * Extracts the source code of the given method.
+     *
+     * @param ReflectionMethod $reflection
+     * @return string The source code.
+     */
+    protected function extractCode(ReflectionMethod $reflection)
+    {
+        $fullSource  = file($reflection->getFileName());
+        $linesOfCode = $reflection->getEndLine() - $reflection->getStartLine() + 1;
+        $source      = array_slice($fullSource, $reflection->getStartLine() - 1, $linesOfCode);
+        $source      = rtrim(implode('', $source));
+        $docBlock    = $reflection->getDocComment();
+        if ($docBlock !== false) {
+            $source = '    ' . $docBlock . PHP_EOL . $source;
+        }
+        return $source;
     }
     
     /**
