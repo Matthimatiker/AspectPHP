@@ -30,12 +30,31 @@ class AspectPHP_Code_Extractor {
      * $source = $extractor->getSource('MyClass::myMethod');
      * </code>
      *
-     * @param string $method The method identifier.
+     * @param string $methodIdentifier The method identifier.
      * @return string The extracted source code.
      * @throws InvalidArgumentException If the method does not exist.
      */
-    public function getSource($method) {
-        
+    public function getSource($methodIdentifier)
+    {
+        $parts = explode('::', $methodIdentifier);
+        if (count($parts) !== 2) {
+            throw new InvalidArgumentException('Method identifier expected.');
+        }
+        list($class, $method) = $parts;
+        if (!class_exists($class, true)) {
+            throw new InvalidArgumentException('Class "' . $class . '" does not exist.');
+        }
+        $reflection = new ReflectionClass($class);
+        if (!$reflection->hasMethod($method)) {
+            throw new InvalidArgumentException('Method "' . $method . '" does not exist in class "' . $class . '".');
+        }
+        $methodReflection = $reflection->getMethod($method);
+        $docBlock         = $methodReflection->getDocComment();
+        $fullSource       = file($methodReflection->getFileName());
+        $linesOfCode      = $methodReflection->getEndLine() - $methodReflection->getStartLine() + 1;
+        $methodSource     = array_slice($fullSource, $methodReflection->getStartLine() - 1, $linesOfCode);
+        $methodSource     = implode('', $methodSource);
+        return '    ' . $docBlock . PHP_EOL . rtrim($methodSource);
     }
     
 }
