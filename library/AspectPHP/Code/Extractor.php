@@ -22,6 +22,15 @@
 class AspectPHP_Code_Extractor {
     
     /**
+     * Cached source code by method identifier.
+     *
+     * The identifier is used as key, the source code as value.
+     *
+     * @var array(string=>string)
+     */
+    protected $sourceByMethod = array();
+    
+    /**
      * Returns the source code of the given method.
      *
      * Example:
@@ -36,9 +45,11 @@ class AspectPHP_Code_Extractor {
      */
     public function getSource($methodIdentifier)
     {
-        $reflection   = $this->toReflectionObject($methodIdentifier);
-        return $this->extractCode($reflection);
-        
+        if (!isset($this->sourceByMethod[$methodIdentifier])) {
+            $reflection = $this->toReflectionObject($methodIdentifier);
+            $this->sourceByMethod[$methodIdentifier] = $this->extractCode($reflection);
+        }
+        return $this->sourceByMethod[$methodIdentifier];
     }
     
     /**
