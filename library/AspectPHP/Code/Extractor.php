@@ -36,6 +36,24 @@ class AspectPHP_Code_Extractor {
      */
     public function getSource($methodIdentifier)
     {
+        $reflection   = $this->toReflectionObject($methodIdentifier);
+        $docBlock     = $reflection->getDocComment();
+        $fullSource   = file($reflection->getFileName());
+        $linesOfCode  = $reflection->getEndLine() - $reflection->getStartLine() + 1;
+        $methodSource = array_slice($fullSource, $reflection->getStartLine() - 1, $linesOfCode);
+        $methodSource = implode('', $methodSource);
+        return '    ' . $docBlock . PHP_EOL . rtrim($methodSource);
+    }
+    
+    /**
+     * Returns the reflection object for the given method.
+     *
+     * @param string $methodIdentifier
+     * @return ReflectionMethod
+     * @throws InvalidArgumentException If an invalid identifier is provided.
+     */
+    protected function toReflectionObject($methodIdentifier)
+    {
         $parts = explode('::', $methodIdentifier);
         if (count($parts) !== 2) {
             throw new InvalidArgumentException('Method identifier expected.');
@@ -48,13 +66,7 @@ class AspectPHP_Code_Extractor {
         if (!$reflection->hasMethod($method)) {
             throw new InvalidArgumentException('Method "' . $method . '" does not exist in class "' . $class . '".');
         }
-        $methodReflection = $reflection->getMethod($method);
-        $docBlock         = $methodReflection->getDocComment();
-        $fullSource       = file($methodReflection->getFileName());
-        $linesOfCode      = $methodReflection->getEndLine() - $methodReflection->getStartLine() + 1;
-        $methodSource     = array_slice($fullSource, $methodReflection->getStartLine() - 1, $linesOfCode);
-        $methodSource     = implode('', $methodSource);
-        return '    ' . $docBlock . PHP_EOL . rtrim($methodSource);
+        return $reflection->getMethod($method);
     }
     
 }
