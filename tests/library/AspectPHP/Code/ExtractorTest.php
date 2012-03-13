@@ -23,6 +23,46 @@
  */
 class AspectPHP_Code_ExtractorTest extends PHPUnit_Framework_TestCase {
     
+    public function testGetSourceThrowsExceptionIfInvalidMethodIdentifierIsProvided()
+    {
+        
+    }
+    
+    public function testGetSourceThrowsExceptionIfClassDoesNotExist()
+    {
+        
+    }
+    
+    public function testGetSourceThrowsExceptionIfMethodDoesNotExist()
+    {
+        
+    }
+    
+    public function testGetSourceReturnsMethodBody()
+    {
+        
+    }
+    
+    public function testGetSourceReturnsMethodSignature()
+    {
+        
+    }
+    
+    public function testGetSourceReturnsMethodDocBlock()
+    {
+        
+    }
+    
+    public function testGetSourceReturnsCorrectNumberOfLines()
+    {
+        
+    }
+    
+    public function testGetSourceIsDeterministic()
+    {
+        
+    }
+    
 }
 
 ?>
