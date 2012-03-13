@@ -26,7 +26,7 @@ class AspectPHP_Transformation_JoinPoints {
      *
      * @var AspectPHP_Code_Extractor
      */
-    protected $codeExtractor = null;
+    private static $codeExtractor = null;
     
     /**
      * The analyzer that is currently used to inspect the tokens.
@@ -198,10 +198,10 @@ class AspectPHP_Transformation_JoinPoints {
      */
     protected function getCodeExtractor()
     {
-        if ($this->codeExtractor === null) {
-            $this->codeExtractor = new AspectPHP_Code_Extractor();
+        if (self::$codeExtractor === null) {
+            self::$codeExtractor = new AspectPHP_Code_Extractor();
         }
-        return $this->codeExtractor;
+        return self::$codeExtractor;
     }
     
     /**
