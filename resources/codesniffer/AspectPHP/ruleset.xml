@@ -62,6 +62,8 @@
 	<rule ref="Generic.PHP.ForbiddenFunctions" />
 	<!-- Ensure that constants like true, false or null are lowercase. -->
 	<rule ref="Generic.PHP.LowerCaseConstant" />
+	<!-- AspectPHP does not use views, therefore short open tags are not allowed. -->
+    <rule ref="Generic.PHP.DisallowShortOpenTagSniff" />
 
     <!-- Enforce indention per spaces. -->
 	<rule ref="Generic.WhiteSpace.DisallowTabIndent" />
