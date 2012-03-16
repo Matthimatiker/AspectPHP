@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Ant build file that is used to gather statistics about the project.
+  
+  Per default the generated files are written to the build directory within the project root.
+  
+  Another build directory may be set via the build.dir property:
+  ant -Dbuild.dir=/path/to/my/build/dir
+  -->
+<project name="AspectPHP" basedir="." default="php-codesniffer">
+
+	<property file="${basedir}/build.properties" />
+	<property name="build.dir" value="${basedir}/build" description="The default build directory." />
+
+	<condition property="batch.extension" value=".bat" else="">
+		<os family="windows" />
+	</condition>
+
+	<target name="cleanup" description="Removes the build directory.">
+		<delete dir="${build.dir}" />
+	</target>
+
+	<target name="init" description="Initializes the build directory.">
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${build.dir}/logs" />
+		<mkdir dir="${build.dir}/errors" />
+	</target>
+
+	<target name="php-codesniffer" depends="init" description="Generates coding violation report.">
+		<!-- Use an absolute path to the ruleset file on linux. -->
+		<condition property="ruleset.path" value="${basedir}/" else="">
+			<os family="unix" />
+		</condition>
+		<exec executable="phpcs${batch.extension}" dir="${basedir}" error="${build.dir}/errors/codesniffer.txt">
+			<arg line="--report=checkstyle" />
+			<arg line="--standard='${ruleset.path}resources/codesniffer/AspectPHP/ruleset.xml'" />
+			<arg line="--encoding=utf-8" />
+			<arg line="--extensions=php" />
+			<arg line="--ignore=*/TestData/*" />
+			<arg line="--report-file=${build.dir}/logs/checkstyle.xml" />
+			<arg line="${basedir}" />
+		</exec>
+	</target>
+
+</project>
