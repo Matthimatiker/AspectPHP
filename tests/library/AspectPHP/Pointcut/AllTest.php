@@ -28,6 +28,29 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
  */
 class AspectPHP_Pointcut_AllTest extends PHPUnit_Framework_TestCase
 {
+
+    /**
+     * System under test.
+     *
+     * @var AspectPHP_Pointcut_All
+     */
+    protected $pointcut = null;
+    
+    /**
+     * See {@link PHPUnit_Framework_TestCase::setUp()} for details.
+     */
+    protected function setUp() {
+        parent::setUp();
+        $this->pointcut = new AspectPHP_Pointcut_All();
+    }
+    
+    /**
+     * See {@link PHPUnit_Framework_TestCase::tearDown()} for details.
+     */
+    protected function tearDown() {
+        $this->pointcut = null;
+        parent::tearDown();
+    }
     
 }
 
