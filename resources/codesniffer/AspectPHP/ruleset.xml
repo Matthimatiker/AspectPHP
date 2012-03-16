@@ -4,14 +4,18 @@
 
 	<rule ref="Generic.Classes.DuplicateClassName" />
 
-    <!-- Avoid empty statements like "if ($a === $b) {}" -->
+    <!-- Avoid empty statements like "if ($a === $b) {}". -->
 	<rule ref="Generic.CodeAnalysis.EmptyStatement" />
 	<rule ref="Generic.CodeAnalysis.UnusedFunctionParameter" />
-	<!-- Avoid complex for loops, for example "for (;true;) true;" -->
+	<!-- Avoid complex for loops, for example "for (;true;) true;". -->
 	<rule ref="Generic.CodeAnalysis.ForLoopShouldBeWhileLoop" />
+	<!-- Avoid function calls in for loops for performance reasons. -->
 	<rule ref="Generic.CodeAnalysis.ForLoopWithTestFunctionCall" />
+	<!-- Avoid constant condition in if statements like "if (true) {/*...*/}". -->
 	<rule ref="Generic.CodeAnalysis.UnconditionalIfStatement" />
+	<!-- Avoid final methods in final classes. -->
 	<rule ref="Generic.CodeAnalysis.UnnecessaryFinalModifier" />
+	<!-- Avoid overridden methods that delegate to its parent. -->
 	<rule ref="Generic.CodeAnalysis.UselessOverridingMethod" />
 
 	<rule ref="Generic.Commenting.Todo" />
