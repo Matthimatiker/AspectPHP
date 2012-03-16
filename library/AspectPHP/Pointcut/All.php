@@ -31,7 +31,7 @@ class AspectPHP_Pointcut_All implements AspectPHP_Pointcut
      * @return boolean
      */
     public function matches($method) {
-        
+        return true;
     }
     
 }
