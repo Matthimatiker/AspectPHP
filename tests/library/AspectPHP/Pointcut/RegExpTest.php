@@ -28,6 +28,14 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
 class AspectPHP_Pointcut_RegExpTest extends PHPUnit_Framework_TestCase {
     
     /**
+     * Checks if the class implements the AspectPHP_Pointcut interface.
+     */
+    public function testPointcutImplementsInterface() {
+        $pointcut = new AspectPHP_Pointcut_RegExp('ABC.*');
+        $this->assertInstanceOf('AspectPHP_Pointcut', $pointcut);
+    }
+    
+    /**
      * Ensures that the constructor throws an exception if an empty string
      * is provided.
      */
