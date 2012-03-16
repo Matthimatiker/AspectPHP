@@ -17,8 +17,10 @@
 	<!-- Avoid overridden methods that delegate to its parent. -->
 	<rule ref="Generic.CodeAnalysis.UselessOverridingMethod" />
 
+    <!-- Generate a warning if TODOs are encountered. -->
 	<rule ref="Generic.Commenting.Todo" />
 
+    <!-- Avoid inline control structures like "if ($a === $b) return true;". -->
 	<rule ref="Generic.ControlStructures.InlineControlStructure" />
 
 	<rule ref="Generic.Files.LineEndings" />
