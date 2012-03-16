@@ -6,7 +6,6 @@
 
     <!-- Avoid empty statements like "if ($a === $b) {}". -->
 	<rule ref="Generic.CodeAnalysis.EmptyStatement" />
-	<rule ref="Generic.CodeAnalysis.UnusedFunctionParameter" />
 	<!-- Avoid complex for loops, for example "for (;true;) true;". -->
 	<rule ref="Generic.CodeAnalysis.ForLoopShouldBeWhileLoop" />
 	<!-- Avoid function calls in for loops for performance reasons. -->
