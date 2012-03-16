@@ -89,4 +89,6 @@
 		<severity>0</severity>
 	</rule>
 
+    <rule ref="Zend.Files.ClosingTag" />
+
 </ruleset>
