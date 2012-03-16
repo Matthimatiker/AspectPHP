@@ -23,6 +23,7 @@
     <!-- Avoid inline control structures like "if ($a === $b) return true;". -->
 	<rule ref="Generic.ControlStructures.InlineControlStructure" />
 
+    <!-- Avoid lines that are too long. -->
 	<rule ref="Generic.Files.LineLength">
 		<properties>
 			<property name="lineLimit" value="120" />
@@ -30,15 +31,19 @@
 		</properties>
 	</rule>
 
+    <!-- Only one statement is permitted per line. -->
 	<rule ref="Generic.Formatting.DisallowMultipleStatements" />
+	<!-- Align assignments. -->
 	<rule ref="Generic.Formatting.MultipleStatementAlignment">
 		<properties>
 			<property name="maxPadding" value="5" />
 			<property name="ignoreMultiLine" value="true" />
 		</properties>
 	</rule>
+	<!-- Avoid spaces after casting, for example "(int) $number". -->
 	<rule ref="Generic.Formatting.NoSpaceAfterCast" />
 
+    <!-- Do not pass variables by reference. -->
 	<rule ref="Generic.Functions.CallTimePassByReference" />
 	<rule ref="Generic.Functions.OpeningFunctionBraceKernighanRitchie" />
 
