@@ -4,6 +4,7 @@
 
 	<rule ref="Generic.Classes.DuplicateClassName" />
 
+    <!-- Avoid empty statements like if ($a === $b) {} -->
 	<rule ref="Generic.CodeAnalysis.EmptyStatement" />
 	<rule ref="Generic.CodeAnalysis.UnusedFunctionParameter" />
 	<rule ref="Generic.CodeAnalysis.ForLoopShouldBeWhileLoop" />
