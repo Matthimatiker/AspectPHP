@@ -46,7 +46,7 @@
     <!-- Do not pass variables by reference. -->
 	<rule ref="Generic.Functions.CallTimePassByReference" />
 	<!-- Braces that opens a method body is expected in the line after the signature. -->
-	<rule ref="Generic.Functions.OpeningFunctionBraceBsdAllmanSniff" />
+	<rule ref="Generic.Functions.OpeningFunctionBraceBsdAllman" />
 
     <!-- Warn if the nesting level is too high. -->
 	<rule ref="Generic.Metrics.NestingLevel" />
@@ -63,7 +63,7 @@
 	<!-- Ensure that constants like true, false or null are lowercase. -->
 	<rule ref="Generic.PHP.LowerCaseConstant" />
 	<!-- AspectPHP does not use views, therefore short open tags are not allowed. -->
-    <rule ref="Generic.PHP.DisallowShortOpenTagSniff" />
+    <rule ref="Generic.PHP.DisallowShortOpenTag" />
 
     <!-- Enforce indention per spaces. -->
 	<rule ref="Generic.WhiteSpace.DisallowTabIndent" />
