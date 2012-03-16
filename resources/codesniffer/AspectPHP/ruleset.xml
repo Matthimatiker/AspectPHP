@@ -76,7 +76,6 @@
     <!-- Ensures that logical operators like "and" or "or" are not used. Use "&&" or "||" instead. -->
 	<rule ref="Squiz.Operators.ValidLogicalOperators" />
 
-	<rule ref="Squiz.PHP.Eval" />
 	<rule ref="Squiz.PHP.GlobalKeyword" />
 	<rule ref="Squiz.PHP.Heredoc" />
 	<rule ref="Squiz.PHP.NonExecutableCode" />
