@@ -52,6 +52,27 @@ class AspectPHP_Pointcut_AllTest extends PHPUnit_Framework_TestCase
         parent::tearDown();
     }
     
+	/**
+     * Checks if the class implements the AspectPHP_Pointcut interface.
+     */
+    public function testPointcutImplementsInterface() {
+        $this->assertInstanceOf('AspectPHP_Pointcut', $this->pointcut);
+    }
+    
+    /**
+     * Checks if matches() returns a boolean value.
+     */
+    public function testMatchesReturnsBoolean() {
+        $this->assertInternalType('boolean', $this->pointcut->matches(__METHOD__));
+    }
+    
+    /**
+     * Ensures that matches() returns true.
+     */
+    public function testMatchesReturnsTrue() {
+        $this->assertTrue($this->pointcut->matches(__METHOD__));
+    }
+    
 }
 
 ?>
