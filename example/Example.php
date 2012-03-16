@@ -32,5 +32,3 @@ $demo = new Demo();
 // Hello Matthias!
 // after sayHello
 $demo->sayHello('Matthias');
-
-?>

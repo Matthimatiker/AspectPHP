@@ -77,5 +77,3 @@ class AspectPHP_Environment {
     }
     
 }
-
-?>

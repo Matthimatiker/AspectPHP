@@ -117,5 +117,3 @@ class AspectPHP_Transformation_ReplaceTest extends PHPUnit_Framework_TestCase {
     }
     
 }
-
-?>

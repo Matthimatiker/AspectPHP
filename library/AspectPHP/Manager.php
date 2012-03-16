@@ -54,5 +54,3 @@ interface AspectPHP_Manager {
     public function getAspectsFor($method);
     
 }
-
-?>

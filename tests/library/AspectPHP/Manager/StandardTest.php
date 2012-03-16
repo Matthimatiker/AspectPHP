@@ -148,5 +148,3 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase {
     }
     
 }
-
-?>

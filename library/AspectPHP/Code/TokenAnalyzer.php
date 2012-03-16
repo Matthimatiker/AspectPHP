@@ -452,5 +452,3 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
     }
     
 }
-
-?>

@@ -43,5 +43,3 @@ interface AspectPHP_Aspect {
     public function afterThrowing(AspectPHP_JoinPoint $joinPoint);
     
 }
-
-?>

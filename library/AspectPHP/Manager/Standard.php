@@ -90,5 +90,3 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager {
     }
     
 }
-
-?>

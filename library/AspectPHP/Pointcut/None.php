@@ -35,5 +35,3 @@ class AspectPHP_Pointcut_None implements AspectPHP_Pointcut
     }
     
 }
-
-?>

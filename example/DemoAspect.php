@@ -51,5 +51,3 @@ class DemoAspect implements AspectPHP_Aspect {
     }
     
 }
-
-?>

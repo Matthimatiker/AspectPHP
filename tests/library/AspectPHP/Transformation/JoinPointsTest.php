@@ -459,5 +459,3 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
     }
     
 }
-
-?>

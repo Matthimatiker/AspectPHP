@@ -36,5 +36,3 @@ interface AspectPHP_Pointcut {
     public function matches($method);
     
 }
-
-?>

@@ -74,5 +74,3 @@ class AspectPHP_Pointcut_NoneTest extends PHPUnit_Framework_TestCase
     }
     
 }
-
-?>

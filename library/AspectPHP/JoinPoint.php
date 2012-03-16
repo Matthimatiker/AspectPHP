@@ -274,5 +274,3 @@ class AspectPHP_JoinPoint {
     }
     
 }
-
-?>

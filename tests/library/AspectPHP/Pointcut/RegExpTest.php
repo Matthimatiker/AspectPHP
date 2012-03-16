@@ -124,5 +124,3 @@ class AspectPHP_Pointcut_RegExpTest extends PHPUnit_Framework_TestCase {
     }
     
 }
-
-?>

@@ -321,5 +321,3 @@ class AspectPHP_Transformation_JoinPoints {
     }
     
 }
-
-?>

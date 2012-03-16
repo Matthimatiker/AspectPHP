@@ -17,5 +17,3 @@ define('APPLICATION_ENV', 'unittests');
 
 /** Load the default configuration. */
 require_once(dirname(__FILE__) . '/../Environment.config.php');
-
-?>

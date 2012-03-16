@@ -285,5 +285,3 @@ class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase {
     }
     
 }
-
-?>

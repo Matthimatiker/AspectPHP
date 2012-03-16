@@ -414,5 +414,3 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
     }
     
 }
-
-?>

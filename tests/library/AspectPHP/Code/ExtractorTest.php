@@ -151,5 +151,3 @@ class AspectPHP_Code_ExtractorTest extends PHPUnit_Framework_TestCase {
     }
     
 }
-
-?>

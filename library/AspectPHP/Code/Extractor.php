@@ -96,5 +96,3 @@ class AspectPHP_Code_Extractor {
     }
     
 }
-
-?>

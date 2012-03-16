@@ -74,5 +74,3 @@ class AspectPHP_Transformation_Replace {
     }
     
 }
-
-?>

@@ -238,5 +238,3 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
     }
     
 }
-
-?>

@@ -97,5 +97,3 @@ class AspectPHP_Pointcut_RegExp implements AspectPHP_Pointcut {
     }
     
 }
-
-?>

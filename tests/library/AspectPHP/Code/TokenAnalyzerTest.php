@@ -732,5 +732,3 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
     }
     
 }
-
-?>
