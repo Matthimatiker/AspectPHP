@@ -4,9 +4,10 @@
 
 	<rule ref="Generic.Classes.DuplicateClassName" />
 
-    <!-- Avoid empty statements like if ($a === $b) {} -->
+    <!-- Avoid empty statements like "if ($a === $b) {}" -->
 	<rule ref="Generic.CodeAnalysis.EmptyStatement" />
 	<rule ref="Generic.CodeAnalysis.UnusedFunctionParameter" />
+	<!-- Avoid complex for loops, for example "for (;true;) true;" -->
 	<rule ref="Generic.CodeAnalysis.ForLoopShouldBeWhileLoop" />
 	<rule ref="Generic.CodeAnalysis.ForLoopWithTestFunctionCall" />
 	<rule ref="Generic.CodeAnalysis.UnconditionalIfStatement" />
