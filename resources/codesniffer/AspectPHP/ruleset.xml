@@ -76,11 +76,16 @@
     <!-- Ensures that logical operators like "and" or "or" are not used. Use "&&" or "||" instead. -->
 	<rule ref="Squiz.Operators.ValidLogicalOperators" />
 
+    <!-- Do not use the "global" keyword. -->
 	<rule ref="Squiz.PHP.GlobalKeyword" />
+	<!-- Do not use Heredoc strings (started by <<<IDENTIFIER).  -->
 	<rule ref="Squiz.PHP.Heredoc" />
+	<!-- Avoid code that is not executable, for example after a return statement. -->
 	<rule ref="Squiz.PHP.NonExecutableCode" />
 
+    <!-- Enforce documentation of exceptions. -->
 	<rule ref="Squiz.Commenting.FunctionCommentThrowTag" />
+	<!-- Check for valid method comments. -->
 	<rule ref="PEAR.Commenting.FunctionComment" />
 	<rule ref="PEAR.Commenting.FunctionComment.MissingReturn">
 		<!-- "return void" is not mandatory. -->
@@ -102,6 +107,7 @@
 		<!-- Aligning parameter comments is not required. -->
 		<severity>0</severity>
 	</rule>
+	<!-- Check for variable comments. -->
 	<rule ref="Squiz.Commenting.VariableComment" />
 	<rule ref="Squiz.Commenting.VariableComment.IncorrectVarType">
 		<!-- Squiz variable style is not required. -->
@@ -112,6 +118,7 @@
 		<severity>0</severity>
 	</rule>
 
+    <!-- Ensure that PHP files do not contain closing tags ("?>"). -->
     <rule ref="Zend.Files.ClosingTag" />
 
 </ruleset>
