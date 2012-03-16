@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="AspectPHP">
+	<description>The AspectPHP coding standard.</description>
+
+	<rule ref="Generic.Classes.DuplicateClassName" />
+
+	<rule ref="Generic.CodeAnalysis.EmptyStatement" />
+	<rule ref="Generic.CodeAnalysis.UnusedFunctionParameter" />
+	<rule ref="Generic.CodeAnalysis.ForLoopShouldBeWhileLoop" />
+	<rule ref="Generic.CodeAnalysis.ForLoopWithTestFunctionCall" />
+	<rule ref="Generic.CodeAnalysis.UnconditionalIfStatement" />
+	<rule ref="Generic.CodeAnalysis.UnnecessaryFinalModifier" />
+	<rule ref="Generic.CodeAnalysis.UselessOverridingMethod" />
+
+	<rule ref="Generic.Commenting.Todo" />
+
+	<rule ref="Generic.ControlStructures.InlineControlStructure" />
+
+	<rule ref="Generic.Files.LineEndings" />
+	<rule ref="Generic.Files.LineLength">
+		<properties>
+			<property name="lineLimit" value="120" />
+			<property name="absoluteLineLimit" value="150" />
+		</properties>
+	</rule>
+
+	<rule ref="Generic.Formatting.DisallowMultipleStatements" />
+	<rule ref="Generic.Formatting.MultipleStatementAlignment">
+		<properties>
+			<property name="maxPadding" value="5" />
+			<property name="ignoreMultiLine" value="true" />
+		</properties>
+	</rule>
+	<rule ref="Generic.Formatting.NoSpaceAfterCast" />
+
+	<rule ref="Generic.Functions.CallTimePassByReference" />
+	<rule ref="Generic.Functions.OpeningFunctionBraceKernighanRitchie" />
+
+	<rule ref="Generic.Metrics.NestingLevel" />
+	<rule ref="Generic.Metrics.CyclomaticComplexity" />
+
+	<rule ref="Generic.NamingConventions.ConstructorName" />
+	<rule ref="Generic.NamingConventions.UpperCaseConstantName" />
+
+	<rule ref="Generic.PHP.ForbiddenFunctions" />
+	<rule ref="Generic.PHP.LowerCaseConstant" />
+
+	<rule ref="Generic.WhiteSpace.DisallowTabIndent" />
+	<rule ref="Generic.WhiteSpace.ScopeIndent" />
+
+	<rule ref="Squiz.Arrays.ArrayBracketSpacing" />
+
+	<rule ref="Squiz.Operators.ValidLogicalOperators" />
+
+	<rule ref="Squiz.PHP.Eval" />
+	<rule ref="Squiz.PHP.GlobalKeyword" />
+	<rule ref="Squiz.PHP.Heredoc" />
+	<rule ref="Squiz.PHP.NonExecutableCode" />
+
+	<rule ref="Squiz.Commenting.FunctionCommentThrowTag" />
+	<rule ref="PEAR.Commenting.FunctionComment" />
+	<rule ref="PEAR.Commenting.FunctionComment.MissingReturn">
+		<!-- "return void" is not mandatory. -->
+		<severity>0</severity>
+	</rule>
+	<rule ref="PEAR.Commenting.FunctionComment.MissingParamComment">
+		<!-- An own comment for each parameter is not mandatory. -->
+		<severity>0</severity>
+	</rule>
+	<rule ref="PEAR.Commenting.FunctionComment.SpacingAfterParams">
+		<!-- Blank line after parameters is not required. -->
+		<severity>0</severity>
+	</rule>
+	<rule ref="PEAR.Commenting.FunctionComment.ParameterNamesNotAligned">
+		<!-- Aligning parameters is not required. -->
+		<severity>0</severity>
+	</rule>
+	<rule ref="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned">
+		<!-- Aligning parameter comments is not required. -->
+		<severity>0</severity>
+	</rule>
+	<rule ref="Squiz.Commenting.VariableComment" />
+	<rule ref="Squiz.Commenting.VariableComment.IncorrectVarType">
+		<!-- Squiz variable style is not required. -->
+		<severity>0</severity>
+	</rule>
+	<rule ref="Squiz.Commenting.VariableComment.ShortSingleLine">
+		<!-- Short description may span multiple lines. -->
+		<severity>0</severity>
+	</rule>
+
+</ruleset>
