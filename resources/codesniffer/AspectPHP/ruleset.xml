@@ -58,9 +58,12 @@
 	<!-- Ensures that constant names are uppercase. -->
 	<rule ref="Generic.NamingConventions.UpperCaseConstantName" />
 
+    <!-- Do not use alias function, for example "sizeof". -->
 	<rule ref="Generic.PHP.ForbiddenFunctions" />
+	<!-- Ensure that constants like true, false or null are lowercase. -->
 	<rule ref="Generic.PHP.LowerCaseConstant" />
 
+    <!-- Enforce indention per spaces. -->
 	<rule ref="Generic.WhiteSpace.DisallowTabIndent" />
 	<rule ref="Generic.WhiteSpace.ScopeIndent" />
 
