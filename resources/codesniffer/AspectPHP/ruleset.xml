@@ -67,10 +67,13 @@
 
     <!-- Enforce indention per spaces. -->
 	<rule ref="Generic.WhiteSpace.DisallowTabIndent" />
+	<!-- Check for correct indention of structures. -->
 	<rule ref="Generic.WhiteSpace.ScopeIndent" />
 
+    <!-- Avoid spaces around array brackets, for example "$a [1] = 'x';". -->
 	<rule ref="Squiz.Arrays.ArrayBracketSpacing" />
 
+    <!-- Ensures that logical operators like "and" or "or" are not used. Use "&&" or "||" instead. -->
 	<rule ref="Squiz.Operators.ValidLogicalOperators" />
 
 	<rule ref="Squiz.PHP.Eval" />
