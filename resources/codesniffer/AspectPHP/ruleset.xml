@@ -2,6 +2,7 @@
 <ruleset name="AspectPHP">
 	<description>The AspectPHP coding standard.</description>
 
+    <!-- Ensure that class and interface names are used only once. -->
 	<rule ref="Generic.Classes.DuplicateClassName" />
 
     <!-- Avoid empty statements like "if ($a === $b) {}". -->
