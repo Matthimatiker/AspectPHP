@@ -48,10 +48,14 @@
 	<!-- Braces that opens a method body is expected in the line after the signature. -->
 	<rule ref="Generic.Functions.OpeningFunctionBraceBsdAllmanSniff" />
 
+    <!-- Warn if the nesting level is too high. -->
 	<rule ref="Generic.Metrics.NestingLevel" />
+	<!-- Avoid complex methods. -->
 	<rule ref="Generic.Metrics.CyclomaticComplexity" />
 
+    <!-- Only "__construct" is allowed as constructor name. -->
 	<rule ref="Generic.NamingConventions.ConstructorName" />
+	<!-- Ensures that constant names are uppercase. -->
 	<rule ref="Generic.NamingConventions.UpperCaseConstantName" />
 
 	<rule ref="Generic.PHP.ForbiddenFunctions" />
