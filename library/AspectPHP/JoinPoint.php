@@ -76,7 +76,8 @@ class AspectPHP_JoinPoint {
      * @param string $method The method.
      * @param object|string $context The method context (object or class name).
      */
-    public function __construct($method, $context) {
+    public function __construct($method, $context)
+    {
         $this->method  = new ReflectionMethod($context, $method);
         $this->context = $context;
     }
@@ -86,7 +87,8 @@ class AspectPHP_JoinPoint {
      *
      * @return array(mixed)
      */
-    public function getArguments() {
+    public function getArguments()
+    {
         return $this->arguments;
     }
     
@@ -96,7 +98,8 @@ class AspectPHP_JoinPoint {
      * @param array(mixed) $arguments The arguments that are used to call the method.
      * @return AspectPHP_JoinPoint Provides a fluent interface.
      */
-    public function setArguments($arguments) {
+    public function setArguments($arguments)
+    {
         
         $this->arguments = $arguments + $this->getDefaultParameters();
         return $this;
@@ -122,7 +125,8 @@ class AspectPHP_JoinPoint {
      * @return mixed
      * @throws InvalidArgumentException If an invalid parameter name or index is provided.
      */
-    public function getArgument($nameOrIndex) {
+    public function getArgument($nameOrIndex)
+    {
         $index = (is_string($nameOrIndex)) ? $this->getPositionFor($nameOrIndex) : $nameOrIndex;
         if( $index >= $this->method->getNumberOfParameters() ) {
             throw new InvalidArgumentException('Parameter #' . $index . ' was not declared.');
@@ -135,7 +139,8 @@ class AspectPHP_JoinPoint {
      *
      * @return string
      */
-    public function getClass() {
+    public function getClass()
+    {
         return $this->method->class;
     }
     
@@ -144,7 +149,8 @@ class AspectPHP_JoinPoint {
      *
      * @return string
      */
-    public function getMethod() {
+    public function getMethod()
+    {
         return $this->method->name;
     }
     
@@ -156,7 +162,8 @@ class AspectPHP_JoinPoint {
      *
      * @return object|string
      */
-    public function getContext() {
+    public function getContext()
+    {
         return $this->context;
     }
     
@@ -165,7 +172,8 @@ class AspectPHP_JoinPoint {
      *
      * @return array|string|Closure A callback.
      */
-    public function getTarget() {
+    public function getTarget()
+    {
         if( $this->target === null ) {
             return array($this->getContext(), $this->getMethod());
         }
@@ -181,7 +189,8 @@ class AspectPHP_JoinPoint {
      * @return AspectPHP_JoinPoint Provides a fluent interface.
      * @throws InvalidArgumentException If an invalid callback is provided.
      */
-    public function setTarget($callback) {
+    public function setTarget($callback)
+    {
         // Check only the syntax of the callback as it will
         // be called in another context.
         if( !is_callable($callback, true) ) {
@@ -196,7 +205,8 @@ class AspectPHP_JoinPoint {
      *
      * @return mixed|null
      */
-    public function getReturnValue() {
+    public function getReturnValue()
+    {
         return $this->returnValue;
     }
     
@@ -206,7 +216,8 @@ class AspectPHP_JoinPoint {
      * @param mixed $value
      * @return AspectPHP_JoinPoint Provides a fluent interface.
      */
-    public function setReturnValue($value) {
+    public function setReturnValue($value)
+    {
         $this->returnValue = $value;
         return $this;
     }
@@ -218,7 +229,8 @@ class AspectPHP_JoinPoint {
      *
      * @return Exception|null
      */
-    public function getException() {
+    public function getException()
+    {
         return $this->exception;
     }
     
@@ -230,7 +242,8 @@ class AspectPHP_JoinPoint {
      * @param Exception|null $exception
      * @return AspectPHP_JoinPoint Provides a fluent interface.
      */
-    public function setException($exception) {
+    public function setException($exception)
+    {
         if( $exception !== null && !($exception instanceof Exception) ) {
             throw new InvalidArgumentException('Expected instance of Exception or null.');
         }
@@ -246,7 +259,8 @@ class AspectPHP_JoinPoint {
      *
      * @return array(integer=>mixed)
      */
-    protected function getDefaultParameters() {
+    protected function getDefaultParameters()
+    {
         $defaults = array();
         foreach( $this->method->getParameters() as $parameter) {
             /* @var $parameter ReflectionParameter */
@@ -263,7 +277,8 @@ class AspectPHP_JoinPoint {
      * @param string $parameterName
      * @return integer
      */
-    protected function getPositionFor($parameterName) {
+    protected function getPositionFor($parameterName)
+    {
         foreach( $this->method->getParameters() as $parameter) {
             /* @var $parameter ReflectionParameter */
             if( $parameter->getName() === $parameterName ) {

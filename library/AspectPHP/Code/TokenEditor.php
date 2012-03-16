@@ -41,7 +41,8 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
      * @param integer|array(integer) $indexOrIndexes
      * @param string|array(integer|string) $newToken
      */
-    public function replace($indexOrIndexes, $newToken) {
+    public function replace($indexOrIndexes, $newToken)
+    {
         $indexes = is_array($indexOrIndexes) ? $indexOrIndexes : array($indexOrIndexes);
         foreach( $indexes as $index ) {
             /* @var $index integer */
@@ -64,7 +65,8 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
      *
      * @param integer|array(integer) $indexOrIndexes
      */
-    public function remove($indexOrIndexes) {
+    public function remove($indexOrIndexes)
+    {
         $indexes = is_array($indexOrIndexes) ? $indexOrIndexes : array($indexOrIndexes);
         foreach( $indexes as $index ) {
             /* @var $index integer */
@@ -80,7 +82,8 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
      * @param integer $index The referenced position.
      * @param array(string|array(integer|string)) $tokens A list of tokens.
      */
-    public function insertBefore($index, array $tokens) {
+    public function insertBefore($index, array $tokens)
+    {
         $change = $this->createChange('insertBefore', $index);
         $change->tokens = $tokens;
         $this->registerChange($change);
@@ -95,7 +98,8 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
      * @param string $newName
      * @throws InvalidArgumentException If no T_STRING token is specified.
      */
-    public function rename($index, $newName) {
+    public function rename($index, $newName)
+    {
         $this->assertIsIndex($index);
         if( !$this->isOfType($index, T_STRING) ) {
             $message = 'Expected token of type T_STRING.';
@@ -111,21 +115,24 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
     /**
      * Commits all pending changes.
      */
-    public function commit() {
+    public function commit()
+    {
         $this->applyChanges();
     }
     
     /**
      * Discards all queued changes.
      */
-    public function discard() {
+    public function discard()
+    {
         $this->changes = array();
     }
     
     /**
      * Applies all queued changes.
      */
-    protected function applyChanges() {
+    protected function applyChanges()
+    {
         // The changes are sorted by refIndex and are applied in
         // ascending order. That allows us to handle the index
         // drift that may occur.
@@ -147,7 +154,8 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
      * @param stdClass $change
      * @return integer The index drift.
      */
-    protected function applyReplace(stdClass $change) {
+    protected function applyReplace(stdClass $change)
+    {
         $this->tokens[$change->refIndex] = $change->newToken;
         return 0;
     }
@@ -158,7 +166,8 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
      * @param stdClass $change
      * @return integer The index drift.
      */
-    protected function applyRemove(stdClass $change) {
+    protected function applyRemove(stdClass $change)
+    {
         unset($this->tokens[$change->refIndex]);
         // Normalize the keys.
         $this->tokens = array_values($this->tokens);
@@ -171,7 +180,8 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
      * @param stdClass $change
      * @return integer The index drift.
      */
-    protected function applyInsertBefore(stdClass $change) {
+    protected function applyInsertBefore(stdClass $change)
+    {
         $tokens = $change->tokens;
         array_splice($this->tokens, $change->refIndex, 0, $tokens);
         return count($tokens);
@@ -184,7 +194,8 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
      * @param stdClass $change
      * @return array A callback.
      */
-    protected function getApplyMethod(stdClass $change) {
+    protected function getApplyMethod(stdClass $change)
+    {
         return array($this, 'apply' . ucfirst($change->type));
     }
     
@@ -195,7 +206,8 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
      * @param integer $refIndex The reference index.
      * @return stdClass
      */
-    protected function createChange($type, $refIndex) {
+    protected function createChange($type, $refIndex)
+    {
         $this->assertIsIndex($refIndex);
         $change = new stdClass();
         $change->type        = $type;
@@ -209,7 +221,8 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
      *
      * @param stdClass $change
      */
-    protected function registerChange(stdClass $change) {
+    protected function registerChange(stdClass $change)
+    {
         if( $change->modifiesRef ) {
             // The last change that modifies a token overwrites
             // previous modification requests for that token.
@@ -233,7 +246,8 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
      * @param stdClass $right
      * @return integer
      */
-    private function compareByRefIndex(stdClass $left, stdClass $right) {
+    private function compareByRefIndex(stdClass $left, stdClass $right)
+    {
         return $left->refIndex - $right->refIndex;
     }
     

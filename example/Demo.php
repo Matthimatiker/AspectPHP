@@ -28,7 +28,8 @@ class Demo {
      *
      * @param string $name
      */
-    public function sayHello($name) {
+    public function sayHello($name)
+    {
         echo 'Hello ' . $name . '!' . PHP_EOL;
         return $name;
     }

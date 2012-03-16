@@ -28,7 +28,8 @@ class DemoAspect implements AspectPHP_Aspect {
      *
      * @param AspectPHP_JoinPoint $joinPoint
      */
-    public function before(AspectPHP_JoinPoint $joinPoint) {
+    public function before(AspectPHP_JoinPoint $joinPoint)
+    {
         echo 'before ' . $joinPoint->getMethod() . PHP_EOL;
     }
     
@@ -37,7 +38,8 @@ class DemoAspect implements AspectPHP_Aspect {
      *
      * @param AspectPHP_JoinPoint $joinPoint
      */
-    public function afterReturning(AspectPHP_JoinPoint $joinPoint) {
+    public function afterReturning(AspectPHP_JoinPoint $joinPoint)
+    {
         echo 'after ' . $joinPoint->getMethod() . PHP_EOL;
     }
     
@@ -46,7 +48,8 @@ class DemoAspect implements AspectPHP_Aspect {
      *
      * @param AspectPHP_JoinPoint $joinPoint
      */
-    public function afterThrowing(AspectPHP_JoinPoint $joinPoint) {
+    public function afterThrowing(AspectPHP_JoinPoint $joinPoint)
+    {
         
     }
     

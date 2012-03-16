@@ -38,7 +38,8 @@ class AspectPHP_Transformation_ReplaceTest extends PHPUnit_Framework_TestCase {
     /**
      * See {@link PHPUnit_Framework_TestCase::setUp()} for details.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         parent::setUp();
         $this->transformation = new AspectPHP_Transformation_Replace();
     }
@@ -46,7 +47,8 @@ class AspectPHP_Transformation_ReplaceTest extends PHPUnit_Framework_TestCase {
     /**
      * See {@link PHPUnit_Framework_TestCase::tearDown()} for details.
      */
-    protected function tearDown() {
+    protected function tearDown()
+    {
         $this->transformation = null;
         parent::tearDown();
     }
@@ -54,7 +56,8 @@ class AspectPHP_Transformation_ReplaceTest extends PHPUnit_Framework_TestCase {
     /**
      * Ensures that the provided source code is not modified if no rules were provided.
      */
-    public function testTransformationDoesNothingIfNoRulesWereProvided() {
+    public function testTransformationDoesNothingIfNoRulesWereProvided()
+    {
         $source = '<?php ?>';
         $this->assertEquals($source, $this->transformation->transform($source));
     }
@@ -62,7 +65,8 @@ class AspectPHP_Transformation_ReplaceTest extends PHPUnit_Framework_TestCase {
     /**
      * Checks if the transformation replaces the specified tokens.
      */
-    public function testTransformationReplacesSpecifiedTokens() {
+    public function testTransformationReplacesSpecifiedTokens()
+    {
         $rules = array(
             T_OPEN_TAG => ''
         );
@@ -75,7 +79,8 @@ class AspectPHP_Transformation_ReplaceTest extends PHPUnit_Framework_TestCase {
     /**
      * Ensures that the transformation replaces all occurences of the provided tokens.
      */
-    public function testTransformationReplacesAllTokenOccurences() {
+    public function testTransformationReplacesAllTokenOccurences()
+    {
         $source = '<?php function hello() {} function bye() {} ?>';
         $rules = array(
             T_FUNCTION => ''
@@ -89,7 +94,8 @@ class AspectPHP_Transformation_ReplaceTest extends PHPUnit_Framework_TestCase {
     /**
      * Ensures that the transformation does not use rules that were overwritten.
      */
-    public function testTransformationDoesNotUseRulesThatWereOverwritten() {
+    public function testTransformationDoesNotUseRulesThatWereOverwritten()
+    {
         $rules = array(
             T_OPEN_TAG => ''
         );
@@ -107,7 +113,8 @@ class AspectPHP_Transformation_ReplaceTest extends PHPUnit_Framework_TestCase {
     /**
      * Checks if the correct replacement values are used.
      */
-    public function testTransformationUsesCorrectReplacementValues() {
+    public function testTransformationUsesCorrectReplacementValues()
+    {
         $rules = array(
             T_OPEN_TAG  => 'open',
             T_CLOSE_TAG => 'close'

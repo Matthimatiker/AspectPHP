@@ -66,7 +66,8 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
     /**
      * See {@link PHPUnit_Framework_TestCase::setUp()} for details.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         parent::setUp();
         $this->transformation = new AspectPHP_Transformation_JoinPoints();
         $this->original       = $this->getContent('Transformation.php');
@@ -91,7 +92,8 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
     /**
      * See {@link PHPUnit_Framework_TestCase::tearDown()} for details.
      */
-    protected function tearDown() {
+    protected function tearDown()
+    {
         $this->transformedInstance = null;
         $this->transformed         = null;
         $this->original            = null;
@@ -102,14 +104,16 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
     /**
      * Ensures that transform() returns a string.
      */
-    public function testTransformReturnsString() {
+    public function testTransformReturnsString()
+    {
         $this->assertInternalType('string', $this->transformation->transform($this->original));
     }
     
     /**
      * Checks if the same input always leads to the same output.
      */
-    public function testTransformIsDeterministic() {
+    public function testTransformIsDeterministic()
+    {
         $first  = $this->transformation->transform($this->original);
         $second = $this->transformation->transform($this->original);
         $this->assertEquals($first, $second);
@@ -118,7 +122,8 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
     /**
      * Tests if code is added by the transformation.
      */
-    public function testTransformationAddsCode() {
+    public function testTransformationAddsCode()
+    {
         $message = 'Code size did not increase as expected.';
         $this->assertGreaterThan(strlen($this->original), strlen($this->transformed), $message);
     }
@@ -126,14 +131,16 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
     /**
      * Ensures that the transformation does not change the method context ($this).
      */
-    public function testTransformationDoesNotChangeContext() {
+    public function testTransformationDoesNotChangeContext()
+    {
         $this->assertSame($this->transformedInstance, $this->transformedInstance->getContext());
     }
     
     /**
      * Ensures that the transformed code does not suppress notices.
      */
-    public function testTransformedCodeDoesNotSuppressNotices() {
+    public function testTransformedCodeDoesNotSuppressNotices()
+    {
         $this->setExpectedException('PHPUnit_Framework_Error_Notice');
         $this->transformedInstance->triggerNotice();
         
@@ -142,7 +149,8 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
     /**
      * Ensures that the transformed code does not suppress exceptions.
      */
-    public function testTransformedCodeDoesNotSuppressExceptions() {
+    public function testTransformedCodeDoesNotSuppressExceptions()
+    {
         $this->setExpectedException('RuntimeException');
         $this->transformedInstance->throwException();
     }
@@ -151,14 +159,16 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      * Ensures that the transformation does not change the line numbers of
      * the original code.
      */
-    public function testTransformationDoesNotChangeLineNumbers() {
+    public function testTransformationDoesNotChangeLineNumbers()
+    {
         $this->assertEquals(35, $this->transformedInstance->getLineNumber());
     }
     
     /**
      * Ensures that the transformation does not change the visibility of public methods.
      */
-    public function testTransformationDoesNotChangeVisibilityOfPublicMethods() {
+    public function testTransformationDoesNotChangeVisibilityOfPublicMethods()
+    {
         $method = $this->getMethodInfo('myPublicMethod');
         $this->assertTrue($method->isPublic());
     }
@@ -166,7 +176,8 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
 	/**
      * Ensures that the transformation does not change the visibility of protected methods.
      */
-    public function testTransformationDoesNotChangeVisibilityOfProtectedMethods() {
+    public function testTransformationDoesNotChangeVisibilityOfProtectedMethods()
+    {
         $method = $this->getMethodInfo('myProtectedMethod');
         $this->assertTrue($method->isProtected());
     }
@@ -174,7 +185,8 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
 	/**
      * Ensures that the transformation does not change the visibility of private methods.
      */
-    public function testTransformationDoesNotChangeVisibilityOfPrivateMethods() {
+    public function testTransformationDoesNotChangeVisibilityOfPrivateMethods()
+    {
         $method = $this->getMethodInfo('myPrivateMethod');
         $this->assertTrue($method->isPrivate());
     }
@@ -182,7 +194,8 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
     /**
      * Ensures that the transformation does not remove the static attribute from methods.
      */
-    public function testTransformationDoesNotRemoveStaticAttributeFromMethod() {
+    public function testTransformationDoesNotRemoveStaticAttributeFromMethod()
+    {
         $method = $this->getMethodInfo('myStaticMethod');
         $this->assertTrue($method->isStatic());
     }
@@ -190,7 +203,8 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
 	/**
      * Ensures that the transformation does not remove the final attribute from methods.
      */
-    public function testTransformationDoesNotRemoveFinalAttributeFromMethod() {
+    public function testTransformationDoesNotRemoveFinalAttributeFromMethod()
+    {
         $method = $this->getMethodInfo('myFinalMethod');
         $this->assertTrue($method->isFinal());
     }
@@ -199,7 +213,8 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      * Ensures that the transformation does not remove the final attribute
      * from the class.
      */
-    public function testTransformationDoesNotRemoveFinalAttributeFromClass() {
+    public function testTransformationDoesNotRemoveFinalAttributeFromClass()
+    {
         $class = $this->getClassInfo();
         $this->assertTrue($class->isFinal());
     }
@@ -210,7 +225,8 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      * Public methods might be exposed when reflection is used (for example to find
      * methods that arre available via webservice).
      */
-    public function testTransformationDoesNotAddPublicMethods() {
+    public function testTransformationDoesNotAddPublicMethods()
+    {
         $original   = $this->getOriginalClassInfo()->getMethods(ReflectionMethod::IS_PUBLIC);
         $transfomed = $this->getClassInfo()->getMethods(ReflectionMethod::IS_PUBLIC);
         $message = 'Number of public methods in original and transformed class differs.';
@@ -222,7 +238,8 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      *
      * Additional protected methods might caus conflicts in sub classes.
      */
-    public function testTransformationDoesNotAddProtectedMethods() {
+    public function testTransformationDoesNotAddProtectedMethods()
+    {
         $original   = $this->getOriginalClassInfo()->getMethods(ReflectionMethod::IS_PROTECTED);
         $transfomed = $this->getClassInfo()->getMethods(ReflectionMethod::IS_PROTECTED);
         $message = 'Number of protected methods in original and transformed class differs.';
@@ -235,7 +252,8 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      * The doc blocks might be used by scripts that rely on reflection and therefore
      * should not be changed.
      */
-    public function testTransformationDoesNotChangeMethodDocBlocks() {
+    public function testTransformationDoesNotChangeMethodDocBlocks()
+    {
         $original    = $this->getOriginalMethodInfo('myDocBlockMethod');
         $transformed = $this->getMethodInfo('myDocBlockMethod');
         $this->assertEquals($original->getDocComment(), $transformed->getDocComment());
@@ -244,7 +262,8 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
     /**
      * Ensures that code that does not belong to a class is not changed during transformation.
      */
-    public function testTransformationDoesNotChangeCodeThatDoesNotBelongToClass() {
+    public function testTransformationDoesNotChangeCodeThatDoesNotBelongToClass()
+    {
         $code = $this->getContent('NoClass.php');
         $this->assertEquals($code, $this->transformation->transform($code));
     }
@@ -252,7 +271,8 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
     /**
      * Checks if methods receive the parameters that were declared in the signature.
      */
-    public function testMethodsReceiveCorrectDeclaredParameters() {
+    public function testMethodsReceiveCorrectDeclaredParameters()
+    {
         $received = $this->transformedInstance->parameters(42, 7);
         $this->assertEquals(array(42, 7), $received);
     }
@@ -260,7 +280,8 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
     /**
      * Checks if methods receive variable parameters (that cannot be declared in the signature).
      */
-    public function testMethodsReceiveCorrectVariableParameters() {
+    public function testMethodsReceiveCorrectVariableParameters()
+    {
         $received = $this->transformedInstance->variableParameters(3, 2, 1);
         $this->assertEquals(array(3, 2, 1), $received);
     }
@@ -268,21 +289,24 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
     /**
      * Checks if the __CLASS__ constant has the correct value.
      */
-    public function testClassConstantHasCorrectValue() {
+    public function testClassConstantHasCorrectValue()
+    {
         $this->assertEquals(self::TRANSFORMED_CLASS, $this->transformedInstance->getClass());
     }
     
     /**
      * Checks if the __METHOD__ constant has the correct value.
      */
-    public function testMethodConstantHasCorrectValue() {
+    public function testMethodConstantHasCorrectValue()
+    {
         $this->assertEquals(self::TRANSFORMED_CLASS . '::getMethod', $this->transformedInstance->getMethod());
     }
     
     /**
      * Checks if the __FUNCTION__ constant has the correct value.
      */
-    public function testFunctionConstantHasCorrectValue() {
+    public function testFunctionConstantHasCorrectValue()
+    {
         $this->assertEquals('getFunction', $this->transformedInstance->getFunction());
     }
     
@@ -298,7 +322,8 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      * }
      * </code>
      */
-    public function testTransformationWorksWithMethodsWhoseVisibilityIsNotDeclaredExplicitly() {
+    public function testTransformationWorksWithMethodsWhoseVisibilityIsNotDeclaredExplicitly()
+    {
         $this->setExpectedException(null);
         $source      = $this->getContent('NoVisibility.php');
         $transformed = $this->transformation->transform($source);
@@ -309,7 +334,8 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      * Ensures that the transformation works even if the provided code does
      * not have any comment.
      */
-    public function testTransformationWorksEvenIfCodeDoesNotHaveAnyComment() {
+    public function testTransformationWorksEvenIfCodeDoesNotHaveAnyComment()
+    {
         $this->setExpectedException(null);
         $source      = $this->getContent('NoDocComment.php');
         $transformed = $this->transformation->transform($source);
@@ -321,7 +347,8 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
     /**
      * Ensures that the transformation does not change interface declarations.
      */
-    public function testTransformationDoesNotChangeInterfaces() {
+    public function testTransformationDoesNotChangeInterfaces()
+    {
         $this->setExpectedException(null);
         $source      = $this->getContent('WithInterfaces.php');
         $transformed = $this->transformation->transform($source);
@@ -333,7 +360,8 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
     /**
      * Checks if the transformation can handle abstract methods.
      */
-    public function testTransformationHandlesAbstractMethods() {
+    public function testTransformationHandlesAbstractMethods()
+    {
         $this->setExpectedException(null);
         $source      = $this->getContent('AbstractMethod.php');
         $transformed = $this->transformation->transform($source);
@@ -344,7 +372,8 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      * Ensures that the transformation is able to handle methods that do not
      * contain a doc comment and whose visibility is not explicitly defined.
      */
-    public function testTransformationHandlesMethodsWithoutCommentAndVisibility() {
+    public function testTransformationHandlesMethodsWithoutCommentAndVisibility()
+    {
         $this->setExpectedException(null);
         $source      = $this->getContent('NoDocCommentAndNoVisibility.php');
         $transformed = $this->transformation->transform($source);
@@ -354,14 +383,16 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
     /**
      * Checks if static methods are callable after transformation.
      */
-    public function testStaticMethodIsCallable() {
+    public function testStaticMethodIsCallable()
+    {
         $this->assertEquals('static', JoinPointsCheck_Transformation::myStaticMethod());
     }
     
     /**
      * Ensures that methods receive the correct default parameters.
      */
-    public function testMethodsReceiveDefaultParameters() {
+    public function testMethodsReceiveDefaultParameters()
+    {
         $this->assertEquals('Demo', $this->transformedInstance->defaultParameter());
     }
     
@@ -374,7 +405,8 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      *
      * @param string $class
      */
-    protected function assertClassExists($class) {
+    protected function assertClassExists($class)
+    {
         $message = 'Class "' . $class . '" is not available.';
         $this->assertTrue(class_exists($class, false), $message);
     }
@@ -384,7 +416,8 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      *
      * @return ReflectionClass
      */
-    protected function getClassInfo() {
+    protected function getClassInfo()
+    {
         return new ReflectionClass(self::TRANSFORMED_CLASS);
     }
     
@@ -395,7 +428,8 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      * @param string $name
      * @return ReflectionMethod
      */
-    protected function getMethodInfo($name) {
+    protected function getMethodInfo($name)
+    {
         return $this->getClassInfo()->getMethod($name);
     }
     
@@ -404,7 +438,8 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      *
      * @return ReflectionClass
      */
-    protected function getOriginalClassInfo() {
+    protected function getOriginalClassInfo()
+    {
         return new ReflectionClass($this->getOriginalClassName());
     }
     
@@ -415,7 +450,8 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      * @param string $name
      * @return ReflectionMethod
      */
-    protected function getOriginalMethodInfo($name) {
+    protected function getOriginalMethodInfo($name)
+    {
         return $this->getOriginalClassInfo()->getMethod($name);
     }
     
@@ -424,7 +460,8 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      *
      * @return string
      */
-    protected function getOriginalClassName() {
+    protected function getOriginalClassName()
+    {
         return self::TRANSFORMED_CLASS . '_Original';
     }
     
@@ -434,7 +471,8 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      * @param string $code
      * @return false
      */
-    protected function execute($code) {
+    protected function execute($code)
+    {
         // Remove opening tag as eval does not accept it.
         if( strpos($code, '<?php') === 0 ) {
             $code = substr($code, strlen('<?php'));
@@ -454,7 +492,8 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      * @param string $file The file name.
      * @return string
      */
-    protected function getContent($file) {
+    protected function getContent($file)
+    {
         return file_get_contents(dirname(__FILE__) . '/TestData/JoinPointsCheck/' . $file);
     }
     

@@ -30,7 +30,8 @@ class AspectPHP_Pointcut_RegExpTest extends PHPUnit_Framework_TestCase {
     /**
      * Checks if the class implements the AspectPHP_Pointcut interface.
      */
-    public function testPointcutImplementsInterface() {
+    public function testPointcutImplementsInterface()
+    {
         $pointcut = new AspectPHP_Pointcut_RegExp('ABC.*');
         $this->assertInstanceOf('AspectPHP_Pointcut', $pointcut);
     }
@@ -39,7 +40,8 @@ class AspectPHP_Pointcut_RegExpTest extends PHPUnit_Framework_TestCase {
      * Ensures that the constructor throws an exception if an empty string
      * is provided.
      */
-    public function testConstructorThrowsExceptionIfEmptyStringIsProvided() {
+    public function testConstructorThrowsExceptionIfEmptyStringIsProvided()
+    {
         $this->setExpectedException('InvalidArgumentException');
         new AspectPHP_Pointcut_RegExp('');
     }
@@ -47,7 +49,8 @@ class AspectPHP_Pointcut_RegExpTest extends PHPUnit_Framework_TestCase {
     /**
      * Ensures that the constructor throws an exception if no string is provided.
      */
-    public function testConstructorThrowsExceptionIfNoStringIsProvided() {
+    public function testConstructorThrowsExceptionIfNoStringIsProvided()
+    {
         $this->setExpectedException('InvalidArgumentException');
         new AspectPHP_Pointcut_RegExp(new stdClass());
     }
@@ -55,7 +58,8 @@ class AspectPHP_Pointcut_RegExpTest extends PHPUnit_Framework_TestCase {
     /**
      * Checks if matches() returns a boolean value.
      */
-    public function testMatchesReturnsBoolean() {
+    public function testMatchesReturnsBoolean()
+    {
         $this->assertInternalType('boolean', $this->create('.*')->matches(__METHOD__));
     }
     
@@ -63,7 +67,8 @@ class AspectPHP_Pointcut_RegExpTest extends PHPUnit_Framework_TestCase {
      * Ensures that matches() returns true if the expression matches
      * the provided method.
      */
-    public function testMatchesReturnsTrueIfExpressionMatchesMethod() {
+    public function testMatchesReturnsTrueIfExpressionMatchesMethod()
+    {
         $this->assertMatches(__CLASS__ . '::.*', __METHOD__);
     }
     
@@ -71,7 +76,8 @@ class AspectPHP_Pointcut_RegExpTest extends PHPUnit_Framework_TestCase {
      * Ensures that matches() returns false if the expression does not match
      * the provided method.
      */
-    public function testMatchesReturnsFalseIfExpressionDoesNotMatchMethod() {
+    public function testMatchesReturnsFalseIfExpressionDoesNotMatchMethod()
+    {
         $this->assertNotMatches('AnotherClass::.*', __METHOD__);
     }
     
@@ -79,7 +85,8 @@ class AspectPHP_Pointcut_RegExpTest extends PHPUnit_Framework_TestCase {
      * Ensures that matches() returns true if the expression matches a method
      * whose class uses a namespace.
      */
-    public function testMatchesReturnsTrueIfExpressionMatchesNamespacedClass() {
+    public function testMatchesReturnsTrueIfExpressionMatchesNamespacedClass()
+    {
         $this->assertMatches('Demo\Package\.*::show', 'Demo\Package\MyClass::show');
     }
     
@@ -87,7 +94,8 @@ class AspectPHP_Pointcut_RegExpTest extends PHPUnit_Framework_TestCase {
      * Ensures that matches() returns false if the expression does not match a method
      * whose class uses a namespace.
      */
-    public function testMatchesReturnsTrueIfExpressionDoesNotMatchNamespacedClass() {
+    public function testMatchesReturnsTrueIfExpressionDoesNotMatchNamespacedClass()
+    {
         $this->assertNotMatches('Demo\Package\.*::show', 'Demo\AnotherPackage\MyClass::show');
     }
     
@@ -97,7 +105,8 @@ class AspectPHP_Pointcut_RegExpTest extends PHPUnit_Framework_TestCase {
      * @param string $expression
      * @param string $method
      */
-    protected function assertMatches($expression, $method) {
+    protected function assertMatches($expression, $method)
+    {
         $message = '"' . $expression . '" does not match "' . $method . '".';
         $this->assertTrue($this->create($expression)->matches($method), $message);
     }
@@ -108,7 +117,8 @@ class AspectPHP_Pointcut_RegExpTest extends PHPUnit_Framework_TestCase {
      * @param string $expression
      * @param string $method
      */
-    protected function assertNotMatches($expression, $method) {
+    protected function assertNotMatches($expression, $method)
+    {
         $message = '"' . $expression . '" matches "' . $method . '".';
         $this->assertFalse($this->create($expression)->matches($method), $message);
     }
@@ -119,7 +129,8 @@ class AspectPHP_Pointcut_RegExpTest extends PHPUnit_Framework_TestCase {
      * @param string $expression
      * @return AspectPHP_Pointcut_RegExp
      */
-    protected function create($expression) {
+    protected function create($expression)
+    {
         return new AspectPHP_Pointcut_RegExp($expression);
     }
     

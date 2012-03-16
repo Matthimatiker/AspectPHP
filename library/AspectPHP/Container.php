@@ -34,7 +34,8 @@ class AspectPHP_Container {
      * @param AspectPHP_Manager|null $manager
      * @throws InvalidArgumentException If an invalid argument is provided.
      */
-    public static function setManager($manager) {
+    public static function setManager($manager)
+    {
         if( $manager !== null && !($manager instanceof AspectPHP_Manager) ) {
             throw new InvalidArgumentException('Expected null or instance of AspectPHP_Manager.');
         }
@@ -47,7 +48,8 @@ class AspectPHP_Container {
      * @return AspectPHP_Manager
      * @throws BadMethodCallException If no manager is available.
      */
-    public static function getManager() {
+    public static function getManager()
+    {
         if( !self::hasManager() ) {
             $message = 'Aspect manager is not available. Use ' . __CLASS__ . '::setManager() to provide a manager.';
             throw new BadMethodCallException($message);
@@ -60,7 +62,8 @@ class AspectPHP_Container {
      *
      * @return boolean True if a manager is available, false otherwise.
      */
-    public static function hasManager() {
+    public static function hasManager()
+    {
         return self::$manager !== null;
     }
     

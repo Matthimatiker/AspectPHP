@@ -41,7 +41,8 @@ class AspectPHP_Transformation_JoinPoints {
      * @param string $source
      * @return string The transformed code.
      */
-    public function transform($source) {
+    public function transform($source)
+    {
         $this->editor = new AspectPHP_Code_TokenEditor($source);
         
         $classToken = $this->editor->findNext(T_CLASS, 0);
@@ -120,7 +121,8 @@ class AspectPHP_Transformation_JoinPoints {
      * @param integer $functionIndex The function index.
      * @return integer
      */
-    protected function findSignatureStart($functionIndex) {
+    protected function findSignatureStart($functionIndex)
+    {
         $signatureTypes = array(
             T_DOC_COMMENT,
             T_PUBLIC,
@@ -142,7 +144,8 @@ class AspectPHP_Transformation_JoinPoints {
      * @param integer $functionIndex
      * @return array(integer) The indexes of the matches.
      */
-    protected function findAll($type, $functionIndex) {
+    protected function findAll($type, $functionIndex)
+    {
         $matches = array();
         $start   = $this->findBody($functionIndex);
         $end     = $this->editor->findMatchingBrace($start);
@@ -155,7 +158,8 @@ class AspectPHP_Transformation_JoinPoints {
      * @param integer $functionIndex
      * @return boolean True if the function is static, false otherwise.
      */
-    protected function isStatic($functionIndex) {
+    protected function isStatic($functionIndex)
+    {
         return $this->editor->findPrevious(T_STATIC, $functionIndex, array(T_DOC_COMMENT, ';', '{', '}')) !== -1;
     }
     
@@ -167,7 +171,8 @@ class AspectPHP_Transformation_JoinPoints {
      * @param string $context The method context. For example $this or __CLASS__.
      * @return string The code of the generated injection point method.
      */
-    protected function buildInjectionPoint($signature, $callee, $context) {
+    protected function buildInjectionPoint($signature, $callee, $context)
+    {
         $template = '    %1$s'                                                                                . PHP_EOL
                   . '    {'                                                                                   . PHP_EOL
                   . '        $args = func_get_args();'                                                        . PHP_EOL
@@ -187,7 +192,8 @@ class AspectPHP_Transformation_JoinPoints {
      * @param string $name The method name.
      * @return string
      */
-    protected function getCode($name) {
+    protected function getCode($name)
+    {
         return $this->getCodeExtractor()->getSource(__CLASS__ . '::' . $name);
     }
     
@@ -212,7 +218,8 @@ class AspectPHP_Transformation_JoinPoints {
      * @param integer $end
      * @return string
      */
-    protected function between($start, $end) {
+    protected function between($start, $end)
+    {
         $code = '';
         for( $i = $start; $i <= $end; $i++) {
             if( is_string($this->editor[$i]) ) {
@@ -231,7 +238,8 @@ class AspectPHP_Transformation_JoinPoints {
      * @param integer $functionIndex Index of a T_FUNCTION token.
      * @return integer
      */
-    protected function findMethodName($functionIndex) {
+    protected function findMethodName($functionIndex)
+    {
         return $this->editor->findNext(T_STRING, $functionIndex);
     }
     
@@ -242,7 +250,8 @@ class AspectPHP_Transformation_JoinPoints {
      * @param integer $functionIndex Index of a T_FUNCTION token.
      * @return integer
      */
-    protected function findMethodVisibility($functionIndex) {
+    protected function findMethodVisibility($functionIndex)
+    {
         $visibilities = array(
             T_PUBLIC,
             T_PROTECTED,
@@ -258,7 +267,8 @@ class AspectPHP_Transformation_JoinPoints {
      * @param integer $functionIndex Index of a T_FUNCTION token.
      * @return integer
      */
-    protected function findDocBlock($functionIndex) {
+    protected function findDocBlock($functionIndex)
+    {
         return $this->editor->findPrevious(T_DOC_COMMENT, $functionIndex, array('{', '}', ';'));
     }
     
@@ -268,7 +278,8 @@ class AspectPHP_Transformation_JoinPoints {
      * @param integer $index
      * @return integer
      */
-    protected function findBody($index) {
+    protected function findBody($index)
+    {
         return $this->editor->findNext('{', $index, array(';'));
     }
 
@@ -287,7 +298,8 @@ class AspectPHP_Transformation_JoinPoints {
      * @return mixed
      * @throws Exception If the original method or a join point throws an exception.
      */
-    private static function _aspectPHPInternalHandleCall($method, $compiledMethod, $context, $args) {
+    private static function _aspectPHPInternalHandleCall($method, $compiledMethod, $context, $args)
+    {
         if( AspectPHP_Container::hasManager() ) {
             $aspects = AspectPHP_Container::getManager()->getAspectsFor(__CLASS__ . '::' . $method);
         } else {

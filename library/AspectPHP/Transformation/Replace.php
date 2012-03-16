@@ -44,7 +44,8 @@ class AspectPHP_Transformation_Replace {
      *
      * @param array(integer=>string) $map
      */
-    public function setRules(array $map) {
+    public function setRules(array $map)
+    {
         $this->rules = $map;
     }
     
@@ -54,7 +55,8 @@ class AspectPHP_Transformation_Replace {
      * @param string $source
      * @return string
      */
-    public function transform($source) {
+    public function transform($source)
+    {
         $tokens    = token_get_all($source);
         $newSource = '';
         foreach( $tokens as $token ) {

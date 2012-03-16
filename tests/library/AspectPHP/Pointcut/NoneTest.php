@@ -39,7 +39,8 @@ class AspectPHP_Pointcut_NoneTest extends PHPUnit_Framework_TestCase
     /**
      * See {@link PHPUnit_Framework_TestCase::setUp()} for details.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         parent::setUp();
         $this->pointcut = new AspectPHP_Pointcut_None();
     }
@@ -47,7 +48,8 @@ class AspectPHP_Pointcut_NoneTest extends PHPUnit_Framework_TestCase
     /**
      * See {@link PHPUnit_Framework_TestCase::tearDown()} for details.
      */
-    protected function tearDown() {
+    protected function tearDown()
+    {
         $this->pointcut = null;
         parent::tearDown();
     }
@@ -55,21 +57,24 @@ class AspectPHP_Pointcut_NoneTest extends PHPUnit_Framework_TestCase
 	/**
      * Checks if the class implements the AspectPHP_Pointcut interface.
      */
-    public function testPointcutImplementsInterface() {
+    public function testPointcutImplementsInterface()
+    {
         $this->assertInstanceOf('AspectPHP_Pointcut', $this->pointcut);
     }
     
     /**
      * Checks if matches() returns a boolean value.
      */
-    public function testMatchesReturnsBoolean() {
+    public function testMatchesReturnsBoolean()
+    {
         $this->assertInternalType('boolean', $this->pointcut->matches(__METHOD__));
     }
     
     /**
      * Ensures that matches() returns false.
      */
-    public function testMatchesReturnsFalse() {
+    public function testMatchesReturnsFalse()
+    {
         $this->assertFalse($this->pointcut->matches(__METHOD__));
     }
     

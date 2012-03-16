@@ -33,7 +33,8 @@ class AspectPHP_Environment {
      *
      * @return AspectPHP_Manager
      */
-    public function getManager() {
+    public function getManager()
+    {
         if( $this->manager === null ) {
             $this->manager = new AspectPHP_Manager_Standard();
         }
@@ -44,7 +45,8 @@ class AspectPHP_Environment {
      * Modifies the include path and ensures that the classes
      * are loaded with the AspectPHP stream.
      */
-    protected function modifyIncludePath() {
+    protected function modifyIncludePath()
+    {
         $paths         = explode(PATH_SEPARATOR, get_include_path());
         $numberOfPaths = count($paths);
         for( $i = 0; $i < $numberOfPaths; $i++ ) {
@@ -59,7 +61,8 @@ class AspectPHP_Environment {
      * @param string $path
      * @return string
      */
-    protected function toStream($path) {
+    protected function toStream($path)
+    {
         return AspectPHP_Stream::NAME . '://' . $path;
     }
     
@@ -70,7 +73,8 @@ class AspectPHP_Environment {
      *
      * @return AspectPHP_Manager
      */
-    public function initialize() {
+    public function initialize()
+    {
         AspectPHP_Stream::register();
         AspectPHP_Container::setManager($this->getManager());
         $this->modifyIncludePath();

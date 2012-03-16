@@ -38,7 +38,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
     /**
      * See {@link PHPUnit_Framework_TestCase::setUp()} for details.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         parent::setUp();
         $tokens = array(
         	'1',
@@ -53,7 +54,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
     /**
      * See {@link PHPUnit_Framework_TestCase::tearDown()} for details.
      */
-    protected function tearDown() {
+    protected function tearDown()
+    {
         $this->editor = null;
         parent::tearDown();
     }
@@ -61,7 +63,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
     /**
      * Ensures that discard() does nothing if no pending changes are available.
      */
-    public function testDiscardDoesNothingIfThereAreNoPendingChanges() {
+    public function testDiscardDoesNothingIfThereAreNoPendingChanges()
+    {
         $this->setExpectedException(null);
         $this->editor->discard();
     }
@@ -69,7 +72,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
     /**
      * Ensures that commit() does nothing if no pending changes are available.
      */
-    public function testCommitDoesNothingIfThereAreNoPendingChanges() {
+    public function testCommitDoesNothingIfThereAreNoPendingChanges()
+    {
         $this->setExpectedException(null);
         $this->editor->commit();
     }
@@ -78,7 +82,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * Ensures that replace() throws an exception if an invalid index
      * is provided.
      */
-    public function testReplaceThrowsExceptionIfInvalidIndexIsProvided() {
+    public function testReplaceThrowsExceptionIfInvalidIndexIsProvided()
+    {
         $this->setExpectedException('InvalidArgumentException');
         $this->editor->replace(-1, '7');
     }
@@ -86,7 +91,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
     /**
      * Ensures that replace() does not modify the tokens before commit() is called.
      */
-    public function testReplaceDoesNotChangeTokensIfChangesAreNotCommitted() {
+    public function testReplaceDoesNotChangeTokensIfChangesAreNotCommitted()
+    {
         $this->editor->replace(0, '7');
         $this->assertNotEquals('7', $this->editor[0]);
     }
@@ -94,7 +100,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
     /**
      * Checks if replace() changes the token after commit.
      */
-    public function testReplaceChangesTokenContentAfterCommit() {
+    public function testReplaceChangesTokenContentAfterCommit()
+    {
         $this->editor->replace(0, '7');
         $this->editor->commit();
         $this->assertEquals('7', $this->editor[0]);
@@ -104,7 +111,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * Ensures that replace() throws an exception if the provided list of token
      * indexes contains invalid values.
      */
-    public function testReplaceThrowsExceptionIfListWithInvalidIndexIsProvided() {
+    public function testReplaceThrowsExceptionIfListWithInvalidIndexIsProvided()
+    {
         $this->setExpectedException('InvalidArgumentException');
         $this->editor->replace(array(2, -1), 'n');
     }
@@ -113,7 +121,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * Checks if replace() substitutes all tokens whose indexes were provided
      * in the list.
      */
-    public function testReplaceSubstitutesAllProvidedTokensAfterCommit() {
+    public function testReplaceSubstitutesAllProvidedTokensAfterCommit()
+    {
         $this->editor->replace(array(0, 1), 'a');
         $this->editor->commit();
         $this->assertEquals('a', $this->editor[0]);
@@ -129,7 +138,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * $editor->replace(5, array(T_STRING, 'hello'));
      * </code>
      */
-    public function testReplaceKeepsOriginalLineNumberIfNewTokenDoesNotProvideOne() {
+    public function testReplaceKeepsOriginalLineNumberIfNewTokenDoesNotProvideOne()
+    {
         $this->editor = $this->createEditor(array($this->createTextToken()));
         $newToken = array(
             T_STRING,
@@ -146,7 +156,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * not provide one and there is also none defined in the original token (that
      * is the case if the token is a string, for example a brace).
      */
-    public function testReplaceInsertsDummyLineNumberIfOriginalNumberIsNotAvailable() {
+    public function testReplaceInsertsDummyLineNumberIfOriginalNumberIsNotAvailable()
+    {
         $newToken = array(
             T_STRING,
             'test'
@@ -160,7 +171,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * Ensures that replace() uses the line number of the new token if
      * it is available.
      */
-    public function testReplaceUsesProvidedLineNumber() {
+    public function testReplaceUsesProvidedLineNumber()
+    {
         $this->editor = $this->createEditor(array($this->createTextToken()));
         $newToken = array(
             T_STRING,
@@ -176,7 +188,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * Ensures that remove() throws an exception if an invalid index
      * is provided.
      */
-    public function testRemoveThrowsExceptionIfInvalidIndexIsProvided() {
+    public function testRemoveThrowsExceptionIfInvalidIndexIsProvided()
+    {
         $this->setExpectedException('InvalidArgumentException');
         $this->editor->remove(-1);
     }
@@ -184,7 +197,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
     /**
      * Ensures that remove() does not modify the tokens before commit() is called.
      */
-    public function testRemoveDoesNotChangeTokensIfChangesAreNotCommitted() {
+    public function testRemoveDoesNotChangeTokensIfChangesAreNotCommitted()
+    {
         $numberOfTokens = count($this->editor);
         $this->editor->remove(4);
         $this->assertEquals($numberOfTokens, count($this->editor));
@@ -193,7 +207,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
     /**
      * Checks if remove() deletes the token after commit.
      */
-    public function testRemoveDeletesTokenAfterCommit() {
+    public function testRemoveDeletesTokenAfterCommit()
+    {
         $numberOfTokens = count($this->editor);
         $this->editor->remove(4);
         $this->editor->commit();
@@ -204,7 +219,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * Ensures that remove() throws an exception if the provided list of token
      * indexes contains invalid values.
      */
-    public function testRemoveThrowsExceptionIfListWithInvalidIndexIsProvided() {
+    public function testRemoveThrowsExceptionIfListWithInvalidIndexIsProvided()
+    {
         $this->setExpectedException('InvalidArgumentException');
         $this->editor->remove(array(2, -1));
     }
@@ -212,7 +228,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
     /**
      * Checks if remove() deletes all tokens whose indexes were provided in the list.
      */
-    public function testRemoveDeletesAllProvidedTokensAfterCommit() {
+    public function testRemoveDeletesAllProvidedTokensAfterCommit()
+    {
         $numberOfTokens = count($this->editor);
         $tokensToDelete = array(1, 2);
         $this->editor->remove($tokensToDelete);
@@ -224,7 +241,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * Ensures that the editor rearranges the token indexes if a token in
      * the middle of the source is removed.
      */
-    public function testEditorRearrangesIndexesAfterRemovingToken() {
+    public function testEditorRearrangesIndexesAfterRemovingToken()
+    {
         $this->editor->remove(2);
         $this->editor->commit();
         $this->assertEquals('1', $this->editor[0]);
@@ -237,7 +255,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * Ensures that insertBefore() throws an exception if an invalid index
      * is provided.
      */
-    public function testInsertBeforeThrowsExceptionIfInvalidIndexIsProvided() {
+    public function testInsertBeforeThrowsExceptionIfInvalidIndexIsProvided()
+    {
         $this->setExpectedException('InvalidArgumentException');
         $this->editor->insertBefore(-1, array('7'));
     }
@@ -245,7 +264,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
     /**
      * Ensures that insertBefore() does not modify the tokens before commit() is called.
      */
-    public function testInsertBeforeDoesNotChangeTokensIfChangesAreNotCommitted() {
+    public function testInsertBeforeDoesNotChangeTokensIfChangesAreNotCommitted()
+    {
         $numberOfTokens = count($this->editor);
         $this->editor->insertBefore(1, array('7'));
         $this->assertEquals($numberOfTokens, count($this->editor));
@@ -254,7 +274,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
     /**
      * Checks if insertBefore() adds the tokens after commit.
      */
-    public function testInsertBeforeAddsTokensAfterCommit() {
+    public function testInsertBeforeAddsTokensAfterCommit()
+     {
         $numberOfTokens = count($this->editor);
         $this->editor->insertBefore(0, array('0'));
         $this->editor->commit();
@@ -264,7 +285,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
     /**
      * Checks if insertBefore() adds the tokens at the correct position.
      */
-    public function testInsertBeforeAddsTokensAtCorrectPositionAfterCommit() {
+    public function testInsertBeforeAddsTokensAtCorrectPositionAfterCommit()
+    {
        $this->editor->insertBefore(1, array('8', '9'));
        $this->editor->commit();
        $this->assertEquals('8', $this->editor[1]);
@@ -274,7 +296,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
     /**
      * Ensures that discard() removes pending changes.
      */
-    public function testDiscardRemovesPreviousChangeRequests() {
+    public function testDiscardRemovesPreviousChangeRequests()
+    {
         $this->editor->replace(0, '9');
         $this->editor->discard();
         $this->editor->replace(1, '8');
@@ -288,7 +311,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
     /**
      * Checks if the magic method __toString() returns the modified source code.
      */
-    public function testToStringReturnsModifiedSourceCode() {
+    public function testToStringReturnsModifiedSourceCode()
+    {
         $this->editor->replace(0, '0');
         $this->editor->commit();
         $source = (string)$this->editor;
@@ -298,7 +322,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
     /**
      * Checks if multiple pending changes are applied correctly.
      */
-    public function testMultipleQueuedChangesAreAppliedCorrectly() {
+    public function testMultipleQueuedChangesAreAppliedCorrectly()
+    {
         $this->editor->replace(0, '0');
         $this->editor->insertBefore(4, array('a', 'b'));
         $this->editor->insertBefore(2, array('c', 'd'));
@@ -311,7 +336,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * Ensures that the editor does not apply the same changes
      * twice.
      */
-    public function testEditorDoesNotApplyChangesTwice() {
+    public function testEditorDoesNotApplyChangesTwice()
+    {
         $this->editor->insertBefore(0, array('a'));
         $this->editor->commit();
         $source = (string)$this->editor;
@@ -324,7 +350,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * If multiple changes are competing for the modification of the
      * same token then the last one will be applied.
      */
-    public function testLastChangeThatModifiesTokenIsApplied() {
+    public function testLastChangeThatModifiesTokenIsApplied()
+    {
         $this->editor->replace(0, 'a');
         $this->editor->remove(0);
         $this->editor->replace(0, 'b');
@@ -335,7 +362,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
     /**
      * Ensures that rename() throws an exception if an invalid index is provided.
      */
-    public function testRenameThrowsExceptionIfInvalidIndexIsProvided() {
+    public function testRenameThrowsExceptionIfInvalidIndexIsProvided()
+    {
         $this->setExpectedException('InvalidArgumentException');
         $this->editor->rename(-1, 'test');
     }
@@ -344,7 +372,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * Ensures that rename() throws an exception if the provided index points
      * to a token of invalid type.
      */
-    public function testRenameThrowsExceptionIfTokenOfInvalidTypeIsProvided() {
+    public function testRenameThrowsExceptionIfTokenOfInvalidTypeIsProvided()
+    {
         $this->setExpectedException('InvalidArgumentException');
         $this->editor->rename(1, 'test');
     }
@@ -353,7 +382,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * Ensures that rename() does not modify the token before the changes
      * are committed.
      */
-    public function testRenameDoesNotModifyTokenIfChangesAreNotCommitted() {
+    public function testRenameDoesNotModifyTokenIfChangesAreNotCommitted()
+    {
         $tokens = array(
             $this->createTextToken()
         );
@@ -365,7 +395,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
     /**
      * Checks if rename changes the content of the token.
      */
-    public function testRenameChangesTokenContentAfterCommit() {
+    public function testRenameChangesTokenContentAfterCommit()
+    {
         $tokens = array(
             $this->createTextToken()
         );
@@ -379,7 +410,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * Checks if rename() keeps the original line number of the
      * provided token.
      */
-    public function testRenameKeepsLineNumberOfToken() {
+    public function testRenameKeepsLineNumberOfToken()
+    {
         $tokens = array(
             $this->createTextToken()
         );
@@ -395,7 +427,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * @param array(string|array(string|integer)) $tokens
      * @return AspectPHP_Code_TokenEditor
      */
-    protected function createEditor(array $tokens) {
+    protected function createEditor(array $tokens)
+    {
         return new AspectPHP_Code_TokenEditor($tokens);
     }
     
@@ -404,7 +437,8 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      *
      * @return array(integer|string)
      */
-    protected function createTextToken() {
+    protected function createTextToken()
+    {
         $token = array(
             T_STRING,
             'myName',

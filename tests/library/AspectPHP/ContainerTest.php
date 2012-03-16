@@ -38,7 +38,8 @@ class AspectPHP_ContainerTest extends PHPUnit_Framework_TestCase {
     /**
      * See {@link PHPUnit_Framework_TestCase::setUp()} for details.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         parent::setUp();
         $this->storeManager();
         $this->resetManager();
@@ -47,7 +48,8 @@ class AspectPHP_ContainerTest extends PHPUnit_Framework_TestCase {
     /**
      * See {@link PHPUnit_Framework_TestCase::tearDown()} for details.
      */
-    protected function tearDown() {
+    protected function tearDown()
+    {
         $this->restoreManager();
         parent::tearDown();
     }
@@ -55,7 +57,8 @@ class AspectPHP_ContainerTest extends PHPUnit_Framework_TestCase {
     /**
      * Ensures that getManager() throws an exception if no manager is available.
      */
-    public function testGetManagerThrowsExceptionIfNoManagerIsAvailable() {
+    public function testGetManagerThrowsExceptionIfNoManagerIsAvailable()
+    {
         $this->setExpectedException('BadMethodCallException');
         AspectPHP_Container::getManager();
     }
@@ -63,7 +66,8 @@ class AspectPHP_ContainerTest extends PHPUnit_Framework_TestCase {
     /**
      * Checks if getManager() returns the provided aspect manager.
      */
-    public function testGetManagerReturnsProvidedManager() {
+    public function testGetManagerReturnsProvidedManager()
+    {
         $manager = $this->createManager();
         AspectPHP_Container::setManager($manager);
         $this->assertSame($manager, AspectPHP_Container::getManager());
@@ -72,7 +76,8 @@ class AspectPHP_ContainerTest extends PHPUnit_Framework_TestCase {
     /**
      * Ensures that setManager() throws an exception if an invalid argument is passed.
      */
-    public function testSetManagerThrowsExceptionIfInvalidArgumentIsProvided() {
+    public function testSetManagerThrowsExceptionIfInvalidArgumentIsProvided()
+    {
         $this->setExpectedException('InvalidArgumentException');
         AspectPHP_Container::setManager(new stdClass());
     }
@@ -80,14 +85,16 @@ class AspectPHP_ContainerTest extends PHPUnit_Framework_TestCase {
     /**
      * Ensures that hasManager() returns false if no aspect manager is available.
      */
-    public function testHasManagerReturnsFalseIfNoManagerIsAvailable() {
+    public function testHasManagerReturnsFalseIfNoManagerIsAvailable()
+    {
         $this->assertFalse(AspectPHP_Container::hasManager());
     }
     
     /**
      * Ensures that hasManager() returns true if an aspect manager is available.
      */
-    public function testHasManagerReturnsTrueIfManagerIsAvailable() {
+    public function testHasManagerReturnsTrueIfManagerIsAvailable()
+    {
         AspectPHP_Container::setManager($this->createManager());
         $this->assertTrue(AspectPHP_Container::hasManager());
     }
@@ -97,28 +104,32 @@ class AspectPHP_ContainerTest extends PHPUnit_Framework_TestCase {
      *
      * @return AspectPHP_Manager
      */
-    protected function createManager() {
+    protected function createManager()
+    {
         return $this->getMock('AspectPHP_Manager');
     }
     
 	/**
      * Resets the aspect manager.
      */
-    protected function resetManager() {
+    protected function resetManager()
+    {
         AspectPHP_Container::setManager(null);
     }
     
     /**
      * Stores the current aspect manager.
      */
-    protected function storeManager() {
+    protected function storeManager()
+    {
         $this->previousManager = (AspectPHP_Container::hasManager()) ? AspectPHP_Container::getManager() : null;
     }
     
     /**
      * Restores the previous aspect manager.
      */
-    protected function restoreManager() {
+    protected function restoreManager()
+    {
         AspectPHP_Container::setManager($this->previousManager);
     }
     

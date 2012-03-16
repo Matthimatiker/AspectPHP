@@ -38,7 +38,8 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager {
      * @param AspectPHP_Aspect $aspect
      * @param string $pointcut
      */
-    public function register(AspectPHP_Aspect $aspect, $pointcut) {
+    public function register(AspectPHP_Aspect $aspect, $pointcut)
+    {
         if( !isset($this->aspects[$pointcut]) ) {
             $this->aspects[$pointcut] = array();
         }
@@ -50,7 +51,8 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager {
      *
      * @param AspectPHP_Aspect $aspect
      */
-    public function unregister(AspectPHP_Aspect $aspect) {
+    public function unregister(AspectPHP_Aspect $aspect)
+    {
         foreach( $this->aspects as $pointcut => $aspects ) {
             /* @var string $pointcut */
             /* @var array(AspectPHP_Aspect) $aspects */
@@ -68,7 +70,8 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager {
      *
      * @return array(AspectPHP_Aspect)
      */
-    public function getAspects() {
+    public function getAspects()
+    {
         $allAspects = array();
         foreach( $this->aspects as $aspects ) {
             $allAspects = array_merge($allAspects, $aspects);
@@ -82,7 +85,8 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager {
      * @param string $method
      * @return array(AspectPHP_Aspect)
      */
-    public function getAspectsFor($method) {
+    public function getAspectsFor($method)
+    {
         if( !isset($this->aspects[$method]) ) {
             return array();
         }

@@ -38,7 +38,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
     /**
      * See {@link PHPUnit_Framework_TestCase::setUp()} for details.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         parent::setUp();
         $this->storeIncludePath();
         AspectPHP_Stream::register();
@@ -47,7 +48,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
     /**
      * See {@link PHPUnit_Framework_TestCase::tearDown()} for details.
      */
-    protected function tearDown() {
+    protected function tearDown()
+    {
         AspectPHP_Stream::unregister();
         $this->restoreIncludePath();
         parent::tearDown();
@@ -56,14 +58,16 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
     /**
      * Ensures that isRegistered() returns true if the stream is already registered.
      */
-    public function testIsRegisteredReturnsTrueIfStreamIsAlreadyRegistered() {
+    public function testIsRegisteredReturnsTrueIfStreamIsAlreadyRegistered()
+    {
         $this->assertTrue(AspectPHP_Stream::isRegistered());
     }
     
     /**
      * Ensures that isRegistered() returns false if the stream is not registered.
      */
-    public function testIsRegisteredReturnsFalseIfStreamIsNotRegistered() {
+    public function testIsRegisteredReturnsFalseIfStreamIsNotRegistered()
+    {
         AspectPHP_Stream::unregister();
         $this->assertFalse(AspectPHP_Stream::isRegistered());
     }
@@ -71,7 +75,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
     /**
      * Checks if register() registers the stream.
      */
-    public function testRegisterRegistersStream() {
+    public function testRegisterRegistersStream()
+    {
         $streams = stream_get_wrappers();
         $this->assertContains(AspectPHP_Stream::NAME, $streams);
     }
@@ -79,7 +84,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
     /**
      * Ensures that register() does nothing if the stream is already registered.
      */
-    public function testRegisterDoesNothingIfStreamIsAlreadyRegistered() {
+    public function testRegisterDoesNothingIfStreamIsAlreadyRegistered()
+    {
         $this->setExpectedException(null);
         AspectPHP_Stream::register();
     }
@@ -87,7 +93,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
     /**
      * Checks if unregister() removes the registered stream.
      */
-    public function testUnregisterRemovesRegisteredStream() {
+    public function testUnregisterRemovesRegisteredStream()
+    {
         AspectPHP_Stream::unregister();
         $streams = stream_get_wrappers();
         $this->assertNotContains(AspectPHP_Stream::NAME, $streams);
@@ -96,7 +103,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
     /**
      * Ensures that unregister() does nothing if the stream is not registered.
      */
-    public function testUnregisterDoesNothingIfStreamIsNotRegistered() {
+    public function testUnregisterDoesNothingIfStreamIsNotRegistered()
+    {
         $this->setExpectedException(null);
         AspectPHP_Stream::unregister();
         AspectPHP_Stream::unregister();
@@ -106,7 +114,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
      * Ensures that is_file() returns true if the given path points
      * to a existing file.
      */
-    public function testIsFileReturnsTrueIfFileExists() {
+    public function testIsFileReturnsTrueIfFileExists()
+    {
         $path = $this->toStream($this->getPath('StreamCheck/Io.php'));
         $this->assertTrue(is_file($path));
     }
@@ -115,7 +124,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
      * Ensures that is_file() returns false if the given path points
      * to a not existing file.
      */
-    public function testIsFileReturnsFalseIfFileDoesNotExist() {
+    public function testIsFileReturnsFalseIfFileDoesNotExist()
+    {
         $path = $this->toStream($this->getPath('Missing.php'));
         $this->assertFalse(is_file($path));
     }
@@ -123,7 +133,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
     /**
      * Checks if stat() returns valid data about the given file.
      */
-    public function testStatProvidesRequiredMetaData() {
+    public function testStatProvidesRequiredMetaData()
+    {
         $path = $this->toStream($this->getPath('StreamCheck/Io.php'));
         $data = stat($path);
         $this->assertInternalType('array', $data);
@@ -159,7 +170,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
     /**
      * Ensures that stat() returns false if the provided file does not exist.
      */
-    public function testStatReturnsFalseIfFileDoesNotExist() {
+    public function testStatReturnsFalseIfFileDoesNotExist()
+    {
         $path  = $this->toStream($this->getPath('Missing.php'));
         $stats = @stat($path);
         $this->assertFalse($stats);
@@ -168,7 +180,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
     /**
      * Ensures that is_writable() returns always false.
      */
-    public function testIsWritableReturnsFalse() {
+    public function testIsWritableReturnsFalse()
+    {
         $this->markTestSkipped('Not implemented yet.');
         $path = $this->toStream($this->getPath('StreamCheck/Io.php'));
         $this->assertFalse(is_writable($path));
@@ -177,7 +190,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
     /**
      * Ensures that the stream cannot be used to modify files.
      */
-    public function testStreamDoesNotAllowModifyingFiles() {
+    public function testStreamDoesNotAllowModifyingFiles()
+    {
         $path = $this->getPath('WriteTest.txt');
         // Ensures that the test file is empty.
         file_put_contents($path, '');
@@ -190,7 +204,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
     /**
      * Checks if filesize() returns a valid value.
      */
-    public function testStreamProvidesValidFileSize() {
+    public function testStreamProvidesValidFileSize()
+    {
         $this->markTestSkipped('Not implemented yet.');
         $original = $this->getPath('StreamCheck/Size.php');
         $stream   = $this->toStream($original);
@@ -201,7 +216,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
     /**
      * Checks if the stream modifies the loaded code.
      */
-    public function testStreamModifiesLoadedCode() {
+    public function testStreamModifiesLoadedCode()
+    {
         $path       = $this->getPath('StreamCheck/Io.php');
         $original   = file_get_contents($path);
         $fromStream = file_get_contents($this->toStream($path));
@@ -211,7 +227,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
     /**
      * Checks if the stream generates valid PHP code.
      */
-    public function testStreamGeneratesValidCode() {
+    public function testStreamGeneratesValidCode()
+    {
         $this->setExpectedException(null);
         $path = $this->getPath('StreamCheck/Modification/Valid.php');
         // If invalid code is generated then the script will stop or
@@ -223,7 +240,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
      * Ensures that the stream can be used to load a file via include()
      * if the full file path is passed.
      */
-    public function testStreamCanBeUsedToIncludeFileByFullPath() {
+    public function testStreamCanBeUsedToIncludeFileByFullPath()
+    {
         $path = $this->getPath('StreamCheck/Include/FullPath.php');
         include($this->toStream($path));
         $this->assertClassExists('StreamCheck_Include_FullPath');
@@ -233,7 +251,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
      * Ensures that the stream can be used to load files via include()
      * by using the include path.
      */
-    public function testStreamCanBeUsedToIncludeFileFromIncludePath() {
+    public function testStreamCanBeUsedToIncludeFileFromIncludePath()
+    {
         $this->changeIncludePath();
         include('StreamCheck/Include/RelativePath.php');
         $this->assertClassExists('StreamCheck_Include_RelativePath');
@@ -242,7 +261,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
     /**
      * Ensures that the stream does not change the original method names.
      */
-    public function testStreamDoesNotChangeOriginalMethodNames() {
+    public function testStreamDoesNotChangeOriginalMethodNames()
+    {
         $path = $this->getPath('StreamCheck/Modification/MethodNames.php');
         include($this->toStream($path));
         $this->assertHasMethod('StreamCheck_Modification_MethodNames', 'customMethod');
@@ -252,7 +272,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
      * Ensures that the stream does not modify the visibility of the original
      * methods.
      */
-    public function testStreamDoesNotChangeMethodVisibility() {
+    public function testStreamDoesNotChangeMethodVisibility()
+    {
         $path = $this->getPath('StreamCheck/Modification/Visibility.php');
         include($this->toStream($path));
         $class = 'StreamCheck_Modification_Visibility';
@@ -273,7 +294,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
     /**
      * Ensures that static methods remain static.
      */
-    public function testStreamDoesNotRemoveStaticAttributeFromMethods() {
+    public function testStreamDoesNotRemoveStaticAttributeFromMethods()
+    {
         $path = $this->getPath('StreamCheck/Modification/Static.php');
         include($this->toStream($path));
         $class = 'StreamCheck_Modification_Static';
@@ -287,7 +309,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
      * Ensures that the stream does not suppress errors if invalid
      * code is loaded.
      */
-    public function testStreamDoesNotSuppressErrors() {
+    public function testStreamDoesNotSuppressErrors()
+    {
         $this->setExpectedException('PHPUnit_Framework_Error_Notice');
         $path = $this->getPath('StreamCheck/Modification/Notice.php');
         include($this->toStream($path));
@@ -297,7 +320,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
      * Ensures that the stream does not modify source code that
      * contains (compile) errors.
      */
-    public function testStreamDoesNotModifyCodeWithErrors() {
+    public function testStreamDoesNotModifyCodeWithErrors()
+    {
         $this->markTestSkipped('Not implemented yet.');
         $path       = $this->getPath('StreamCheck/Modification/CompileError.txt');
         $original   = file_get_contents($path);
@@ -309,7 +333,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
      * Ensures that the __FILE__ constant works correctly in loaded
      * classes.
      */
-    public function testFileConstantIsUsableInLoadedFiles() {
+    public function testFileConstantIsUsableInLoadedFiles()
+    {
         $path = $this->getPath('StreamCheck/FileConstant.php');
         include($this->toStream($path));
         $this->assertClassExists('StreamCheck_FileConstant');
@@ -322,7 +347,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
     /**
      * Ensures that the stream does not modify files that do not contain classes.
      */
-    public function testStreamDoesNotModifyFilesThatDoNotContainClasses() {
+    public function testStreamDoesNotModifyFilesThatDoNotContainClasses()
+    {
         $path = $this->getPath('StreamCheck/Modification/NoClass.php');
         $original   = file_get_contents($path);
         $fromStream = file_get_contents($this->toStream($path));
@@ -332,7 +358,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
     /**
      * Enusres that the stream does not modify the line numbers of the original code.
      */
-    public function testStreamDoesNotChangeLineNumbers() {
+    public function testStreamDoesNotChangeLineNumbers()
+    {
         // Ensure that the test fails if the exception is not thrown.
         $this->setExpectedException('RuntimeException');
         include($this->toStream($this->getPath('StreamCheck/Modification/LineNumber.php')));
@@ -352,7 +379,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
      * @param string $class
      * @param string $method
      */
-    protected function assertHasMethod($class, $method) {
+    protected function assertHasMethod($class, $method)
+    {
         $this->assertClassExists($class);
         $refelection = new ReflectionClass($class);
         $message     = 'Class "' . $class . '" does not provide the method "' . $method . '".';
@@ -364,7 +392,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
      *
      * @param string $class
      */
-    protected function assertClassExists($class) {
+    protected function assertClassExists($class)
+    {
         $message = 'The class "' . $class . '" was not loaded.';
         $this->assertTrue(class_exists($class, false), $message);
     }
@@ -383,7 +412,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
      * @param string $testFile
      * @return string
      */
-    protected function getPath($testFile) {
+    protected function getPath($testFile)
+    {
         return $this->getTestDataDirectory() . '/' . $testFile;
     }
     
@@ -392,7 +422,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
      *
      * @return string
      */
-    protected function getTestDataDirectory() {
+    protected function getTestDataDirectory()
+    {
         return dirname(__FILE__) . '/TestData';
     }
     
@@ -408,21 +439,24 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
      * @param string $path
      * @return string
      */
-    protected function toStream($path) {
+    protected function toStream($path)
+    {
         return AspectPHP_Stream::NAME . '://' . $path;
     }
     
     /**
      * Stores the current include path.
      */
-    protected function storeIncludePath() {
+    protected function storeIncludePath()
+    {
         $this->previousIncludePath = get_include_path();
     }
     
     /**
      * Restores the include path that was saved by storeIncludePath().
      */
-    protected function restoreIncludePath() {
+    protected function restoreIncludePath()
+    {
         set_include_path($this->previousIncludePath);
     }
     
@@ -430,7 +464,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
      * Sets the include path to the test data directory and uses the
      * stream to load data from that path.
      */
-    protected function changeIncludePath() {
+    protected function changeIncludePath()
+    {
         set_include_path($this->toStream($this->getTestDataDirectory()));
     }
     

@@ -43,7 +43,8 @@ class AspectPHP_Code_ExtractorTest extends PHPUnit_Framework_TestCase {
     /**
      * See {@link PHPUnit_Framework_TestCase::setUp()} for details.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         parent::setUp();
         $this->extractor = new AspectPHP_Code_Extractor();
     }
@@ -51,7 +52,8 @@ class AspectPHP_Code_ExtractorTest extends PHPUnit_Framework_TestCase {
     /**
      * See {@link PHPUnit_Framework_TestCase::tearDown()} for details.
      */
-    protected function tearDown() {
+    protected function tearDown()
+    {
         $this->extractor = null;
         parent::tearDown();
     }

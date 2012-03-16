@@ -38,7 +38,8 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase {
     /**
      * See {@link PHPUnit_Framework_TestCase::setUp()} for details.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         parent::setUp();
         $this->manager = new AspectPHP_Manager_Standard();
     }
@@ -46,7 +47,8 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase {
     /**
      * See {@link PHPUnit_Framework_TestCase::tearDown()} for details.
      */
-    protected function tearDown() {
+    protected function tearDown()
+    {
         $this->manager = null;
         parent::tearDown();
     }
@@ -54,7 +56,8 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase {
     /**
      * Checks if getAspects() returns an array.
      */
-    public function testGetAspectsReturnsArray() {
+    public function testGetAspectsReturnsArray()
+    {
         $aspects = $this->manager->getAspects();
         $this->assertInternalType('array', $aspects);
     }
@@ -62,7 +65,8 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase {
     /**
      * Ensures that getAspects() returns the registered aspects.
      */
-    public function testGetAspectsReturnsRegisteredAspects() {
+    public function testGetAspectsReturnsRegisteredAspects()
+    {
         $first  = $this->createAspect();
         $second = $this->createAspect();
         $this->manager->register($first, __METHOD__);
@@ -76,7 +80,8 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase {
     /**
      * Checks if unregister() removes a registered aspect.
      */
-    public function testUnregisterRemovesGivenAspect() {
+    public function testUnregisterRemovesGivenAspect()
+    {
         $aspect = $this->createAspect();
         $this->manager->register($aspect, __METHOD__);
         $this->manager->unregister($aspect);
@@ -88,7 +93,8 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase {
     /**
      * Ensures that unregister() does nothing if the given aspect is not registered.
      */
-    public function testUnregisterDoesNothingIfTheGivenAspectIsNotRegistered() {
+    public function testUnregisterDoesNothingIfTheGivenAspectIsNotRegistered()
+    {
         $this->setExpectedException(null);
         $aspect = $this->createAspect();
         $this->manager->unregister($aspect);
@@ -97,7 +103,8 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase {
     /**
      * Checks if getAspectsFor() returns an array.
      */
-    public function testGetAspectsForReturnsArray() {
+    public function testGetAspectsForReturnsArray()
+    {
         $aspects = $this->manager->getAspectsFor(__METHOD__);
         $this->assertInternalType('array', $aspects);
     }
@@ -106,7 +113,8 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase {
      * Ensures that getAspectsFor() returns an empty array if no aspected is registered
      * for the given method.
      */
-    public function testGetAspectsForReturnsEmptyArrayIfNoAspectIsRegisteredForMethod() {
+    public function testGetAspectsForReturnsEmptyArrayIfNoAspectIsRegisteredForMethod()
+    {
         $this->manager->register($this->createAspect(), __CLASS__ . '::a');
         $aspects = $this->manager->getAspectsFor(__METHOD__);
         $this->assertInternalType('array', $aspects);
@@ -117,7 +125,8 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase {
      * Ensures that getAspectsFor() does not return aspects that are not registered for the
      * given method.
      */
-    public function testGetAspectsForDoesNotReturnAspectsThatAreNotRegisteredForTheProvidedMethod() {
+    public function testGetAspectsForDoesNotReturnAspectsThatAreNotRegisteredForTheProvidedMethod()
+    {
         $aspect = $this->createAspect();
         $this->manager->register($this->createAspect(), __CLASS__ . '::a');
         $this->manager->register($aspect, __CLASS__ . '::b');
@@ -129,7 +138,8 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase {
     /**
      * Ensures that getAspectsFor() returns aspects that are registered for the provided method.
      */
-    public function testGetAspectsForReturnsAspectsThatAreRegisteredForTheProvidedMethod() {
+    public function testGetAspectsForReturnsAspectsThatAreRegisteredForTheProvidedMethod()
+    {
         $aspect = $this->createAspect();
         $this->manager->register($this->createAspect(), __CLASS__ . '::a');
         $this->manager->register($aspect, __CLASS__ . '::b');
@@ -143,7 +153,8 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase {
      *
      * @return AspectPHP_Aspect
      */
-    protected function createAspect() {
+    protected function createAspect()
+    {
        return $this->getMock('AspectPHP_Aspect');
     }
     

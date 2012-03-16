@@ -30,7 +30,8 @@ class AspectPHP_Pointcut_None implements AspectPHP_Pointcut
      * @param string $method
      * @return boolean
      */
-    public function matches($method) {
+    public function matches($method)
+    {
         return false;
     }
     

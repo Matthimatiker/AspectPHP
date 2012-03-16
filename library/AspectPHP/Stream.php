@@ -61,7 +61,8 @@ class AspectPHP_Stream {
      *
      * Does nothing if the wrapper is already registered.
      */
-    public static function register() {
+    public static function register()
+    {
         if( self::isRegistered() ) {
             return;
         }
@@ -73,7 +74,8 @@ class AspectPHP_Stream {
      *
      * Does nothing if the wrapper is not registered.
      */
-    public static function unregister() {
+    public static function unregister()
+    {
         if( !self::isRegistered() ) {
             return;
         }
@@ -85,7 +87,8 @@ class AspectPHP_Stream {
      *
      * @return boolean True if the wrapper is registered, false otherwise.
      */
-    public static function isRegistered() {
+    public static function isRegistered()
+    {
         $wrappers = stream_get_wrappers();
         return in_array(self::NAME, $wrappers);
     }
@@ -211,7 +214,8 @@ class AspectPHP_Stream {
      *
      * @return integer
      */
-    protected function getContentLength() {
+    protected function getContentLength()
+    {
         return strlen($this->content);
     }
     
@@ -220,7 +224,8 @@ class AspectPHP_Stream {
      *
      * @return string
      */
-    protected function buildContent() {
+    protected function buildContent()
+    {
         $source = file_get_contents($this->path);
         if( $this->isFrameworkFile($this->path) ) {
             // Do not modify framework files.
@@ -237,7 +242,8 @@ class AspectPHP_Stream {
      * @param string $source
      * @return string
      */
-    protected function compile($source) {
+    protected function compile($source)
+    {
         if( empty($source) ) {
             // No content find, therefore compiling is not required.
             return $source;
@@ -256,7 +262,8 @@ class AspectPHP_Stream {
      * @param string $path
      * @return string
      */
-    protected function isFrameworkFile($path) {
+    protected function isFrameworkFile($path)
+    {
         $frameworkDirectory = dirname(__FILE__);
         return strpos($path, $frameworkDirectory) === 0;
     }
@@ -275,7 +282,8 @@ class AspectPHP_Stream {
      * @param integer $flags
      * @return array(string|integer=>integer)
      */
-    protected function getStats($path, $flags = 0) {
+    protected function getStats($path, $flags = 0)
+    {
         $filePath = $this->removeScheme($path);
         if( !file_exists($filePath) ) {
             return false;
@@ -295,7 +303,8 @@ class AspectPHP_Stream {
      * @param string $path
      * @return string
      */
-    protected function removeScheme($path) {
+    protected function removeScheme($path)
+    {
         return substr($path, strlen(self::NAME . '://'));
     }
     
