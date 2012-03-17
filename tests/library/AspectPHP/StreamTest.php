@@ -356,7 +356,7 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
     }
     
     /**
-     * Enusres that the stream does not modify the line numbers of the original code.
+     * Ensures that the stream does not modify the line numbers of the original code.
      */
     public function testStreamDoesNotChangeLineNumbers()
     {
