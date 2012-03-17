@@ -25,7 +25,7 @@ class AspectPHP_Pointcut_All implements AspectPHP_Pointcut
 {
     
     /**
-     * @see AspectPHP_Pointcut::matches()
+     * See {@link AspectPHP_Pointcut::matches()} for details.
      *
      * @param string $method
      * @return boolean

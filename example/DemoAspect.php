@@ -24,7 +24,7 @@
 class DemoAspect implements AspectPHP_Aspect {
     
     /**
-     * @see AspectPHP_Aspect::before()
+     * See {@link AspectPHP_Aspect::before()} for details.
      *
      * @param AspectPHP_JoinPoint $joinPoint
      */
@@ -34,7 +34,7 @@ class DemoAspect implements AspectPHP_Aspect {
     }
     
     /**
-     * @see AspectPHP_Aspect::afterReturning()
+     * See {@link AspectPHP_Aspect::afterReturning()} for details.
      *
      * @param AspectPHP_JoinPoint $joinPoint
      */
@@ -44,7 +44,7 @@ class DemoAspect implements AspectPHP_Aspect {
     }
     
     /**
-     * @see AspectPHP_Aspect::afterThrowing()
+     * See {@link AspectPHP_Aspect::afterThrowing()} for details.
      *
      * @param AspectPHP_JoinPoint $joinPoint
      */

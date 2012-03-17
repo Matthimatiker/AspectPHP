@@ -33,7 +33,7 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager {
     protected $aspects = array();
     
     /**
-     * @see AspectPHP_Manager::register()
+     * See {@link AspectPHP_Manager::register()} for details.
      *
      * @param AspectPHP_Aspect $aspect
      * @param string $pointcut
@@ -47,7 +47,7 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager {
     }
     
     /**
-     * @see AspectPHP_Manager::unregister()
+     * See {@link AspectPHP_Manager::unregister()} for details.
      *
      * @param AspectPHP_Aspect $aspect
      */
@@ -66,7 +66,7 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager {
     }
     
     /**
-     * @see AspectPHP_Manager::getAspects()
+     * See {@link AspectPHP_Manager::getAspects()} for details.
      *
      * @return array(AspectPHP_Aspect)
      */
@@ -80,7 +80,7 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager {
     }
     
     /**
-     * @see AspectPHP_Manager::getMatchingAspects()
+     * See {@link AspectPHP_Manager::getMatchingAspects()} for details.
      *
      * @param string $method
      * @return array(AspectPHP_Aspect)
