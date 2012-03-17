@@ -26,7 +26,8 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
  * @version $Rev$
  * @since 27.01.2012
  */
-class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
+class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase
+{
     
     /**
      * Checks if count() returns the number of tokens.

@@ -46,7 +46,8 @@
  * @version $Rev$
  * @since 09.02.2012
  */
-class AspectPHP_Pointcut_RegExp implements AspectPHP_Pointcut {
+class AspectPHP_Pointcut_RegExp implements AspectPHP_Pointcut
+{
     
     /**
      * The regular expression that is used to check the methods.

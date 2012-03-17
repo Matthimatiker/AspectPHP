@@ -20,7 +20,8 @@
  * @version $Rev$
  * @since 11.01.2012
  */
-interface AspectPHP_Manager {
+interface AspectPHP_Manager
+{
     
     /**
      * Registers the given aspect for all method calls that match the

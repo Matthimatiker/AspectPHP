@@ -26,7 +26,8 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
  * @version $Rev$
  * @since 05.01.2012
  */
-class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase {
+class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
+{
     
     /**
      * The name of the transformed class.

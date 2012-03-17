@@ -22,7 +22,8 @@
  * @version $Rev$
  * @since 27.01.2012
  */
-class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAggregate  {
+class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAggregate
+{
     
     /**
      * Contains opening braces as key and corresponding

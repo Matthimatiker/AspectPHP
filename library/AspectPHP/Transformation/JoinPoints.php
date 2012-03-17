@@ -19,7 +19,8 @@
  * @version $Rev$
  * @since 05.01.2012
  */
-class AspectPHP_Transformation_JoinPoints {
+class AspectPHP_Transformation_JoinPoints
+{
     
     /**
      * Helper object to load source code.

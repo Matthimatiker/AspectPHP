@@ -19,7 +19,8 @@
  * @version $Rev$
  * @since 08.01.2012
  */
-class AspectPHP_JoinPoint {
+class AspectPHP_JoinPoint
+{
     
     /**
      * The method context.

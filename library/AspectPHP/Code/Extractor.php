@@ -19,7 +19,8 @@
  * @version $Rev$
  * @since 11.02.2012
  */
-class AspectPHP_Code_Extractor {
+class AspectPHP_Code_Extractor
+{
     
     /**
      * Cached source code by method identifier.

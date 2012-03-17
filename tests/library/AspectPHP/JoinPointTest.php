@@ -26,7 +26,8 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
  * @version $Rev$
  * @since 08.01.2012
  */
-class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase {
+class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase
+{
     
     /**
      * System under test.

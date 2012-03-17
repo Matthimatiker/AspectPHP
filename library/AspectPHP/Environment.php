@@ -19,7 +19,8 @@
  * @version $Rev$
  * @since 12.01.2012
  */
-class AspectPHP_Environment {
+class AspectPHP_Environment
+{
     
     /**
      * The aspect manager.

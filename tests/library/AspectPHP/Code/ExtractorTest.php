@@ -31,7 +31,8 @@ require_once(dirname(__FILE__) . '/TestData/Extractor/Method.php');
  * @version $Rev$
  * @since 11.02.2012
  */
-class AspectPHP_Code_ExtractorTest extends PHPUnit_Framework_TestCase {
+class AspectPHP_Code_ExtractorTest extends PHPUnit_Framework_TestCase
+{
     
     /**
      * System under test.

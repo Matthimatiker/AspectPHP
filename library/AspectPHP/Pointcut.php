@@ -19,7 +19,8 @@
  * @version $Rev$
  * @since 09.02.2012
  */
-interface AspectPHP_Pointcut {
+interface AspectPHP_Pointcut
+{
     
     /**
      * Checks if the pointcut matches the given method.

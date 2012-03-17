@@ -25,7 +25,8 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
  * @version $Rev$
  * @since 09.02.2012
  */
-class AspectPHP_Pointcut_RegExpTest extends PHPUnit_Framework_TestCase {
+class AspectPHP_Pointcut_RegExpTest extends PHPUnit_Framework_TestCase
+{
     
     /**
      * Checks if the class implements the AspectPHP_Pointcut interface.

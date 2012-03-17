@@ -19,7 +19,8 @@
  * @version $Rev$
  * @since 17.01.2012
  */
-class AspectPHP_Transformation_Replace {
+class AspectPHP_Transformation_Replace
+{
     
     /**
      * The replacement rules.

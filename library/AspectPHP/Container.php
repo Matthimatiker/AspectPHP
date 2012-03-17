@@ -19,7 +19,8 @@
  * @version $Rev$
  * @since 15.01.2012
  */
-class AspectPHP_Container {
+class AspectPHP_Container
+{
     
     /**
      * The object that manages the aspects.

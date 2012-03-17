@@ -21,7 +21,8 @@
  * @version $Rev$
  * @since 12.01.2012
  */
-class AspectPHP_Manager_Standard implements AspectPHP_Manager {
+class AspectPHP_Manager_Standard implements AspectPHP_Manager
+{
     
     /**
      * The registered aspects.

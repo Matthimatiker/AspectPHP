@@ -19,7 +19,8 @@
  * @version $Rev$
  * @since 11.01.2012
  */
-interface AspectPHP_Aspect {
+interface AspectPHP_Aspect
+{
     
     /**
      * Is called when the method was entered.

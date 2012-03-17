@@ -26,7 +26,8 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
  * @version $Rev$
  * @since 13.12.2011
  */
-class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
+class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
+{
     
     /**
      * The original include path.

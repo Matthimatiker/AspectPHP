@@ -26,7 +26,8 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
  * @version $Rev$
  * @since 05.02.2012
  */
-class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
+class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase
+{
     
     /**
      * System under test.

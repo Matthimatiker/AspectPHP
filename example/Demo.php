@@ -21,7 +21,8 @@
  * @version $Rev$
  * @since 16.01.2012
  */
-class Demo {
+class Demo
+{
     
     /**
      * Outputs the given name.

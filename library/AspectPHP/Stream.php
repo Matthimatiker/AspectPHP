@@ -19,7 +19,8 @@
  * @version $Rev$
  * @since 13.12.2011
  */
-class AspectPHP_Stream {
+class AspectPHP_Stream
+{
     
     /**
      * The name that is used to access the stream (name://...).

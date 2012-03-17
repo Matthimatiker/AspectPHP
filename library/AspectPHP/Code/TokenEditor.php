@@ -19,7 +19,8 @@
  * @version $Rev$
  * @since 05.02.2012
  */
-class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer {
+class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer
+{
     
     /**
      * A list of queued changes.

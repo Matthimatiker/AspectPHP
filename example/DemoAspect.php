@@ -21,7 +21,8 @@
  * @version $Rev$
  * @since 16.01.2012
  */
-class DemoAspect implements AspectPHP_Aspect {
+class DemoAspect implements AspectPHP_Aspect
+{
     
     /**
      * See {@link AspectPHP_Aspect::before()} for details.
