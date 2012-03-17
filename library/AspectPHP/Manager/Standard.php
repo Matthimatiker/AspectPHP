@@ -57,7 +57,7 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager {
             /* @var string $pointcut */
             /* @var array(AspectPHP_Aspect) $aspects */
             foreach( $aspects as $index => $currentAspect ) {
-            	/* @var AspectPHP_Aspect $currentAspect */
+                /* @var AspectPHP_Aspect $currentAspect */
                 if( $currentAspect === $aspect ) {
                     unset($this->aspects[$pointcut][$index]);
                 }

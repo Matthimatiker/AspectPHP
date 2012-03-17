@@ -24,7 +24,7 @@
 class AspectPHP_Pointcut_None implements AspectPHP_Pointcut
 {
     
-	/**
+    /**
      * @see AspectPHP_Pointcut::matches()
      *
      * @param string $method

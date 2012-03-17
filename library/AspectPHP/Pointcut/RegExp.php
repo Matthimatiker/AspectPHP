@@ -91,7 +91,7 @@ class AspectPHP_Pointcut_RegExp implements AspectPHP_Pointcut {
     {
         // Escape namespace and class/method separators.
         $replacePairs = array(
-        	'\\' => '\\\\',
+            '\\' => '\\\\',
             '::' => '\:\:'
         );
         $regExp = str_replace(array_keys($replacePairs), array_values($replacePairs), $expression);
