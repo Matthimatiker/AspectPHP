@@ -60,13 +60,13 @@ class AspectPHP_Transformation_Replace
     {
         $tokens    = token_get_all($source);
         $newSource = '';
-        foreach( $tokens as $token ) {
+        foreach ($tokens as $token) {
             /* @var $token string|array(integer|string) */
-            if( is_string($token) ) {
+            if (is_string($token)) {
                 $newSource .= $token;
                 continue;
             }
-            if( isset($this->rules[$token[0]]) ) {
+            if (isset($this->rules[$token[0]])) {
                 // Replace the token.
                 $newSource .= $this->rules[$token[0]];
                 continue;

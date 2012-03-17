@@ -47,7 +47,7 @@ class AspectPHP_Transformation_JoinPoints
         $this->editor = new AspectPHP_Code_TokenEditor($source);
         
         $classToken = $this->editor->findNext(T_CLASS, 0);
-        if( $classToken === -1 ) {
+        if ($classToken === -1) {
             // No class found.
             return $source;
         }
@@ -55,10 +55,10 @@ class AspectPHP_Transformation_JoinPoints
         $classEnd = $this->editor->findMatchingBrace($body);
         
         $index = $classToken;
-        while( ($index = $this->editor->findNext(T_FUNCTION, $index)) !== -1 ) {
+        while (($index = $this->editor->findNext(T_FUNCTION, $index)) !== -1) {
             // We found a "function" keyword at position $index.
             $bodyStart = $this->findBody($index);
-            if( $bodyStart === -1 ) {
+            if ($bodyStart === -1) {
                 // No body, might be an abstract method.
                 continue;
             }
@@ -77,7 +77,7 @@ class AspectPHP_Transformation_JoinPoints
             // Rename the original method...
             $this->editor->rename($name, $newName);
             // ... and reduce its visibility.
-            if( $visibility === -1 ) {
+            if ($visibility === -1) {
                 // Visibility was not defined explicity.
                 $visibilityToken = array(
                     T_PRIVATE,
@@ -223,8 +223,8 @@ class AspectPHP_Transformation_JoinPoints
     protected function between($start, $end)
     {
         $code = '';
-        for( $i = $start; $i <= $end; $i++) {
-            if( is_string($this->editor[$i]) ) {
+        for ($i = $start; $i <= $end; $i++) {
+            if (is_string($this->editor[$i])) {
                 $code .= $this->editor[$i];
             } else {
                 $code .= $this->editor[$i][1];
@@ -302,31 +302,31 @@ class AspectPHP_Transformation_JoinPoints
      */
     private static function _aspectPHPInternalHandleCall($method, $compiledMethod, $context, $args)
     {
-        if( AspectPHP_Container::hasManager() ) {
+        if (AspectPHP_Container::hasManager()) {
             $aspects = AspectPHP_Container::getManager()->getAspectsFor(__CLASS__ . '::' . $method);
         } else {
             $aspects = array();
         }
-        if( count($aspects) === 0 ) {
+        if (count($aspects) === 0) {
             return call_user_func_array(array($context, $compiledMethod), $args);
         }
         $joinPoint = new AspectPHP_JoinPoint($method, $context);
         $joinPoint->setArguments($args);
-        foreach( $aspects as $aspect ) {
+        foreach ($aspects as $aspect) {
             /* @var $aspect AspectPHP_Aspect */
             $aspect->before($joinPoint);
         }
         try {
             $returnValue = call_user_func_array(array($context, $compiledMethod), $args);
             $joinPoint->setReturnValue($returnValue);
-            foreach( $aspects as $aspect ) {
+            foreach ($aspects as $aspect) {
                 /* @var $aspect AspectPHP_Aspect */
                 $aspect->afterReturning($joinPoint);
             }
             return $joinPoint->getReturnValue();
         } catch(Exception $e) {
             $joinPoint->setException($e);
-            foreach( $aspects as $aspect ) {
+            foreach ($aspects as $aspect) {
                 /* @var $aspect AspectPHP_Aspect */
                 $aspect->afterThrowing($joinPoint);
             }

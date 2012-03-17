@@ -28,7 +28,7 @@ function autoload($class)
 {
     $file = str_replace(array('_', '\\'), '/', $class) . '.php';
     $path = stream_resolve_include_path($file);
-    if( $path === false) {
+    if ($path === false) {
         return false;
     }
     require($path);

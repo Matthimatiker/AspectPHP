@@ -45,9 +45,9 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer
     public function replace($indexOrIndexes, $newToken)
     {
         $indexes = is_array($indexOrIndexes) ? $indexOrIndexes : array($indexOrIndexes);
-        foreach( $indexes as $index ) {
+        foreach ($indexes as $index) {
             /* @var $index integer */
-            if( is_array($newToken) && !isset($newToken[2]) ) {
+            if (is_array($newToken) && !isset($newToken[2])) {
                 // Token does not contain a line number.
                 $newToken[2] = is_array($this[$index]) ? $this[$index][2] : 0;
             }
@@ -69,7 +69,7 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer
     public function remove($indexOrIndexes)
     {
         $indexes = is_array($indexOrIndexes) ? $indexOrIndexes : array($indexOrIndexes);
-        foreach( $indexes as $index ) {
+        foreach ($indexes as $index) {
             /* @var $index integer */
             $change = $this->createChange('remove', $index);
             $change->modifiesRef = true;
@@ -102,7 +102,7 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer
     public function rename($index, $newName)
     {
         $this->assertIsIndex($index);
-        if( !$this->isOfType($index, T_STRING) ) {
+        if (!$this->isOfType($index, T_STRING)) {
             $message = 'Expected token of type T_STRING.';
             throw new InvalidArgumentException($message);
         }
@@ -140,7 +140,7 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer
         usort($this->changes, array($this, 'compareByRefIndex'));
         // $delta contains the index drift from all previous changes.
         $delta = 0;
-        foreach( $this->changes as $change ) {
+        foreach ($this->changes as $change) {
             /* @var $change stdClass */
             $change->refIndex += $delta;
             $delta += call_user_func($this->getApplyMethod($change), $change);
@@ -224,12 +224,12 @@ class AspectPHP_Code_TokenEditor extends AspectPHP_Code_TokenAnalyzer
      */
     protected function registerChange(stdClass $change)
     {
-        if( $change->modifiesRef ) {
+        if ($change->modifiesRef) {
             // The last change that modifies a token overwrites
             // previous modification requests for that token.
             $numberOfChanges = count($this->changes);
-            for( $i = 0; $i < $numberOfChanges; $i++ ) {
-                if($this->changes[$i]->modifiesRef && $this->changes[$i]->refIndex === $change->refIndex) {
+            for ($i = 0; $i < $numberOfChanges; $i++) {
+                if ($this->changes[$i]->modifiesRef && $this->changes[$i]->refIndex === $change->refIndex) {
                     // Overwrite the old modification request.
                     $this->changes[$i] = $change;
                     return;

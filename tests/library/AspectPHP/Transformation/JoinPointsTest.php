@@ -73,7 +73,7 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
         $this->transformation = new AspectPHP_Transformation_JoinPoints();
         $this->original       = $this->getContent('Transformation.php');
         $this->transformed    = $this->transformation->transform($this->original);
-        if( !class_exists(self::TRANSFORMED_CLASS, false) ) {
+        if (!class_exists(self::TRANSFORMED_CLASS, false)) {
             // We execute the transformed code to be able to use the reflection api for testing.
             // We assume that the same input is always transformed into the same output.
             // Otherwise our tests might be incorrect, because the execution is done only
@@ -81,7 +81,7 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
             $this->execute($this->transformed);
         }
         $this->assertClassExists(self::TRANSFORMED_CLASS);
-        if( !class_exists($this->getOriginalClassName(), false) ) {
+        if (!class_exists($this->getOriginalClassName(), false)) {
             // Rename the original class and execute the code to be able to use the reflection api.
             $code = str_replace(self::TRANSFORMED_CLASS, $this->getOriginalClassName(), $this->original);
             $this->execute($code);
@@ -475,7 +475,7 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
     protected function execute($code)
     {
         // Remove opening tag as eval does not accept it.
-        if( strpos($code, '<?php') === 0 ) {
+        if (strpos($code, '<?php') === 0) {
             $code = substr($code, strlen('<?php'));
         }
         $result = eval($code);

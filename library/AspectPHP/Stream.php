@@ -64,7 +64,7 @@ class AspectPHP_Stream
      */
     public static function register()
     {
-        if( self::isRegistered() ) {
+        if (self::isRegistered()) {
             return;
         }
         stream_wrapper_register(self::NAME, __CLASS__);
@@ -77,7 +77,7 @@ class AspectPHP_Stream
      */
     public static function unregister()
     {
-        if( !self::isRegistered() ) {
+        if (!self::isRegistered()) {
             return;
         }
         stream_wrapper_unregister(self::NAME);
@@ -106,7 +106,7 @@ class AspectPHP_Stream
     public function stream_open($path, $mode, $options, &$openedPath)
     {
         $filePath = $this->removeScheme($path);
-        if( !is_file($filePath) ) {
+        if (!is_file($filePath)) {
             return false;
         }
         $this->path    = realpath($filePath);
@@ -228,7 +228,7 @@ class AspectPHP_Stream
     protected function buildContent()
     {
         $source = file_get_contents($this->path);
-        if( $this->isFrameworkFile($this->path) ) {
+        if ($this->isFrameworkFile($this->path)) {
             // Do not modify framework files.
             // Some of the framework files are reponsible for code transformations.
             // So trying to modify these classes results in a fatal error (class not found).
@@ -245,7 +245,7 @@ class AspectPHP_Stream
      */
     protected function compile($source)
     {
-        if( empty($source) ) {
+        if (empty($source)) {
             // No content find, therefore compiling is not required.
             return $source;
         }
@@ -285,7 +285,7 @@ class AspectPHP_Stream
     protected function getStats($path, $flags = 0)
     {
         $filePath = $this->removeScheme($path);
-        if( !file_exists($filePath) ) {
+        if (!file_exists($filePath)) {
             return false;
         }
         $suppressErrors = ($flags & STREAM_URL_STAT_QUIET) === STREAM_URL_STAT_QUIET;

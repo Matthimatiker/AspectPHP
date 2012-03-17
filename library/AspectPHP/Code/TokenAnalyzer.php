@@ -65,14 +65,14 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
     public function __construct($tokensOrSource)
     {
         $tokens = array();
-        if( is_string($tokensOrSource) ) {
+        if (is_string($tokensOrSource)) {
             // Source code provided.
             $tokens = token_get_all($tokensOrSource);
-        } elseif( is_array($tokensOrSource) ) {
+        } elseif (is_array($tokensOrSource)) {
             // Token array provided.
             $tokens = $tokensOrSource;
         }
-        if( count($tokens) === 0 ) {
+        if (count($tokens) === 0) {
             $message = 'Expected non-empty token list or source code.';
             throw new InvalidArgumentException($message);
         }
@@ -92,7 +92,7 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
     public function findNext($typeOrTypes, $index, array $stopAt = array())
     {
         $this->assertIsIndex($index);
-        if( $index === count($this) - 1 ) {
+        if ($index === count($this) - 1) {
             return -1;
         }
         return $this->findBetween($typeOrTypes, $index + 1, count($this) - 1, $stopAt);
@@ -111,7 +111,7 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
     public function findPrevious($typeOrTypes, $index, array $stopAt = array())
     {
         $this->assertIsIndex($index);
-        if( $index === 0 ) {
+        if ($index === 0) {
             return -1;
         }
         return $this->findBetween($typeOrTypes, $index - 1, 0, $stopAt);
@@ -163,17 +163,17 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
         $this->assertIsIndex($end);
         
         $step = 1;
-        if( $start > $end ) {
+        if ($start > $end) {
             // Search in descending order.
             $step = -1;
         }
         
         $lastIndex = $end + $step;
-        for( $index = $start; $index !== $lastIndex; $index += $step ) {
-            if( $this->isOneTypeOf($index, $types)) {
+        for ($index = $start; $index !== $lastIndex; $index += $step) {
+            if ($this->isOneTypeOf($index, $types)) {
                 return $index;
             }
-            if( $this->isOneTypeOf($index, $stopAt)) {
+            if ($this->isOneTypeOf($index, $stopAt)) {
                 // Stop token encountered.
                 return -1;
             }
@@ -208,10 +208,10 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
         $current   = $start;
         $minIndex  = min($start, $end);
         $maxIndex  = max($start, $end);
-        while( ($index = $this->findBetween($typeOrTypes, $current, $end, $stopAt)) !== -1 ) {
+        while (($index = $this->findBetween($typeOrTypes, $current, $end, $stopAt)) !== -1) {
             $matches[] = $index;
             $current   = $index + $direction;
-            if( $current < $minIndex || $current > $maxIndex  ) {
+            if ($current < $minIndex || $current > $maxIndex) {
                 // The calculated index is out of bounds, therefore stop search process.
                 break;
             }
@@ -230,13 +230,13 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
     public function findMatchingBrace($index)
     {
         $this->assertIsIndex($index);
-        if( !$this->isBrace($index) ) {
+        if (!$this->isBrace($index)) {
             $message = 'Token at position ' . $index . ' does not contain a brace.';
             throw new InvalidArgumentException($message);
         }
         $brace              = $this->tokens[$index];
         $correspondingBrace = $this->getCorrespondingBrace($brace);
-        if( isset(self::$braces[$brace]) ) {
+        if (isset(self::$braces[$brace])) {
             // Token contains an opening brace.
             $stopIndex = count($this);
             $step      = 1;
@@ -246,12 +246,12 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
             $step      = -1;
         }
         $braceCount = 1;
-        for( $i = $index + $step; $i !== $stopIndex; $i += $step ) {
-            if( $this->isOfType($i, $brace) ) {
+        for ($i = $index + $step; $i !== $stopIndex; $i += $step) {
+            if ($this->isOfType($i, $brace)) {
                 $braceCount++;
-            } elseif( $this->isOfType($i, $correspondingBrace) ) {
+            } elseif ($this->isOfType($i, $correspondingBrace)) {
                 $braceCount--;
-                if( $braceCount === 0) {
+                if ($braceCount === 0) {
                     return $i;
                 }
             }
@@ -337,8 +337,8 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
     {
         $sourceCode     = '';
         $numberOfTokens = count($this);
-        for( $i = 0; $i < $numberOfTokens; $i++) {
-            if( is_string($this->tokens[$i]) ) {
+        for ($i = 0; $i < $numberOfTokens; $i++) {
+            if (is_string($this->tokens[$i])) {
                 $sourceCode .= $this->tokens[$i];
             } else {
                 $sourceCode .= $this->tokens[$i][1];
@@ -396,7 +396,7 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
      */
     protected function getCorrespondingBrace($brace)
     {
-        if( isset(self::$braces[$brace]) ) {
+        if (isset(self::$braces[$brace])) {
             // Opening brace provided.
             return self::$braces[$brace];
         }
@@ -415,9 +415,9 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
      */
     protected function isOneTypeOf($index, array $types)
     {
-        foreach( $types as $type ) {
+        foreach ($types as $type) {
             /* @var $type integer|string */
-            if( $this->isOfType($index, $type) ) {
+            if ($this->isOfType($index, $type)) {
                 return true;
             }
         }
@@ -433,9 +433,9 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
      */
     protected function isOfType($index, $type)
     {
-        if( is_int($type) ) {
+        if (is_int($type)) {
             // T_* constant provided as type.
-            if( !is_array($this->tokens[$index]) ) {
+            if (!is_array($this->tokens[$index])) {
                 return false;
             }
             return $type === $this->tokens[$index][0];
@@ -454,7 +454,7 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
      */
     protected function assertIsIndex($index)
     {
-        if( !$this->isIndex($index) ) {
+        if (!$this->isIndex($index)) {
             $template = '"%s" is not a valid token position. Expected value between %s and %s.';
             $message  = sprintf($template, $index, 0, count($this) - 1);
             throw new InvalidArgumentException($message);

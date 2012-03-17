@@ -122,7 +122,7 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase
     {
         $tokens   = array('1', '2');
         $analyzer = $this->create($tokens);
-        foreach( $analyzer as $token ) {
+        foreach ($analyzer as $token) {
             $this->assertContains($token, $tokens);
         }
     }
@@ -649,7 +649,7 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase
         $tokens   = $analyzer->findAllBetween('2', 0, 4);
         $this->assertInternalType('array', $tokens);
         $last = -1;
-        foreach( $tokens as $index ) {
+        foreach ($tokens as $index) {
             $this->assertGreaterThan($last, $index);
             $last = $index;
         }
@@ -665,7 +665,7 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase
         $tokens   = $analyzer->findAllBetween('2', 4, 0);
         $this->assertInternalType('array', $tokens);
         $last = PHP_INT_MAX;
-        foreach( $tokens as $index ) {
+        foreach ($tokens as $index) {
             $this->assertLessThan($last, $index);
             $last = $index;
         }
@@ -788,7 +788,7 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase
      */
     protected function create($tokensOrSource)
     {
-        if( is_array($tokensOrSource) ) {
+        if (is_array($tokensOrSource)) {
             $tokens = $tokensOrSource;
         } else {
             $tokens = token_get_all($tokensOrSource);

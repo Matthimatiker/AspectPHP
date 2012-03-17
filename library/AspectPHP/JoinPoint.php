@@ -129,7 +129,7 @@ class AspectPHP_JoinPoint
     public function getArgument($nameOrIndex)
     {
         $index = (is_string($nameOrIndex)) ? $this->getPositionFor($nameOrIndex) : $nameOrIndex;
-        if( $index >= $this->method->getNumberOfParameters() ) {
+        if ($index >= $this->method->getNumberOfParameters()) {
             throw new InvalidArgumentException('Parameter #' . $index . ' was not declared.');
         }
         return $this->arguments[$index];
@@ -175,7 +175,7 @@ class AspectPHP_JoinPoint
      */
     public function getTarget()
     {
-        if( $this->target === null ) {
+        if ($this->target === null) {
             return array($this->getContext(), $this->getMethod());
         }
         return $this->target;
@@ -194,7 +194,7 @@ class AspectPHP_JoinPoint
     {
         // Check only the syntax of the callback as it will
         // be called in another context.
-        if( !is_callable($callback, true) ) {
+        if (!is_callable($callback, true)) {
             throw new InvalidArgumentException('Callback expected.');
         }
         $this->target = $callback;
@@ -246,7 +246,7 @@ class AspectPHP_JoinPoint
      */
     public function setException($exception)
     {
-        if( $exception !== null && !($exception instanceof Exception) ) {
+        if ($exception !== null && !($exception instanceof Exception)) {
             throw new InvalidArgumentException('Expected instance of Exception or null.');
         }
         $this->exception = $exception;
@@ -264,9 +264,9 @@ class AspectPHP_JoinPoint
     protected function getDefaultParameters()
     {
         $defaults = array();
-        foreach( $this->method->getParameters() as $parameter) {
+        foreach ($this->method->getParameters() as $parameter) {
             /* @var $parameter ReflectionParameter */
-            if( $parameter->isOptional() ) {
+            if ($parameter->isOptional()) {
                 $defaults[$parameter->getPosition()] = $parameter->getDefaultValue();
             }
         }
@@ -282,9 +282,9 @@ class AspectPHP_JoinPoint
      */
     protected function getPositionFor($parameterName)
     {
-        foreach( $this->method->getParameters() as $parameter) {
+        foreach ($this->method->getParameters() as $parameter) {
             /* @var $parameter ReflectionParameter */
-            if( $parameter->getName() === $parameterName ) {
+            if ($parameter->getName() === $parameterName) {
                 return $parameter->getPosition();
             }
         }

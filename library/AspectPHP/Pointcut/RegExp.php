@@ -64,7 +64,7 @@ class AspectPHP_Pointcut_RegExp implements AspectPHP_Pointcut
      */
     public function __construct($expression)
     {
-        if( !is_string($expression) || empty($expression) ) {
+        if (!is_string($expression) || empty($expression)) {
             $message = 'Expected regular expression (non-empty string).';
             throw new InvalidArgumentException($message);
         }

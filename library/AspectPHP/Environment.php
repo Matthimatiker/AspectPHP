@@ -36,7 +36,7 @@ class AspectPHP_Environment
      */
     public function getManager()
     {
-        if( $this->manager === null ) {
+        if ($this->manager === null) {
             $this->manager = new AspectPHP_Manager_Standard();
         }
         return $this->manager;
@@ -50,7 +50,7 @@ class AspectPHP_Environment
     {
         $paths         = explode(PATH_SEPARATOR, get_include_path());
         $numberOfPaths = count($paths);
-        for( $i = 0; $i < $numberOfPaths; $i++ ) {
+        for ($i = 0; $i < $numberOfPaths; $i++) {
             $paths[$i] = $this->toStream($paths[$i]);
         }
         set_include_path(implode(PATH_SEPARATOR, $paths));
