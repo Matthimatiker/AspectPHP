@@ -338,8 +338,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
         $path = $this->getPath('StreamCheck/FileConstant.php');
         include($this->toStream($path));
         $this->assertClassExists('StreamCheck_FileConstant');
-        $check = new StreamCheck_FileConstant();
-        $value = $check->getFileConstant();
+        $check   = new StreamCheck_FileConstant();
+        $value   = $check->getFileConstant();
         $message = '__FILE__ returned an invalid value: ' . $value;
         $this->assertEquals(realpath($path), realpath($value), $message);
     }
@@ -357,6 +357,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
     
     /**
      * Ensures that the stream does not modify the line numbers of the original code.
+     *
+     * @throws RuntimeException The expected exception.
      */
     public function testStreamDoesNotChangeLineNumbers()
     {
