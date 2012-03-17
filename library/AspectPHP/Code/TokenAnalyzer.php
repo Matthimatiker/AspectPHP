@@ -404,7 +404,7 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
         return $braces[$brace];
     }
     
-	/**
+    /**
      * Checks if the type of the token at position $index equals one
      * of the types that were specified in $types.
      *
@@ -414,13 +414,13 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
      */
     protected function isOneTypeOf($index, array $types)
     {
-         foreach( $types as $type ) {
-             /* @var $type integer|string */
-             if( $this->isOfType($index, $type) ) {
-                 return true;
-             }
-         }
-         return false;
+        foreach( $types as $type ) {
+            /* @var $type integer|string */
+            if( $this->isOfType($index, $type) ) {
+                return true;
+            }
+        }
+        return false;
     }
     
     /**
@@ -455,7 +455,7 @@ class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAg
     {
         if( !$this->isIndex($index) ) {
             $template = '"%s" is not a valid token position. Expected value between %s and %s.';
-            $message = sprintf($template, $index, 0, count($this) - 1);
+            $message  = sprintf($template, $index, 0, count($this) - 1);
             throw new InvalidArgumentException($message);
         }
     }

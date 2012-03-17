@@ -93,13 +93,13 @@ class AspectPHP_Stream {
         return in_array(self::NAME, $wrappers);
     }
     
-	/**
+    /**
      * Opens the code file and adds extension points.
      *
      * @param string $path
      * @param string $mode
      * @param integer $options
-     * @param string $openedPath
+     * @param string &$openedPath
      * @return boolean
      */
     public function stream_open($path, $mode, $options, &$openedPath)
@@ -157,7 +157,7 @@ class AspectPHP_Stream {
         return $this->stats;
     }
 
-	/**
+    /**
      * Returns meta data about the file.
      *
      * @param string $path The file path.
@@ -276,11 +276,10 @@ class AspectPHP_Stream {
      * $stats = $this->getStats('aspectphp://path/to/my/file');
      * </code>
      *
-     * @todo respect STREAM_URL_STAT_LINK flag if information about a link is required
-     *
      * @param string $path The path including the stream scheme.
      * @param integer $flags
      * @return array(string|integer=>integer)
+     * @todo respect STREAM_URL_STAT_LINK flag if information about a link is required
      */
     protected function getStats($path, $flags = 0)
     {

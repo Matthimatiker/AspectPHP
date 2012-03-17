@@ -42,11 +42,11 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
     {
         parent::setUp();
         $tokens = array(
-        	'1',
-        	'2',
-        	'3',
-        	'4',
-        	'5'
+            '1',
+            '2',
+            '3',
+            '4',
+            '5'
         );
         $this->editor = $this->createEditor($tokens);
     }
@@ -107,7 +107,7 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('7', $this->editor[0]);
     }
     
-	/**
+    /**
      * Ensures that replace() throws an exception if the provided list of token
      * indexes contains invalid values.
      */
@@ -117,7 +117,7 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
         $this->editor->replace(array(2, -1), 'n');
     }
     
-	/**
+    /**
      * Checks if replace() substitutes all tokens whose indexes were provided
      * in the list.
      */

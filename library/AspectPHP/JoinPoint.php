@@ -52,9 +52,9 @@ class AspectPHP_JoinPoint {
     protected $returnValue = null;
     
     /**
-	 * The exeception that was thrown.
-	 *
-	 * @var Exception|null
+     * The exeception that was thrown.
+     *
+     * @var Exception|null
      */
     protected $exception = null;
     
@@ -92,7 +92,7 @@ class AspectPHP_JoinPoint {
         return $this->arguments;
     }
     
-	/**
+    /**
      * Sets the arguments that are used to call the method.
      *
      * @param array(mixed) $arguments The arguments that are used to call the method.
@@ -241,6 +241,7 @@ class AspectPHP_JoinPoint {
      *
      * @param Exception|null $exception
      * @return AspectPHP_JoinPoint Provides a fluent interface.
+     * @throws InvalidArgumentException If an invalid exception value is provided.
      */
     public function setException($exception)
     {
@@ -276,6 +277,7 @@ class AspectPHP_JoinPoint {
      *
      * @param string $parameterName
      * @return integer
+     * @throws InvalidArgumentException If an invalid parameter name is provided.
      */
     protected function getPositionFor($parameterName)
     {

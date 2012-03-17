@@ -85,7 +85,7 @@ class AspectPHP_Transformation_JoinPoints {
                 );
                 $this->editor->insertBefore($index, array($visibility));
             } else {
-                $visibilityToken = $this->editor[$visibility];
+                $visibilityToken    = $this->editor[$visibility];
                 $visibilityToken[0] = T_PRIVATE;
                 $visibilityToken[1] = 'private';
                 $this->editor->replace($visibility, $visibilityToken);
@@ -132,6 +132,7 @@ class AspectPHP_Transformation_JoinPoints {
             T_FINAL,
             T_FUNCTION
         );
+        
         $stopTokens = array(';', '{', '}');
         $tokens     = $this->editor->findAllBetween($signatureTypes, $functionIndex, 0, $stopTokens);
         return min($tokens);

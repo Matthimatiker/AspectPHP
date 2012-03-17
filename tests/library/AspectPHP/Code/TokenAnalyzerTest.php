@@ -90,7 +90,7 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
     public function testOffsetSetThrowsException()
     {
         $this->setExpectedException('BadMethodCallException');
-        $analyzer = $this->create(array('1', '2'));
+        $analyzer    = $this->create(array('1', '2'));
         $analyzer[0] = '3';
     }
     
@@ -131,7 +131,7 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
      */
     public function testToStringReturnsOriginalSourceCode()
     {
-        $source = file_get_contents(__FILE__);
+        $source   = file_get_contents(__FILE__);
         $analyzer = $this->create($source);
         $this->assertEquals($source, (string)$analyzer);
     }
@@ -231,6 +231,7 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
             $this->createToken(T_FUNCTION, 'function'),
             $this->createToken(T_STRING, 'hello')
         );
+        
         $analyzer = $this->create($tokens);
         $this->assertEquals(1, $analyzer->findBetween(T_FUNCTION, 0, 2));
     }
@@ -404,7 +405,7 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
         $analyzer->findPrevious('2', 3);
     }
     
-	/**
+    /**
      * Ensures that findPrevious() does not search tokens after the provided
      * index.
      */
@@ -423,7 +424,7 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals(1, $analyzer->findPrevious('2', 2));
     }
     
-	/**
+    /**
      * Checks if findPrevious() is able to handle the first index.
      */
     public function testFindPreviousCanHandleFirstIndex()
@@ -598,7 +599,7 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals(0, count($tokens));
     }
     
-	/**
+    /**
      * Checks if findAllBetween() returns the correct token indexes.
      */
     public function testFindAllBetweenReturnsCorrectTokenIndexes()
@@ -766,7 +767,7 @@ class AspectPHP_Code_TokenAnalyzerTest extends PHPUnit_Framework_TestCase {
         $this->assertNotContains(4, $tokens);
     }
     
-	/**
+    /**
      * Ensures that findAllBetween() does not search tokens (while performing a descending search)
      * that are before start index even if the token at start index is matching.
      */
