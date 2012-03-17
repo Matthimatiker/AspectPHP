@@ -92,6 +92,13 @@
 
     <!-- Ensure that braces start on line after the class/interface declaration. -->
     <rule ref="PEAR.Classes.ClassDeclaration" />
+    <!-- Check spacing of method calls. -->
+    <rule ref="PEAR.Functions.FunctionCallSignature" />
+    <!-- Ensure that default values are only used at the end of a parameter list. -->
+    <rule ref="PEAR.Functions.ValidDefaultValue" />
+    
+    <!-- Enforce correct block indention. -->
+    <rule ref="PEAR.WhiteSpace.ScopeClosingBrace" /> 
 
     <!-- Ensures that control structures are valid. Required format: "if ($a === $b) {}" -->
     <rule ref="PEAR.ControlStructures.ControlSignature" />
