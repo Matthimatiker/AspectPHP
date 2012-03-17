@@ -279,11 +279,11 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
         $class = 'StreamCheck_Modification_Visibility';
         
         $this->assertHasMethod($class, 'myPrivateMethod');
-        $privateMethod = new ReflectionMethod($class,  'myPrivateMethod');
+        $privateMethod = new ReflectionMethod($class, 'myPrivateMethod');
         $this->assertTrue($privateMethod->isPrivate(), 'Method is not private anymore.');
         
         $this->assertHasMethod($class, 'myProtectedMethod');
-        $privateMethod = new ReflectionMethod($class,  'myProtectedMethod');
+        $privateMethod = new ReflectionMethod($class, 'myProtectedMethod');
         $this->assertTrue($privateMethod->isProtected(), 'Method is not protected anymore.');
         
         $this->assertHasMethod($class, 'myPublicMethod');
@@ -301,7 +301,7 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase {
         $class = 'StreamCheck_Modification_Static';
         
         $this->assertHasMethod($class, 'myStaticMethod');
-        $privateMethod = new ReflectionMethod($class,  'myStaticMethod');
+        $privateMethod = new ReflectionMethod($class, 'myStaticMethod');
         $this->assertTrue($privateMethod->isStatic(), 'Method is not static anymore.');
     }
     
