@@ -37,7 +37,7 @@
 	<!-- Align assignments. -->
 	<rule ref="Generic.Formatting.MultipleStatementAlignment">
 		<properties>
-			<property name="maxPadding" value="5" />
+			<property name="maxPadding" value="3" />
 			<property name="ignoreMultiLine" value="true" />
 		</properties>
 	</rule>
