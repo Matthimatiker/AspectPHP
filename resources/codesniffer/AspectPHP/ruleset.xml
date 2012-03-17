@@ -50,6 +50,8 @@
 	<rule ref="Generic.Functions.CallTimePassByReference" />
 	<!-- Braces that opens a method body is expected in the line after the signature. -->
 	<rule ref="Generic.Functions.OpeningFunctionBraceBsdAllman" />
+	<!-- Check spacing of arguments for all method calls. -->
+	<rule ref="Generic.Functions.FunctionCallArgumentSpacing" />
 
     <!-- Warn if the nesting level is too high. -->
 	<rule ref="Generic.Metrics.NestingLevel" />
