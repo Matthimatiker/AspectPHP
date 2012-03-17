@@ -24,6 +24,8 @@
     <!-- Avoid inline control structures like "if ($a === $b) return true;". -->
 	<rule ref="Generic.ControlStructures.InlineControlStructure" />
 
+    <!-- Ensure that only \n line endings are used. -->
+    <rule ref="Generic.Files.LineEndings" />
     <!-- Avoid lines that are too long. -->
 	<rule ref="Generic.Files.LineLength">
 		<properties>
