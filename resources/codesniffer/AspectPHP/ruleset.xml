@@ -90,6 +90,9 @@
 	<!-- Avoid code that is not executable, for example after a return statement. -->
 	<rule ref="Squiz.PHP.NonExecutableCode" />
 
+    <!-- Ensure that braces start on line after the class/interface declaration. -->
+    <rule ref="PEAR.Classes.ClassDeclaration" />
+
     <!-- Enforce documentation of exceptions. -->
 	<rule ref="Squiz.Commenting.FunctionCommentThrowTag" />
 	<!-- Check for valid method comments. -->
