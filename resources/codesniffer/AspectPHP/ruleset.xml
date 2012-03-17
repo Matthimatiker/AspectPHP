@@ -93,6 +93,9 @@
     <!-- Ensure that braces start on line after the class/interface declaration. -->
     <rule ref="PEAR.Classes.ClassDeclaration" />
 
+    <!-- Ensures that control structures are valid. Required format: "if ($a === $b) {}" -->
+    <rule ref="PEAR.ControlStructures.ControlSignature" />
+
     <!-- Enforce documentation of exceptions. -->
 	<rule ref="Squiz.Commenting.FunctionCommentThrowTag" />
 	<!-- Check for valid method comments. -->
