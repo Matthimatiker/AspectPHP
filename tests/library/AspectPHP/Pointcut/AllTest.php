@@ -54,7 +54,7 @@ class AspectPHP_Pointcut_AllTest extends PHPUnit_Framework_TestCase
         parent::tearDown();
     }
     
-	/**
+    /**
      * Checks if the class implements the AspectPHP_Pointcut interface.
      */
     public function testPointcutImplementsInterface()

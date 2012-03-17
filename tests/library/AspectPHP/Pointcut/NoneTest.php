@@ -29,7 +29,7 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
 class AspectPHP_Pointcut_NoneTest extends PHPUnit_Framework_TestCase
 {
     
-	/**
+    /**
      * System under test.
      *
      * @var AspectPHP_Pointcut_None
@@ -54,7 +54,7 @@ class AspectPHP_Pointcut_NoneTest extends PHPUnit_Framework_TestCase
         parent::tearDown();
     }
     
-	/**
+    /**
      * Checks if the class implements the AspectPHP_Pointcut interface.
      */
     public function testPointcutImplementsInterface()

@@ -218,7 +218,7 @@ class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals(true, $joinPoint->getArgument('register'));
     }
     
-	/**
+    /**
      * Ensures that getArgument() throws an exception if an invalid parameter index is
      * provided.
      */

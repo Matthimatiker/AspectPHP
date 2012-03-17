@@ -109,7 +109,7 @@ class AspectPHP_ContainerTest extends PHPUnit_Framework_TestCase {
         return $this->getMock('AspectPHP_Manager');
     }
     
-	/**
+    /**
      * Resets the aspect manager.
      */
     protected function resetManager()

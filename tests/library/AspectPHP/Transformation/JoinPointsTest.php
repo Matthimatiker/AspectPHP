@@ -173,7 +173,7 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($method->isPublic());
     }
     
-	/**
+    /**
      * Ensures that the transformation does not change the visibility of protected methods.
      */
     public function testTransformationDoesNotChangeVisibilityOfProtectedMethods()
@@ -182,7 +182,7 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($method->isProtected());
     }
     
-	/**
+    /**
      * Ensures that the transformation does not change the visibility of private methods.
      */
     public function testTransformationDoesNotChangeVisibilityOfPrivateMethods()
@@ -200,7 +200,7 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($method->isStatic());
     }
     
-	/**
+    /**
      * Ensures that the transformation does not remove the final attribute from methods.
      */
     public function testTransformationDoesNotRemoveFinalAttributeFromMethod()
@@ -433,7 +433,7 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
         return $this->getClassInfo()->getMethod($name);
     }
     
-	/**
+    /**
      * Returns a reflection object that may be used to inspect the original class.
      *
      * @return ReflectionClass
@@ -443,7 +443,7 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
         return new ReflectionClass($this->getOriginalClassName());
     }
     
-	/**
+    /**
      * Returns a reflection object that may be used to inspect the
      * method $name in the original class.
      *
@@ -455,7 +455,7 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
         return $this->getOriginalClassInfo()->getMethod($name);
     }
     
-	/**
+    /**
      * Returns the name that is used for the original class.
      *
      * @return string

@@ -82,7 +82,7 @@ class AspectPHP_Transformation_ReplaceTest extends PHPUnit_Framework_TestCase {
     public function testTransformationReplacesAllTokenOccurences()
     {
         $source = '<?php function hello() {} function bye() {} ?>';
-        $rules = array(
+        $rules  = array(
             T_FUNCTION => ''
         );
         $this->transformation->setRules($rules);

@@ -275,7 +275,7 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      * Checks if insertBefore() adds the tokens after commit.
      */
     public function testInsertBeforeAddsTokensAfterCommit()
-     {
+    {
         $numberOfTokens = count($this->editor);
         $this->editor->insertBefore(0, array('0'));
         $this->editor->commit();
@@ -287,10 +287,10 @@ class AspectPHP_Code_TokenEditorTest extends PHPUnit_Framework_TestCase {
      */
     public function testInsertBeforeAddsTokensAtCorrectPositionAfterCommit()
     {
-       $this->editor->insertBefore(1, array('8', '9'));
-       $this->editor->commit();
-       $this->assertEquals('8', $this->editor[1]);
-       $this->assertEquals('9', $this->editor[2]);
+        $this->editor->insertBefore(1, array('8', '9'));
+        $this->editor->commit();
+        $this->assertEquals('8', $this->editor[1]);
+        $this->assertEquals('9', $this->editor[2]);
     }
     
     /**

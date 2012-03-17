@@ -155,7 +155,7 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase {
      */
     protected function createAspect()
     {
-       return $this->getMock('AspectPHP_Aspect');
+        return $this->getMock('AspectPHP_Aspect');
     }
     
 }
