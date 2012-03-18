@@ -9,6 +9,7 @@
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @license http://www.opensource.org/licenses/BSD-3-Clause BSD License
+ * @link https://github.com/Matthimatiker/AspectPHP
  * @since 08.01.2012
  */
 
@@ -26,6 +27,7 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @license http://www.opensource.org/licenses/BSD-3-Clause BSD License
+ * @link https://github.com/Matthimatiker/AspectPHP
  * @since 08.01.2012
  */
 class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase

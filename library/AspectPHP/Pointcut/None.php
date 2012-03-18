@@ -8,6 +8,7 @@
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @license http://www.opensource.org/licenses/BSD-3-Clause BSD License
+ * @link https://github.com/Matthimatiker/AspectPHP
  * @since 16.03.2012
  */
 
@@ -21,6 +22,7 @@
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @license http://www.opensource.org/licenses/BSD-3-Clause BSD License
+ * @link https://github.com/Matthimatiker/AspectPHP
  * @since 16.03.2012
  */
 class AspectPHP_Pointcut_None implements AspectPHP_Pointcut
