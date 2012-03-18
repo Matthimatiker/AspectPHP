@@ -4,8 +4,8 @@
  * AspectPHP_Pointcut_None
  *
  * @category PHP
- * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Pointcut
+ * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @license http://www.opensource.org/licenses/BSD-3-Clause BSD License
  * @since 16.03.2012
@@ -17,8 +17,8 @@
  * May be used for testing or as null object.
  *
  * @category PHP
- * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Pointcut
+ * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @license http://www.opensource.org/licenses/BSD-3-Clause BSD License
  * @since 16.03.2012
