@@ -7,7 +7,6 @@
  * @subpackage Tests
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
- * @version $Rev$
  * @since 16.03.2012
  */
 
@@ -23,7 +22,6 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
  * @subpackage Tests
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
- * @version $Rev$
  * @since 16.03.2012
  */
 class AspectPHP_Pointcut_AllTest extends PHPUnit_Framework_TestCase

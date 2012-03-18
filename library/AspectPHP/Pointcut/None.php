@@ -6,7 +6,6 @@
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Pointcut
  * @copyright 2012 Matthias Molitor
- * @version $Rev$
  * @since 16.03.2012
  */
 
@@ -18,7 +17,6 @@
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Pointcut
  * @copyright 2012 Matthias Molitor
- * @version $Rev$
  * @since 16.03.2012
  */
 class AspectPHP_Pointcut_None implements AspectPHP_Pointcut

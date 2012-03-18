@@ -7,7 +7,6 @@
  * @subpackage Example
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
- * @version $Rev$
  * @since 16.01.2012
  */
 
@@ -18,7 +17,6 @@
  * @subpackage Example
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
- * @version $Rev$
  * @since 16.01.2012
  */
 class DemoAspect implements AspectPHP_Aspect

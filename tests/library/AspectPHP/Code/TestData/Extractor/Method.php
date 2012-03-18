@@ -5,7 +5,6 @@
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
- * @version $Rev$
  * @since 13.03.2012
  */
 
@@ -14,7 +13,6 @@
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
- * @version $Rev$
  * @since 13.03.2012
  */
 class Extractor_Method

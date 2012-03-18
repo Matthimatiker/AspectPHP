@@ -6,7 +6,6 @@
  * @package AspectPHP_Pointcut
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
- * @version $Rev$
  * @since 09.02.2012
  */
 
@@ -43,7 +42,6 @@
  * @package AspectPHP_Pointcut
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
- * @version $Rev$
  * @since 09.02.2012
  */
 class AspectPHP_Pointcut_RegExp implements AspectPHP_Pointcut

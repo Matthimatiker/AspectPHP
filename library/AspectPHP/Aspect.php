@@ -6,7 +6,6 @@
  * @package AspectPHP
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
- * @version $Rev$
  * @since 11.01.2012
  */
 
@@ -16,7 +15,6 @@
  * @package AspectPHP
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
- * @version $Rev$
  * @since 11.01.2012
  */
 interface AspectPHP_Aspect

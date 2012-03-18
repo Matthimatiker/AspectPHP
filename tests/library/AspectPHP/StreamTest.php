@@ -7,7 +7,6 @@
  * @subpackage Tests
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2011-2012 Matthias Molitor
- * @version $Rev$
  * @since 13.12.2011
  */
 
@@ -23,7 +22,6 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
  * @subpackage Tests
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2011-2012 Matthias Molitor
- * @version $Rev$
  * @since 13.12.2011
  */
 class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase

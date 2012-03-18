@@ -6,7 +6,6 @@
  * @package AspectPHP_Code
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
- * @version $Rev$
  * @since 11.02.2012
  */
 
@@ -16,7 +15,6 @@
  * @package AspectPHP_Code
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
- * @version $Rev$
  * @since 11.02.2012
  */
 class AspectPHP_Code_Extractor

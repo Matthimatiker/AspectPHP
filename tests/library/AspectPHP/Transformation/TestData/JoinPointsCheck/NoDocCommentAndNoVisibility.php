@@ -5,7 +5,6 @@
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
- * @version $Rev$
  * @since 07.02.2012
  */
 
@@ -15,7 +14,6 @@
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
- * @version $Rev$
  * @since 07.02.2012
  */
 class JoinPointsCheck_NoDocCommentAndNoVisibility {

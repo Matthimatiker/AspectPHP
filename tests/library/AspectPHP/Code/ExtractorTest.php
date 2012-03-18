@@ -7,7 +7,6 @@
  * @subpackage Tests
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
- * @version $Rev$
  * @since 11.02.2012
  */
 
@@ -28,7 +27,6 @@ require_once(dirname(__FILE__) . '/TestData/Extractor/Method.php');
  * @subpackage Tests
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
- * @version $Rev$
  * @since 11.02.2012
  */
 class AspectPHP_Code_ExtractorTest extends PHPUnit_Framework_TestCase

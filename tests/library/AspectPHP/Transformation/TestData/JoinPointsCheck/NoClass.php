@@ -5,7 +5,6 @@
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
- * @version $Rev$
  * @since 07.01.2012
  */
 
