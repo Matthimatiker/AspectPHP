@@ -3,6 +3,7 @@
 /**
  * AspectPHP_Stream
  *
+ * @category PHP
  * @package AspectPHP_Stream
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2011-2012 Matthias Molitor
@@ -13,6 +14,7 @@
 /**
  * Stream that adds injection points to loaded php classes.
  *
+ * @category PHP
  * @package AspectPHP_Stream
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2011-2012 Matthias Molitor

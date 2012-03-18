@@ -3,6 +3,7 @@
 /**
  * AspectPHP_Transformation_Replace
  *
+ * @category PHP
  * @package AspectPHP_Transformation
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
@@ -13,6 +14,7 @@
 /**
  * Transformation class that replaces specific tokens by provided values.
  *
+ * @category PHP
  * @package AspectPHP_Transformation
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor

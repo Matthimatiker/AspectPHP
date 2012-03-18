@@ -3,6 +3,7 @@
 /**
  * AspectPHP_Code_ExtractorTest
  *
+ * @category PHP
  * @package AspectPHP_Code
  * @subpackage Tests
  * @author Matthias Molitor <matthias@matthimatiker.de>
@@ -24,6 +25,7 @@ require_once(dirname(__FILE__) . '/TestData/Extractor/Method.php');
 /**
  * Tests the code extractor.
  *
+ * @category PHP
  * @package AspectPHP_Code
  * @subpackage Tests
  * @author Matthias Molitor <matthias@matthimatiker.de>

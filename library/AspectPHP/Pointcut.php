@@ -3,6 +3,7 @@
 /**
  * AspectPHP_Pointcut
  *
+ * @category PHP
  * @package AspectPHP_Pointcut
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
@@ -13,6 +14,7 @@
 /**
  * Interface for classes that represent pointcut expressions.
  *
+ * @category PHP
  * @package AspectPHP_Pointcut
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor

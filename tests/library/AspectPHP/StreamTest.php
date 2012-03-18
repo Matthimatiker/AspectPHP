@@ -3,6 +3,7 @@
 /**
  * AspectPHP_StreamTest
  *
+ * @category PHP
  * @package AspectPHP_Stream
  * @subpackage Tests
  * @author Matthias Molitor <matthias@matthimatiker.de>
@@ -19,6 +20,7 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
 /**
  * Tests the AspectPHP stream.
  *
+ * @category PHP
  * @package AspectPHP_Stream
  * @subpackage Tests
  * @author Matthias Molitor <matthias@matthimatiker.de>

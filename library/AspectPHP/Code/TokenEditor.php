@@ -3,6 +3,7 @@
 /**
  * AspectPHP_Code_TokenEditor
  *
+ * @category PHP
  * @package AspectPHP_Code
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
@@ -13,6 +14,7 @@
 /**
  * The token editor allows the manipulation of tokenized source code.
  *
+ * @category PHP
  * @package AspectPHP_Code
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor

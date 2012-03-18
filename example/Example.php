@@ -3,6 +3,7 @@
 /**
  * Example script.
  *
+ * @category PHP
  * @package AspectPHP
  * @subpackage Example
  * @author Matthias Molitor <matthias@matthimatiker.de>

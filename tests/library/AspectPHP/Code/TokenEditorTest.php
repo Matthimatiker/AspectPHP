@@ -3,6 +3,7 @@
 /**
  * AspectPHP_Code_TokenEditorTest
  *
+ * @category PHP
  * @package AspectPHP_Code
  * @subpackage Tests
  * @author Matthias Molitor <matthias@matthimatiker.de>
@@ -19,6 +20,7 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
 /**
  * Tests the token editor.
  *
+ * @category PHP
  * @package AspectPHP_Code
  * @subpackage Tests
  * @author Matthias Molitor <matthias@matthimatiker.de>

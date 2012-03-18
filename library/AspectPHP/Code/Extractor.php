@@ -3,6 +3,7 @@
 /**
  * AspectPHP_Code_Extractor
  *
+ * @category PHP
  * @package AspectPHP_Code
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
@@ -13,6 +14,7 @@
 /**
  * Helper class that may be used to extract source code.
  *
+ * @category PHP
  * @package AspectPHP_Code
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor

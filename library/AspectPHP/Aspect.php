@@ -3,6 +3,7 @@
 /**
  * AspectPHP_Aspect
  *
+ * @category PHP
  * @package AspectPHP
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
@@ -13,6 +14,7 @@
 /**
  * Interface that must be implemented by aspects.
  *
+ * @category PHP
  * @package AspectPHP
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor

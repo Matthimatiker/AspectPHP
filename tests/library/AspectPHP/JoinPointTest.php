@@ -3,6 +3,7 @@
 /**
  * AspectPHP_JoinPointTest
  *
+ * @category PHP
  * @package AspectPHP
  * @subpackage Tests
  * @author Matthias Molitor <matthias@matthimatiker.de>
@@ -19,6 +20,7 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
 /**
  * Tests the JoinPoint implementation.
  *
+ * @category PHP
  * @package AspectPHP
  * @subpackage Tests
  * @author Matthias Molitor <matthias@matthimatiker.de>

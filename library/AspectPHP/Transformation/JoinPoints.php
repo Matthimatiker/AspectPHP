@@ -3,6 +3,7 @@
 /**
  * AspectPHP_Transformation_JoinPoints
  *
+ * @category PHP
  * @package AspectPHP_Transformation
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
@@ -13,6 +14,7 @@
 /**
  * Transformation class that adds injection points to the given source code.
  *
+ * @category PHP
  * @package AspectPHP_Transformation
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor

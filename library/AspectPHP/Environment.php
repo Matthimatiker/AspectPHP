@@ -3,6 +3,7 @@
 /**
  * AspectPHP_Environment
  *
+ * @category PHP
  * @package AspectPHP
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
@@ -13,6 +14,7 @@
 /**
  * Helper class that is able to configure the AspectPHP environment.
  *
+ * @category PHP
  * @package AspectPHP
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor

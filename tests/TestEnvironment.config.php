@@ -3,6 +3,7 @@
 /**
  * Initialization code for all unit tests.
  *
+ * @category PHP
  * @package Tests
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2011-2012 Matthias Molitor

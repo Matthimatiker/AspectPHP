@@ -3,6 +3,7 @@
 /**
  * Demo
  *
+ * @category PHP
  * @package AspectPHP
  * @subpackage Example
  * @author Matthias Molitor <matthias@matthimatiker.de>
@@ -14,6 +15,7 @@
 /**
  * Class for demonstration purposes.
  *
+ * @category PHP
  * @package AspectPHP
  * @subpackage Example
  * @author Matthias Molitor <matthias@matthimatiker.de>

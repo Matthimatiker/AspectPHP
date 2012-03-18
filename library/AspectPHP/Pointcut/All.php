@@ -3,6 +3,7 @@
 /**
  * AspectPHP_Pointcut_All
  *
+ * @category PHP
  * @package AspectPHP_Pointcut
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
@@ -15,6 +16,7 @@
  *
  * May be used for testing or as null object.
  *
+ * @category PHP
  * @package AspectPHP_Pointcut
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor

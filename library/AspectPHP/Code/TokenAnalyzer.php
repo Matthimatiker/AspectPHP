@@ -3,6 +3,7 @@
 /**
  * AspectPHP_Code_TokenAnalyzer
  *
+ * @category PHP
  * @package AspectPHP_Code
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
@@ -16,6 +17,7 @@
  * The analyzer provides methods that simplify searching for specific tokens
  * in the provided token list.
  *
+ * @category PHP
  * @package AspectPHP_Code
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
