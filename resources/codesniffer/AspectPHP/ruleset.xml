@@ -161,6 +161,10 @@
         <!-- Do not enforce tag indention. -->
         <severity>0</severity>
     </rule>
+    <rule ref="PEAR.Commenting.FileComment.MissingVersion">
+        <!-- Do not enforce the presence of the required PHP version. -->
+        <severity>0</severity>
+    </rule>
 
     <!-- Ensure that PHP files do not contain closing tags ("?>"). -->
     <rule ref="Zend.Files.ClosingTag" />
