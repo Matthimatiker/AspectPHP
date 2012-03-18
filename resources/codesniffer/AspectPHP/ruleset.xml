@@ -64,6 +64,8 @@
 	<rule ref="Generic.NamingConventions.ConstructorName" />
 	<!-- Ensures that constant names are uppercase. -->
 	<rule ref="Generic.NamingConventions.UpperCaseConstantName" />
+	<!-- Check class names. -->
+    <rule ref="PEAR.NamingConventions.ValidClassName" />
 
     <!-- Do not use deprecated functions. -->
     <rule ref="Generic.PHP.DeprecatedFunctions" />
@@ -78,6 +80,14 @@
 	<rule ref="Generic.WhiteSpace.DisallowTabIndent" />
 	<!-- Check for correct indention of structures. -->
 	<rule ref="Generic.WhiteSpace.ScopeIndent" />
+	<!-- Disallow whitespace in front of semicolons. -->
+	<rule ref="Squiz.WhiteSpace.SemicolonSpacing" />
+	<!-- Ensure that there is no whitespace in front of PHP open tags. -->
+	<rule ref="Squiz.WhiteSpace.SuperfluousWhitespace" />
+	<rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.EndLine">
+        <!-- Do not complain about empty lines that start with whitespace. -->
+        <severity>0</severity>
+    </rule>
 
     <!-- Avoid spaces around array brackets, for example "$a [1] = 'x';". -->
 	<rule ref="Squiz.Arrays.ArrayBracketSpacing" />
@@ -104,7 +114,7 @@
 
     <!-- Ensures that control structures are valid. Required format: "if ($a === $b) {}" -->
     <rule ref="PEAR.ControlStructures.ControlSignature" />
-
+    
     <!-- Enforce documentation of exceptions. -->
 	<rule ref="Squiz.Commenting.FunctionCommentThrowTag" />
 	<!-- Check for valid method comments. -->
