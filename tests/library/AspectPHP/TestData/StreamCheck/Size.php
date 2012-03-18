@@ -4,7 +4,7 @@
  * StreamCheck_Size
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
- * @copyright Matthias Molitor 2012
+ * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 04.01.2012
  */
@@ -13,7 +13,7 @@
  * File that is used to check the filesize() functionality.
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
- * @copyright Matthias Molitor 2012
+ * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 04.01.2012
  */

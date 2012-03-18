@@ -5,7 +5,7 @@
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Stream
- * @copyright Matthias Molitor 2011
+ * @copyright 2011-2012 Matthias Molitor
  * @version $Rev$
  * @since 13.12.2011
  */
@@ -15,7 +15,7 @@
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Stream
- * @copyright Matthias Molitor 2011
+ * @copyright 2011-2012 Matthias Molitor
  * @version $Rev$
  * @since 13.12.2011
  */

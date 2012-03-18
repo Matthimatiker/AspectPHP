@@ -4,7 +4,7 @@
  * StreamCheck_Modification_Valid
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
- * @copyright Matthias Molitor 2012
+ * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 04.01.2012
  */
@@ -13,7 +13,7 @@
  * Class that is used to check if the stream creates valid code.
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
- * @copyright Matthias Molitor 2012
+ * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 04.01.2012
  */

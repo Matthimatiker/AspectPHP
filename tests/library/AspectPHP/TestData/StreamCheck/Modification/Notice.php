@@ -4,7 +4,7 @@
  * This file triggers a notice when it is loaded.
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
- * @copyright Matthias Molitor 2012
+ * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 04.01.2012
  */

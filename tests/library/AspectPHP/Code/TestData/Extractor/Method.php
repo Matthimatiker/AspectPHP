@@ -4,7 +4,7 @@
  * Extractor_Method
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
- * @copyright Matthias Molitor 2012
+ * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 13.03.2012
  */
@@ -13,7 +13,7 @@
  * Class that is used to test the code extractor.
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
- * @copyright Matthias Molitor 2012
+ * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 13.03.2012
  */

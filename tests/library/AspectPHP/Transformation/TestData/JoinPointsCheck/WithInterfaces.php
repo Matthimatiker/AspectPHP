@@ -4,7 +4,7 @@
  * JoinsPointsCheck_WithInterfaces
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
- * @copyright Matthias Molitor 2012
+ * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 31.01.2012
  */
@@ -13,7 +13,7 @@
  * This class implements an interface.
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
- * @copyright Matthias Molitor 2012
+ * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 31.01.2012
  */

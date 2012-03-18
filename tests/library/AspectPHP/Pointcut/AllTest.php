@@ -6,7 +6,7 @@
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Pointcut
  * @subpackage Tests
- * @copyright Matthias Molitor 2012
+ * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 16.03.2012
  */
@@ -22,7 +22,7 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Pointcut
  * @subpackage Tests
- * @copyright Matthias Molitor 2012
+ * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 16.03.2012
  */

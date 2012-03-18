@@ -6,7 +6,7 @@
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Code
  * @subpackage Test
- * @copyright Matthias Molitor 2012
+ * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 11.02.2012
  */
@@ -27,7 +27,7 @@ require_once(dirname(__FILE__) . '/TestData/Extractor/Method.php');
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Code
  * @subpackage Test
- * @copyright Matthias Molitor 2012
+ * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 11.02.2012
  */

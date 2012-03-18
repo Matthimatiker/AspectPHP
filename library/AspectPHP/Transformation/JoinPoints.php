@@ -5,7 +5,7 @@
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Transformation
- * @copyright Matthias Molitor 2012
+ * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 05.01.2012
  */
@@ -15,7 +15,7 @@
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Transformation
- * @copyright Matthias Molitor 2012
+ * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 05.01.2012
  */

@@ -5,7 +5,7 @@
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP
- * @copyright Matthias Molitor 2012
+ * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 11.01.2012
  */
@@ -16,7 +16,7 @@
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP
- * @copyright Matthias Molitor 2012
+ * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 11.01.2012
  */

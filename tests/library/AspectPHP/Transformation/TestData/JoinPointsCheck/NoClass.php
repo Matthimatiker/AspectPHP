@@ -4,7 +4,7 @@
  * This code file does not contain a class.
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
- * @copyright Matthias Molitor 2012
+ * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 07.01.2012
  */

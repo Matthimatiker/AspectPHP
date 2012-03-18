@@ -5,7 +5,7 @@
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Pointcut
- * @copyright Matthias Molitor 2012
+ * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 09.02.2012
  */
@@ -15,7 +15,7 @@
  *
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Pointcut
- * @copyright Matthias Molitor 2012
+ * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 09.02.2012
  */
