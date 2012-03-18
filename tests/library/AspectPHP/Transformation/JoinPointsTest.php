@@ -3,9 +3,9 @@
 /**
  * AspectPHP_Transformation_JoinPointsTest
  *
- * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Transformation
  * @subpackage Tests
+ * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 05.01.2012
@@ -19,9 +19,9 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
 /**
  * Tests the transformation class that adds injection points.
  *
- * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Transformation
  * @subpackage Tests
+ * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 05.01.2012

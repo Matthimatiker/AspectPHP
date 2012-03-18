@@ -3,8 +3,8 @@
 /**
  * Configures the environment.
  *
- * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP
+ * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2011-2012 Matthias Molitor
  * @version $Rev$
  * @since 16.10.2011

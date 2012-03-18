@@ -3,8 +3,8 @@
 /**
  * AspectPHP_JoinPoint
  *
- * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP
+ * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 08.01.2012
@@ -13,8 +13,8 @@
 /**
  * Encapsulates information about a join point.
  *
- * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP
+ * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 08.01.2012

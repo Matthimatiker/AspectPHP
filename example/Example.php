@@ -3,9 +3,9 @@
 /**
  * Example script.
  *
- * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP
  * @subpackage Example
+ * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 16.01.2012

@@ -3,9 +3,9 @@
 /**
  * AspectPHP_ContainerTest
  *
- * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP
  * @subpackage Tests
+ * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 15.01.2012
@@ -19,9 +19,9 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
 /**
  * Tests the container class.
  *
- * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP
  * @subpackage Tests
+ * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 15.01.2012

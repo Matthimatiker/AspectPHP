@@ -3,8 +3,8 @@
 /**
  * AspectPHP_Manager
  *
- * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP
+ * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 11.01.2012
@@ -14,8 +14,8 @@
  * Interface for classes that are responsible for registering and
  * unregistering aspects.
  *
- * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP
+ * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 11.01.2012

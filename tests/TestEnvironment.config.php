@@ -3,8 +3,8 @@
 /**
  * Initialization code for all unit tests.
  *
- * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package Tests
+ * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2011-2012 Matthias Molitor
  * @version $Rev$
  * @since 13.12.2011

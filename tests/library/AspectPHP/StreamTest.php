@@ -3,9 +3,9 @@
 /**
  * AspectPHP_StreamTest
  *
- * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Stream
  * @subpackage Tests
+ * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2011-2012 Matthias Molitor
  * @version $Rev$
  * @since 13.12.2011
@@ -19,9 +19,9 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
 /**
  * Tests the AspectPHP stream.
  *
- * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Stream
  * @subpackage Tests
+ * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2011-2012 Matthias Molitor
  * @version $Rev$
  * @since 13.12.2011

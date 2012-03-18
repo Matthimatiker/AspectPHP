@@ -3,8 +3,8 @@
 /**
  * AspectPHP_Container
  *
- * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP
+ * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 15.01.2012
@@ -13,8 +13,8 @@
 /**
  * Class that holds the global aspect manager object.
  *
- * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP
+ * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 15.01.2012

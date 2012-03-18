@@ -3,9 +3,9 @@
 /**
  * AspectPHP_Manager_StandardTest
  *
- * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Manager
  * @subpackage Tests
+ * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 13.01.2012
@@ -19,9 +19,9 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
 /**
  * Tests the default aspect manager.
  *
- * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Manager
  * @subpackage Tests
+ * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 13.01.2012

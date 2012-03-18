@@ -3,8 +3,8 @@
 /**
  * AspectPHP_Pointcut_RegExp
  *
- * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Pointcut
+ * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 09.02.2012
@@ -40,8 +40,8 @@
  * $pointcut = new AspectPHP_Pointcut_RegExp('.*::(get|set)Name');
  * </code>
  *
- * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Pointcut
+ * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 09.02.2012

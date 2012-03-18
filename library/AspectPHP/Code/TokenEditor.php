@@ -3,8 +3,8 @@
 /**
  * AspectPHP_Code_TokenEditor
  *
- * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Code
+ * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 05.02.2012
@@ -13,8 +13,8 @@
 /**
  * The token editor allows the manipulation of tokenized source code.
  *
- * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Code
+ * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 05.02.2012

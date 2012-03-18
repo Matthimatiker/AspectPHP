@@ -3,9 +3,9 @@
 /**
  * AspectPHP_Transformation_ReplaceTest
  *
- * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Transformation
  * @subpackage Tests
+ * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 17.01.2012
@@ -19,9 +19,9 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
 /**
  * Tests the replace transformation.
  *
- * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Transformation
  * @subpackage Tests
+ * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 17.01.2012

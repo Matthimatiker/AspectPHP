@@ -3,9 +3,9 @@
 /**
  * AspectPHP_Pointcut_RegExpTest
  *
- * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Pointcut
  * @subpackage Tests
+ * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 09.02.2012
@@ -15,12 +15,13 @@
  * Initializes the test environment.
  */
 require_once(dirname(__FILE__) . '/bootstrap.php');
+
 /**
  * Tests the regular expression pointcut.
  *
- * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Pointcut
  * @subpackage Tests
+ * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 09.02.2012

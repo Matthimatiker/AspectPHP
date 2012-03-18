@@ -3,8 +3,8 @@
 /**
  * AspectPHP_Manager_Standard
  *
- * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Manager
+ * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 12.01.2012
@@ -15,8 +15,8 @@
  *
  * Registrations are lost if the manager object is destroyed.
  *
- * @author Matthias Molitor <matthias@matthimatiker.de>
  * @package AspectPHP_Manager
+ * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @version $Rev$
  * @since 12.01.2012
