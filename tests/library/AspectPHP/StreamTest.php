@@ -369,7 +369,7 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
             $check = new StreamCheck_Modification_LineNumber();
             $check->lineNumber();
         } catch(RuntimeException $e) {
-            $this->assertEquals(29, $e->getLine(), 'Stream changed line numbers.');
+            $this->assertEquals(27, $e->getLine(), 'Stream changed line numbers.');
             throw $e;
         }
     }

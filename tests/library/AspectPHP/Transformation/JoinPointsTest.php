@@ -160,7 +160,7 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
      */
     public function testTransformationDoesNotChangeLineNumbers()
     {
-        $this->assertEquals(35, $this->transformedInstance->getLineNumber());
+        $this->assertEquals(33, $this->transformedInstance->getLineNumber());
     }
     
     /**
