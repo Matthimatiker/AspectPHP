@@ -149,6 +149,18 @@
 		<!-- Short description may span multiple lines. -->
 		<severity>0</severity>
 	</rule>
+	<!-- Ensure that valid class doc blocks are present. -->
+	<rule ref="PEAR.Commenting.ClassComment" />
+	<rule ref="PEAR.Commenting.ClassComment.TagIndent">
+        <!-- Do not enforce tag indention. -->
+        <severity>0</severity>
+    </rule>
+	<!-- Ensure that valid file doc blocks are present. -->
+	<rule ref="PEAR.Commenting.FileComment" />
+	<rule ref="PEAR.Commenting.FileComment.TagIndent">
+        <!-- Do not enforce tag indention. -->
+        <severity>0</severity>
+    </rule>
 
     <!-- Ensure that PHP files do not contain closing tags ("?>"). -->
     <rule ref="Zend.Files.ClosingTag" />
