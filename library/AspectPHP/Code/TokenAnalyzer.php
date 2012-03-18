@@ -6,6 +6,7 @@
  * @package AspectPHP_Code
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
+ * @license http://www.opensource.org/licenses/BSD-3-Clause BSD License
  * @since 27.01.2012
  */
 
@@ -18,6 +19,7 @@
  * @package AspectPHP_Code
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
+ * @license http://www.opensource.org/licenses/BSD-3-Clause BSD License
  * @since 27.01.2012
  */
 class AspectPHP_Code_TokenAnalyzer implements ArrayAccess, Countable, IteratorAggregate

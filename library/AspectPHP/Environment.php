@@ -6,6 +6,7 @@
  * @package AspectPHP
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
+ * @license http://www.opensource.org/licenses/BSD-3-Clause BSD License
  * @since 12.01.2012
  */
 
@@ -15,6 +16,7 @@
  * @package AspectPHP
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
+ * @license http://www.opensource.org/licenses/BSD-3-Clause BSD License
  * @since 12.01.2012
  */
 class AspectPHP_Environment

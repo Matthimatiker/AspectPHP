@@ -7,6 +7,7 @@
  * @subpackage Example
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
+ * @license http://www.opensource.org/licenses/BSD-3-Clause BSD License
  * @since 16.01.2012
  */
 
@@ -17,6 +18,7 @@
  * @subpackage Example
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
+ * @license http://www.opensource.org/licenses/BSD-3-Clause BSD License
  * @since 16.01.2012
  */
 class DemoAspect implements AspectPHP_Aspect

@@ -7,6 +7,7 @@
  * @subpackage Tests
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
+ * @license http://www.opensource.org/licenses/BSD-3-Clause BSD License
  * @since 09.02.2012
  */
 
@@ -22,6 +23,7 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
  * @subpackage Tests
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
+ * @license http://www.opensource.org/licenses/BSD-3-Clause BSD License
  * @since 09.02.2012
  */
 class AspectPHP_Pointcut_RegExpTest extends PHPUnit_Framework_TestCase
