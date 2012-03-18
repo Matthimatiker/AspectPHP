@@ -17,6 +17,8 @@
 	<rule ref="Generic.CodeAnalysis.UnnecessaryFinalModifier" />
 	<!-- Avoid overridden methods that delegate to its parent. -->
 	<rule ref="Generic.CodeAnalysis.UselessOverridingMethod" />
+	<!-- Avoid the usage of the same incrementer in outer and inner loops. -->
+	<rule ref="Generic.CodeAnalysis.JumbledIncrementer" />
 
     <!-- Generate a warning if TODOs are encountered. -->
 	<rule ref="Generic.Commenting.Todo" />
