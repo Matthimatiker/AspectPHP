@@ -385,8 +385,7 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
      */
     public function testTellInitiallyReturnsCorrectValue()
     {
-        $path     = $this->toStream($this->getPath('SeekTest.txt'));
-        $handle   = fopen($path, 'rb');
+        $handle   = $this->openSeekTestFile();
         $position = ftell($handle);
         fclose($handle);
         $this->assertEquals(0, $position);
@@ -398,8 +397,7 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
      */
     public function testSeekMovesPointerToCorrectPositionIfSetModeIsUsed()
     {
-        $path   = $this->toStream($this->getPath('SeekTest.txt'));
-        $handle = fopen($path, 'rb');
+        $handle = $this->openSeekTestFile();
         // Call fseek() twice to ensure that SEEK_CUR is not internally used by mistake.
         fseek($handle, 5, SEEK_SET);
         fseek($handle, 5, SEEK_SET);
@@ -414,8 +412,7 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
      */
     public function testSeekReturnsErrorCodeIfSetModeIsUsedAndInvalidPointerPositionIsProvided()
     {
-        $path   = $this->toStream($this->getPath('SeekTest.txt'));
-        $handle = fopen($path, 'rb');
+        $handle = $this->openSeekTestFile();
         $result = fseek($handle, -1, SEEK_SET);
         fclose($handle);
         $this->assertEquals(-1, $result);
@@ -427,8 +424,7 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
      */
     public function testSeekMovesPointerToCorrectPositionIfCurModeIsUsed()
     {
-        $path   = $this->toStream($this->getPath('SeekTest.txt'));
-        $handle = fopen($path, 'rb');
+        $handle = $this->openSeekTestFile();
         // Call fseek() twice to ensure that SEEK_SET is not internally used by mistake.
         fseek($handle, 1, SEEK_CUR);
         fseek($handle, 1, SEEK_CUR);
@@ -443,8 +439,7 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
      */
     public function testSeekReturnsErrorCodeIfCurModeIsUsedAndInvalidPointerPositionIsProvided()
     {
-        $path   = $this->toStream($this->getPath('SeekTest.txt'));
-        $handle = fopen($path, 'rb');
+        $handle = $this->openSeekTestFile();
         $result = fseek($handle, -1, SEEK_CUR);
         fclose($handle);
         $this->assertEquals(-1, $result);
@@ -456,8 +451,7 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
      */
     public function testSeekMovesPointerToCorrectPositionIfEndModeIsUsed()
     {
-        $path   = $this->toStream($this->getPath('SeekTest.txt'));
-        $handle = fopen($path, 'rb');
+        $handle = $this->openSeekTestFile();
         fseek($handle, -2, SEEK_END);
         $position = ftell($handle);
         fclose($handle);
@@ -470,8 +464,7 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
      */
     public function testSeekReturnsErrorCodeIfEndModeIsUsedAndInvalidPointerPositionIsProvided()
     {
-        $path   = $this->toStream($this->getPath('SeekTest.txt'));
-        $handle = fopen($path, 'rb');
+        $handle = $this->openSeekTestFile();
         $result = fseek($handle, -12, SEEK_END);
         fclose($handle);
         $this->assertEquals(-1, $result);
@@ -482,8 +475,7 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
      */
     public function testSeekUsesSetModePerDefault()
     {
-        $path   = $this->toStream($this->getPath('SeekTest.txt'));
-        $handle = fopen($path, 'rb');
+        $handle = $this->openSeekTestFile();
         // Call fseek() twice to ensure that SEEK_CUR is not internally used by mistake.
         fseek($handle, 5);
         fseek($handle, 5);
@@ -515,6 +507,20 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
     {
         $message = 'The class "' . $class . '" was not loaded.';
         $this->assertTrue(class_exists($class, false), $message);
+    }
+    
+    /**
+     * Opens the seek test file (SeekTest.txt) for reading and returns
+     * the file handle.
+     *
+     * The length of the test file content is exactly 11 bytes.
+     *
+     * @return resource
+     */
+    protected function openSeekTestFile()
+    {
+        $path = $this->toStream($this->getPath('SeekTest.txt'));
+        return fopen($path, 'rb');
     }
     
     /**
