@@ -385,10 +385,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
      */
     public function testTellInitiallyReturnsCorrectValue()
     {
-        $handle   = $this->openSeekTestFile();
-        $position = ftell($handle);
-        fclose($handle);
-        $this->assertEquals(0, $position);
+        $operations = array();
+        $this->assertPositionAfterSeek(0, $operations);
     }
     
     /**
@@ -397,13 +395,12 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
      */
     public function testSeekMovesPointerToCorrectPositionIfSetModeIsUsed()
     {
-        $handle = $this->openSeekTestFile();
         // Call fseek() twice to ensure that SEEK_CUR is not internally used by mistake.
-        fseek($handle, 5, SEEK_SET);
-        fseek($handle, 5, SEEK_SET);
-        $position = ftell($handle);
-        fclose($handle);
-        $this->assertEquals(5, $position);
+        $operations = array(
+            array(5, SEEK_SET),
+            array(5, SEEK_SET)
+        );
+        $this->assertPositionAfterSeek(5, $operations);
     }
     
     /**
@@ -424,13 +421,12 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
      */
     public function testSeekMovesPointerToCorrectPositionIfCurModeIsUsed()
     {
-        $handle = $this->openSeekTestFile();
         // Call fseek() twice to ensure that SEEK_SET is not internally used by mistake.
-        fseek($handle, 1, SEEK_CUR);
-        fseek($handle, 1, SEEK_CUR);
-        $position = ftell($handle);
-        fclose($handle);
-        $this->assertEquals(2, $position);
+        $operations = array(
+            array(1, SEEK_CUR),
+            array(1, SEEK_CUR)
+        );
+        $this->assertPositionAfterSeek(2, $operations);
     }
     
     /**
@@ -451,11 +447,10 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
      */
     public function testSeekMovesPointerToCorrectPositionIfEndModeIsUsed()
     {
-        $handle = $this->openSeekTestFile();
-        fseek($handle, -2, SEEK_END);
-        $position = ftell($handle);
-        fclose($handle);
-        $this->assertEquals(9, $position);
+        $operations = array(
+            array(-2, SEEK_END)
+        );
+        $this->assertPositionAfterSeek(9, $operations);
     }
     
     /**
@@ -471,17 +466,16 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * Checks if fseek() uses the SEEK_END mode per default.
+     * Checks if fseek() uses the SEEK_SET mode per default.
      */
     public function testSeekUsesSetModePerDefault()
     {
-        $handle = $this->openSeekTestFile();
         // Call fseek() twice to ensure that SEEK_CUR is not internally used by mistake.
-        fseek($handle, 5);
-        fseek($handle, 5);
-        $position = ftell($handle);
-        fclose($handle);
-        $this->assertEquals(5, $position);
+        $operations = array(
+            array(5, null),
+            array(5, null)
+        );
+        $this->assertPositionAfterSeek(5, $operations);
     }
     
     /**
