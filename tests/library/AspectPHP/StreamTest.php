@@ -530,7 +530,7 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
      * @param integer $expected
      * @param array(array(mixed)) $operations
      */
-    protected function assertPosition($expected, array $operations)
+    protected function assertPositionAfterSeek($expected, array $operations)
     {
         $handle = $this->openSeekTestFile();
         foreach ($operations as $operation) {
