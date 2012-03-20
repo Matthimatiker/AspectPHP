@@ -510,6 +510,32 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * Applies the provided seek operations to the handle of the
+     * seek test file (See {@link openSeekTestFile()} for details)
+     * and asserts that the stream pointer position equals $expected.
+     *
+     * Each seek operations consists of an offset value and a mode that
+     * are provided as array.
+     *
+     * Example:
+     * <code>
+     * // Apply fseek($handle, 5, SEEK_SET) first and fseek($handle, 2, SEEK_CUR) afterwards.
+     * $operations = array(
+     *     array(SEEK_SET, 5),
+     *     array(SEEK_CUR, 2)
+     * );
+     * $this->assertPosition(7, $operations);
+     * </code>
+     *
+     * @param integer $expected
+     * @param array(array(mixed)) $operations
+     */
+    protected function assertPosition($expected, array $operations)
+    {
+        
+    }
+    
+    /**
      * Opens the seek test file (SeekTest.txt) for reading and returns
      * the file handle.
      *
