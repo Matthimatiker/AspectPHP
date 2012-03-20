@@ -396,16 +396,16 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
      * Ensures that fseek() moves the file pointer to the correct position
      * if the SEEK_SET mode is used.
      */
-    public function testSeekMovesPointerToCorrectPositionIfSeekSetModeIsUsed()
+    public function testSeekMovesPointerToCorrectPositionIfSetModeIsUsed()
     {
         
     }
     
     /**
      * Ensures that fseek() returns false if an invalid pointer position
-     * is provided.
+     * is provided in SEEK_SET mode.
      */
-    public function testSeekReturnsFalseIfInvalidPointerPositionIsProvided()
+    public function testSeekReturnsFalseIfSetModeIsUsedAndInvalidPointerPositionIsProvided()
     {
         
     }
@@ -414,18 +414,44 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
      * Ensures that fseek() moves the file pointer to the correct position
      * if the SEEK_CUR mode is used.
      */
-    public function testSeekMovesPointerToCorrectPositionIfSeekCurModeIsUsed()
+    public function testSeekMovesPointerToCorrectPositionIfCurModeIsUsed()
     {
         
+    }
+    
+    /**
+     * Ensures that fseek() returns false if an invalid pointer position
+     * is provided in SEEK_CUR mode.
+     */
+    public function testSeekReturnsFalseIfCurModeIsUsedAndInvalidPointerPositionIsProvided()
+    {
+    
     }
     
     /**
      * Ensures that fseek() moves the file pointer to the correct position
      * if the SEEK_END mode is used.
      */
-    public function testSeekMovesPointerToCorrectPositionIfSeekEndModeIsUsed()
+    public function testSeekMovesPointerToCorrectPositionIfEndModeIsUsed()
     {
     
+    }
+    
+    /**
+     * Ensures that fseek() returns false if an invalid pointer position
+     * is provided in SEEK_END mode.
+     */
+    public function testSeekReturnsFalseIfEndModeIsUsedAndInvalidPointerPositionIsProvided()
+    {
+    
+    }
+    
+    /**
+     * Checks if fseek() uses the SEEK_END mode per default.
+     */
+    public function testSeekUsesSetModePerDefault()
+    {
+        
     }
     
     /**
