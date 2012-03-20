@@ -381,6 +381,18 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * Checks if ftell() initially returns the correct value.
+     */
+    public function testTellInitiallyReturnsCorrectValue()
+    {
+        $path     = $this->toStream($this->getPath('SeekTest.txt'));
+        $handle   = fopen($path, 'rb');
+        $position = ftell($handle);
+        fclose($handle);
+        $this->assertEquals(0, $position);
+    }
+    
+    /**
      * Asserts that the class $class has the method with the provided name.
      *
      * @param string $class
