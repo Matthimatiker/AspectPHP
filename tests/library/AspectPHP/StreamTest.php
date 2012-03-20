@@ -398,16 +398,27 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
      */
     public function testSeekMovesPointerToCorrectPositionIfSetModeIsUsed()
     {
-        
+        $path   = $this->toStream($this->getPath('SeekTest.txt'));
+        $handle = fopen($path, 'rb');
+        // Call fseek() twice to ensure that SEEK_CUR is not internally used by mistake.
+        fseek($handle, 5, SEEK_SET);
+        fseek($handle, 5, SEEK_SET);
+        $position = ftell($handle);
+        fclose($handle);
+        $this->assertEquals(5, $position);
     }
     
     /**
-     * Ensures that fseek() returns false if an invalid pointer position
+     * Ensures that fseek() returns -1 if an invalid pointer position
      * is provided in SEEK_SET mode.
      */
-    public function testSeekReturnsFalseIfSetModeIsUsedAndInvalidPointerPositionIsProvided()
+    public function testSeekReturnsErrorCodeIfSetModeIsUsedAndInvalidPointerPositionIsProvided()
     {
-        
+        $path   = $this->toStream($this->getPath('SeekTest.txt'));
+        $handle = fopen($path, 'rb');
+        $result = fseek($handle, -1, SEEK_SET);
+        fclose($handle);
+        $this->assertEquals(-1, $result);
     }
     
     /**
@@ -416,14 +427,21 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
      */
     public function testSeekMovesPointerToCorrectPositionIfCurModeIsUsed()
     {
-        
+        $path   = $this->toStream($this->getPath('SeekTest.txt'));
+        $handle = fopen($path, 'rb');
+        // Call fseek() twice to ensure that SEEK_SET is not internally used by mistake.
+        fseek($handle, 1, SEEK_CUR);
+        fseek($handle, 1, SEEK_CUR);
+        $position = ftell($handle);
+        fclose($handle);
+        $this->assertEquals(2, $position);
     }
     
     /**
-     * Ensures that fseek() returns false if an invalid pointer position
+     * Ensures that fseek() returns -1 if an invalid pointer position
      * is provided in SEEK_CUR mode.
      */
-    public function testSeekReturnsFalseIfCurModeIsUsedAndInvalidPointerPositionIsProvided()
+    public function testSeekReturnsErrorCodeIfCurModeIsUsedAndInvalidPointerPositionIsProvided()
     {
     
     }
@@ -438,10 +456,10 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * Ensures that fseek() returns false if an invalid pointer position
+     * Ensures that fseek() returns -1 if an invalid pointer position
      * is provided in SEEK_END mode.
      */
-    public function testSeekReturnsFalseIfEndModeIsUsedAndInvalidPointerPositionIsProvided()
+    public function testSeekReturnsErrorCodeIfEndModeIsUsedAndInvalidPointerPositionIsProvided()
     {
     
     }
