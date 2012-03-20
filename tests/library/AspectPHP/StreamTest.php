@@ -548,7 +548,10 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
      */
     protected function assertSeekCode($expected, $offset, $mode)
     {
-        
+        $handle = $this->openSeekTestFile();
+        $code   = fseek($handle, $offset, $mode);
+        fclose($handle);
+        $this->assertEquals($expected, $code);
     }
     
     /**
