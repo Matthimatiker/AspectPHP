@@ -443,7 +443,11 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
      */
     public function testSeekReturnsErrorCodeIfCurModeIsUsedAndInvalidPointerPositionIsProvided()
     {
-    
+        $path   = $this->toStream($this->getPath('SeekTest.txt'));
+        $handle = fopen($path, 'rb');
+        $result = fseek($handle, -1, SEEK_CUR);
+        fclose($handle);
+        $this->assertEquals(-1, $result);
     }
     
     /**
@@ -452,7 +456,12 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
      */
     public function testSeekMovesPointerToCorrectPositionIfEndModeIsUsed()
     {
-    
+        $path   = $this->toStream($this->getPath('SeekTest.txt'));
+        $handle = fopen($path, 'rb');
+        fseek($handle, -2, SEEK_END);
+        $position = ftell($handle);
+        fclose($handle);
+        $this->assertEquals(9, $position);
     }
     
     /**
@@ -461,7 +470,11 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
      */
     public function testSeekReturnsErrorCodeIfEndModeIsUsedAndInvalidPointerPositionIsProvided()
     {
-    
+        $path   = $this->toStream($this->getPath('SeekTest.txt'));
+        $handle = fopen($path, 'rb');
+        $result = fseek($handle, -12, SEEK_END);
+        fclose($handle);
+        $this->assertEquals(-1, $result);
     }
     
     /**
@@ -469,7 +482,14 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
      */
     public function testSeekUsesSetModePerDefault()
     {
-        
+        $path   = $this->toStream($this->getPath('SeekTest.txt'));
+        $handle = fopen($path, 'rb');
+        // Call fseek() twice to ensure that SEEK_CUR is not internally used by mistake.
+        fseek($handle, 5);
+        fseek($handle, 5);
+        $position = ftell($handle);
+        fclose($handle);
+        $this->assertEquals(5, $position);
     }
     
     /**
