@@ -393,6 +393,42 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * Ensures that fseek() moves the file pointer to the correct position
+     * if the SEEK_SET mode is used.
+     */
+    public function testSeekMovesPointerToCorrectPositionIfSeekSetModeIsUsed()
+    {
+        
+    }
+    
+    /**
+     * Ensures that fseek() returns false if an invalid pointer position
+     * is provided.
+     */
+    public function testSeekReturnsFalseIfInvalidPointerPositionIsProvided()
+    {
+        
+    }
+    
+    /**
+     * Ensures that fseek() moves the file pointer to the correct position
+     * if the SEEK_CUR mode is used.
+     */
+    public function testSeekMovesPointerToCorrectPositionIfSeekCurModeIsUsed()
+    {
+        
+    }
+    
+    /**
+     * Ensures that fseek() moves the file pointer to the correct position
+     * if the SEEK_END mode is used.
+     */
+    public function testSeekMovesPointerToCorrectPositionIfSeekEndModeIsUsed()
+    {
+    
+    }
+    
+    /**
      * Asserts that the class $class has the method with the provided name.
      *
      * @param string $class
