@@ -389,9 +389,9 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
     protected function assertHasMethod($class, $method)
     {
         $this->assertClassExists($class);
-        $refelection = new ReflectionClass($class);
-        $message     = 'Class "' . $class . '" does not provide the method "' . $method . '".';
-        $this->assertTrue($refelection->hasMethod($method), $message);
+        $reflection = new ReflectionClass($class);
+        $message    = 'Class "' . $class . '" does not provide the method "' . $method . '".';
+        $this->assertTrue($reflection->hasMethod($method), $message);
     }
     
     /**
