@@ -521,7 +521,7 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
      * $this->assertPosition(7, $operations);
      * </code>
      *
-     * @param integer $expected
+     * @param integer $expected The expected pointer position.
      * @param array(array(mixed)) $operations
      */
     protected function assertPositionAfterSeek($expected, array $operations)
@@ -535,6 +535,20 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
         $position = ftell($handle);
         fclose($handle);
         $this->assertEquals($expected, $position);
+    }
+    
+    /**
+     * Applies fseek($handle, $offset, $mode) to the handle of the
+     * seek test file (See {@link openSeekTestFile()} for details)
+     * and asserts that fssek() returns the expected result code.
+     *
+     * @param integer $expected The expected result code.
+     * @param integer $offset
+     * @param integer $mode One of the SEEK_* constants.
+     */
+    protected function assertSeekCode($expected, $offset, $mode)
+    {
+        
     }
     
     /**
