@@ -521,8 +521,8 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
      * <code>
      * // Apply fseek($handle, 5, SEEK_SET) first and fseek($handle, 2, SEEK_CUR) afterwards.
      * $operations = array(
-     *     array(SEEK_SET, 5),
-     *     array(SEEK_CUR, 2)
+     *     array(5, SEEK_SET),
+     *     array(2, SEEK_CUR)
      * );
      * $this->assertPosition(7, $operations);
      * </code>
@@ -532,7 +532,15 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
      */
     protected function assertPosition($expected, array $operations)
     {
-        
+        $handle = $this->openSeekTestFile();
+        foreach ($operations as $operation) {
+            /* @var $operation array(mixed) */
+            list($offset, $mode) = $operation;
+            fseek($handle, $offset, $mode);
+        }
+        $position = ftell($handle);
+        fclose($handle);
+        $this->assertEquals($expected, $position);
     }
     
     /**
