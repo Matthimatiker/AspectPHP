@@ -183,35 +183,23 @@ class AspectPHP_Stream
      */
     public function stream_seek($offset, $whence = SEEK_SET)
     {
-        // TODO: simplify
-        switch( $whence ) {
-            case SEEK_SET:
-                if ($offset >= 0 && $offset < $this->getContentLength()) {
-                    $this->position = $offset;
-                    return true;
-                } else {
-                    return false;
-                }
-                break;
+        // Calculate absolute offset position if necessary.
+        switch ($whence) {
             case SEEK_CUR:
-                if ($offset >= 0) {
-                    $this->position += $offset;
-                    return true;
-                } else {
-                    return false;
-                }
+                $offset = $this->position += $offset;
                 break;
             case SEEK_END:
-                if ($this->getContentLength() + $offset >= 0) {
-                    $this->position = $this->getContentLength() + $offset;
-                    return true;
-                } else {
-                    return false;
-                }
+                $offset = $this->position = $this->getContentLength() + $offset;
                 break;
-            default:
-                return false;
         }
+        
+        if ($offset < 0 || $offset >= $this->getContentLength()) {
+            return false;
+        }
+        
+        // Move stream pointer.
+        $this->position = $offset;
+        return true;
     }
     
     /**
