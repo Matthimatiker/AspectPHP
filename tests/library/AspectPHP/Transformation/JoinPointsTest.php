@@ -107,6 +107,14 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * Checks if the transformation implements the AspectPHP_Transformation interface.
+     */
+    public function testTransformationImplementsInterface()
+    {
+        $this->assertInstanceOf('AspectPHP_Transformation', $this->transformation);
+    }
+    
+    /**
      * Ensures that transform() returns a string.
      */
     public function testTransformReturnsString()
