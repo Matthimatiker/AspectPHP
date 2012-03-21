@@ -55,7 +55,7 @@ class AspectPHP_Transformation_Replace implements AspectPHP_Transformation
     }
     
     /**
-     * Transforms the provided source code.
+     * See {@link AspectPHP_Transformation::trasnform()} for details.
      *
      * @param string $source
      * @return string

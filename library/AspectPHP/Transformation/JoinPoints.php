@@ -41,10 +41,10 @@ class AspectPHP_Transformation_JoinPoints implements AspectPHP_Transformation
     protected $editor = null;
     
     /**
-     * Transforms the source code.
+     * See {@link AspectPHP_Transformation::trasnform()} for details.
      *
      * @param string $source
-     * @return string The transformed code.
+     * @return string
      */
     public function transform($source)
     {
