@@ -26,4 +26,12 @@
 interface AspectPHP_Transformation
 {
     
+    /**
+     * Transforms the provided source code.
+     *
+     * @param string $source
+     * @return string The transformed code.
+     */
+    public function transform($source);
+    
 }
