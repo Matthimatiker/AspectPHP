@@ -23,7 +23,7 @@
  * @link https://github.com/Matthimatiker/AspectPHP
  * @since 17.01.2012
  */
-class AspectPHP_Transformation_Replace
+class AspectPHP_Transformation_Replace implements AspectPHP_Transformation
 {
     
     /**

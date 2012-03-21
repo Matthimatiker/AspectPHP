@@ -23,7 +23,7 @@
  * @link https://github.com/Matthimatiker/AspectPHP
  * @since 05.01.2012
  */
-class AspectPHP_Transformation_JoinPoints
+class AspectPHP_Transformation_JoinPoints implements AspectPHP_Transformation
 {
     
     /**
