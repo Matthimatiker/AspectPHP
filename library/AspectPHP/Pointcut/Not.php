@@ -37,13 +37,20 @@ class AspectPHP_Pointcut_Not implements AspectPHP_Pointcut
 {
     
     /**
+     * The inner pointcut.
+     *
+     * @var AspectPHP_Pointcut
+     */
+    protected $inner = null;
+    
+    /**
      * Creates a Not pointcut that inverts the result of the pointcut $inner.
      *
      * @param AspectPHP_Pointcut $inner
      */
     public function __construct(AspectPHP_Pointcut $inner)
     {
-        
+        $this->inner = $inner;
     }
     
     /**
@@ -54,7 +61,7 @@ class AspectPHP_Pointcut_Not implements AspectPHP_Pointcut
      */
     public function matches($method)
     {
-        
+        return !$this->inner->matches($method);
     }
     
 }
