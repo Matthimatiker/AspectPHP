@@ -15,6 +15,16 @@
 /**
  * Pointcut that negates the result of its inner pointcut.
  *
+ * Example:
+ * <code>
+ * $inner = new AspectPHP_Pointcut_All();
+ * $not   = new AspectPHP_Pointcut_Not($inner);
+ * // Returns true:
+ * $inner->matches('Demo::method');
+ * // Returns false:
+ * $not->matches('Demo::method');
+ * </code>
+ *
  * @category PHP
  * @package AspectPHP_Pointcut
  * @author Matthias Molitor <matthias@matthimatiker.de>
