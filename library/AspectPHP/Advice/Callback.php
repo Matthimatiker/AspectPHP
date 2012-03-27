@@ -27,6 +27,20 @@ class AspectPHP_Advice_Callback implements AspectPHP_Advice
 {
     
     /**
+     * The pointcut.
+     *
+     * @var AspectPHP_Pointcut
+     */
+    protected $pointcut = null;
+    
+    /**
+     * The callback.
+     *
+     * @var mixed
+     */
+    protected $callback = null;
+    
+    /**
      * Creates an advice whose invoke() method will invoke the given callback.
      *
      * @param AspectPHP_Pointcut $pointcut
@@ -35,7 +49,12 @@ class AspectPHP_Advice_Callback implements AspectPHP_Advice
      */
     public function __construct(AspectPHP_Pointcut $pointcut, $callback)
     {
-        
+        if (!is_callable($callback)) {
+            $message = 'Provided callback is invalid or not callable.';
+            throw new InvalidArgumentException($message);
+        }
+        $this->pointcut = $pointcut;
+        $this->callback = $callback;
     }
     
     /**
@@ -45,7 +64,7 @@ class AspectPHP_Advice_Callback implements AspectPHP_Advice
      */
     public function getPointcut()
     {
-        
+        return $this->pointcut;
     }
     
     /**
@@ -55,7 +74,7 @@ class AspectPHP_Advice_Callback implements AspectPHP_Advice
      */
     public function invoke(AspectPHP_JoinPoint $joinPoint)
     {
-        
+        call_user_func($this->callback, $joinPoint);
     }
     
 }
