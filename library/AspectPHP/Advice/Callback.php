@@ -27,6 +27,18 @@ class AspectPHP_Advice_Callback implements AspectPHP_Advice
 {
     
     /**
+     * Creates an advice whose invoke() method will invoke the given callback.
+     *
+     * @param AspectPHP_Pointcut $pointcut
+     * @param mixed $callback A valid callback.
+     * @throws InvalidArgumentException If an invalid callback is provided.
+     */
+    public function __construct(AspectPHP_Pointcut $pointcut, $callback)
+    {
+        
+    }
+    
+    /**
      * See {@link AspectPHP_Advice::getPointcut()} for details.
      *
      * @return AspectPHP_Pointcut
