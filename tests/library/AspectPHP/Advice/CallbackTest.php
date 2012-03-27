@@ -49,7 +49,8 @@ class AspectPHP_Advice_CallbackTest extends PHPUnit_Framework_TestCase
      */
     public function testAdviceThrowsExceptionIfInvalidCallbackIsProvided()
     {
-        
+        $this->setExpectedException('InvalidArgumentException');
+        new AspectPHP_Advice_Callback($this->createPointcut(), null);
     }
     
     /**
@@ -59,7 +60,9 @@ class AspectPHP_Advice_CallbackTest extends PHPUnit_Framework_TestCase
      */
     public function testAdviceThrowsExceptionIfProvidedCallbackIsNotCallable()
     {
-        
+        $this->setExpectedException('InvalidArgumentException');
+        // The createPointcut() method is protected and cannot be called by the advice object.
+        new AspectPHP_Advice_Callback($this->createPointcut(), array($this, 'createPointcut'));
     }
     
     /**
