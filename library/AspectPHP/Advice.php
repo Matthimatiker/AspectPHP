@@ -4,7 +4,7 @@
  * AspectPHP_Advice
  *
  * @category PHP
- * @package AspectPHP
+ * @package AspectPHP_Advice
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @license http://www.opensource.org/licenses/BSD-3-Clause BSD License
@@ -18,7 +18,7 @@
  * An advice consists of a pointcut and an advice callback.
  *
  * @category PHP
- * @package AspectPHP
+ * @package AspectPHP_Advice
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @license http://www.opensource.org/licenses/BSD-3-Clause BSD License
