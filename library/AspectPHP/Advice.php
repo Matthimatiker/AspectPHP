@@ -15,7 +15,8 @@
 /**
  * Interface for advices.
  *
- * An advice consists of a pointcut and an advice callback.
+ * An advice consists of a pointcut and code that is executed if
+ * the specified join point occurs.
  *
  * @category PHP
  * @package AspectPHP_Advice
