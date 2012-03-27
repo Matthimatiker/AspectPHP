@@ -90,7 +90,13 @@ class AspectPHP_Advice_CallbackTest extends PHPUnit_Framework_TestCase
      */
     public function testAdvicePassesJoinPointToCallbackMethod()
     {
-        
+        $joinPoint = $this->createJoinPoint();
+        $callback  = $this->createCallbackObject();
+        $callback->expects($this->any())
+                 ->method(self::CALLBACK_NAME)
+                 ->with($this->identicalTo($joinPoint));
+        $advice = new AspectPHP_Advice_Callback($this->createPointcut(), $this->toCallback($callback));
+        $advice->invoke($joinPoint);
     }
     
     /**
@@ -99,7 +105,9 @@ class AspectPHP_Advice_CallbackTest extends PHPUnit_Framework_TestCase
      */
     public function testGetPointcutReturnsProvidedPointcut()
     {
-        
+        $pointcut = $this->createPointcut();
+        $advice   = new AspectPHP_Advice_Callback($pointcut, $this->toCallback($this->createCallbackObject()));
+        $this->assertSame($pointcut, $advice->getPointcut());
     }
     
     /**
