@@ -15,6 +15,9 @@
 /**
  * Interface that must be implemented by aspects.
  *
+ * An aspect consists of pointcuts and advices. Pointcuts identify methods
+ * for code injection and advices contain the code that will be executed.
+ *
  * @category PHP
  * @package AspectPHP
  * @author Matthias Molitor <matthias@matthimatiker.de>
@@ -25,26 +28,5 @@
  */
 interface AspectPHP_Aspect
 {
-    
-    /**
-     * Is called when the method was entered.
-     *
-     * @param AspectPHP_JoinPoint $joinPoint
-     */
-    public function before(AspectPHP_JoinPoint $joinPoint);
-    
-    /**
-     * Is called when the original method returned a value.
-     *
-     * @param AspectPHP_JoinPoint $joinPoint
-     */
-    public function afterReturning(AspectPHP_JoinPoint $joinPoint);
-    
-    /**
-     * Is called when an exception was thrown by the original method.
-     *
-     * @param AspectPHP_JoinPoint $joinPoint
-     */
-    public function afterThrowing(AspectPHP_JoinPoint $joinPoint);
     
 }
