@@ -34,6 +34,13 @@ class AspectPHP_Advice_CallbackTest extends PHPUnit_Framework_TestCase
 {
     
     /**
+     * Name of the callback method that is used for testing.
+     *
+     * @var string
+     */
+    const CALLBACK_NAME = 'callback';
+    
+    /**
      * Checks if the class implements the advice interface.
      */
     public function testAdviceImplementsInterface()
@@ -109,9 +116,9 @@ class AspectPHP_Advice_CallbackTest extends PHPUnit_Framework_TestCase
      */
     protected function createCallbackObject()
     {
-        $mock = $this->getMock('stdClass', array('callback'));
+        $mock = $this->getMock('stdClass', array(self::CALLBACK_NAME));
         $mock->expects($this->any())
-             ->method('callback')
+             ->method(self::CALLBACK_NAME)
              ->will($this->returnValue(null));
         return $mock;
     }
@@ -125,7 +132,7 @@ class AspectPHP_Advice_CallbackTest extends PHPUnit_Framework_TestCase
      */
     protected function toCallback($callbackObject)
     {
-        return array($callbackObject, 'callback');
+        return array($callbackObject, self::CALLBACK_NAME);
     }
     
 }
