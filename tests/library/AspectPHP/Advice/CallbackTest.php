@@ -51,6 +51,16 @@ class AspectPHP_Advice_CallbackTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * Ensures that the constructor throws an exception if the provided
+     * callback seems valid, but it is not callable (for example if the
+     * callback references a private method).
+     */
+    public function testAdviceThrowsExceptionIfProvidedCallbackIsNotCallable()
+    {
+        
+    }
+    
+    /**
      * Checks if invoke() calls the callback method.
      */
     public function testAdviceInvokesCallbackMethod()
