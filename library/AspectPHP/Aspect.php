@@ -13,10 +13,13 @@
  */
 
 /**
- * Interface that must be implemented by aspects.
+ * Marker interface that must be implemented by aspects.
  *
  * An aspect consists of pointcuts and advices. Pointcuts identify methods
  * for code injection and advices contain the code that will be executed.
+ *
+ * This interface does not require any method. It is used to tag aspect
+ * classes and to allow type hinting.
  *
  * @category PHP
  * @package AspectPHP
