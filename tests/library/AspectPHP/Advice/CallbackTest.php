@@ -38,7 +38,9 @@ class AspectPHP_Advice_CallbackTest extends PHPUnit_Framework_TestCase
      */
     public function testAdviceImplementsInterface()
     {
-        
+        $callback = array($this->createCallbackObject(), 'callback');
+        $advice   = new AspectPHP_Advice_Callback($this->createPointcut(), $callback);
+        $this->assertInstanceOf('AspectPHP_Advice', $advice);
     }
     
     /**
@@ -84,6 +86,31 @@ class AspectPHP_Advice_CallbackTest extends PHPUnit_Framework_TestCase
     public function testGetPointcutReturnsProvidedPointcut()
     {
         
+    }
+    
+    /**
+     * Creates a pointcut for testing.
+     *
+     * @return AspectPHP_Pointcut
+     */
+    protected function createPointcut()
+    {
+        return new AspectPHP_Pointcut_None();
+    }
+    
+    /**
+     * Creates a mock object whose callback() method
+     * may be used to check method calls.
+     *
+     * @return PHPUnit_Framework_MockObject_MockObject
+     */
+    protected function createCallbackObject()
+    {
+        $mock = $this->getMock('stdClass', array('callback'));
+        $mock->expects($this->any())
+             ->method('callback')
+             ->will($this->returnValue(null));
+        return $mock;
     }
     
 }
