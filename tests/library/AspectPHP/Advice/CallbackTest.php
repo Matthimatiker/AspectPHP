@@ -33,26 +33,44 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
 class AspectPHP_Advice_CallbackTest extends PHPUnit_Framework_TestCase
 {
     
+    /**
+     * Checks if the class implements the advice interface.
+     */
     public function testAdviceImplementsInterface()
     {
         
     }
     
+    /**
+     * Ensures that the constructor throws an exception if an invalid
+     * callback argument is provided.
+     */
     public function testAdviceThrowsExceptionIfInvalidCallbackIsProvided()
     {
         
     }
     
+    /**
+     * Checks if invoke() calls the callback method.
+     */
     public function testAdviceInvokesCallbackMethod()
     {
         
     }
     
+    /**
+     * Ensures that invoke() passes the provided join point
+     * to the callback method.
+     */
     public function testAdvicePassesJoinPointToCallbackMethod()
     {
         
     }
     
+    /**
+     * Checks if getPointcut() returns the pointcut object that
+     * was provided during construction.
+     */
     public function testGetPointcutReturnsProvidedPointcut()
     {
         
