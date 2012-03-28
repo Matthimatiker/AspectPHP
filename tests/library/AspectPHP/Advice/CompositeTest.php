@@ -33,4 +33,29 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
 class AspectPHP_Advice_CompositeTest extends PHPUnit_Framework_TestCase
 {
     
+    /**
+     * System under test.
+     *
+     * @var AspectPHP_Advice_Composite
+     */
+    protected $advice = null;
+    
+    /**
+     * See {@link PHPUnit_Framework_TestCase::setUp()} for details.
+     */
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->advice = new AspectPHP_Advice_Composite();
+    }
+    
+    /**
+     * See {@link PHPUnit_Framework_TestCase::tearDown()} for details.
+     */
+    protected function tearDown()
+    {
+        $this->advice = null;
+        parent::tearDown();
+    }
+    
 }
