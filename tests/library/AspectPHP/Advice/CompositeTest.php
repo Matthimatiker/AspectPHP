@@ -66,4 +66,49 @@ class AspectPHP_Advice_CompositeTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('AspectPHP_Advice', $this->advice);
     }
     
+    public function testGetPointcutReturnsPointcutObjectEvenIfNoAdviceWasAdded()
+    {
+        
+    }
+    
+    public function testInvokeDoesNothingIfNoAdviceWasAdded()
+    {
+        
+    }
+    
+    public function testAddProvidesFluentInterface()
+    {
+    
+    }
+    
+    public function testInvokeCallsAllAddedAdvices()
+    {
+        
+    }
+    
+    public function testCompositeImplementsCountable()
+    {
+        
+    }
+    
+    public function testCountReturnsZeroIfNoAdviceWasAdded()
+    {
+        
+    }
+    
+    public function testCountReturnsNumberOfAddedAdvices()
+    {
+        
+    }
+    
+    public function testPointcutMatchesIfAllInnerAdvicePointcutsMatch()
+    {
+        
+    }
+    
+    public function testointcutDoesNotMatchIfOneInnerAdvicePointcutDoesNotMatch()
+    {
+        
+    }
+    
 }
