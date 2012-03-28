@@ -58,4 +58,12 @@ class AspectPHP_Advice_CompositeTest extends PHPUnit_Framework_TestCase
         parent::tearDown();
     }
     
+    /**
+     * Checks if the advice implements the AspectPHP_Advice interface.
+     */
+    public function testImplementsAdviceInterface()
+    {
+        $this->assertInstanceOf('AspectPHP_Advice', $this->advice);
+    }
+    
 }
