@@ -66,46 +66,77 @@ class AspectPHP_Advice_CompositeTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('AspectPHP_Advice', $this->advice);
     }
     
+    /**
+     * Ensures that getPointcut() returns a pointcut object even if no advice
+     * was added.
+     */
     public function testGetPointcutReturnsPointcutObjectEvenIfNoAdviceWasAdded()
     {
         
     }
     
+    /**
+     * Ensures that invoke() does nothing if no advice was added.
+     */
     public function testInvokeDoesNothingIfNoAdviceWasAdded()
     {
         
     }
     
+    /**
+     * Checks if add() provides a fluent interface.
+     */
     public function testAddProvidesFluentInterface()
     {
     
     }
     
+    /**
+     * Ensures that invoke() calls the invoke() method of all
+     * added advices.
+     */
     public function testInvokeCallsAllAddedAdvices()
     {
         
     }
     
+    /**
+     * Checks if the composite implements the Countable interface.
+     */
     public function testCompositeImplementsCountable()
     {
         
     }
     
+    /**
+     * Ensures that count() returns 0 if no advice was added.
+     */
     public function testCountReturnsZeroIfNoAdviceWasAdded()
     {
         
     }
     
+    /**
+     * Checks if count() returns the number of registered advices.
+     */
     public function testCountReturnsNumberOfAddedAdvices()
     {
         
     }
     
+    /**
+     * Ensures that the pointcut that is provided by getPointcut() matches
+     * if the pointcuts of all added advices match.
+     */
     public function testPointcutMatchesIfAllInnerAdvicePointcutsMatch()
     {
         
     }
     
+    /**
+     * Ensures that the pointcut that is provided by getPointcut() does not match
+     * if at least one of the inner advice pointcuts does not match.
+     */
     public function testointcutDoesNotMatchIfOneInnerAdvicePointcutDoesNotMatch()
     {
         
