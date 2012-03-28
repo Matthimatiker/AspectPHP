@@ -46,4 +46,25 @@ class AspectPHP_Advice_Composite implements AspectPHP_Advice
         
     }
     
+    /**
+     * Adds the provided advice to the composite.
+     *
+     * @param AspectPHP_Advice $advice
+     * @return AspectPHP_Advice_Composite Provides a fluent interface.
+     */
+    public function add(AspectPHP_Advice $advice)
+    {
+        
+    }
+    
+    /**
+     * Returns the number of registered advices.
+     *
+     * @return integer
+     */
+    public function count()
+    {
+        
+    }
+    
 }
