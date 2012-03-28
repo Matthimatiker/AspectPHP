@@ -23,7 +23,27 @@
  * @link https://github.com/Matthimatiker/AspectPHP
  * @since 28.03.2012
  */
-class AspectPHP_Advice_Composite
+class AspectPHP_Advice_Composite implements AspectPHP_Advice
 {
+    
+    /**
+     * See {@link AspectPHP_Advice::getPointcut()} for details.
+     *
+     * @return AspectPHP_Pointcut
+     */
+    public function getPointcut()
+    {
+        
+    }
+    
+    /**
+     * See {@link AspectPHP_Advice::invoke()} for details.
+     *
+     * @param AspectPHP_JoinPoint $joinPoint
+     */
+    public function invoke(AspectPHP_JoinPoint $joinPoint)
+    {
+        
+    }
     
 }
