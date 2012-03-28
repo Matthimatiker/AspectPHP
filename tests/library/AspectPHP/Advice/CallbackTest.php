@@ -153,7 +153,6 @@ class AspectPHP_Advice_CallbackTest extends PHPUnit_Framework_TestCase
      */
     protected function createJoinPoint()
     {
-        $callback = $this->createCallbackObject();
         return new AspectPHP_JoinPoint(__FUNCTION__, $this);
     }
     
