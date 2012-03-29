@@ -72,7 +72,7 @@ class AspectPHP_Advice_CompositeTest extends PHPUnit_Framework_TestCase
      */
     public function testGetPointcutReturnsPointcutObjectEvenIfNoAdviceWasAdded()
     {
-        
+        $this->assertInstanceOf('AspectPHP_Pointcut', $this->advice->getPointcut());
     }
     
     /**
@@ -80,7 +80,8 @@ class AspectPHP_Advice_CompositeTest extends PHPUnit_Framework_TestCase
      */
     public function testInvokeDoesNothingIfNoAdviceWasAdded()
     {
-        
+        $this->setExpectedException(null);
+        $this->advice->invoke($this->createJoinPoint());
     }
     
     /**
@@ -88,7 +89,8 @@ class AspectPHP_Advice_CompositeTest extends PHPUnit_Framework_TestCase
      */
     public function testAddProvidesFluentInterface()
     {
-    
+        $innerAdvice = $this->createAdvice(new AspectPHP_Pointcut_None());
+        $this->assertSame($this->advice, $this->advice->add($innerAdvice));
     }
     
     /**
@@ -97,7 +99,15 @@ class AspectPHP_Advice_CompositeTest extends PHPUnit_Framework_TestCase
      */
     public function testInvokeCallsAllAddedAdvices()
     {
-        
+        $firstAdvice = $this->createAdvice(new AspectPHP_Pointcut_None());
+        $firstAdvice->expects($this->once())
+                    ->method('invoke');
+        $secondAdvice = $this->createAdvice(new AspectPHP_Pointcut_None());
+        $secondAdvice->expects($this->once())
+                     ->method('invoke');
+        $this->advice->add($firstAdvice);
+        $this->advice->add($secondAdvice);
+        $this->advice->invoke($this->createJoinPoint());
     }
     
     /**
@@ -105,7 +115,7 @@ class AspectPHP_Advice_CompositeTest extends PHPUnit_Framework_TestCase
      */
     public function testCompositeImplementsCountable()
     {
-        
+        $this->assertInstanceOf('Countable', $this->advice);
     }
     
     /**
@@ -113,7 +123,7 @@ class AspectPHP_Advice_CompositeTest extends PHPUnit_Framework_TestCase
      */
     public function testCountReturnsZeroIfNoAdviceWasAdded()
     {
-        
+        $this->assertEquals(0, $this->advice->count());
     }
     
     /**
@@ -121,7 +131,9 @@ class AspectPHP_Advice_CompositeTest extends PHPUnit_Framework_TestCase
      */
     public function testCountReturnsNumberOfAddedAdvices()
     {
-        
+        $this->advice->add($this->createAdvice(new AspectPHP_Pointcut_None()));
+        $this->advice->add($this->createAdvice(new AspectPHP_Pointcut_None()));
+        $this->assertEquals(2, $this->advice->count());
     }
     
     /**
@@ -130,7 +142,11 @@ class AspectPHP_Advice_CompositeTest extends PHPUnit_Framework_TestCase
      */
     public function testPointcutMatchesIfAllInnerAdvicePointcutsMatch()
     {
-        
+        $this->advice->add($this->createAdvice(new AspectPHP_Pointcut_All()));
+        $this->advice->add($this->createAdvice(new AspectPHP_Pointcut_All()));
+        $pointcut = $this->advice->getPointcut();
+        $this->assertInstanceOf('AspectPHP_Pointcut', $pointcut);
+        $this->assertTrue($pointcut->matches(__METHOD__));
     }
     
     /**
@@ -139,7 +155,36 @@ class AspectPHP_Advice_CompositeTest extends PHPUnit_Framework_TestCase
      */
     public function testointcutDoesNotMatchIfOneInnerAdvicePointcutDoesNotMatch()
     {
-        
+        $this->advice->add($this->createAdvice(new AspectPHP_Pointcut_All()));
+        $this->advice->add($this->createAdvice(new AspectPHP_Pointcut_None()));
+        $pointcut = $this->advice->getPointcut();
+        $this->assertInstanceOf('AspectPHP_Pointcut', $pointcut);
+        $this->assertFalse($pointcut->matches(__METHOD__));
+    }
+    
+    /**
+     * Creates a mocked advice for testing.
+     *
+     * @param AspectPHP_Pointcut $pointcut
+     * @return PHPUnit_Framework_MockObject_MockObject
+     */
+    protected function createAdvice(AspectPHP_Pointcut $pointcut)
+    {
+        $mock = $this->getMock('AspectPHP_Advice');
+        $mock->expects($this->any())
+             ->method('getPointcut')
+             ->will($this->returnValue($pointcut));
+        return $mock;
+    }
+    
+    /**
+     * Creates a join point for testing.
+     *
+     * @return AspectPHP_JoinPoint
+     */
+    protected function createJoinPoint()
+    {
+        return new AspectPHP_JoinPoint(__FUNCTION__, $this);
     }
     
 }
