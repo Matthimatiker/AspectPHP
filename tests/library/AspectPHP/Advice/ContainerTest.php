@@ -122,4 +122,21 @@ class AspectPHP_Advice_ContainerTest extends PHPUnit_Framework_TestCase
         $this->assertSame($this->container->after(), $this->container->after());
     }
     
+    /**
+     * Ensures that the container returns a different composite object for
+     * each advice type.
+     */
+    public function testContainerReturnsDifferentCompositeForEachType()
+    {
+        $objects = array(
+            $this->container->before(),
+            $this->container->afterReturning(),
+            $this->container->afterThrowing(),
+            $this->container->after()
+        );
+        
+        $hashes = array_map('spl_object_hash', $objects);
+        $this->assertEquals($hashes, array_unique($hashes), 'Same object returned for different advice types.');
+    }
+    
 }
