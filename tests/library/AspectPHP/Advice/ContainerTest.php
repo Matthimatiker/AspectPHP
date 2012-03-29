@@ -34,6 +34,31 @@ class AspectPHP_Advice_ContainerTest extends PHPUnit_Framework_TestCase
 {
     
     /**
+     * System under test.
+     *
+     * @var AspectPHP_Advice_Container
+     */
+    protected $container = null;
+    
+    /**
+     * See {@link PHPUnit_Framework_TestCase::setUp()} for details.
+     */
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->container = new AspectPHP_Advice_Container();
+    }
+    
+    /**
+     * See {@link PHPUnit_Framework_TestCase::tearDown()} for details.
+     */
+    protected function tearDown()
+    {
+        $this->container = null;
+        parent::tearDown();
+    }
+    
+    /**
      * Checks if before() returns an AspectPHP_Advice_Composite object.
      */
     public function testBeforeReturnsComposite()
