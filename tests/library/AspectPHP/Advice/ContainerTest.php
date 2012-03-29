@@ -33,4 +33,44 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
 class AspectPHP_Advice_ContainerTest extends PHPUnit_Framework_TestCase
 {
     
+    public function testBeforeReturnsComposite()
+    {
+        
+    }
+    
+    public function testAfterReturningReturnsComposite()
+    {
+        
+    }
+    
+    public function testAfterThrowingReturnsComposite()
+    {
+        
+    }
+    
+    public function testAfterReturnsComposite()
+    {
+        
+    }
+    
+    public function testBeforeReturnsSameObjectForEachCall()
+    {
+        
+    }
+    
+    public function testAfterReturningReturnsSameObjectForEachCall()
+    {
+    
+    }
+    
+    public function testAfterThrowingReturnsSameObjectForEachCall()
+    {
+    
+    }
+    
+    public function testAfterReturnsSameObjectForEachCall()
+    {
+    
+    }
+    
 }
