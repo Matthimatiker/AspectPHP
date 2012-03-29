@@ -23,8 +23,15 @@
  * @link https://github.com/Matthimatiker/AspectPHP
  * @since 28.03.2012
  */
-class AspectPHP_Advice_Composite implements AspectPHP_Advice
+class AspectPHP_Advice_Composite implements AspectPHP_Advice, Countable, AspectPHP_Pointcut
 {
+    
+    /**
+     * A list of all added advices.
+     *
+     * @var array(AspectPHP_Advice)
+     */
+    protected $advices = array();
     
     /**
      * See {@link AspectPHP_Advice::getPointcut()} for details.
@@ -33,7 +40,7 @@ class AspectPHP_Advice_Composite implements AspectPHP_Advice
      */
     public function getPointcut()
     {
-        
+        return $this;
     }
     
     /**
@@ -43,7 +50,10 @@ class AspectPHP_Advice_Composite implements AspectPHP_Advice
      */
     public function invoke(AspectPHP_JoinPoint $joinPoint)
     {
-        
+        foreach ($this->advices as $advice) {
+            /* @var $advice AspectPHP_Advice */
+            $advice->invoke($joinPoint);
+        }
     }
     
     /**
@@ -54,7 +64,8 @@ class AspectPHP_Advice_Composite implements AspectPHP_Advice
      */
     public function add(AspectPHP_Advice $advice)
     {
-        
+        $this->advices[] = $advice;
+        return $this;
     }
     
     /**
@@ -64,7 +75,24 @@ class AspectPHP_Advice_Composite implements AspectPHP_Advice
      */
     public function count()
     {
-        
+        return count($this->advices);
+    }
+    
+    /**
+     * See {@link AspectPHP_Pointcut::matches()} for details.
+     *
+     * @param string $method
+     * @return boolean
+     */
+    public function matches($method)
+    {
+        foreach ($this->advices as $advice) {
+            /* @var $advice AspectPHP_Advice */
+            if (!$advice->getPointcut()->matches($method)) {
+                return false;
+            }
+        }
+        return true;
     }
     
 }
