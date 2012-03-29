@@ -86,6 +86,9 @@ class AspectPHP_Advice_Composite implements AspectPHP_Advice, Countable, AspectP
      */
     public function matches($method)
     {
+        if (count($this) === 0) {
+            return false;
+        }
         foreach ($this->advices as $advice) {
             /* @var $advice AspectPHP_Advice */
             if (!$advice->getPointcut()->matches($method)) {
