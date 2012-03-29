@@ -76,6 +76,17 @@ class AspectPHP_Advice_CompositeTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * Ensures that getPointcut() returns a pointcut that does not match
+     * if no advice was added.
+     */
+    public function testPointcutDoesNotMatchIfNoAdviceWasAdded()
+    {
+        $pointcut = $this->advice->getPointcut();
+        $this->assertInstanceOf('AspectPHP_Pointcut', $pointcut);
+        $this->assertFalse($pointcut->matches(__METHOD__));
+    }
+    
+    /**
      * Ensures that invoke() does nothing if no advice was added.
      */
     public function testInvokeDoesNothingIfNoAdviceWasAdded()
