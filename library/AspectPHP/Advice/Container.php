@@ -15,6 +15,13 @@
 /**
  * Container class that holds an arbitrary number of advices grouped by type.
  *
+ * The container provides a composite object for each advice type. An arbitrary
+ * number of advices may be added for each type:
+ * <code>
+ * $container = new AspectPHP_Advice_Container();
+ * $container->before()->add($myAdvice);
+ * </code>
+ *
  * @category PHP
  * @package AspectPHP_Advice
  * @author Matthias Molitor <matthias@matthimatiker.de>
