@@ -63,7 +63,7 @@ class AspectPHP_Advice_ContainerTest extends PHPUnit_Framework_TestCase
      */
     public function testBeforeReturnsComposite()
     {
-        
+        $this->assertInstanceOf('AspectPHP_Advice_Composite', $this->container->before());
     }
     
     /**
@@ -71,7 +71,7 @@ class AspectPHP_Advice_ContainerTest extends PHPUnit_Framework_TestCase
      */
     public function testAfterReturningReturnsComposite()
     {
-        
+        $this->assertInstanceOf('AspectPHP_Advice_Composite', $this->container->afterReturning());
     }
     
     /**
@@ -79,7 +79,7 @@ class AspectPHP_Advice_ContainerTest extends PHPUnit_Framework_TestCase
      */
     public function testAfterThrowingReturnsComposite()
     {
-        
+        $this->assertInstanceOf('AspectPHP_Advice_Composite', $this->container->afterThrowing());
     }
     
     /**
@@ -87,7 +87,7 @@ class AspectPHP_Advice_ContainerTest extends PHPUnit_Framework_TestCase
      */
     public function testAfterReturnsComposite()
     {
-        
+        $this->assertInstanceOf('AspectPHP_Advice_Composite', $this->container->after());
     }
     
     /**
@@ -95,7 +95,7 @@ class AspectPHP_Advice_ContainerTest extends PHPUnit_Framework_TestCase
      */
     public function testBeforeReturnsSameObjectForEachCall()
     {
-        
+        $this->assertSame($this->container->before(), $this->container->before());
     }
     
     /**
@@ -103,7 +103,7 @@ class AspectPHP_Advice_ContainerTest extends PHPUnit_Framework_TestCase
      */
     public function testAfterReturningReturnsSameObjectForEachCall()
     {
-    
+        $this->assertSame($this->container->afterReturning(), $this->container->afterReturning());
     }
     
     /**
@@ -111,7 +111,7 @@ class AspectPHP_Advice_ContainerTest extends PHPUnit_Framework_TestCase
      */
     public function testAfterThrowingReturnsSameObjectForEachCall()
     {
-    
+        $this->assertSame($this->container->afterThrowing(), $this->container->afterThrowing());
     }
     
     /**
@@ -119,7 +119,7 @@ class AspectPHP_Advice_ContainerTest extends PHPUnit_Framework_TestCase
      */
     public function testAfterReturnsSameObjectForEachCall()
     {
-    
+        $this->assertSame($this->container->after(), $this->container->after());
     }
     
 }
