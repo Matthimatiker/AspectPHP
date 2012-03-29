@@ -26,4 +26,44 @@
 class AspectPHP_Advice_Container
 {
     
+    /**
+     * Returns a composite that holds the before advices.
+     *
+     * @return AspectPHP_Advice_Composite
+     */
+    public function before()
+    {
+        
+    }
+    
+    /**
+     * Returns a composite that holds the afterReturning advices.
+     *
+     * @return AspectPHP_Advice_Composite
+     */
+    public function afterReturning()
+    {
+        
+    }
+    
+    /**
+     * Returns a composite that holds the afterThrowing advices.
+     *
+     * @return AspectPHP_Advice_Composite
+     */
+    public function afterThrowing()
+    {
+        
+    }
+    
+    /**
+     * Returns a composite that holds the after advices.
+     *
+     * @return AspectPHP_Advice_Composite
+     */
+    public function after()
+    {
+        
+    }
+    
 }
