@@ -34,13 +34,52 @@ class AspectPHP_Advice_Container
 {
     
     /**
+     * Contains the before advices.
+     *
+     * @var AspectPHP_Advice_Composite
+     */
+    protected $beforeAdvices = null;
+    
+    /**
+     * Contains the afterReturning advices.
+     *
+     * @var AspectPHP_Advice_Composite
+     */
+    protected $afterReturningAdvices = null;
+    
+    /**
+     * Contains the afterThrowing advices.
+     *
+     * @var AspectPHP_Advice_Composite
+     */
+    protected $afterThrowingAdvices = null;
+    
+    /**
+     * Contains the after advices.
+     *
+     * @var AspectPHP_Advice_Composite
+     */
+    protected $afterAdvices = null;
+    
+    /**
+     * Creates the container.
+     */
+    public function __construct()
+    {
+        $this->beforeAdvices         = new AspectPHP_Advice_Composite();
+        $this->afterReturningAdvices = new AspectPHP_Advice_Composite();
+        $this->afterThrowingAdvices  = new AspectPHP_Advice_Composite();
+        $this->afterAdvices          = new AspectPHP_Advice_Composite();
+    }
+    
+    /**
      * Returns a composite that holds the before advices.
      *
      * @return AspectPHP_Advice_Composite
      */
     public function before()
     {
-        
+        return $this->beforeAdvices;
     }
     
     /**
@@ -50,7 +89,7 @@ class AspectPHP_Advice_Container
      */
     public function afterReturning()
     {
-        
+        return $this->afterReturningAdvices;
     }
     
     /**
@@ -60,7 +99,7 @@ class AspectPHP_Advice_Container
      */
     public function afterThrowing()
     {
-        
+        return $this->afterThrowingAdvices;
     }
     
     /**
@@ -70,7 +109,7 @@ class AspectPHP_Advice_Container
      */
     public function after()
     {
-        
+        return $this->afterAdvices;
     }
     
 }
