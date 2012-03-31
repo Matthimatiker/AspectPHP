@@ -112,4 +112,25 @@ class AspectPHP_Advice_Container
         return $this->afterAdvices;
     }
     
+    /**
+     * Merges all advices of the given container into this container.
+     *
+     * @param AspectPHP_Advice_Container $container
+     * @return AspectPHP_Advice_Container
+     */
+    public function merge(AspectPHP_Advice_Container $container)
+    {
+        
+    }
+    
+    /**
+     * Returns the number of added advices.
+     *
+     * @return integer
+     */
+    public function count()
+    {
+        
+    }
+    
 }
