@@ -30,7 +30,7 @@
  * @link https://github.com/Matthimatiker/AspectPHP
  * @since 29.03.2012
  */
-class AspectPHP_Advice_Container
+class AspectPHP_Advice_Container implements Countable
 {
     
     /**
@@ -121,7 +121,12 @@ class AspectPHP_Advice_Container
      */
     public function count()
     {
-        
+        $numberOfAdvices = 0;
+        foreach ($this->advicesByType as $composite) {
+            /* @var $composite AspectPHP_Advice_Composite */
+            $numberOfAdvices += count($composite);
+        }
+        return $numberOfAdvices;
     }
     
 }
