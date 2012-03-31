@@ -17,7 +17,7 @@
  */
 require_once(dirname(__FILE__) . '/bootstrap.php');
 
-foreach (glob(dirname(__FILE__) . '/TestData/*.php') as $helperFile) {
+foreach (glob(dirname(__FILE__) . '/TestData/Extractor/*.php') as $helperFile) {
     /** Load file that contains a helper class for testing. */
     require_once($helperFile);
 }
@@ -37,12 +37,38 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
 {
     
     /**
+     * System under test.
+     *
+     * @var AspectPHP_Advice_Extractor
+     */
+    protected $extractor = null;
+    
+    /**
+     * See {@link PHPUnit_Framework_TestCase::setUp()} for details.
+     */
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->extractor = new AspectPHP_Advice_Extractor();
+    }
+    
+    /**
+     * See {@link PHPUnit_Framework_TestCase::tearDown()} for details.
+     */
+    protected function tearDown()
+    {
+        $this->extractor = null;
+        parent::tearDown();
+    }
+    
+    /**
      * Ensures that getAdvicesFrom() throws an exception if an advice method
      * is not public.
      */
     public function testGetAdvicesFromThrowsExceptionIfAdviceMethodIsNotPublic()
     {
-        
+        $this->setExpectedException('RuntimeException');
+        $this->extractor->getAdvicesFrom(new Extractor_AdviceNotPublicAspect());
     }
     
     /**
@@ -51,7 +77,8 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
      */
     public function testGetAdvicesFromThrowsExceptionIfReferencedPointcutMethodIsNotPublic()
     {
-        
+        $this->setExpectedException('RuntimeException');
+        $this->extractor->getAdvicesFrom(new Extractor_PointcutNotPublicAspect());
     }
     
     /**
@@ -60,7 +87,8 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
      */
     public function testGetAdvicesFromThrowsExceptionIfReferencedPointcutMethodDoesNotExist()
     {
-    
+        $this->setExpectedException('RuntimeException');
+        $this->extractor->getAdvicesFrom(new Extractor_PointcutMissingAspect());
     }
     
     /**
