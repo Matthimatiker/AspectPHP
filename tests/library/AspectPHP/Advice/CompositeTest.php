@@ -173,6 +173,16 @@ class AspectPHP_Advice_CompositeTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($pointcut->matches(__METHOD__));
     }
     
+    public function testMergeProvidesFluentInterface()
+    {
+    
+    }
+    
+    public function testMergeAddsAllAdvicesFromProvidedComposite()
+    {
+    
+    }
+    
     /**
      * Creates a mocked advice for testing.
      *
