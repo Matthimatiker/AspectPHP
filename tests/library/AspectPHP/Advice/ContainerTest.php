@@ -139,4 +139,29 @@ class AspectPHP_Advice_ContainerTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($hashes, array_unique($hashes), 'Same object returned for different advice types.');
     }
     
+    public function testContainerImplementsCountable()
+    {
+        
+    }
+    
+    public function testCountReturnsZeroIfNoAdviceWasAdded()
+    {
+        
+    }
+    
+    public function testCountReturnsNumberOfAllAddedAdvices()
+    {
+        
+    }
+    
+    public function testMergeProvidesFluentInterface()
+    {
+        
+    }
+    
+    public function testMergeAddsAllAdvicesFromProvidedContainer()
+    {
+        
+    }
+    
 }
