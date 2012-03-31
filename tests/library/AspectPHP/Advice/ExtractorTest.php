@@ -31,61 +31,101 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
 class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
 {
     
+    /**
+     * Ensures that getAdvicesFrom() throws an exception if an advice method
+     * is not public.
+     */
     public function testGetAdvicesFromThrowsExceptionIfAdviceMethodIsNotPublic()
     {
         
     }
     
+    /**
+     * Ensures that getAdvicesFrom() throws an exception if a via annotation referenced
+     * pointcut method is not public.
+     */
     public function testGetAdvicesFromThrowsExceptionIfReferencedPointcutMethodIsNotPublic()
     {
         
     }
     
+    /**
+     * Ensures that getAdvicesFrom() throws an exception if a via annotation referenced
+     * pointcut method does not exist.
+     */
     public function testGetAdvicesFromThrowsExceptionIfReferencedPointcutMethodDoesNotExist()
     {
     
     }
     
+    /**
+     * Checks if getAdvicesFrom() extracts all before advices.
+     */
     public function testGetAdvicesFromExtractsBeforeAdvices()
     {
         
     }
     
+    /**
+     * Checks if getAdvicesFrom() extracts all afterReturning advices.
+     */
     public function testGetAdvicesFromExtractsAfterReturningAdvices()
     {
     
     }
     
+    /**
+     * Checks if getAdvicesFrom() extracts all afterThrowing advices.
+     */
     public function testGetAdvicesFromExtractsAfterThrowingAdvices()
     {
     
     }
     
+    /**
+     * Checks if getAdvicesFrom() extracts all after advices.
+     */
     public function testGetAdvicesFromExtractsAfterAdvices()
     {
     
     }
     
+    /**
+     * Ensures that getAdvicesFrom() returns the correct number of advices of an advice method
+     * is connected to multiple pointcuts via annotations.
+     */
     public function testGetAdvicesFromReturnsCorrectNumberOfAdvicesIfOneMethodHasMultiplePointcutAnnotations()
     {
         
     }
     
+    /**
+     * Ensures that calling the before advices invokes the expected aspect methods.
+     */
     public function testCallingBeforeAdvicesInvokesCorrectAspectMethods()
     {
         
     }
     
+    /**
+     * Ensures that calling the afterReturning advices invokes the expected aspect methods.
+     */
     public function testCallingAfterReturningAdvicesInvokesCorrectAspectMethods()
     {
     
     }
     
+    /**
+     * Ensures that calling the afterThrowing advices invokes the expected aspect methods.
+     */
     public function testCallingAfterThrowingAdvicesInvokesCorrectAspectMethods()
     {
     
     }
     
+    /**
+     * Ensures that calling the after advices invokes the expected aspect methods.
+     */
     public function testCallingAfterAdvicesInvokesCorrectAspectMethods()
     {
     
