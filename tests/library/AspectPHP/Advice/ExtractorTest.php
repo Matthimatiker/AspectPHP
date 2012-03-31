@@ -31,4 +31,39 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
 class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
 {
     
+    public function testGetAdvicesFromThrowsExceptionIfAdviceMethodIsNotPublic()
+    {
+        
+    }
+    
+    public function testGetAdvicesFromThrowsExceptionIfReferencedPointcutMethodIsNotPublic()
+    {
+        
+    }
+    
+    public function testGetAdvicesFromThrowsExceptionIfReferencedPointcutMethodDoesNotExist()
+    {
+    
+    }
+    
+    public function testGetAdvicesFromExtractsBeforeAdvices()
+    {
+        
+    }
+    
+    public function testGetAdvicesFromExtractsAfterReturningAdvices()
+    {
+    
+    }
+    
+    public function testGetAdvicesFromExtractsAfterThrowingAdvices()
+    {
+    
+    }
+    
+    public function testGetAdvicesFromExtractsAfterAdvices()
+    {
+    
+    }
+    
 }
