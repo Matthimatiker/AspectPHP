@@ -144,7 +144,7 @@ class AspectPHP_Advice_ContainerTest extends PHPUnit_Framework_TestCase
      */
     public function testContainerImplementsCountable()
     {
-        
+        $this->assertInstanceOf('Countable', $this->container);
     }
     
     /**
@@ -152,7 +152,7 @@ class AspectPHP_Advice_ContainerTest extends PHPUnit_Framework_TestCase
      */
     public function testCountReturnsZeroIfNoAdviceWasAdded()
     {
-        
+        $this->assertEquals(0, $this->container->count());
     }
     
     /**
@@ -160,7 +160,11 @@ class AspectPHP_Advice_ContainerTest extends PHPUnit_Framework_TestCase
      */
     public function testCountReturnsNumberOfAllAddedAdvices()
     {
-        
+        $this->container->before()->add($this->createAdvice());
+        $this->container->afterReturning()->add($this->createAdvice());
+        $this->container->afterThrowing()->add($this->createAdvice());
+        $this->container->after()->add($this->createAdvice());
+        $this->assertEquals(4, $this->container->count());
     }
     
     /**
@@ -168,7 +172,8 @@ class AspectPHP_Advice_ContainerTest extends PHPUnit_Framework_TestCase
      */
     public function testMergeProvidesFluentInterface()
     {
-        
+        $anotherContainer = new AspectPHP_Advice_Container();
+        $this->assertSame($this->container, $this->container->merge($anotherContainer));
     }
     
     /**
@@ -176,7 +181,33 @@ class AspectPHP_Advice_ContainerTest extends PHPUnit_Framework_TestCase
      */
     public function testMergeAddsAllAdvicesFromProvidedContainer()
     {
+        $anotherContainer = new AspectPHP_Advice_Container();
+        $anotherContainer->before()->add($this->createAdvice());
+        $anotherContainer->afterReturning()->add($this->createAdvice());
+        $anotherContainer->afterThrowing()->add($this->createAdvice());
+        $anotherContainer->after()->add($this->createAdvice());
         
+        $this->container->before()->add($this->createAdvice());
+        $this->container->afterReturning()->add($this->createAdvice());
+        $this->container->afterThrowing()->add($this->createAdvice());
+        $this->container->after()->add($this->createAdvice());
+        
+        $this->container->merge($anotherContainer);
+        $this->assertEquals(8, $this->container->count());
+    }
+    
+    /**
+     * Creates a mocked advice for testing.
+     *
+     * @return AspectPHP_Advice
+     */
+    protected function createAdvice()
+    {
+        $mock = $this->getMock('AspectPHP_Advice');
+        $mock->expects($this->any())
+             ->method('getPointcut')
+             ->will($this->returnValue(new AspectPHP_Pointcut_All()));
+        return $mock;
     }
     
 }
