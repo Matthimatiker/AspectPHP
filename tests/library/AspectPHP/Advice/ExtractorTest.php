@@ -66,4 +66,29 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
     
     }
     
+    public function testGetAdvicesFromReturnsCorrectNumberOfAdvicesIfOneMethodHasMultiplePointcutAnnotations()
+    {
+        
+    }
+    
+    public function testCallingBeforeAdvicesInvokesCorrectAspectMethods()
+    {
+        
+    }
+    
+    public function testCallingAfterReturningAdvicesInvokesCorrectAspectMethods()
+    {
+    
+    }
+    
+    public function testCallingAfterThrowingAdvicesInvokesCorrectAspectMethods()
+    {
+    
+    }
+    
+    public function testCallingAfterAdvicesInvokesCorrectAspectMethods()
+    {
+    
+    }
+    
 }
