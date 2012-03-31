@@ -178,7 +178,8 @@ class AspectPHP_Advice_CompositeTest extends PHPUnit_Framework_TestCase
      */
     public function testMergeProvidesFluentInterface()
     {
-    
+        $anotherComposite = new AspectPHP_Advice_Composite();
+        $this->assertSame($this->advice, $this->advice->merge($anotherComposite));
     }
     
     /**
@@ -186,7 +187,11 @@ class AspectPHP_Advice_CompositeTest extends PHPUnit_Framework_TestCase
      */
     public function testMergeAddsAllAdvicesFromProvidedComposite()
     {
-    
+        $anotherComposite = new AspectPHP_Advice_Composite();
+        $anotherComposite->add($this->createAdvice(new AspectPHP_Pointcut_All()));
+        $this->advice->add($this->createAdvice(new AspectPHP_Pointcut_All()));
+        $this->advice->merge($anotherComposite);
+        $this->assertEquals(2, $this->advice->count());
     }
     
     /**
