@@ -111,7 +111,12 @@ class AspectPHP_Advice_Container implements Countable
      */
     public function merge(AspectPHP_Advice_Container $container)
     {
-        
+        foreach ($this->advicesByType as $type => $composite) {
+            /* @var $type string */
+            /* @var $composite AspectPHP_Advice_Composite */
+            $composite->merge($container->advicesByType[$type]);
+        }
+        return $this;
     }
     
     /**
