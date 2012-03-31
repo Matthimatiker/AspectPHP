@@ -164,7 +164,7 @@ class AspectPHP_Advice_CompositeTest extends PHPUnit_Framework_TestCase
      * Ensures that the pointcut that is provided by getPointcut() does not match
      * if at least one of the inner advice pointcuts does not match.
      */
-    public function testointcutDoesNotMatchIfOneInnerAdvicePointcutDoesNotMatch()
+    public function testPointcutDoesNotMatchIfOneInnerAdvicePointcutDoesNotMatch()
     {
         $this->advice->add($this->createAdvice(new AspectPHP_Pointcut_All()));
         $this->advice->add($this->createAdvice(new AspectPHP_Pointcut_None()));
