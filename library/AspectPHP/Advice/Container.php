@@ -34,42 +34,31 @@ class AspectPHP_Advice_Container
 {
     
     /**
-     * Contains the before advices.
+     * Contains a composite object for each advice type.
      *
-     * @var AspectPHP_Advice_Composite
-     */
-    protected $beforeAdvices = null;
-    
-    /**
-     * Contains the afterReturning advices.
+     * The composites contain the added advices.
+     * The name of the advice type (for example "before")
+     * is used as key.
      *
-     * @var AspectPHP_Advice_Composite
+     * @var array(string=>AspectPHP_Advice_Composite)
      */
-    protected $afterReturningAdvices = null;
-    
-    /**
-     * Contains the afterThrowing advices.
-     *
-     * @var AspectPHP_Advice_Composite
-     */
-    protected $afterThrowingAdvices = null;
-    
-    /**
-     * Contains the after advices.
-     *
-     * @var AspectPHP_Advice_Composite
-     */
-    protected $afterAdvices = null;
+    protected $advicesByType = array(
+        'before'         => null,
+        'afterReturning' => null,
+        'afterThrowing'  => null,
+        'after'          => null
+    );
     
     /**
      * Creates the container.
      */
     public function __construct()
     {
-        $this->beforeAdvices         = new AspectPHP_Advice_Composite();
-        $this->afterReturningAdvices = new AspectPHP_Advice_Composite();
-        $this->afterThrowingAdvices  = new AspectPHP_Advice_Composite();
-        $this->afterAdvices          = new AspectPHP_Advice_Composite();
+        // Initialize the composite objects.
+        foreach (array_keys($this->advicesByType) as $type) {
+            /* @var $type string */
+            $this->advicesByType[$type] = new AspectPHP_Advice_Composite();
+        }
     }
     
     /**
@@ -79,7 +68,7 @@ class AspectPHP_Advice_Container
      */
     public function before()
     {
-        return $this->beforeAdvices;
+        return $this->advicesByType[__FUNCTION__];
     }
     
     /**
@@ -89,7 +78,7 @@ class AspectPHP_Advice_Container
      */
     public function afterReturning()
     {
-        return $this->afterReturningAdvices;
+        return $this->advicesByType[__FUNCTION__];
     }
     
     /**
@@ -99,7 +88,7 @@ class AspectPHP_Advice_Container
      */
     public function afterThrowing()
     {
-        return $this->afterThrowingAdvices;
+        return $this->advicesByType[__FUNCTION__];
     }
     
     /**
@@ -109,7 +98,7 @@ class AspectPHP_Advice_Container
      */
     public function after()
     {
-        return $this->afterAdvices;
+        return $this->advicesByType[__FUNCTION__];
     }
     
     /**
