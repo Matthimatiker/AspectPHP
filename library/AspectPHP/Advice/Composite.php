@@ -69,6 +69,19 @@ class AspectPHP_Advice_Composite implements AspectPHP_Advice, Countable, AspectP
     }
     
     /**
+     * Merges all advices of the given composite into this composite.
+     *
+     * The given composite is not modified.
+     *
+     * @param AspectPHP_Advice_Composite $composite
+     * @return AspectPHP_Advice_Composite Provides a fluent interface.
+     */
+    public function merge(AspectPHP_Advice_Composite $composite)
+    {
+        
+    }
+    
+    /**
      * Returns the number of registered advices.
      *
      * @return integer

@@ -115,6 +115,8 @@ class AspectPHP_Advice_Container
     /**
      * Merges all advices of the given container into this container.
      *
+     * The given container is not modified.
+     *
      * @param AspectPHP_Advice_Container $container
      * @return AspectPHP_Advice_Container
      */
