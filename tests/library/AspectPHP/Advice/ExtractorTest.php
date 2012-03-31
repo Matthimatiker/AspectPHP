@@ -59,6 +59,15 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * Ensures that getAdvicesFrom() throws an exception if a via annotation referenced
+     * pointcut method does not return a pointcut object.
+     */
+    public function testGetAdvicesFromThrowsExceptionIfReferencedPointcutMethodDoesNotReturnPointcutObject()
+    {
+        
+    }
+    
+    /**
      * Checks if getAdvicesFrom() extracts all before advices.
      */
     public function testGetAdvicesFromExtractsBeforeAdvices()
