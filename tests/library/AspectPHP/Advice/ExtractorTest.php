@@ -17,6 +17,11 @@
  */
 require_once(dirname(__FILE__) . '/bootstrap.php');
 
+foreach (glob(dirname(__FILE__) . '/TestData/*.php') as $helperFile) {
+    /** Load file that contains a helper class for testing. */
+    require_once($helperFile);
+}
+
 /**
  * Test the advice extractor.
  *
