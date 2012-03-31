@@ -139,26 +139,41 @@ class AspectPHP_Advice_ContainerTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($hashes, array_unique($hashes), 'Same object returned for different advice types.');
     }
     
+    /**
+     * Checks if the container implements the Countable interface.
+     */
     public function testContainerImplementsCountable()
     {
         
     }
     
+    /**
+     * Ensures that count() returns 0 if no advice was added.
+     */
     public function testCountReturnsZeroIfNoAdviceWasAdded()
     {
         
     }
     
+    /**
+     * Checks if count() returns the number of added advices.
+     */
     public function testCountReturnsNumberOfAllAddedAdvices()
     {
         
     }
     
+    /**
+     * Checks if merge() provides a fluent interface.
+     */
     public function testMergeProvidesFluentInterface()
     {
         
     }
     
+    /**
+     * Ensures that merge() adds all advices from the given container.
+     */
     public function testMergeAddsAllAdvicesFromProvidedContainer()
     {
         
