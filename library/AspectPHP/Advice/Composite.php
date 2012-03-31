@@ -78,7 +78,8 @@ class AspectPHP_Advice_Composite implements AspectPHP_Advice, Countable, AspectP
      */
     public function merge(AspectPHP_Advice_Composite $composite)
     {
-        
+        $this->advices = array_merge($this->advices, $composite->advices);
+        return $this;
     }
     
     /**
