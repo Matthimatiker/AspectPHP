@@ -69,15 +69,13 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase
     
     /**
      * Ensures that getAspects() returns the registered aspects.
-     *
-     * @todo remove usage of pointcut parameter
      */
     public function testGetAspectsReturnsRegisteredAspects()
     {
         $first  = $this->createAspect();
         $second = $this->createAspect();
-        $this->manager->register($first, __METHOD__);
-        $this->manager->register($second, __CLASS__ . '::setUp');
+        $this->manager->register($first);
+        $this->manager->register($second);
         $aspects = $this->manager->getAspects();
         $this->assertInternalType('array', $aspects);
         $this->assertContains($first, $aspects, 'Missing first aspect.');
@@ -86,13 +84,11 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase
     
     /**
      * Checks if unregister() removes a registered aspect.
-     *
-     * @todo remove usage of pointcut parameter
      */
     public function testUnregisterRemovesGivenAspect()
     {
         $aspect = $this->createAspect();
-        $this->manager->register($aspect, __METHOD__);
+        $this->manager->register($aspect);
         $this->manager->unregister($aspect);
         $aspects = $this->manager->getAspects();
         $this->assertInternalType('array', $aspects);
@@ -110,28 +106,24 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * Checks if getAspectsFor() returns an array.
-     *
-     * @deprecated method not supported anymore
+     * Checks if getAdvicesFor() returns an advice container.
      */
-    public function testGetAspectsForReturnsArray()
+    public function testGetAdvicesForReturnsContainer()
     {
-        $aspects = $this->manager->getAspectsFor(__METHOD__);
-        $this->assertInternalType('array', $aspects);
+        $advices = $this->manager->getAdvicesFor(__METHOD__);
+        $this->assertInstanceOf('AspectPHP_Advice_Container', $advices);
     }
     
     /**
-     * Ensures that getAspectsFor() returns an empty array if no aspected is registered
+     * Ensures that getAdvicesFor() returns an empty container if no advice is registered
      * for the given method.
-     *
-     * @deprecated method not supported anymore
      */
-    public function testGetAspectsForReturnsEmptyArrayIfNoAspectIsRegisteredForMethod()
+    public function testGetAdvicesForReturnsEmptyContainerIfNoAdviceIsRegisteredForMethod()
     {
-        $this->manager->register($this->createAspect(), __CLASS__ . '::a');
-        $aspects = $this->manager->getAspectsFor(__METHOD__);
-        $this->assertInternalType('array', $aspects);
-        $this->assertEquals(0, count($aspects));
+        $this->manager->register($this->createAspect());
+        $advices = $this->manager->getAdvicesFor(__METHOD__);
+        $this->assertInstanceOf('AspectPHP_Advice_Container', $advices);
+        $this->assertEquals(0, count($advices));
     }
     
     /**
