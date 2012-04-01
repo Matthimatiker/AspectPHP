@@ -51,11 +51,12 @@ interface AspectPHP_Manager
     public function getAspects();
     
     /**
-     * Returns all aspects that are registered for handling the given method.
+     * Returns a container with all advices that are registered for the
+     * given method.
      *
      * @param string $method
-     * @return array(AspectPHP_Aspect)
+     * @return AspectPHP_Advice_Container
      */
-    public function getAspectsFor($method);
+    public function getAdvicesFor($method);
     
 }
