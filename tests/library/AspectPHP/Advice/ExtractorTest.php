@@ -97,7 +97,8 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
      */
     public function testGetAdvicesFromThrowsExceptionIfReferencedPointcutMethodDoesNotReturnPointcutObject()
     {
-        
+        $this->setExpectedException('RuntimeException');
+        $this->extractor->getAdvicesFrom(new Extractor_PointcutInvalidAspect());
     }
     
     /**
@@ -105,7 +106,10 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
      */
     public function testGetAdvicesFromExtractsBeforeAdvices()
     {
-        
+        $aspect  = new Extractor_MockAspect();
+        $advices = $this->extractor->getAdvicesFrom($aspect);
+        $this->assertInstanceOf('AspectPHP_Advice_Container', $advices);
+        $this->assertEquals(2, count($advices->before()));
     }
     
     /**
@@ -113,7 +117,10 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
      */
     public function testGetAdvicesFromExtractsAfterReturningAdvices()
     {
-    
+        $aspect  = new Extractor_MockAspect();
+        $advices = $this->extractor->getAdvicesFrom($aspect);
+        $this->assertInstanceOf('AspectPHP_Advice_Container', $advices);
+        $this->assertEquals(2, count($advices->afterReturning()));
     }
     
     /**
@@ -121,7 +128,10 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
      */
     public function testGetAdvicesFromExtractsAfterThrowingAdvices()
     {
-    
+        $aspect  = new Extractor_MockAspect();
+        $advices = $this->extractor->getAdvicesFrom($aspect);
+        $this->assertInstanceOf('AspectPHP_Advice_Container', $advices);
+        $this->assertEquals(2, count($advices->afterThrowing()));
     }
     
     /**
@@ -129,7 +139,10 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
      */
     public function testGetAdvicesFromExtractsAfterAdvices()
     {
-    
+        $aspect  = new Extractor_MockAspect();
+        $advices = $this->extractor->getAdvicesFrom($aspect);
+        $this->assertInstanceOf('AspectPHP_Advice_Container', $advices);
+        $this->assertEquals(2, count($advices->after()));
     }
     
     /**
