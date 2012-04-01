@@ -69,6 +69,8 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase
     
     /**
      * Ensures that getAspects() returns the registered aspects.
+     *
+     * @todo remove usage of pointcut parameter
      */
     public function testGetAspectsReturnsRegisteredAspects()
     {
@@ -84,6 +86,8 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase
     
     /**
      * Checks if unregister() removes a registered aspect.
+     *
+     * @todo remove usage of pointcut parameter
      */
     public function testUnregisterRemovesGivenAspect()
     {
@@ -107,6 +111,8 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase
     
     /**
      * Checks if getAspectsFor() returns an array.
+     *
+     * @deprecated method not supported anymore
      */
     public function testGetAspectsForReturnsArray()
     {
@@ -117,6 +123,8 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase
     /**
      * Ensures that getAspectsFor() returns an empty array if no aspected is registered
      * for the given method.
+     *
+     * @deprecated method not supported anymore
      */
     public function testGetAspectsForReturnsEmptyArrayIfNoAspectIsRegisteredForMethod()
     {
@@ -129,6 +137,8 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase
     /**
      * Ensures that getAspectsFor() does not return aspects that are not registered for the
      * given method.
+     *
+     * @deprecated method not supported anymore
      */
     public function testGetAspectsForDoesNotReturnAspectsThatAreNotRegisteredForTheProvidedMethod()
     {
@@ -142,6 +152,8 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase
     
     /**
      * Ensures that getAspectsFor() returns aspects that are registered for the provided method.
+     *
+     * @deprecated method not supported anymore
      */
     public function testGetAspectsForReturnsAspectsThatAreRegisteredForTheProvidedMethod()
     {
@@ -157,6 +169,7 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase
      * Creates an aspect mock.
      *
      * @return AspectPHP_Aspect
+     * @todo use aspect that provides at least one advice
      */
     protected function createAspect()
     {
