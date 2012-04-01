@@ -211,6 +211,17 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * Ensures that the extractor ignores methods that are not documented and
+     * does not throw any exception.
+     */
+    public function testGetAdvicesFromIgnoresMethodsWithoutDocComment()
+    {
+        $this->setExpectedException(null);
+        $aspect = new Extractor_NoDocCommentAspect();
+        $this->extractor->getAdvicesFrom($aspect);
+    }
+    
+    /**
      * Creates a join point for testing.
      *
      * @return AspectPHP_JoinPoint
