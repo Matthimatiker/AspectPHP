@@ -85,10 +85,11 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager
     }
     
     /**
-     * See {@link AspectPHP_Manager::getAspectsFor()} for details.
+     * Returns the aspects that were registered for the given method.
      *
      * @param string $method
      * @return array(AspectPHP_Aspect)
+     * @deprecated Will not be used in the future. See getAdvicesFor().
      */
     public function getAspectsFor($method)
     {
