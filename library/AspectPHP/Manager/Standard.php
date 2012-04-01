@@ -43,7 +43,7 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager
      * @param AspectPHP_Aspect $aspect
      * @param string $pointcut
      */
-    public function register(AspectPHP_Aspect $aspect, $pointcut)
+    public function register(AspectPHP_Aspect $aspect, $pointcut = null)
     {
         if (!isset($this->aspects[$pointcut])) {
             $this->aspects[$pointcut] = array();
