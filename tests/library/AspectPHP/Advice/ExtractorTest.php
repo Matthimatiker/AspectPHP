@@ -151,7 +151,11 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
      */
     public function testGetAdvicesFromReturnsCorrectNumberOfAdvicesIfOneMethodHasMultiplePointcutAnnotations()
     {
-        
+        $aspect  = new Extractor_MultipleReferencedPointcutAspect();
+        $advices = $this->extractor->getAdvicesFrom($aspect);
+        $this->assertInstanceOf('AspectPHP_Advice_Container', $advices);
+        $this->assertEquals(1, count($advices->before()), 'Unexpected number of before advices.');
+        $this->assertEquals(1, count($advices->after()), 'Unexpected number of after advices.');
     }
     
     /**
@@ -159,7 +163,12 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
      */
     public function testCallingBeforeAdvicesInvokesCorrectAspectMethods()
     {
-        
+        $aspect  = new Extractor_MockAspect();
+        $advices = $this->extractor->getAdvicesFrom($aspect);
+        $this->assertInstanceOf('AspectPHP_Advice_Container', $advices);
+        $advices->before()->invoke($this->createJoinPoint());
+        $this->assertContains('adviceBeforeOne', $aspect->getCalledMethods());
+        $this->assertContains('adviceBeforeTwo', $aspect->getCalledMethods());
     }
     
     /**
@@ -167,7 +176,12 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
      */
     public function testCallingAfterReturningAdvicesInvokesCorrectAspectMethods()
     {
-    
+        $aspect  = new Extractor_MockAspect();
+        $advices = $this->extractor->getAdvicesFrom($aspect);
+        $this->assertInstanceOf('AspectPHP_Advice_Container', $advices);
+        $advices->afterReturning()->invoke($this->createJoinPoint());
+        $this->assertContains('adviceAfterReturningOne', $aspect->getCalledMethods());
+        $this->assertContains('adviceAfterReturningTwo', $aspect->getCalledMethods());
     }
     
     /**
@@ -175,7 +189,12 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
      */
     public function testCallingAfterThrowingAdvicesInvokesCorrectAspectMethods()
     {
-    
+        $aspect  = new Extractor_MockAspect();
+        $advices = $this->extractor->getAdvicesFrom($aspect);
+        $this->assertInstanceOf('AspectPHP_Advice_Container', $advices);
+        $advices->afterThrowing()->invoke($this->createJoinPoint());
+        $this->assertContains('adviceAfterThrowingOne', $aspect->getCalledMethods());
+        $this->assertContains('adviceAfterThrowingTwo', $aspect->getCalledMethods());
     }
     
     /**
@@ -183,7 +202,22 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
      */
     public function testCallingAfterAdvicesInvokesCorrectAspectMethods()
     {
+        $aspect  = new Extractor_MockAspect();
+        $advices = $this->extractor->getAdvicesFrom($aspect);
+        $this->assertInstanceOf('AspectPHP_Advice_Container', $advices);
+        $advices->after()->invoke($this->createJoinPoint());
+        $this->assertContains('adviceAfterOne', $aspect->getCalledMethods());
+        $this->assertContains('adviceAfterTwo', $aspect->getCalledMethods());
+    }
     
+    /**
+     * Creates a join point for testing.
+     *
+     * @return AspectPHP_JoinPoint
+     */
+    protected function createJoinPoint()
+    {
+        return new AspectPHP_JoinPoint(__FUNCTION__, $this);
     }
     
 }
