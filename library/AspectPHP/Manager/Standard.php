@@ -85,7 +85,7 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager
     }
     
     /**
-     * See {@link AspectPHP_Manager::getMatchingAspects()} for details.
+     * See {@link AspectPHP_Manager::getAspectsFor()} for details.
      *
      * @param string $method
      * @return array(AspectPHP_Aspect)
@@ -96,6 +96,17 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager
             return array();
         }
         return $this->aspects[$method];
+    }
+    
+    /**
+     * See {@link AspectPHP_Manager::getAdvicesFor()} for details.
+     *
+     * @param string $method
+     * @return AspectPHP_Advice_Container
+     */
+    public function getAdvicesFor($method)
+    {
+        
     }
     
 }
