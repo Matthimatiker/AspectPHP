@@ -222,6 +222,19 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * Ensures that getAdvicesFrom() returns the correct number of advices even if one advice method
+     * referencesmultiple pointcuts for the same advice type (for example "before").
+     */
+    public function testGetAdvicesFromReturnsCorrectNumberOfAdvicesIfMultiplePointcutsAreRegisteredForSameType()
+    {
+        $aspect  = new Extractor_MultiplePointcutsForSameTypeAspect();
+        $advices = $this->extractor->getAdvicesFrom($aspect);
+        $this->assertInstanceOf('AspectPHP_Advice_Container', $advices);
+        // One advice for each reference is expected.
+        $this->assertEquals(2, count($advices->before()));
+    }
+    
+    /**
      * Creates a join point for testing.
      *
      * @return AspectPHP_JoinPoint
