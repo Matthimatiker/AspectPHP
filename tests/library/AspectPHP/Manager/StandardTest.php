@@ -127,34 +127,20 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * Ensures that getAspectsFor() does not return aspects that are not registered for the
+     * Ensures that getAdvicesFor() does not return advices that are not registered for the
      * given method.
-     *
-     * @deprecated method not supported anymore
      */
-    public function testGetAspectsForDoesNotReturnAspectsThatAreNotRegisteredForTheProvidedMethod()
+    public function testGetAdvicesForDoesNotReturnAdvicesThatAreNotRegisteredForTheProvidedMethod()
     {
-        $aspect = $this->createAspect();
-        $this->manager->register($this->createAspect(), __CLASS__ . '::a');
-        $this->manager->register($aspect, __CLASS__ . '::b');
-        $aspects = $this->manager->getAspectsFor(__CLASS__ . '::a');
-        $this->assertInternalType('array', $aspects);
-        $this->assertNotContains($aspect, $aspects);
+        $this->markTestIncomplete();
     }
     
     /**
-     * Ensures that getAspectsFor() returns aspects that are registered for the provided method.
-     *
-     * @deprecated method not supported anymore
+     * Ensures that getAdvicesFor() returns advices that are registered for the provided method.
      */
-    public function testGetAspectsForReturnsAspectsThatAreRegisteredForTheProvidedMethod()
+    public function testGetAdvicesForReturnsAdvicesThatAreRegisteredForTheProvidedMethod()
     {
-        $aspect = $this->createAspect();
-        $this->manager->register($this->createAspect(), __CLASS__ . '::a');
-        $this->manager->register($aspect, __CLASS__ . '::b');
-        $aspects = $this->manager->getAspectsFor(__CLASS__ . '::b');
-        $this->assertInternalType('array', $aspects);
-        $this->assertContains($aspect, $aspects);
+        $this->markTestIncomplete();
     }
     
     /**
