@@ -135,7 +135,11 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase
      */
     public function testGetAdvicesForDoesNotReturnAdvicesThatAreNotRegisteredForTheProvidedMethod()
     {
-        $this->markTestIncomplete();
+        $this->manager->register($this->createAspect());
+        $advices = $this->manager->getAdvicesFor('User::save');
+        $this->assertInstanceOf('AspectPHP_Advice_Container', $advices);
+        // The beforeLogMethodsAdvice() should not match the method.
+        $this->assertEquals(0, count($advices->before()));
     }
     
     /**
@@ -143,7 +147,11 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase
      */
     public function testGetAdvicesForReturnsAdvicesThatAreRegisteredForTheProvidedMethod()
     {
-        $this->markTestIncomplete();
+        $this->manager->register($this->createAspect());
+        $advices = $this->manager->getAdvicesFor('User::save');
+        $this->assertInstanceOf('AspectPHP_Advice_Container', $advices);
+        // The afterUserMethodAdvice() should match the method.
+        $this->assertEquals(1, count($advices->after()));
     }
     
     /**
