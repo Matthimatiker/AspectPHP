@@ -199,7 +199,7 @@ class AspectPHP_Advice_CompositeTest extends PHPUnit_Framework_TestCase
      */
     public function testCompositeIsTraversable()
     {
-        
+        $this->assertInstanceOf('Traversable', $this->advice);
     }
     
     /**
@@ -208,7 +208,12 @@ class AspectPHP_Advice_CompositeTest extends PHPUnit_Framework_TestCase
      */
     public function testIterationReturnsNothingIfNoAdviceWasAdded()
     {
-    
+        $this->assertInstanceOf('Traversable', $this->advice);
+        $numberOfItems = 0;
+        foreach ($this->advice as $advice) {
+            $numberOfItems++;
+        }
+        $this->assertEquals(0, $numberOfItems);
     }
     
     /**
@@ -216,7 +221,8 @@ class AspectPHP_Advice_CompositeTest extends PHPUnit_Framework_TestCase
      */
     public function testIterationReturnsOnlyAdvices()
     {
-        
+        $this->assertInstanceOf('Traversable', $this->advice);
+        $this->assertContainsOnly('AspectPHP_Advice', $this->advice);
     }
     
     /**
@@ -225,7 +231,14 @@ class AspectPHP_Advice_CompositeTest extends PHPUnit_Framework_TestCase
      */
     public function testIterationReturnsAddedAdvices()
     {
-        
+        $first  = $this->createAdvice(new AspectPHP_Pointcut_All());
+        $second = $this->createAdvice(new AspectPHP_Pointcut_None());
+        $this->advice->add($first);
+        $this->advice->add($second);
+        $this->assertInstanceOf('Traversable', $this->advice);
+        foreach ($this->advice as $advice) {
+            $this->assertContains($advice, array($first, $second));
+        }
     }
     
     /**
