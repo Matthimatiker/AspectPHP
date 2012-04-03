@@ -38,6 +38,29 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager
     protected $aspects = array();
     
     /**
+     * Contains all advices of the registered aspects.
+     *
+     * @var AspectPHP_Advice_Container
+     */
+    protected $advices = null;
+    
+    /**
+     * Helper object that is used to extract advices from aspects.
+     *
+     * @var AspectPHP_Advice_Extractor
+     */
+    protected $extractor = null;
+    
+    /**
+     * Creates and initializes the manager.
+     */
+    public function __construct()
+    {
+        $this->advices   = new AspectPHP_Advice_Container();
+        $this->extractor = new AspectPHP_Advice_Extractor();
+    }
+    
+    /**
      * See {@link AspectPHP_Manager::register()} for details.
      *
      * @param AspectPHP_Aspect $aspect
@@ -49,6 +72,7 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager
             $this->aspects[$pointcut] = array();
         }
         $this->aspects[$pointcut][] = $aspect;
+        $this->advices->merge($this->extractAdvices($aspect));
     }
     
     /**
@@ -92,7 +116,29 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager
      */
     public function getAdvicesFor($method)
     {
-        
+        $container = new AspectPHP_Advice_Container();
+        $types     = array('before', 'afterReturning', 'afterThrowing', 'after');
+        foreach ($types as $type) {
+            /* @var $type string */
+            foreach ($this->advices->{$type}() as $advice) {
+                /* @var $advice AspectPHP_Advice */
+                if ($advice->getPointcut()->matches($method)) {
+                    $container->{$type}()->add($advice);
+                }
+            }
+        }
+        return $container;
+    }
+    
+    /**
+     * Extracts all advices from the given aspect.
+     *
+     * @param AspectPHP_Aspect $aspect
+     * @return AspectPHP_Advice_Container
+     */
+    protected function extractAdvices(AspectPHP_Aspect $aspect)
+    {
+        return $this->extractor->getAdvicesFrom($aspect);
     }
     
 }
