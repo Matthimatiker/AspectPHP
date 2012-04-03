@@ -194,6 +194,26 @@ class AspectPHP_Advice_CompositeTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(2, $this->advice->count());
     }
     
+    public function testCompositeIsTraversable()
+    {
+        
+    }
+    
+    public function testIterationReturnsNothingIfNoAdviceWasAdded()
+    {
+    
+    }
+    
+    public function testIterationReturnsOnlyAdvices()
+    {
+        
+    }
+    
+    public function testIterationReturnsAddedAdvices()
+    {
+        
+    }
+    
     /**
      * Creates a mocked advice for testing.
      *
