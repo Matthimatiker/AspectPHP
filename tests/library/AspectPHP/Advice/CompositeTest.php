@@ -194,21 +194,35 @@ class AspectPHP_Advice_CompositeTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(2, $this->advice->count());
     }
     
+    /**
+     * Checks if the composite is traversable.
+     */
     public function testCompositeIsTraversable()
     {
         
     }
     
+    /**
+     * Ensures that iterating over the composite does not return any value
+     * if no advice was added.
+     */
     public function testIterationReturnsNothingIfNoAdviceWasAdded()
     {
     
     }
     
+    /**
+     * Ensures that iterating over the composite returns only advices.
+     */
     public function testIterationReturnsOnlyAdvices()
     {
         
     }
     
+    /**
+     * Ensures that iterating over the composite returns the advices that
+     * were added before.
+     */
     public function testIterationReturnsAddedAdvices()
     {
         
