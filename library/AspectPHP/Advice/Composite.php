@@ -23,7 +23,7 @@
  * @link https://github.com/Matthimatiker/AspectPHP
  * @since 28.03.2012
  */
-class AspectPHP_Advice_Composite implements AspectPHP_Advice, Countable, AspectPHP_Pointcut
+class AspectPHP_Advice_Composite implements AspectPHP_Advice, AspectPHP_Pointcut, IteratorAggregate, Countable
 {
     
     /**
@@ -90,6 +90,17 @@ class AspectPHP_Advice_Composite implements AspectPHP_Advice, Countable, AspectP
     public function count()
     {
         return count($this->advices);
+    }
+    
+    /**
+     * Returns an iterator that is used to iterate over all advices
+     * in this composite.
+     *
+     * @return Iterator
+     */
+    public function getIterator()
+    {
+        return new ArrayIterator($this->advices);
     }
     
     /**
