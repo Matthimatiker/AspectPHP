@@ -39,11 +39,31 @@ class Standard_SimpleAspect implements AspectPHP_Aspect
     }
     
     /**
+     * Returns a pointcut that matches all log() methods regardless
+     * of the class.
+     *
+     * @return AspectPHP_Pointcut
+     */
+    public function pointcutLogMethods()
+    {
+        return new AspectPHP_Pointcut_RegExp('.*::log');
+    }
+    
+    /**
      * An after dummy advice.
      *
      * @after pointcutMethodsOfUser()
      */
-    public function afterAdvice()
+    public function afterUserMethodAdvice()
+    {
+    }
+    
+    /**
+     * A before dummy advice.
+     *
+     * @before pointcutLogMethods()
+     */
+    public function beforeLogMethodAdvice()
     {
     }
     
