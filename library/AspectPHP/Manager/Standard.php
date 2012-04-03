@@ -64,14 +64,10 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager
      * See {@link AspectPHP_Manager::register()} for details.
      *
      * @param AspectPHP_Aspect $aspect
-     * @param string $pointcut
      */
-    public function register(AspectPHP_Aspect $aspect, $pointcut = null)
+    public function register(AspectPHP_Aspect $aspect)
     {
-        if (!isset($this->aspects[$pointcut])) {
-            $this->aspects[$pointcut] = array();
-        }
-        $this->aspects[$pointcut][] = $aspect;
+        $this->aspects[] = $aspect;
         $this->advices->merge($this->extractAdvices($aspect));
     }
     
@@ -82,16 +78,12 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager
      */
     public function unregister(AspectPHP_Aspect $aspect)
     {
-        foreach ($this->aspects as $pointcut => $aspects) {
-            /* @var string $pointcut */
-            /* @var array(AspectPHP_Aspect) $aspects */
-            foreach ($aspects as $index => $currentAspect) {
-                /* @var AspectPHP_Aspect $currentAspect */
-                if ($currentAspect === $aspect) {
-                    unset($this->aspects[$pointcut][$index]);
-                }
-            }
+        $index = array_search($aspect, $this->aspects, true);
+        if ($index === false) {
+            // Aspect not found.
+            return;
         }
+        unset($this->aspects[$index]);
     }
     
     /**
@@ -101,11 +93,7 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager
      */
     public function getAspects()
     {
-        $allAspects = array();
-        foreach ($this->aspects as $aspects) {
-            $allAspects = array_merge($allAspects, $aspects);
-        }
-        return $allAspects;
+        return $this->aspects;
     }
     
     /**
