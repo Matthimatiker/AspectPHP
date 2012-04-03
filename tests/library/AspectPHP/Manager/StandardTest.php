@@ -155,6 +155,29 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * Ensures that getAdvicesFor() returns an equal result on the
+     * second call.
+     */
+    public function testGetAdvicesForReturnsEqualResultOnSecondCall()
+    {
+        $this->manager->register($this->createAspect());
+        $first  = $this->manager->getAdvicesFor('User::save');
+        $second = $this->manager->getAdvicesFor('User::save');
+        
+        $this->assertInstanceOf('AspectPHP_Advice_Container', $first);
+        $this->assertInstanceOf('AspectPHP_Advice_Container', $second);
+        
+        $message = 'Different number of before advices.';
+        $this->assertEquals(count($first->before()), count($second->before()), $message);
+        $message = 'Different number of afterReturning advices.';
+        $this->assertEquals(count($first->afterReturning()), count($second->afterReturning()), $message);
+        $message = 'Different number of afterThrowing advices.';
+        $this->assertEquals(count($first->afterThrowing()), count($second->afterThrowing()), $message);
+        $message = 'Different number of after advices.';
+        $this->assertEquals(count($first->after()), count($second->after()), $message);
+    }
+    
+    /**
      * Creates an aspect mock.
      *
      * @return AspectPHP_Aspect
