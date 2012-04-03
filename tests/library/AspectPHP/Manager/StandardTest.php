@@ -178,6 +178,20 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * Ensures that getAdvicesFor() does not return advices from unregistered aspects.
+     */
+    public function testGetAdvicesForDoesNotReturnAdvicesOfUnregisteredAspects()
+    {
+        $aspect = $this->createAspect();
+        $this->manager->register($aspect);
+        $this->manager->register($this->createAspect());
+        $this->manager->unregister($aspect);
+        $advices = $this->manager->getAdvicesFor('User::save');
+        $this->assertInstanceOf('AspectPHP_Advice_Container', $advices);
+        $this->assertEquals(2, count($advices));
+    }
+    
+    /**
      * Creates an aspect mock.
      *
      * @return AspectPHP_Aspect
