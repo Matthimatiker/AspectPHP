@@ -38,11 +38,13 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager
     protected $aspects = array();
     
     /**
-     * Contains all advices of the registered aspects.
+     * Contains the advices of each registered aspect.
      *
-     * @var AspectPHP_Advice_Container
+     * A string that identifies an aspect object is used as key.
+     *
+     * @var array(string=>AspectPHP_Advice_Container)
      */
-    protected $advices = null;
+    protected $advicesByAspect = array();
     
     /**
      * Helper object that is used to extract advices from aspects.
@@ -68,7 +70,7 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager
     public function register(AspectPHP_Aspect $aspect)
     {
         $this->aspects[] = $aspect;
-        $this->advices->merge($this->extractAdvices($aspect));
+        $this->advicesByAspect[spl_object_hash($aspect)] = $this->extractAdvices($aspect);
     }
     
     /**
@@ -84,6 +86,7 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager
             return;
         }
         unset($this->aspects[$index]);
+        unset($this->advicesByAspect[spl_object_hash($aspect)]);
     }
     
     /**
@@ -107,12 +110,15 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager
     {
         $container = new AspectPHP_Advice_Container();
         $types     = array('before', 'afterReturning', 'afterThrowing', 'after');
-        foreach ($types as $type) {
-            /* @var $type string */
-            foreach ($this->advices->{$type}() as $advice) {
-                /* @var $advice AspectPHP_Advice */
-                if ($advice->getPointcut()->matches($method)) {
-                    $container->{$type}()->add($advice);
+        foreach ($this->advicesByAspect as $advices) {
+            /* @var $advices AspectPHP_Advice_Container */
+            foreach ($types as $type) {
+                /* @var $type string */
+                foreach ($advices->{$type}() as $advice) {
+                    /* @var $advice AspectPHP_Advice */
+                    if ($advice->getPointcut()->matches($method)) {
+                        $container->{$type}()->add($advice);
+                    }
                 }
             }
         }
