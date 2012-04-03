@@ -18,6 +18,9 @@
  */
 require_once(dirname(__FILE__) . '/bootstrap.php');
 
+/** Load the aspect that is used for testing. */
+require_once(dirname(__FILE__) . '/TestData/Standard/SimpleAspect.php');
+
 /**
  * Tests the default aspect manager.
  *
@@ -147,11 +150,10 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase
      * Creates an aspect mock.
      *
      * @return AspectPHP_Aspect
-     * @todo use aspect that provides at least one advice
      */
     protected function createAspect()
     {
-        return $this->getMock('AspectPHP_Aspect');
+        return new Standard_SimpleAspect();
     }
     
 }
