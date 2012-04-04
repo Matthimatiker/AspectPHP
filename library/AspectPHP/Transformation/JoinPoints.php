@@ -113,7 +113,7 @@ class AspectPHP_Transformation_JoinPoints implements AspectPHP_Transformation
             $this->editor->replace($functionConstants, $newContent);
         }
         
-        $this->editor->insertBefore($classEnd, array($this->getCode('_aspectPHPInternalHandleCall')));
+        $this->editor->insertBefore($classEnd, array($this->getCodeTemplate('_aspectPHPInternalHandleCall')));
         
         $this->editor->commit();
         
@@ -188,17 +188,18 @@ class AspectPHP_Transformation_JoinPoints implements AspectPHP_Transformation
     }
     
     /**
-     * Returns the source code of the given method including its doc block.
+     * Returns the source code of the given method including its doc block
+     * from the template class AspectPHP_Transformation_Template_JoinPointHandler.
      *
      * Example:
      * <code>
-     * $code = $this->getCode('buildInjectionPoint');
+     * $code = $this->getCodeTemplate('methodName');
      * </code>
      *
      * @param string $name The method name.
      * @return string
      */
-    protected function getCode($name)
+    protected function getCodeTemplate($name)
     {
         return $this->getCodeExtractor()->getSource('AspectPHP_Transformation_Template_JoinPointHandler::' . $name);
     }
