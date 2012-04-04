@@ -34,6 +34,13 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
 {
     
     /**
+     * The name of the simulated method that is provided by callback mocks.
+     *
+     * @var string
+     */
+    const CALLBACK_METHOD = 'invoke';
+    
+    /**
      * The manager that was stored before the test starts.
      *
      * @var AspectPHP_Manager|null
@@ -67,7 +74,7 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
         $this->simulateManager(null);
         $mock = $this->createCallbackMock();
         $mock->expects($this->once())
-             ->method('invoke')
+             ->method(self::CALLBACK_METHOD)
              ->will($this->returnValue(null));
         $this->handle($mock);
     }
@@ -273,7 +280,7 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
     {
         $handlerArgs = array(
             'original',
-            'invoke',
+            self::CALLBACK_METHOD,
             $mock,
             $args
         );
@@ -296,7 +303,7 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
     {
         $mock = $this->getMock('stdClass', array('invoke'));
         $mock->expects($this->any())
-             ->method('invoke')
+             ->method(self::CALLBACK_METHOD)
              ->will($this->returnValue(null));
         return $mock;
     }
