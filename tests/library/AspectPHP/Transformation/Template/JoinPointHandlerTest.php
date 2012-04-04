@@ -48,6 +48,13 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
     protected $previousManager = null;
     
     /**
+     * Contains simulated advices.
+     *
+     * @var AspectPHP_Advice_Container
+     */
+    protected $advices = null;
+    
+    /**
      * See {@link PHPUnit_Framework_TestCase::setUp()} for details.
      */
     protected function setUp()
@@ -55,6 +62,7 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
         parent::setUp();
         $this->storeManager();
         $this->simulateManager(null);
+        $this->advices = $this->createContainer();
     }
     
     /**
@@ -62,6 +70,7 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
      */
     protected function tearDown()
     {
+        $this->advices = null;
         $this->restoreManager();
         parent::tearDown();
     }
@@ -121,7 +130,12 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
      */
     public function testHandlerExecutesBeforeAdvices()
     {
-        
+        $this->simulateManager($this->createManagerMock());
+        $adviceCallback = $this->createCallbackMock();
+        $adviceCallback->expects($this->once())
+                       ->method(self::CALLBACK_METHOD);
+        $this->advices->before()->add($this->toAdvice($adviceCallback));
+        $this->handle($this->createCallbackMock());
     }
     
     /**
@@ -313,7 +327,7 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
         $mock = $this->getMock('AspectPHP_Manager');
         $mock->expects($this->any())
              ->method('getAdvicesFor')
-             ->will($this->returnValue($this->createContainer()));
+             ->will($this->returnValue($this->advices));
         return $mock;
     }
     
@@ -342,6 +356,17 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
              ->method(self::CALLBACK_METHOD)
              ->will($this->returnValue(null));
         return $mock;
+    }
+    
+    /**
+     * Creates an advice that invokes the provided callback mock.
+     *
+     * @param PHPUnit_Framework_MockObject_MockObject $mock
+     * @return AspectPHP_Advice
+     */
+    protected function toAdvice(PHPUnit_Framework_MockObject_MockObject $mock)
+    {
+        return new AspectPHP_Advice_Callback(new AspectPHP_Pointcut_All(), $this->toCallback($mock));
     }
     
     /**
