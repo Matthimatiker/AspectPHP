@@ -86,8 +86,7 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
     {
         $manager = $this->createManagerMock();
         $manager->expects($this->once())
-                ->method('getAdvicesFor')
-                ->will($this->returnValue($this->createContainer()));
+                ->method('getAdvicesFor');
         $this->simulateManager($manager);
         $this->handle($this->createCallbackMock());
     }
