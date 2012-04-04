@@ -15,6 +15,9 @@
 /**
  * Contains code templates that will be weaved into classes.
  *
+ * The templates are responsible for handling the JoinPoints
+ * logic and act as a proxy for calls to the original methods.
+ *
  * @category PHP
  * @package AspectPHP_Transformation
  * @author Matthias Molitor <matthias@matthimatiker.de>
