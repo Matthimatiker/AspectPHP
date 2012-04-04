@@ -96,7 +96,12 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
      */
     public function testHandlerRequestsAdvicesForCorrectMethod()
     {
-        
+        $manager = $this->createManagerMock();
+        $manager->expects($this->any())
+                ->method('getAdvicesFor')
+                ->with('AspectPHP_Transformation_Template_JoinPointHandler::original');
+        $this->simulateManager($manager);
+        $this->handle($this->createCallbackMock());
     }
     
     /**
