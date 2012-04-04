@@ -33,4 +33,55 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
 class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Framework_TestCase
 {
     
+    /**
+     * The manager that was stored before the test starts.
+     *
+     * @var AspectPHP_Manager|null
+     */
+    protected $previousManager = null;
+    
+    /**
+     * See {@link PHPUnit_Framework_TestCase::setUp()} for details.
+     */
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->storeManager();
+    }
+    
+    /**
+     * See {@link PHPUnit_Framework_TestCase::tearDown()} for details.
+     */
+    protected function tearDown()
+    {
+        $this->restoreManager();
+        parent::tearDown();
+    }
+    
+    /**
+     * Uses the given aspect manager for testing.
+     *
+     * @param AspectPHP_Manager|null $manager
+     */
+    protected function simulateManager($manager)
+    {
+        AspectPHP_Container::setManager($manager);
+    }
+    
+    /**
+     * Stores the current aspect manager.
+     */
+    protected function storeManager()
+    {
+        $this->previousManager = AspectPHP_Container::getManager();
+    }
+    
+    /**
+     * Restores the previously stored aspect manager.
+     */
+    protected function restoreManager()
+    {
+        AspectPHP_Container::setManager($this->previousManager);
+    }
+    
 }
