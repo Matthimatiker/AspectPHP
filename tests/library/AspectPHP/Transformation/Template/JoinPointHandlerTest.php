@@ -64,7 +64,12 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
      */
     public function testHandlerExecutesCompiledMethodIfManagerIsNotAvailable()
     {
-        
+        $this->simulateManager(null);
+        $mock = $this->createCallbackMock();
+        $mock->expects($this->once())
+             ->method('invoke')
+             ->will($this->returnValue(null));
+        $this->handle($mock);
     }
     
     /**
@@ -251,6 +256,61 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
     public function testHandlerExecutesAfterAdviceEvenIfExceptionOccurred()
     {
         
+    }
+    
+    /**
+     * Uses the provided data to call the handler methods.
+     *
+     * The given mock object will be used to simulate the compiled method.
+     * The parameters $args contains the method arguments that will be
+     * passed to the compiled method.
+     *
+     * @param PHPUnit_Framework_MockObject_MockObject $mock
+     * @param array(mixed) $args
+     * @return mixed The return value of the handler call.
+     */
+    protected function handle(PHPUnit_Framework_MockObject_MockObject $mock, $args = array())
+    {
+        $handlerArgs = array(
+            'original',
+            'invoke',
+            $mock,
+            $args
+        );
+        $handlerCallback = array(
+            'AspectPHP_Transformation_Template_JoinPointHandler',
+            'forwardToHandleCall'
+        );
+        return call_user_func_array($handlerCallback, $handlerArgs);
+    }
+    
+    /**
+     * Creates a mock object that may be used as callback.
+     *
+     * The mock object offers an invoke method that may be
+     * used as callback.
+     *
+     * @return PHPUnit_Framework_MockObject_MockObject
+     */
+    protected function createCallbackMock()
+    {
+        $mock = $this->getMock('stdClass', array('invoke'));
+        $mock->expects($this->any())
+             ->method('invoke')
+             ->will($this->returnValue(null));
+        return $mock;
+    }
+    
+    /**
+     * Returns a callback identifier for the provided mock object
+     * that was created by createCallbackMock().
+     *
+     * @param PHPUnit_Framework_MockObject_MockObject $mock
+     * @return array(mixed)
+     */
+    protected function toCallback(PHPUnit_Framework_MockObject_MockObject $mock)
+    {
+        return array($mock, 'invoke');
     }
     
     /**
