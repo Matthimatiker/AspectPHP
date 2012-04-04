@@ -31,9 +31,7 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager
     /**
      * The registered aspects.
      *
-     * The pointcut is used as key, the aspect objects as value.
-     *
-     * @var array(string=>array(AspectPHP_Aspect))
+     * @var array(AspectPHP_Aspect)
      */
     protected $aspects = array();
     
