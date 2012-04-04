@@ -84,7 +84,12 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
      */
     public function testHandlerRequestsAdvicesFromManager()
     {
-        
+        $manager = $this->createManagerMock();
+        $manager->expects($this->once())
+                ->method('getAdvicesFor')
+                ->will($this->returnValue($this->createContainer()));
+        $this->simulateManager($manager);
+        $this->handle($this->createCallbackMock());
     }
     
     /**
@@ -289,6 +294,30 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
             'forwardToHandleCall'
         );
         return call_user_func_array($handlerCallback, $handlerArgs);
+    }
+    
+    /**
+     * Returns a mocked aspect manager.
+     *
+     * @return PHPUnit_Framework_MockObject_MockObject|AspectPHP_Manager
+     */
+    protected function createManagerMock()
+    {
+        $mock = $this->getMock('AspectPHP_Manager');
+        $mock->expects($this->any())
+             ->method('getAdvicesFor')
+             ->will($this->returnValue($this->createContainer()));
+        return $mock;
+    }
+    
+    /**
+     * Creates an empty advice container for testing.
+     *
+     * @return AspectPHP_Advice_Container
+     */
+    protected function createContainer()
+    {
+        return new AspectPHP_Advice_Container();
     }
     
     /**
