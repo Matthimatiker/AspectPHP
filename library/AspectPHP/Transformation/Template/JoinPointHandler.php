@@ -46,36 +46,36 @@ class AspectPHP_Transformation_Template_JoinPointHandler
      */
     private static function _aspectPHPInternalHandleCall($method, $compiledMethod, $context, $args)
     {
-        if (AspectPHP_Container::hasManager()) {
-            $aspects = AspectPHP_Container::getManager()->getAspectsFor(__CLASS__ . '::' . $method);
-        } else {
-            $aspects = array();
-        }
-        if (count($aspects) === 0) {
-            return call_user_func_array(array($context, $compiledMethod), $args);
-        }
-        $joinPoint = new AspectPHP_JoinPoint($method, $context);
-        $joinPoint->setArguments($args);
-        foreach ($aspects as $aspect) {
-            /* @var $aspect AspectPHP_Aspect */
-            $aspect->before($joinPoint);
-        }
-        try {
-            $returnValue = call_user_func_array(array($context, $compiledMethod), $args);
-            $joinPoint->setReturnValue($returnValue);
-            foreach ($aspects as $aspect) {
-                /* @var $aspect AspectPHP_Aspect */
-                $aspect->afterReturning($joinPoint);
-            }
-            return $joinPoint->getReturnValue();
-        } catch(Exception $e) {
-            $joinPoint->setException($e);
-            foreach ($aspects as $aspect) {
-                /* @var $aspect AspectPHP_Aspect */
-                $aspect->afterThrowing($joinPoint);
-            }
-            throw $e;
-        }
+        //         if (AspectPHP_Container::hasManager()) {
+        //             $aspects = AspectPHP_Container::getManager()->getAspectsFor(__CLASS__ . '::' . $method);
+        //         } else {
+        //             $aspects = array();
+        //         }
+        //         if (count($aspects) === 0) {
+        //             return call_user_func_array(array($context, $compiledMethod), $args);
+        //         }
+        //         $joinPoint = new AspectPHP_JoinPoint($method, $context);
+        //         $joinPoint->setArguments($args);
+        //         foreach ($aspects as $aspect) {
+        //             /* @var $aspect AspectPHP_Aspect */
+        //             $aspect->before($joinPoint);
+        //         }
+        //         try {
+        //             $returnValue = call_user_func_array(array($context, $compiledMethod), $args);
+        //             $joinPoint->setReturnValue($returnValue);
+        //             foreach ($aspects as $aspect) {
+        //                 /* @var $aspect AspectPHP_Aspect */
+        //                 $aspect->afterReturning($joinPoint);
+        //             }
+        //             return $joinPoint->getReturnValue();
+        //         } catch(Exception $e) {
+        //             $joinPoint->setException($e);
+        //             foreach ($aspects as $aspect) {
+        //                 /* @var $aspect AspectPHP_Aspect */
+        //                 $aspect->afterThrowing($joinPoint);
+        //             }
+        //             throw $e;
+        //         }
     }
     
     /**
