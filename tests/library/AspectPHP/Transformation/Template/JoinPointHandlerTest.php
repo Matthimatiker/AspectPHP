@@ -74,8 +74,7 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
         $this->simulateManager(null);
         $mock = $this->createCallbackMock();
         $mock->expects($this->once())
-             ->method(self::CALLBACK_METHOD)
-             ->will($this->returnValue(null));
+             ->method(self::CALLBACK_METHOD);
         $this->handle($mock);
     }
     
@@ -113,8 +112,7 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
         $this->simulateManager($this->createManagerMock());
         $mock = $this->createCallbackMock();
         $mock->expects($this->once())
-             ->method(self::CALLBACK_METHOD)
-             ->will($this->returnValue(null));
+             ->method(self::CALLBACK_METHOD);
         $this->handle($mock);
     }
     
