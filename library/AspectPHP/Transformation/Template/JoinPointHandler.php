@@ -78,4 +78,21 @@ class AspectPHP_Transformation_Template_JoinPointHandler
         }
     }
     
+    /**
+     * Forwards method calls to the private method _aspectPHPInternalHandleCall().
+     *
+     * This method exists for testing purposes only.
+     * See {@link _aspectPHPInternalHandleCall()} for details about the parameters.
+     *
+     * @param string $method
+     * @param string $compiledMethod
+     * @param object|string $context
+     * @param array(mixed) $args
+     * @return mixed
+     */
+    public static function forwardToHandleCall($method, $compiledMethod, $context, $args)
+    {
+        return self::_aspectPHPInternalHandleCall($method, $compiledMethod, $context, $args);
+    }
+    
 }
