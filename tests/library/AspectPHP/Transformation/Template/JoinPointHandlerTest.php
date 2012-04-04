@@ -47,6 +47,7 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
     {
         parent::setUp();
         $this->storeManager();
+        $this->simulateManager(null);
     }
     
     /**
@@ -56,6 +57,106 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
     {
         $this->restoreManager();
         parent::tearDown();
+    }
+    
+    public function testHandlerExecutesCompiledMethodIfManagerIsNotAvailable()
+    {
+        
+    }
+    
+    public function testHandlerRequestsAdvicesFromManager()
+    {
+        
+    }
+    
+    public function testHandlerRequestsAdvicesForCorrectMethod()
+    {
+        
+    }
+    
+    public function testHandlerExecutesCompiledMethodIfNoAdvicesAreAvailable()
+    {
+        
+    }
+    
+    public function testHandlerExecutesBeforeAdvices()
+    {
+        
+    }
+    
+    public function testHandlerDoesNotExecuteCompiledMethodIfBeforeAdviceProvidesReturnValue()
+    {
+        
+    }
+    
+    public function testHandlerReturnsReturnValueThatIsProvidedByBeforeAdvice()
+    {
+        
+    }
+    
+    public function testHandlerExecutesCompiledMethodIfAdvicesAreAvailable()
+    {
+        
+    }
+    
+    public function testHandlerPassesProvidedArgumentsToCompiledMethod()
+    {
+        
+    }
+    
+    public function testHandlerPassesArgumentsThatWereModifiedByBeforeAdviceToCompiledMethod()
+    {
+        
+    }
+    
+    public function testHandlerReturnsReturnValueFromCompiledMethod()
+    {
+        
+    }
+    
+    public function testHandlerExecutesAfterReturningAdvices()
+    {
+        
+    }
+    
+    public function testHandlerReturnsReturnValueModifiedByAfterReturningAdvice()
+    {
+        
+    }
+    
+    public function testHandlerDoesNotExecuteAfterThrowingAdviceIfNoExceptionOccurred()
+    {
+        
+    }
+    
+    public function testHandlerExecutesAfterThrowingAdviceIfExceptionOccurred()
+    {
+        
+    }
+    
+    public function testHandlerSuppressesExceptionIfAfterThrowingAdviceProvidesReturnValue()
+    {
+        
+    }
+    
+    public function testHandlerReturnsReturnValueProvidedByAfterThrowingAdvice()
+    {
+        
+    }
+    
+    public function testHandlerExecutesAfterThrowingAdviceIfBeforeAdviceThrowsException()
+    {
+    
+    }
+    
+    public function testHandlerExecutesAfterAdvice()
+    {
+        
+    }
+    
+    public function testHandlerExecutesAfterAdviceEvenIfExceptionOccurred()
+    {
+        
     }
     
     /**
@@ -73,7 +174,7 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
      */
     protected function storeManager()
     {
-        $this->previousManager = AspectPHP_Container::getManager();
+        $this->previousManager = AspectPHP_Container::hasManager() ? AspectPHP_Container::getManager() : null;
     }
     
     /**
