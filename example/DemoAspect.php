@@ -27,33 +27,35 @@ class DemoAspect implements AspectPHP_Aspect
 {
     
     /**
-     * See {@link AspectPHP_Aspect::before()} for details.
+     * Returns a pointcut that matches all method in the Demo class.
+     *
+     * @return AspectPHP_Pointcut
+     */
+    public function pointcutDemoMethods()
+    {
+        return new AspectPHP_Pointcut_RegExp('Demo::.*');
+    }
+    
+    /**
+     * Outputs the method name before its execution.
      *
      * @param AspectPHP_JoinPoint $joinPoint
+     * @before pointcutDemoMethods()
      */
-    public function before(AspectPHP_JoinPoint $joinPoint)
+    public function beforeExecution(AspectPHP_JoinPoint $joinPoint)
     {
         echo 'before ' . $joinPoint->getMethod() . PHP_EOL;
     }
     
     /**
-     * See {@link AspectPHP_Aspect::afterReturning()} for details.
+     * Outputs the method name after its execution.
      *
      * @param AspectPHP_JoinPoint $joinPoint
+     * @after pointcutDemoMethods()
      */
-    public function afterReturning(AspectPHP_JoinPoint $joinPoint)
+    public function afterExecution(AspectPHP_JoinPoint $joinPoint)
     {
         echo 'after ' . $joinPoint->getMethod() . PHP_EOL;
-    }
-    
-    /**
-     * See {@link AspectPHP_Aspect::afterThrowing()} for details.
-     *
-     * @param AspectPHP_JoinPoint $joinPoint
-     */
-    public function afterThrowing(AspectPHP_JoinPoint $joinPoint)
-    {
-        
     }
     
 }
