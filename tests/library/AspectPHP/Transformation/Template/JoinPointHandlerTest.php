@@ -240,7 +240,20 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
      */
     public function testHandlerPassesArgumentsThatWereModifiedByBeforeAdviceToCompiledMethod()
     {
+        $this->simulateManager($this->createManagerMock());
         
+        $adviceCallback = $this->createCallbackMock();
+        $adviceCallback->expects($this->any())
+                       ->method(self::CALLBACK_METHOD)
+                       ->will($this->returnCallback(array($this, 'joinPointModifyArgs')));
+        $this->advices->before()->add($this->toAdvice($adviceCallback));
+        
+        $mock = $this->createCallbackMock();
+        $mock->expects($this->any())
+             ->method(self::CALLBACK_METHOD)
+             ->with(1, 2, 3);
+        
+        $this->handle($mock, array(3, 5, 7));
     }
     
     /**
@@ -479,6 +492,20 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
     {
         $this->assertInstanceOf('AspectPHP_JoinPoint', $joinPoint);
         $joinPoint->setReturnValue(42);
+    }
+    
+    /**
+     * Callback function that uses the provided join point to
+     * modify the arguments.
+     *
+     * Sets the values 1, 2, 3 as arguments.
+     *
+     * @param AspectPHP_JoinPoint $joinPoint
+     */
+    public function joinPointModifyArgs($joinPoint)
+    {
+        $this->assertInstanceOf('AspectPHP_JoinPoint', $joinPoint);
+        $joinPoint->setArguments(array(1, 2, 3));
     }
     
 }
