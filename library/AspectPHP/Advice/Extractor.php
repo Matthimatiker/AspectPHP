@@ -52,6 +52,9 @@ class AspectPHP_Advice_Extractor
         $aspectInfo = new ReflectionClass($aspect);
         foreach ($aspectInfo->getMethods() as $method) {
             /* @var $method ReflectionMethod */
+            if ($this->isInternal($method)) {
+                continue;
+            }
             $docComment = $method->getDocComment();
             if ($docComment === false) {
                 // Method does not provide a doc comment.
@@ -144,6 +147,21 @@ class AspectPHP_Advice_Extractor
             }
         }
         return $annotations;
+    }
+    
+    /**
+     * Checks if the given method is an internal method of AspectPHP.
+     *
+     * Internal method are those that are weaved into classes. These methods
+     * often keep the doc comment of their prototype, but they are not marked
+     * as public.
+     *
+     * @param ReflectionMethod $method
+     * @return boolean True if the method is internal, false otherwise.
+     */
+    protected function isInternal(ReflectionMethod $method)
+    {
+        return strpos($method->getName(), '_aspectPHP') === 0;
     }
     
 }

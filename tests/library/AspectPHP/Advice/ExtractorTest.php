@@ -240,7 +240,7 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
     public function testExtractorIgnoresInternalMethods()
     {
         $this->setExpectedException(null);
-        $aspect  = new Extractor_InternalMethodAspect();
+        $aspect = new Extractor_InternalMethodAspect();
         $this->extractor->getAdvicesFrom($aspect);
     }
     
