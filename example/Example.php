@@ -4,8 +4,7 @@
  * Example script.
  *
  * @category PHP
- * @package AspectPHP
- * @subpackage Example
+ * @package AspectPHP_Example
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @license http://www.opensource.org/licenses/BSD-3-Clause BSD License
