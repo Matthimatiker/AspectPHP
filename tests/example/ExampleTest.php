@@ -33,4 +33,34 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
 class AspectPHP_ExampleTest extends PHPUnit_Framework_TestCase
 {
     
+    /**
+     * Ensures that the example outputs the line that is echoed
+     * by the Demo class.
+     */
+    public function testExampleOutputsLineFromDemoClass()
+    {
+        $output = $this->callExampleScript();
+        $this->assertContains('Hello Matthias!', $output);
+    }
+    
+    /**
+     * Calls the example script and returns its output.
+     *
+     * @return string
+     */
+    protected function callExampleScript()
+    {
+        $outputLines = array();
+        $return      = null;
+        $path        = dirname(__FILE__) . '/../../example/Example.php';
+        $path        = realpath($path);
+        
+        exec('php ' . escapeshellarg($path), $outputLines, $return);
+        
+        $output  = implode(PHP_EOL, $outputLines);
+        $message = 'Script did not terminate successfully: ' . PHP_EOL . $output;
+        $this->assertEquals(0, $return, $message);
+        return $output;
+    }
+    
 }
