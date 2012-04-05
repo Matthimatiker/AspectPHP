@@ -62,8 +62,10 @@ class AspectPHP_Transformation_Template_JoinPointHandler
         try {
             $advices->before()->invoke($joinPoint);
             
-            $returnValue = call_user_func_array(array($context, $compiledMethod), $args);
-            $joinPoint->setReturnValue($returnValue);
+            if (!$joinPoint->hasReturnValue()) {
+                $returnValue = call_user_func_array(array($context, $compiledMethod), $joinPoint->getArguments());
+                $joinPoint->setReturnValue($returnValue);
+            }
             
             $advices->afterReturning()->invoke($joinPoint);
             $advices->after()->invoke($joinPoint);
