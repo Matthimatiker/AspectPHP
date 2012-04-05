@@ -66,7 +66,6 @@ class AspectPHP_Transformation_JoinPoints implements AspectPHP_Transformation
                 // No body, might be an abstract method.
                 continue;
             }
-            $docComment     = $this->findDocBlock($index);
             $visibility     = $this->findMethodVisibility($index);
             $name           = $this->findMethodName($index);
             $originalName   = $this->editor[$name][1];
