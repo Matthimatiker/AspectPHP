@@ -363,6 +363,8 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
      */
     public function testHandlerExecutesAfterThrowingAdviceIfExceptionOccurred()
     {
+        $this->setExpectedException('RuntimeException');
+        
         $this->simulateManager($this->createManagerMock());
         
         $adviceCallback = $this->createCallbackMock();
@@ -384,7 +386,22 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
      */
     public function testAfterThrowingAdviceCanAccessOriginalException()
     {
+        $this->setExpectedException('RuntimeException');
         
+        $this->simulateManager($this->createManagerMock());
+        
+        $adviceCallback = $this->createCallbackMock();
+        $adviceCallback->expects($this->any())
+                       ->method(self::CALLBACK_METHOD)
+                       ->will($this->returnCallback(array($this, 'joinPointCheckException')));
+        $this->advices->afterThrowing()->add($this->toAdvice($adviceCallback));
+        
+        $mock = $this->createCallbackMock();
+        $mock->expects($this->any())
+             ->method(self::CALLBACK_METHOD)
+             ->will($this->throwException(new RuntimeException('Test exception.')));
+        
+        $this->handle($mock);
     }
     
     /**
@@ -393,7 +410,22 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
      */
     public function testHandlerSuppressesExceptionIfAfterThrowingAdviceProvidesReturnValue()
     {
+        $this->setExpectedException(null);
         
+        $this->simulateManager($this->createManagerMock());
+        
+        $adviceCallback = $this->createCallbackMock();
+        $adviceCallback->expects($this->any())
+                       ->method(self::CALLBACK_METHOD)
+                       ->will($this->returnCallback(array($this, 'joinPointReturnValue')));
+        $this->advices->afterThrowing()->add($this->toAdvice($adviceCallback));
+        
+        $mock = $this->createCallbackMock();
+        $mock->expects($this->any())
+             ->method(self::CALLBACK_METHOD)
+             ->will($this->throwException(new RuntimeException('Test exception.')));
+        
+        $this->handle($mock);
     }
     
     /**
@@ -401,7 +433,23 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
      */
     public function testHandlerReturnsReturnValueProvidedByAfterThrowingAdvice()
     {
+        $this->setExpectedException(null);
         
+        $this->simulateManager($this->createManagerMock());
+        
+        $adviceCallback = $this->createCallbackMock();
+        $adviceCallback->expects($this->any())
+                       ->method(self::CALLBACK_METHOD)
+                       ->will($this->returnCallback(array($this, 'joinPointReturnValue')));
+        $this->advices->afterThrowing()->add($this->toAdvice($adviceCallback));
+        
+        $mock = $this->createCallbackMock();
+        $mock->expects($this->any())
+             ->method(self::CALLBACK_METHOD)
+             ->will($this->throwException(new RuntimeException('Test exception.')));
+        
+        $result = $this->handle($mock);
+        $this->assertEquals(42, $result);
     }
     
     /**
@@ -410,7 +458,19 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
      */
     public function testHandlerThrowsOriginalExceptionIfAfterThrowingAdviceDoesNotInterfere()
     {
+        $this->setExpectedException('RuntimeException');
         
+        $this->simulateManager($this->createManagerMock());
+        
+        $adviceCallback = $this->createCallbackMock();
+        $this->advices->afterThrowing()->add($this->toAdvice($adviceCallback));
+        
+        $mock = $this->createCallbackMock();
+        $mock->expects($this->any())
+             ->method(self::CALLBACK_METHOD)
+             ->will($this->throwException(new RuntimeException('Test exception.')));
+        
+        $this->handle($mock);
     }
     
     /**
@@ -419,7 +479,22 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
      */
     public function testHandlerThrowsExceptionThatWasSetByAfterThrowingAdvice()
     {
+        $this->setExpectedException('BadMethodCallException');
         
+        $this->simulateManager($this->createManagerMock());
+        
+        $adviceCallback = $this->createCallbackMock();
+        $adviceCallback->expects($this->any())
+                       ->method(self::CALLBACK_METHOD)
+                       ->will($this->returnCallback(array($this, 'joinPointSetException')));
+        $this->advices->afterThrowing()->add($this->toAdvice($adviceCallback));
+        
+        $mock = $this->createCallbackMock();
+        $mock->expects($this->any())
+             ->method(self::CALLBACK_METHOD)
+             ->will($this->throwException(new RuntimeException('Test exception.')));
+        
+        $this->handle($mock);
     }
     
     /**
@@ -564,7 +639,7 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
     }
     
     /**
-     * Callback function that uses the provided join point to
+     * Callback method that uses the provided join point to
      * return the value 42.
      *
      * @param AspectPHP_JoinPoint $joinPoint
@@ -576,7 +651,7 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
     }
     
     /**
-     * Callback function that uses the provided join point to
+     * Callback method that uses the provided join point to
      * modify the arguments.
      *
      * Sets the values 1, 2, 3 as arguments.
@@ -587,6 +662,30 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
     {
         $this->assertInstanceOf('AspectPHP_JoinPoint', $joinPoint);
         $joinPoint->setArguments(array(1, 2, 3));
+    }
+    
+    /**
+     * Callback method that checks if the join point provides
+     * access to an exception.
+     *
+     * @param AspectPHP_JoinPoint $joinPoint
+     */
+    public function joinPointCheckException($joinPoint)
+    {
+        $this->assertInstanceOf('AspectPHP_JoinPoint', $joinPoint);
+        $this->assertInstanceOf('Exception', $joinPoint->getException());
+    }
+    
+    /**
+     * Callback method that uses the join point to set
+     * a BadMethodCallException.
+     *
+     * @param AspectPHP_JoinPoint $joinPoint
+     */
+    public function joinPointSetException($joinPoint)
+    {
+        $this->assertInstanceOf('AspectPHP_JoinPoint', $joinPoint);
+        $joinPoint->setException(new BadMethodCallException('Exception provided via join point.'));
     }
     
 }
