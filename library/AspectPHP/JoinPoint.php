@@ -218,6 +218,9 @@ class AspectPHP_JoinPoint
     /**
      * Sets the return value.
      *
+     * Setting a return value will remove exceptions that were
+     * added via setException() before.
+     *
      * @param mixed $value
      * @return AspectPHP_JoinPoint Provides a fluent interface.
      */
