@@ -262,7 +262,15 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
      */
     public function testHandlerReturnsReturnValueFromCompiledMethodIfNoAdvicesAreAvailable()
     {
+        $this->simulateManager($this->createManagerMock());
         
+        $mock = $this->createCallbackMock();
+        $mock->expects($this->any())
+             ->method(self::CALLBACK_METHOD)
+             ->will($this->returnValue(99));
+        
+        $result = $this->handle($mock);
+        $this->assertEquals(99, $result);
     }
     
     /**
@@ -271,7 +279,35 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
      */
     public function testHandlerReturnsReturnValueFromCompiledMethodIfAdvicesAreAvailable()
     {
+        $this->simulateManager($this->createManagerMock());
+        
+        $adviceCallback = $this->createCallbackMock();
+        $this->advices->before()->add($this->toAdvice($adviceCallback));
+        
+        $mock = $this->createCallbackMock();
+        $mock->expects($this->any())
+             ->method(self::CALLBACK_METHOD)
+             ->will($this->returnValue(99));
+        
+        $result = $this->handle($mock);
+        $this->assertEquals(99, $result);
+    }
     
+    /**
+     * Ensures that the handler returns the result of the compiled method
+     * if no aspect manager is available.
+     */
+    public function testHandlerReturnsReturnValueOfCompiledMethodIfManagerIsNotAvailable()
+    {
+        $this->simulateManager(null);
+        
+        $mock = $this->createCallbackMock();
+        $mock->expects($this->any())
+             ->method(self::CALLBACK_METHOD)
+             ->will($this->returnValue(99));
+        
+        $result = $this->handle($mock);
+        $this->assertEquals(99, $result);
     }
     
     /**
