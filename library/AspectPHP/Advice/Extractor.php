@@ -64,7 +64,7 @@ class AspectPHP_Advice_Extractor
             }
             // Advice method found, perform further checks.
             if (!$method->isPublic()) {
-                throw new RuntimeException('Advice '. $method . ' must be public.');
+                throw new RuntimeException('Advice '. $method->getName() . ' must be public.');
             }
             foreach ($annotations as $type => $pointcuts) {
                 /* @var $type string */
@@ -73,21 +73,21 @@ class AspectPHP_Advice_Extractor
                     /* @var $pointcut string */
                     if (!$aspectInfo->hasMethod($pointcut)) {
                         $message = 'Pointcut method %s referenced by advice %s does not exist.';
-                        $message = sprintf($message, $pointcut, $method);
+                        $message = sprintf($message, $pointcut, $method->getName());
                         throw new RuntimeException($message);
                     }
                     /* @var $pointcutMethod ReflectionMethod */
                     $pointcutMethod = $aspectInfo->getMethod($pointcut);
                     if (!$pointcutMethod->isPublic()) {
                         $message = 'Pointcut method %s referenced by advice %s must be public.';
-                        $message = sprintf($message, $pointcut, $method);
+                        $message = sprintf($message, $pointcut, $method->getName());
                         throw new RuntimeException($message);
                     }
                     $pointcutObject = $pointcutMethod->invoke($aspect);
                     if (!($pointcutObject instanceof AspectPHP_Pointcut)) {
                         $message = 'Pointcut method %s referenced by advice %s must return an instance '
                                  . 'of AspectPHP_Pointcut.';
-                        $message = sprintf($message, $pointcut, $method);
+                        $message = sprintf($message, $pointcut, $method->getName());
                         throw new RuntimeException($message);
                     }
                     // Advice and pointcut method are valid, therefore create and add an advice object.
