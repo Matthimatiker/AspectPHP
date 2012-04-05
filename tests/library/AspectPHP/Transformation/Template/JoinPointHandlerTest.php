@@ -623,9 +623,8 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
              ->method(self::CALLBACK_METHOD)
              ->will($this->returnValue(null));
         $message = 'Method "original" should not be called during testing.';
-        $mock->expects($this->any())
-             ->method('original')
-             ->will($this->throwException(new BadMethodCallException($message)));
+        $mock->expects($this->never())
+             ->method('original');
         return $mock;
     }
     
