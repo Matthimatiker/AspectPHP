@@ -304,6 +304,31 @@ class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase
         $this->joinPoint->setTarget(new stdClass());
     }
     
+    public function testHasReturnValueReturnsFalseIfNoValueWasProvided()
+    {
+        
+    }
+    
+    public function testHasReturnValueReturnsTrueIfValueWasProvided()
+    {
+        
+    }
+    
+    public function testHasExceptionReturnsFalseIfNoExceptionWasProvided()
+    {
+        
+    }
+    
+    public function testHasExceptionReturnsTrueIfExceptionWasProvided()
+    {
+    
+    }
+    
+    public function testProvidingReturnValueRemovesException()
+    {
+        
+    }
+    
     /**
      * This method and its parameters are used to create a join point for testing.
      *
