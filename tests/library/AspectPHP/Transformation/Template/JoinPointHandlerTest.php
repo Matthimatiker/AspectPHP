@@ -257,11 +257,21 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
     }
     
     /**
-     * Checks if the handler returns the result from the compiled method.
+     * Checks if the handler returns the result from the compiled method if no advices
+     * are registered for the method.
      */
-    public function testHandlerReturnsReturnValueFromCompiledMethod()
+    public function testHandlerReturnsReturnValueFromCompiledMethodIfNoAdvicesAreAvailable()
     {
         
+    }
+    
+    /**
+     * Checks if the handler returns the result from the compiled method if advices
+     * are registered for the method.
+     */
+    public function testHandlerReturnsReturnValueFromCompiledMethodIfAdvicesAreAvailable()
+    {
+    
     }
     
     /**
