@@ -193,7 +193,12 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
      */
     public function testHandlerPassesProvidedArgumentsToCompiledMethodIfNoAdvicesAreAvailable()
     {
-        
+        $this->simulateManager($this->createManagerMock());
+        $mock = $this->createCallbackMock();
+        $mock->expects($this->any())
+             ->method(self::CALLBACK_METHOD)
+             ->with(3, 5, 7);
+        $this->handle($mock, array(3, 5, 7));
     }
     
     /**
@@ -202,7 +207,14 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
      */
     public function testHandlerPassesProvidedArgumentsToCompiledMethodIfAdvicesAreAvailable()
     {
-    
+        $this->simulateManager($this->createManagerMock());
+        $adviceCallback = $this->createCallbackMock();
+        $this->advices->before()->add($this->toAdvice($adviceCallback));
+        $mock = $this->createCallbackMock();
+        $mock->expects($this->any())
+             ->method(self::CALLBACK_METHOD)
+             ->with(3, 5, 7);
+        $this->handle($mock, array(3, 5, 7));
     }
     
     /**
