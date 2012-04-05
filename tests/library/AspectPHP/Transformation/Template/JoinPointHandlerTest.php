@@ -188,11 +188,21 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
     }
     
     /**
-     * Checks if the handler passes the provided arguments to the compiled method.
+     * Checks if the handler passes the provided arguments to the compiled method
+     * if there are no registered advices for the method.
      */
-    public function testHandlerPassesProvidedArgumentsToCompiledMethod()
+    public function testHandlerPassesProvidedArgumentsToCompiledMethodIfNoAdvicesAreAvailable()
     {
         
+    }
+    
+    /**
+     * Checks if the handler passes the provided arguments to the compiled method
+     * if advices are registered for the method.
+     */
+    public function testHandlerPassesProvidedArgumentsToCompiledMethodIfAdvicesAreAvailable()
+    {
+    
     }
     
     /**
