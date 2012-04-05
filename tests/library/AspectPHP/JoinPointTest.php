@@ -310,7 +310,7 @@ class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase
      */
     public function testHasReturnValueReturnsFalseIfNoValueWasProvided()
     {
-        
+        $this->assertFalse($this->joinPoint->hasReturnValue());
     }
     
     /**
@@ -319,7 +319,8 @@ class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase
      */
     public function testHasReturnValueReturnsTrueIfValueWasProvided()
     {
-        
+        $this->joinPoint->setReturnValue('test');
+        $this->assertTrue($this->joinPoint->hasReturnValue());
     }
     
     /**
@@ -328,7 +329,8 @@ class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase
      */
     public function testHasReturnValueReturnsTrueIfNullWasProvided()
     {
-    
+        $this->joinPoint->setReturnValue(null);
+        $this->assertTrue($this->joinPoint->hasReturnValue());
     }
     
     /**
@@ -337,7 +339,7 @@ class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase
      */
     public function testHasExceptionReturnsFalseIfNoExceptionWasProvided()
     {
-        
+        $this->assertFalse($this->joinPoint->hasException());
     }
     
     /**
@@ -346,7 +348,8 @@ class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase
      */
     public function testHasExceptionReturnsTrueIfExceptionWasProvided()
     {
-    
+        $this->joinPoint->setException(new RuntimeException('Test exception.'));
+        $this->assertTrue($this->joinPoint->hasException());
     }
     
     /**
@@ -355,7 +358,9 @@ class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase
      */
     public function testProvidingReturnValueRemovesException()
     {
-        
+        $this->joinPoint->setException(new RuntimeException('Test exception.'));
+        $this->joinPoint->setReturnValue('test');
+        $this->assertFalse($this->joinPoint->hasException());
     }
     
     /**
