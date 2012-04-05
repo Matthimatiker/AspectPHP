@@ -304,26 +304,46 @@ class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase
         $this->joinPoint->setTarget(new stdClass());
     }
     
+    /**
+     * Ensures that hasReturnValue() returns false if no return value
+     * was provided via setReturnValue().
+     */
     public function testHasReturnValueReturnsFalseIfNoValueWasProvided()
     {
         
     }
     
+    /**
+     * Ensures that hasReturnValue() returns true if a return value
+     * was provided via setReturnValue().
+     */
     public function testHasReturnValueReturnsTrueIfValueWasProvided()
     {
         
     }
     
+    /**
+     * Ensures that hasException() returns false if no exception
+     * was provided via setException().
+     */
     public function testHasExceptionReturnsFalseIfNoExceptionWasProvided()
     {
         
     }
     
+    /**
+     * Ensures that hasException() returns true if a exception
+     * was provided via setException().
+     */
     public function testHasExceptionReturnsTrueIfExceptionWasProvided()
     {
     
     }
     
+    /**
+     * Checks if adding a return value via setReturnValue() removes
+     * an exception that was provided via setException() before.
+     */
     public function testProvidingReturnValueRemovesException()
     {
         
