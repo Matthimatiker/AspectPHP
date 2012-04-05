@@ -409,8 +409,7 @@ class AspectPHP_Transformation_JoinPointsTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Demo', $this->transformedInstance->defaultParameter());
     }
     
-    // TODO: handles multiple classes in one code block
-    // TODO: advice invocation
+    // TODO: handle multiple classes in one code block
     
     /**
      * Asserts that the class is loaded.
