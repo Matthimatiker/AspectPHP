@@ -264,10 +264,7 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
     {
         $this->simulateManager($this->createManagerMock());
         
-        $mock = $this->createCallbackMock();
-        $mock->expects($this->any())
-             ->method(self::CALLBACK_METHOD)
-             ->will($this->returnValue(99));
+        $mock = $this->createCallbackMock(99);
         
         $result = $this->handle($mock);
         $this->assertEquals(99, $result);
@@ -284,10 +281,7 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
         $adviceCallback = $this->createCallbackMock();
         $this->advices->before()->add($this->toAdvice($adviceCallback));
         
-        $mock = $this->createCallbackMock();
-        $mock->expects($this->any())
-             ->method(self::CALLBACK_METHOD)
-             ->will($this->returnValue(99));
+        $mock = $this->createCallbackMock(99);
         
         $result = $this->handle($mock);
         $this->assertEquals(99, $result);
@@ -301,10 +295,7 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
     {
         $this->simulateManager(null);
         
-        $mock = $this->createCallbackMock();
-        $mock->expects($this->any())
-             ->method(self::CALLBACK_METHOD)
-             ->will($this->returnValue(99));
+        $mock = $this->createCallbackMock(99);
         
         $result = $this->handle($mock);
         $this->assertEquals(99, $result);
@@ -614,14 +605,15 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
      * The mock object offers an invoke method that may be
      * used as callback.
      *
+     * @param mixed $returnValue The value that will be returned by invoke().
      * @return PHPUnit_Framework_MockObject_MockObject
      */
-    protected function createCallbackMock()
+    protected function createCallbackMock($returnValue = null)
     {
         $mock = $this->getMock('stdClass', array(self::CALLBACK_METHOD, 'original'));
         $mock->expects($this->any())
              ->method(self::CALLBACK_METHOD)
-             ->will($this->returnValue(null));
+             ->will($this->returnValue($returnValue));
         $message = 'Method "original" should not be called during testing.';
         $mock->expects($this->never())
              ->method('original');
