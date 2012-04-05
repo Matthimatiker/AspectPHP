@@ -228,6 +228,16 @@ class AspectPHP_JoinPoint
     }
     
     /**
+     * Checks if a return value was provided via setReturnValue().
+     *
+     * @return boolean True if a return value is available, false otherwise.
+     */
+    public function hasReturnValue()
+    {
+        
+    }
+    
+    /**
      * Returns the exception that was thrown by the method.
      *
      * Returns null if no exception was thrown.
@@ -255,6 +265,16 @@ class AspectPHP_JoinPoint
         }
         $this->exception = $exception;
         return $this;
+    }
+    
+    /**
+     * Checks if an exception was provided via setException().
+     *
+     * @return boolean True if an exception is available, false otherwise.
+     */
+    public function hasException()
+    {
+        
     }
     
     /**
