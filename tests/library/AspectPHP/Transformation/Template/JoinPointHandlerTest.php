@@ -503,7 +503,22 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
      */
     public function testHandlerExecutesAfterThrowingAdviceIfBeforeAdviceThrowsException()
     {
-    
+        $this->setExpectedException('RuntimeException');
+        
+        $this->simulateManager($this->createManagerMock());
+        
+        $beforeCallback = $this->createCallbackMock();
+        $beforeCallback->expects($this->any())
+                       ->method(self::CALLBACK_METHOD)
+                       ->will($this->throwException(new RuntimeException('Test exception.')));
+        $this->advices->before()->add($this->toAdvice($beforeCallback));
+        
+        $afterThrowingCallback = $this->createCallbackMock();
+        $afterThrowingCallback->expects($this->once())
+                              ->method(self::CALLBACK_METHOD);
+        $this->advices->afterThrowing()->add($this->toAdvice($afterThrowingCallback));
+        
+        $this->handle($this->createCallbackMock());
     }
     
     /**
