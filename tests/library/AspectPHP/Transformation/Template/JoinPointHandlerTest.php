@@ -315,7 +315,14 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
      */
     public function testHandlerExecutesAfterReturningAdvices()
     {
+        $this->simulateManager($this->createManagerMock());
         
+        $adviceCallback = $this->createCallbackMock();
+        $adviceCallback->expects($this->once())
+                       ->method(self::CALLBACK_METHOD);
+        $this->advices->afterReturning()->add($this->toAdvice($adviceCallback));
+        
+        $this->handle($this->createCallbackMock());
     }
     
     /**
@@ -323,7 +330,16 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
      */
     public function testHandlerReturnsReturnValueModifiedByAfterReturningAdvice()
     {
+        $this->simulateManager($this->createManagerMock());
         
+        $adviceCallback = $this->createCallbackMock();
+        $adviceCallback->expects($this->once())
+                       ->method(self::CALLBACK_METHOD)
+                       ->will($this->returnCallback(array($this, 'joinPointReturnValue')));
+        $this->advices->afterReturning()->add($this->toAdvice($adviceCallback));
+        
+        $result = $this->handle($this->createCallbackMock());
+        $this->assertEquals(42, $result);
     }
     
     /**
