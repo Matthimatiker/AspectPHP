@@ -34,13 +34,33 @@ class AspectPHP_ExampleTest extends PHPUnit_Framework_TestCase
 {
     
     /**
-     * Ensures that the example outputs the line that is echoed
+     * Ensures that the example script outputs the line that is echoed
      * by the Demo class.
      */
     public function testExampleOutputsLineFromDemoClass()
     {
         $output = $this->callExampleScript();
         $this->assertContains('Hello Matthias!', $output);
+    }
+    
+    /**
+     * Checks if the example script outputs the line that is echoed
+     * by the before advice.
+     */
+    public function testExampleOutputsLineFromBeforeAdvice()
+    {
+        $output = $this->callExampleScript();
+        $this->assertContains('before sayHello', $output);
+    }
+    
+    /**
+     * Checks if the example script outputs the line that is echoed
+     * by the after advice.
+     */
+    public function testExampleOutputsLineFromAfterAdvice()
+    {
+        $output = $this->callExampleScript();
+        $this->assertContains('after sayHello', $output);
     }
     
     /**
