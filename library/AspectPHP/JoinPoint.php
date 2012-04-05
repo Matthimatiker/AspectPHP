@@ -327,4 +327,21 @@ class AspectPHP_JoinPoint
         throw new InvalidArgumentException('Parameter with name "' . $parameterName . '" does not exist.');
     }
     
+    /**
+     * Overwrite the magic __clone() method to ensure that join points
+     * are not clonable.
+     *
+     * Example:
+     * <code>
+     * // The following is not possible:
+     * clone $myJoinPoint;
+     * </code>
+     *
+     * @throws BadMethodCallException If __clone() is called.
+     */
+    public function __clone()
+    {
+        throw new BadMethodCallException('Cloning join points is not possible.');
+    }
+    
 }

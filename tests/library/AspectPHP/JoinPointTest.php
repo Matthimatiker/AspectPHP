@@ -364,6 +364,15 @@ class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * Ensures that a join point is not clonable.
+     */
+    public function testJoinPointIsNotClonable()
+    {
+        $this->setExpectedException('BadMethodCallException');
+        clone $this->joinPoint;
+    }
+    
+    /**
      * This method and its parameters are used to create a join point for testing.
      *
      * @param string $name
