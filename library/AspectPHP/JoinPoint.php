@@ -57,6 +57,13 @@ class AspectPHP_JoinPoint
     protected $returnValue = null;
     
     /**
+     * Flag that indicates if a return value was provided.
+     *
+     * @var boolean
+     */
+    protected $hasReturnValue = false;
+    
+    /**
      * The exeception that was thrown.
      *
      * @var Exception|null
@@ -226,7 +233,9 @@ class AspectPHP_JoinPoint
      */
     public function setReturnValue($value)
     {
-        $this->returnValue = $value;
+        $this->returnValue    = $value;
+        $this->hasReturnValue = true;
+        $this->setException(null);
         return $this;
     }
     
@@ -237,7 +246,7 @@ class AspectPHP_JoinPoint
      */
     public function hasReturnValue()
     {
-        
+        return $this->hasReturnValue;
     }
     
     /**
@@ -277,7 +286,7 @@ class AspectPHP_JoinPoint
      */
     public function hasException()
     {
-        
+        return $this->exception !== null;
     }
     
     /**
