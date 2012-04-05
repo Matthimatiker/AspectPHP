@@ -235,6 +235,16 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * Checks if the extractor ignores the internal methods of AspectPHP.
+     */
+    public function testExtractorIgnoresInternalMethods()
+    {
+        $this->setExpectedException(null);
+        $aspect  = new Extractor_InternalMethodAspect();
+        $this->extractor->getAdvicesFrom($aspect);
+    }
+    
+    /**
      * Creates a join point for testing.
      *
      * @return AspectPHP_JoinPoint
