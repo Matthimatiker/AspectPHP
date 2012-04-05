@@ -5,9 +5,12 @@
          backupStaticAttributes="false">
 
 	<testsuites>
-		<testsuite name="AspectPHP Test Suite">
+		<testsuite name="AspectPHP Framework Test Suite">
 	        <directory>./library</directory>
 	    </testsuite>
+	    <testsuite name="AspectPHP Example Test Suite">
+            <directory>./example</directory>
+        </testsuite>
 	</testsuites>
 
  	<!-- Filter for code coverage -->
