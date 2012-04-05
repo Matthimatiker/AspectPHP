@@ -323,6 +323,15 @@ class AspectPHP_JoinPointTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * Ensures that hasReturnValue() returns true if null was provided
+     * as return value via setReturnValue().
+     */
+    public function testHasReturnValueReturnsTrueIfNullWasProvided()
+    {
+    
+    }
+    
+    /**
      * Ensures that hasException() returns false if no exception
      * was provided via setException().
      */
