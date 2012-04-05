@@ -126,6 +126,22 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
     }
     
     /**
+     * Ensures that the handler executes the compiled method even if advices
+     * are available.
+     */
+    public function testHandlerExecutesCompiledMethodIfAdvicesAreAvailable()
+    {
+        $this->simulateManager($this->createManagerMock());
+        $adviceCallback = $this->createCallbackMock();
+        $this->advices->before()->add($this->toAdvice($adviceCallback));
+        $mock = $this->createCallbackMock();
+        $mock->expects($this->once())
+             ->method(self::CALLBACK_METHOD);
+        $this->handle($mock);
+        
+    }
+    
+    /**
      * Checks if the handler executes before advices.
      */
     public function testHandlerExecutesBeforeAdvices()
@@ -144,7 +160,16 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
      */
     public function testHandlerDoesNotExecuteCompiledMethodIfBeforeAdviceProvidesReturnValue()
     {
-        
+        $this->simulateManager($this->createManagerMock());
+        $adviceCallback = $this->createCallbackMock();
+        $adviceCallback->expects($this->any())
+                       ->method(self::CALLBACK_METHOD)
+                       ->will($this->returnCallback(array($this, 'joinPointReturnValue')));
+        $this->advices->before()->add($this->toAdvice($adviceCallback));
+        $mock = $this->createCallbackMock();
+        $mock->expects($this->never())
+             ->method(self::CALLBACK_METHOD);
+        $this->handle($mock);
     }
     
     /**
@@ -152,16 +177,14 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
      */
     public function testHandlerReturnsReturnValueThatIsProvidedByBeforeAdvice()
     {
-        
-    }
-    
-    /**
-     * Ensures that the handler executes the compiled method even if advices
-     * are available.
-     */
-    public function testHandlerExecutesCompiledMethodIfAdvicesAreAvailable()
-    {
-        
+        $this->simulateManager($this->createManagerMock());
+        $adviceCallback = $this->createCallbackMock();
+        $adviceCallback->expects($this->any())
+                       ->method(self::CALLBACK_METHOD)
+                       ->will($this->returnCallback(array($this, 'joinPointReturnValue')));
+        $this->advices->before()->add($this->toAdvice($adviceCallback));
+        $result = $this->handle($this->createCallbackMock());
+        $this->assertEquals(42, $result);
     }
     
     /**
@@ -405,6 +428,18 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
     protected function restoreManager()
     {
         AspectPHP_Container::setManager($this->previousManager);
+    }
+    
+    /**
+     * Callback function that uses the provided join point to
+     * return the value 42.
+     *
+     * @param AspectPHP_JoinPoint $joinPoint
+     */
+    public function joinPointReturnValue($joinPoint)
+    {
+        $this->assertInstanceOf('AspectPHP_JoinPoint', $joinPoint);
+        $joinPoint->setReturnValue(42);
     }
     
 }
