@@ -67,6 +67,17 @@ class AspectPHP_Reflection_Aspect
     }
     
     /**
+     * Checks if the aspect contains a pointcut with the provided name.
+     *
+     * @param string $name
+     * @return boolean True if the pointcut exists, false otherwise.
+     */
+    public function hasPointcut($name)
+    {
+        
+    }
+    
+    /**
      * Returns all advice methods.
      *
      * A method is considered as advice method if it references
@@ -87,6 +98,17 @@ class AspectPHP_Reflection_Aspect
      * @throws AspectPHP_Reflection_Exception If the requested method is not considered as advice.
      */
     public function getAdvice($name)
+    {
+    
+    }
+    
+    /**
+     * Checks if the aspect contains an advice with the provided name.
+     *
+     * @param string $name
+     * @return boolean True if the advice exists, false otherwise.
+     */
+    public function hasAdvice($name)
     {
     
     }
