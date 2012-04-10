@@ -40,6 +40,18 @@ class AspectPHP_Reflection_Aspect
     }
     
     /**
+     * Returns the pointcut method with the provided name.
+     *
+     * @param string $name
+     * @return ReflectionMethod
+     * @throws AspectPHP_Reflection_Exception If the requested method is not considered as pointcut.
+     */
+    public function getPointcut($name)
+    {
+        
+    }
+    
+    /**
      * Returns all advice methods.
      *
      * A method is considered as advice method if it references
@@ -50,6 +62,18 @@ class AspectPHP_Reflection_Aspect
     public function getAdvices()
     {
         
+    }
+    
+    /**
+     * Returns the advice method with the provided name.
+     *
+     * @param string $name
+     * @return ReflectionMethod
+     * @throws AspectPHP_Reflection_Exception If the requested method is not considered as advice.
+     */
+    public function getAdvice($name)
+    {
+    
     }
     
 }
