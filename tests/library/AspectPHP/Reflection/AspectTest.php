@@ -33,4 +33,16 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
 class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
 {
     
+    /**
+     * Creates a reflection aspect for the provided aspect
+     * object or class.
+     *
+     * @param mixed $classOrAspect
+     * @return AspectPHP_Reflection_Aspect
+     */
+    protected function createReflection($classOrAspect)
+    {
+        return new AspectPHP_Reflection_Aspect($classOrAspect);
+    }
+    
 }
