@@ -25,7 +25,7 @@ $environment = new AspectPHP_Environment();
 $environment->initialize();
 
 $manager = $environment->getManager();
-$manager->register(new DemoAspect(), 'Demo::sayHello');
+$manager->register(new DemoAspect());
 
 $demo = new Demo();
 // Should output:
