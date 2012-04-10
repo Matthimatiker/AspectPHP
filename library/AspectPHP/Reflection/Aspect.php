@@ -27,6 +27,21 @@ class AspectPHP_Reflection_Aspect
 {
     
     /**
+     * Creates a reflection object that is used to inspect
+     * the provided aspect.
+     *
+     * The constructor accepts an aspect object or the name
+     * of an aspect class.
+     *
+     * @param AspectPHP_Aspect|string $nameOrAspect
+     * @throws AspectPHP_Reflection_Exception If an invalid argument is provided.
+     */
+    public function __construct($nameOrAspect)
+    {
+        
+    }
+    
+    /**
      * Returns all pointcut methods.
      *
      * A method is considered as pointcut if it starts with the
