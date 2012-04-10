@@ -26,4 +26,30 @@
 class AspectPHP_Reflection_Aspect
 {
     
+    /**
+     * Returns all pointcut methods.
+     *
+     * A method is considered as pointcut if it starts with the
+     * prefix "pointcut" or if it is referenced by an advice.
+     *
+     * @return array(ReflectionMethod)
+     */
+    public function getPointcuts()
+    {
+        
+    }
+    
+    /**
+     * Returns all advice methods.
+     *
+     * A method is considered as advice method if it references
+     * a pointcut via annotations.
+     *
+     * @return array(ReflectionMethod)
+     */
+    public function getAdvices()
+    {
+        
+    }
+    
 }
