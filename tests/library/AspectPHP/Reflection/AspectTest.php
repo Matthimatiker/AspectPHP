@@ -33,6 +33,106 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
 class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
 {
     
+    public function testConstructorThrowsExceptionIfProvidedClassIsNotAnAspect()
+    {
+        
+    }
+    
+    public function testConstructorThrowsExceptionIfProvidedObjectIsNotAnAspect()
+    {
+        
+    }
+    
+    public function testConstructorAcceptsAspectClass()
+    {
+        
+    }
+    
+    public function testConstructorAcceptsAspectObject()
+    {
+        
+    }
+    
+    public function testGetPointcutsReturnsArray()
+    {
+        
+    }
+    
+    public function testGetPointcutsReturnsNumericalIndexedArray()
+    {
+        
+    }
+    
+    public function testGetPointcutsReturnsReflectionMethodObjects()
+    {
+        
+    }
+    
+    public function testGetPointcutsReturnsCorrectNumberOfMethods()
+    {
+        
+    }
+    
+    public function testGetAdvicesReturnsArray()
+    {
+        
+    }
+    
+    public function testGetAdvicesReturnsNumericalIndexedArray()
+    {
+    
+    }
+    
+    public function testGetAdvicesReturnsReflectionMethodObjects()
+    {
+    
+    }
+    
+    public function testGetAdvicesReturnsCorrectNumberOfMethods()
+    {
+    
+    }
+    
+    public function testGetPointcutThrowsExceptionIfNameOfNotExistingMethodIsProvided()
+    {
+        
+    }
+    
+    public function testGetPointcutThrowsExceptionIfMethodIsNotConsideredAsPointcut()
+    {
+        
+    }
+    
+    public function testGetPointcutReturnsReflectionMethodObject()
+    {
+        
+    }
+    
+    public function testGetPointcutReturnsCorrectReflectionMethodObject()
+    {
+    
+    }
+    
+    public function testGetAdviceThrowsExceptionIfNameOfNotExistingMethodIsProvided()
+    {
+    
+    }
+    
+    public function testGetAdviceThrowsExceptionIfMethodIsNotConsideredAsAdvice()
+    {
+    
+    }
+    
+    public function testGetAdviceReturnsReflectionMethodObject()
+    {
+    
+    }
+    
+    public function testGetAdviceReturnsCorrectReflectionMethodObject()
+    {
+    
+    }
+    
     /**
      * Creates a reflection aspect for the provided aspect
      * object or class.
