@@ -23,7 +23,7 @@
  * @link https://github.com/Matthimatiker/AspectPHP
  * @since 09.04.2012
  */
-class AspectPHP_Reflection_Exception
+class AspectPHP_Reflection_Exception extends ReflectionException
 {
     
 }
