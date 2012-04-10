@@ -33,10 +33,10 @@ class AspectPHP_Reflection_Aspect
      * The constructor accepts an aspect object or the name
      * of an aspect class.
      *
-     * @param AspectPHP_Aspect|string $nameOrAspect
+     * @param AspectPHP_Aspect|string $classOrAspect
      * @throws AspectPHP_Reflection_Exception If an invalid argument is provided.
      */
-    public function __construct($nameOrAspect)
+    public function __construct($classOrAspect)
     {
         
     }
