@@ -100,6 +100,15 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * Checks if getPointcuts() returns methods that are prefixed with "pointcut"
+     * but not referenced by any advice.
+     */
+    public function testGetPointcutsReturnsMethodsThatArePrefixedButNotReferenced()
+    {
+        
+    }
+    
+    /**
      * Checks if getAdvices() returns an array.
      */
     public function testGetAdvicesReturnsArray()
