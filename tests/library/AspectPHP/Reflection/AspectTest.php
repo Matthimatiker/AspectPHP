@@ -133,6 +133,36 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
     
     }
     
+    public function testHasPointcutReturnsFalseIfNotExistingMethodIsProvided()
+    {
+        
+    }
+    
+    public function testHasPointcutReturnsFalseIfMethodIsNotConsideredAsPointcut()
+    {
+        
+    }
+    
+    public function testHasPointcutReturnsTrueIfPointcutExists()
+    {
+        
+    }
+    
+    public function testHasAdviceReturnsFalseIfNotExistingMethodIsProvided()
+    {
+    
+    }
+    
+    public function testHasAdviceReturnsFalseIfMethodIsNotConsideredAsAdvice()
+    {
+    
+    }
+    
+    public function testHasAdviceReturnsTrueIfAdviceExists()
+    {
+    
+    }
+    
     /**
      * Creates a reflection aspect for the provided aspect
      * object or class.
