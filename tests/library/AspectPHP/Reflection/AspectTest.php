@@ -18,6 +18,9 @@
  */
 require_once(dirname(__FILE__) . '/bootstrap.php');
 
+/** Load the aspect that is used for testing. */
+require_once(dirname(__FILE__) . '/TestData/Reflection/SimpleAspect.php');
+
 /**
  * Tests the aspect reflection implementation.
  *
@@ -58,7 +61,8 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorAcceptsAspectClass()
     {
-        
+        $this->setExpectedException(null);
+        new AspectPHP_Reflection_Aspect('Reflection_SimpleAspect');
     }
     
     /**
@@ -66,7 +70,8 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorAcceptsAspectObject()
     {
-        
+        $this->setExpectedException(null);
+        new AspectPHP_Reflection_Aspect(new Reflection_SimpleAspect());
     }
     
     /**
