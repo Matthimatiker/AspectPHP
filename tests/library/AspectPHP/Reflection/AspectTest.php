@@ -39,7 +39,8 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorThrowsExceptionIfProvidedClassIsNotAnAspect()
     {
-        
+        $this->setExpectedException('AspectPHP_Reflection_Exception');
+        new AspectPHP_Reflection_Aspect('ArrayObject');
     }
     
     /**
@@ -48,7 +49,8 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorThrowsExceptionIfProvidedObjectIsNotAnAspect()
     {
-        
+        $this->setExpectedException('AspectPHP_Reflection_Exception');
+        new AspectPHP_Reflection_Aspect(new ArrayObject(array()));
     }
     
     /**
