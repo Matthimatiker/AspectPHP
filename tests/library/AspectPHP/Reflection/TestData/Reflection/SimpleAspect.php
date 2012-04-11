@@ -66,4 +66,11 @@ class Reflection_SimpleAspect implements AspectPHP_Aspect
     {
     }
     
+    /**
+     * A method that is neither pointcut nor advice.
+     */
+    public function anotherMethod()
+    {
+    }
+    
 }
