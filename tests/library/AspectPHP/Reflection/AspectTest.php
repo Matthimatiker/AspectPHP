@@ -206,7 +206,8 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testGetAdviceThrowsExceptionIfNameOfNotExistingMethodIsProvided()
     {
-    
+        $this->setExpectedException('AspectPHP_Reflection_Exception');
+        $this->createReflection('Reflection_SimpleAspect')->getAdvice('missing');
     }
     
     /**
@@ -215,7 +216,8 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testGetAdviceThrowsExceptionIfMethodIsNotConsideredAsAdvice()
     {
-    
+        $this->setExpectedException('AspectPHP_Reflection_Exception');
+        $this->createReflection('Reflection_SimpleAspect')->getAdvice('anotherMethod');
     }
     
     /**
@@ -223,7 +225,8 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testGetAdviceReturnsReflectionMethodObject()
     {
-    
+        $advice = $this->createReflection('Reflection_SimpleAspect')->getAdvice('beforeAdvice');
+        $this->assertInstanceOf('ReflectionMethod', $advice);
     }
     
     /**
@@ -231,7 +234,9 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testGetAdviceReturnsCorrectReflectionMethodObject()
     {
-    
+        $advice = $this->createReflection('Reflection_SimpleAspect')->getAdvice('beforeAdvice');
+        $this->assertInstanceOf('ReflectionMethod', $advice);
+        $this->assertEquals('beforeAdvice', $advice->getName());
     }
     
     /**
