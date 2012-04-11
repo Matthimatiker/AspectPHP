@@ -33,7 +33,7 @@ class Reflection_SimpleAspect implements AspectPHP_Aspect
      *
      * @return AspectPHP_Pointcut
      */
-    public function pointcutMethodsOfUser()
+    public function pointcutOne()
     {
         return new AspectPHP_Pointcut_All();
     }
@@ -43,7 +43,7 @@ class Reflection_SimpleAspect implements AspectPHP_Aspect
      *
      * @return AspectPHP_Pointcut
      */
-    public function pointcutLogMethods()
+    public function pointcutTwo()
     {
         return new AspectPHP_Pointcut_None();
     }
@@ -53,7 +53,7 @@ class Reflection_SimpleAspect implements AspectPHP_Aspect
      *
      * @after pointcutMethodsOfUser()
      */
-    public function afterUserMethodAdvice()
+    public function afterAdvice()
     {
     }
     
@@ -62,7 +62,7 @@ class Reflection_SimpleAspect implements AspectPHP_Aspect
      *
      * @before pointcutLogMethods()
      */
-    public function beforeLogMethodAdvice()
+    public function beforeAdvice()
     {
     }
     
