@@ -79,7 +79,8 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testGetPointcutsReturnsArray()
     {
-        
+        $pointcuts = $this->createReflection('Reflection_SimpleAspect')->getPointcuts();
+        $this->assertInternalType('array', $pointcuts);
     }
     
     /**
@@ -87,7 +88,9 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testGetPointcutsReturnsNumericalIndexedArray()
     {
-        
+        $pointcuts = $this->createReflection('Reflection_SimpleAspect')->getPointcuts();
+        $this->assertInternalType('array', $pointcuts);
+        $this->assertContainsOnly('integer', array_keys($pointcuts));
     }
     
     /**
@@ -95,7 +98,9 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testGetPointcutsReturnsReflectionMethodObjects()
     {
-        
+        $pointcuts = $this->createReflection('Reflection_SimpleAspect')->getPointcuts();
+        $this->assertInternalType('array', $pointcuts);
+        $this->assertContainsOnly('ReflectionMethod', $pointcuts);
     }
     
     /**
@@ -103,7 +108,9 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testGetPointcutsReturnsCorrectNumberOfMethods()
     {
-        
+        $pointcuts = $this->createReflection('Reflection_SimpleAspect')->getPointcuts();
+        $this->assertInternalType('array', $pointcuts);
+        $this->assertEquals(2, count($pointcuts));
     }
     
     /**
@@ -112,7 +119,7 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testGetPointcutsReturnsMethodsThatArePrefixedButNotReferenced()
     {
-        
+        $this->markTestIncomplete();
     }
     
     /**
@@ -120,7 +127,8 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testGetAdvicesReturnsArray()
     {
-        
+        $advices = $this->createReflection('Reflection_SimpleAspect')->getAdvices();
+        $this->assertInternalType('array', $advices);
     }
     
     /**
@@ -128,7 +136,9 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testGetAdvicesReturnsNumericalIndexedArray()
     {
-    
+        $advices = $this->createReflection('Reflection_SimpleAspect')->getAdvices();
+        $this->assertInternalType('array', $advices);
+        $this->assertContainsOnly('integer', array_keys($advices));
     }
     
     /**
@@ -136,7 +146,9 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testGetAdvicesReturnsReflectionMethodObjects()
     {
-    
+        $advices = $this->createReflection('Reflection_SimpleAspect')->getAdvices();
+        $this->assertInternalType('array', $advices);
+        $this->assertContainsOnly('ReflectionMethod', $advices);
     }
     
     /**
@@ -144,7 +156,9 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testGetAdvicesReturnsCorrectNumberOfMethods()
     {
-    
+        $advices = $this->createReflection('Reflection_SimpleAspect')->getAdvices();
+        $this->assertInternalType('array', $advices);
+        $this->assertEquals(2, count($advices));
     }
     
     /**
