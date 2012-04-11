@@ -167,7 +167,8 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testGetPointcutThrowsExceptionIfNameOfNotExistingMethodIsProvided()
     {
-        
+        $this->setExpectedException('AspectPHP_Reflection_Exception');
+        $this->createReflection('Reflection_SimpleAspect')->getPointcut('missing');
     }
     
     /**
@@ -176,7 +177,8 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testGetPointcutThrowsExceptionIfMethodIsNotConsideredAsPointcut()
     {
-        
+        $this->setExpectedException('AspectPHP_Reflection_Exception');
+        $this->createReflection('Reflection_SimpleAspect')->getPointcut('anotherMethod');
     }
     
     /**
@@ -184,7 +186,8 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testGetPointcutReturnsReflectionMethodObject()
     {
-        
+        $pointcut = $this->createReflection('Reflection_SimpleAspect')->getPointcut('pointcutOne');
+        $this->assertInstanceOf('ReflectionMethod', $pointcut);
     }
     
     /**
@@ -192,7 +195,9 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testGetPointcutReturnsCorrectReflectionMethodObject()
     {
-    
+        $pointcut = $this->createReflection('Reflection_SimpleAspect')->getPointcut('pointcutOne');
+        $this->assertInstanceOf('ReflectionMethod', $pointcut);
+        $this->assertEquals('pointcutOne', $pointcut->getName());
     }
     
     /**
