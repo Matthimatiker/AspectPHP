@@ -274,7 +274,8 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testHasAdviceReturnsFalseIfNotExistingMethodIsProvided()
     {
-    
+        $exists = $this->createReflection('Reflection_SimpleAspect')->hasAdvice('missing');
+        $this->assertFalse($exists);
     }
     
     /**
@@ -283,7 +284,8 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testHasAdviceReturnsFalseIfMethodIsNotConsideredAsAdvice()
     {
-    
+        $exists = $this->createReflection('Reflection_SimpleAspect')->hasAdvice('anotherMethod');
+        $this->assertFalse($exists);
     }
     
     /**
@@ -291,7 +293,8 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testHasAdviceReturnsTrueIfAdviceExists()
     {
-    
+        $exists = $this->createReflection('Reflection_SimpleAspect')->hasAdvice('afterAdvice');
+        $this->assertTrue($exists);
     }
     
     /**
