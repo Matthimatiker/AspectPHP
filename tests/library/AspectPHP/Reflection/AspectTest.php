@@ -245,7 +245,8 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testHasPointcutReturnsFalseIfNotExistingMethodIsProvided()
     {
-        
+        $exists = $this->createReflection('Reflection_SimpleAspect')->hasPointcut('missing');
+        $this->assertFalse($exists);
     }
     
     /**
@@ -254,7 +255,8 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testHasPointcutReturnsFalseIfMethodIsNotConsideredAsPointcut()
     {
-        
+        $exists = $this->createReflection('Reflection_SimpleAspect')->hasPointcut('anotherMethod');
+        $this->assertFalse($exists);
     }
     
     /**
@@ -262,7 +264,8 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testHasPointcutReturnsTrueIfPointcutExists()
     {
-        
+        $exists = $this->createReflection('Reflection_SimpleAspect')->hasPointcut('pointcutTwo');
+        $this->assertTrue($exists);
     }
     
     /**
