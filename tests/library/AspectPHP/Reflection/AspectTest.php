@@ -45,7 +45,7 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
     public function testConstructorThrowsExceptionIfProvidedClassIsNotAnAspect()
     {
         $this->setExpectedException('AspectPHP_Reflection_Exception');
-        new AspectPHP_Reflection_Aspect('ArrayObject');
+        $this->createReflection('ArrayObject');
     }
     
     /**
@@ -55,7 +55,7 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
     public function testConstructorThrowsExceptionIfProvidedObjectIsNotAnAspect()
     {
         $this->setExpectedException('AspectPHP_Reflection_Exception');
-        new AspectPHP_Reflection_Aspect(new ArrayObject(array()));
+        $this->createReflection(new ArrayObject(array()));
     }
     
     /**
@@ -64,7 +64,7 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
     public function testConstructorAcceptsAspectClass()
     {
         $this->setExpectedException(null);
-        new AspectPHP_Reflection_Aspect('Reflection_SimpleAspect');
+        $this->createReflection('Reflection_SimpleAspect');
     }
     
     /**
@@ -73,7 +73,7 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
     public function testConstructorAcceptsAspectObject()
     {
         $this->setExpectedException(null);
-        new AspectPHP_Reflection_Aspect(new Reflection_SimpleAspect());
+        $this->createReflection(new Reflection_SimpleAspect());
     }
     
     /**
