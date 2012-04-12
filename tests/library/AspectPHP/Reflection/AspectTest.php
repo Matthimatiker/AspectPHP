@@ -18,8 +18,10 @@
  */
 require_once(dirname(__FILE__) . '/bootstrap.php');
 
-/** Load the aspect that is used for testing. */
+/** Load an aspect that is used for testing. */
 require_once(dirname(__FILE__) . '/TestData/Reflection/SimpleAspect.php');
+/** Load an aspect that is used for testing. */
+require_once(dirname(__FILE__) . '/TestData/Reflection/UnreferencedPointcutAspect.php');
 
 /**
  * Tests the aspect reflection implementation.
@@ -119,7 +121,9 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testGetPointcutsReturnsMethodsThatArePrefixedButNotReferenced()
     {
-        $this->markTestIncomplete();
+        $pointcuts = $this->createReflection('Reflection_UnreferencedPointcutAspect')->getPointcuts();
+        $names     = $this->getMethodNames($pointcuts);
+        $this->assertContains('pointcutUnreferencedPointcut', $names);
     }
     
     /**
@@ -307,6 +311,25 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
     protected function createReflection($classOrAspect)
     {
         return new AspectPHP_Reflection_Aspect($classOrAspect);
+    }
+    
+    /**
+     * Accepts an array of ReflectionMethod objects and returns the names
+     * of the contained methods as strings.
+     *
+     * @param array(ReflectionMethod)|mixed $methods
+     * @return array(string) The method names.
+     */
+    protected function getMethodNames($methods)
+    {
+        $this->assertInternalType('array', $methods);
+        $this->assertContainsOnly('ReflectionMethod', $methods);
+        $names = array();
+        foreach ($methods as $method) {
+            /* @var $method ReflectionMethod */
+            $names[] = $method->getName();
+        }
+        return $names;
     }
     
 }
