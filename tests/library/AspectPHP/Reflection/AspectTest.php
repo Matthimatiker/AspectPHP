@@ -345,6 +345,21 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
         
     }
     
+    public function testAspectReflectionSkipsInternalMethods()
+    {
+        
+    }
+    
+    public function testAspectReflectionThrowsExceptionIfPointcutIsNotPublic()
+    {
+    
+    }
+    
+    public function testAspectReflectionThrowsExceptionIfAdviceIsNotPublic()
+    {
+    
+    }
+    
     /**
      * Creates a reflection aspect for the provided aspect
      * object or class.
