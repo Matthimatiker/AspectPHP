@@ -396,6 +396,24 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * Ensures that the reflection class throws an exception if a pointcut method
+     * requires a parameter.
+     */
+    public function testAspectReflectionThrowsExceptionIfPointcutRequiresParameters()
+    {
+        
+    }
+    
+    /**
+     * Ensures that the reflection class throws an exception if an advice method
+     * requires more than one parameter.
+     */
+    public function testAspectReflectionThrowsExceptionIfAdviceRequiresMoreThanOneParameter()
+    {
+    
+    }
+    
+    /**
      * Creates a reflection aspect for the provided aspect
      * object or class.
      *
