@@ -205,6 +205,18 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * Ensures that each call to getPointcut() returns the same object (if the
+     * arguments are the same).
+     */
+    public function testGetPointcutReturnsSameObjectForEachCall()
+    {
+        $reflection = $this->createReflection('Reflection_SimpleAspect');
+        $first      = $reflection->getPointcut('pointcutOne');
+        $second     = $reflection->getPointcut('pointcutOne');
+        $this->assertSame($first, $second);
+    }
+    
+    /**
      * Ensures that getAdvice() throws an exception if the method with the provided
      * name does not exist.
      */
@@ -241,6 +253,18 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
         $advice = $this->createReflection('Reflection_SimpleAspect')->getAdvice('beforeAdvice');
         $this->assertInstanceOf('ReflectionMethod', $advice);
         $this->assertEquals('beforeAdvice', $advice->getName());
+    }
+    
+    /**
+     * Ensures that each call to getAdvice() returns the same object (if the
+     * arguments are the same).
+     */
+    public function testGetAdviceReturnsSameObjectForEachCall()
+    {
+        $reflection = $this->createReflection('Reflection_SimpleAspect');
+        $first      = $reflection->getPointcut('beforeAdvice');
+        $second     = $reflection->getPointcut('beforeAdvice');
+        $this->assertSame($first, $second);
     }
     
     /**
