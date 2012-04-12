@@ -251,7 +251,14 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
      */
     protected function containsAdviceAnnotation($docComment)
     {
-        return count($this->getAdviceAnnotations($docComment)) > 0;
+        foreach ($this->supportedTags as $tag) {
+            /* @var $tag string */
+            if (strpos($docComment, '* @' . $tag . ' ') !== false) {
+                // Comment contains the tag.
+                return true;
+            }
+        }
+        return false;
     }
     
     /**
