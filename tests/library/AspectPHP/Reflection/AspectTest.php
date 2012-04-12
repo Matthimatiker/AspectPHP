@@ -18,11 +18,6 @@
  */
 require_once(dirname(__FILE__) . '/bootstrap.php');
 
-/** Load an aspect that is used for testing. */
-require_once(dirname(__FILE__) . '/TestData/Reflection/SimpleAspect.php');
-/** Load an aspect that is used for testing. */
-require_once(dirname(__FILE__) . '/TestData/Reflection/UnreferencedPointcutAspect.php');
-
 /**
  * Tests the aspect reflection implementation.
  *
@@ -64,7 +59,7 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
     public function testConstructorAcceptsAspectClass()
     {
         $this->setExpectedException(null);
-        $this->createReflection($this->getMock('AspectPHP_Aspect'));
+        $this->createReflection('Reflection_SimpleAspect');
     }
     
     /**
@@ -73,7 +68,7 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
     public function testConstructorAcceptsAspectObject()
     {
         $this->setExpectedException(null);
-        $this->createReflection(new Reflection_SimpleAspect());
+        $this->createReflection($this->getMock('AspectPHP_Aspect'));
     }
     
     /**
@@ -422,6 +417,10 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     protected function createReflection($classOrAspect)
     {
+        if (is_string($classOrAspect) && !class_exists($classOrAspect, false)) {
+            $pathSegment = str_replace('_', '/', $classOrAspect);
+            require_once(dirname(__FILE__) . '/TestData/'. $pathSegment . '.php');
+        }
         return new AspectPHP_Reflection_Aspect($classOrAspect);
     }
     
