@@ -51,7 +51,7 @@ class Reflection_SimpleAspect implements AspectPHP_Aspect
     /**
      * An after dummy advice.
      *
-     * @after pointcutMethodsOfUser()
+     * @after pointcutOne()
      */
     public function afterAdvice()
     {
@@ -60,7 +60,7 @@ class Reflection_SimpleAspect implements AspectPHP_Aspect
     /**
      * A before dummy advice.
      *
-     * @before pointcutLogMethods()
+     * @before pointcutTwo()
      */
     public function beforeAdvice()
     {
