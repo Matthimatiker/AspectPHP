@@ -98,7 +98,11 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
      */
     public function getPointcut($name)
     {
-        
+        if (!$this->hasPointcut($name)) {
+            $message = 'Pointcut ' . $name . ' does not exist.';
+            throw new AspectPHP_Reflection_Exception($message);
+        }
+        return $this->pointcuts[$name];
     }
     
     /**
@@ -109,7 +113,7 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
      */
     public function hasPointcut($name)
     {
-        
+        return isset($this->pointcuts[$name]);
     }
     
     /**
@@ -134,7 +138,11 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
      */
     public function getAdvice($name)
     {
-    
+        if (!$this->hasAdvice($name)) {
+            $message = 'Advice ' . $name . ' does not exist.';
+            throw new AspectPHP_Reflection_Exception($message);
+        }
+        return $this->advices[$name];
     }
     
     /**
@@ -145,7 +153,7 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
      */
     public function hasAdvice($name)
     {
-    
+        return isset($this->advices[$name]);
     }
     
     /**
