@@ -64,7 +64,7 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
     public function testConstructorAcceptsAspectClass()
     {
         $this->setExpectedException(null);
-        $this->createReflection('Reflection_SimpleAspect');
+        $this->createReflection($this->getMock('AspectPHP_Aspect'));
     }
     
     /**
