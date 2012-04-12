@@ -331,7 +331,7 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testGetPointcutsReturnsCorrectNumberOfMethodsEvenIfPointcutIsReferencedMultipleTimes()
     {
-        
+        $this->markTestIncomplete();
     }
     
     /**
@@ -339,7 +339,7 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testAspectReflectionSkipsMethodsWithoutDocBlock()
     {
-        
+        $this->markTestIncomplete();
     }
     
     /**
@@ -347,7 +347,7 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testAspectReflectionThrowsExceptionIfReferencedPointcutDoesNotExist()
     {
-        
+        $this->markTestIncomplete();
     }
     
     /**
@@ -356,7 +356,7 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testAspectReflectionThrowsExceptionIfTagWithoutPointcutInformationIsUsed()
     {
-        
+        $this->markTestIncomplete();
     }
     
     /**
@@ -367,7 +367,7 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testAspectReflectionSkipsInternalMethods()
     {
-        
+        $this->markTestIncomplete();
     }
     
     /**
@@ -375,7 +375,7 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testAspectReflectionThrowsExceptionIfPointcutIsNotPublic()
     {
-    
+        $this->markTestIncomplete();
     }
     
     /**
@@ -383,7 +383,7 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testAspectReflectionThrowsExceptionIfAdviceIsNotPublic()
     {
-    
+        $this->markTestIncomplete();
     }
     
     /**
@@ -392,7 +392,7 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testAspectReflectionAcceptsPointcutReferencesWithoutBraces()
     {
-        
+        $this->markTestIncomplete();
     }
     
     /**
@@ -401,7 +401,7 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testAspectReflectionThrowsExceptionIfPointcutRequiresParameters()
     {
-        
+        $this->markTestIncomplete();
     }
     
     /**
@@ -410,7 +410,7 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testAspectReflectionThrowsExceptionIfAdviceRequiresMoreThanOneParameter()
     {
-    
+        $this->markTestIncomplete();
     }
     
     /**
