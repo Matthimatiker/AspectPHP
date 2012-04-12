@@ -417,11 +417,25 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     protected function createReflection($classOrAspect)
     {
-        if (is_string($classOrAspect) && !class_exists($classOrAspect, false)) {
-            $pathSegment = str_replace('_', '/', $classOrAspect);
-            require_once(dirname(__FILE__) . '/TestData/'. $pathSegment . '.php');
+        if (is_string($classOrAspect)) {
+            $this->loadIfNecessary($classOrAspect);
         }
         return new AspectPHP_Reflection_Aspect($classOrAspect);
+    }
+    
+    /**
+     * Loads the provided test class if it is not already available.
+     *
+     * @param string $class
+     */
+    protected function loadIfNecessary($class)
+    {
+        if (class_exists($class, false)) {
+            // Class is already loaded.
+            return;
+        }
+        $pathSegment = str_replace('_', '/', $class);
+        require_once(dirname(__FILE__) . '/TestData/'. $pathSegment . '.php');
     }
     
     /**
