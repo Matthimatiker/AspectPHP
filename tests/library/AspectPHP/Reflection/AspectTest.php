@@ -325,10 +325,25 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($exists);
     }
     
-    // TODO: pointcut referenced multiple times
-    // TODO: no doc block
-    // TODO: referenced pointcut does not exist
-    // TODO: tag without pointcut
+    public function testGetPointcutsReturnsCorrectNumberOfMethodsEvenIfPointcutIsReferencedMultipleTimes()
+    {
+        
+    }
+    
+    public function testAspectReflectionSkipsMethodsWithoutDocBlock()
+    {
+        
+    }
+    
+    public function testAspectReflectionThrowsExceptionIfReferencedPointcutDoesNotExist()
+    {
+        
+    }
+    
+    public function testAspectReflectionThrowsExceptionIfTagWithoutPointcutInformationIsUsed()
+    {
+        
+    }
     
     /**
      * Creates a reflection aspect for the provided aspect
