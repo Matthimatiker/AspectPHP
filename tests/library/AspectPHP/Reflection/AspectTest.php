@@ -262,8 +262,8 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
     public function testGetAdviceReturnsSameObjectForEachCall()
     {
         $reflection = $this->createReflection('Reflection_SimpleAspect');
-        $first      = $reflection->getPointcut('beforeAdvice');
-        $second     = $reflection->getPointcut('beforeAdvice');
+        $first      = $reflection->getAdvice('beforeAdvice');
+        $second     = $reflection->getAdvice('beforeAdvice');
         $this->assertSame($first, $second);
     }
     
