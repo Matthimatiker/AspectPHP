@@ -23,7 +23,7 @@
  * @link https://github.com/Matthimatiker/AspectPHP
  * @since 09.04.2012
  */
-class AspectPHP_Reflection_Aspect
+class AspectPHP_Reflection_Aspect extends ReflectionClass
 {
     
     /**
@@ -38,7 +38,11 @@ class AspectPHP_Reflection_Aspect
      */
     public function __construct($classOrAspect)
     {
-        
+        parent::__construct($classOrAspect);
+        if (!$this->implementsInterface('AspectPHP_Aspect')) {
+            $message = 'Provided class/object is not an aspect.';
+            throw new AspectPHP_Reflection_Exception($message);
+        }
     }
     
     /**
