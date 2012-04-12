@@ -27,6 +27,36 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
 {
     
     /**
+     * Contains a list of supported annotation tags.
+     *
+     * @var array(string)
+     */
+    protected $supportedTags = array(
+        'before',
+        'afterReturning',
+        'afterThrowing',
+        'after'
+    );
+    
+    /**
+     * A list of methods that are considered as pointcut.
+     *
+     * The method name is used as key to provided fast access by name.
+     *
+     * @var array(string=>ReflectionMethod)
+     */
+    protected $pointcuts = array();
+    
+    /**
+     * A list of methods that are considered as advice.
+     *
+     * The method name is used as key to provided fast access by name.
+     *
+     * @var array(string=>ReflectionMethod)
+     */
+    protected $advices = array();
+    
+    /**
      * Creates a reflection object that is used to inspect
      * the provided aspect.
      *
@@ -43,6 +73,7 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
             $message = 'Provided class/object is not an aspect.';
             throw new AspectPHP_Reflection_Exception($message);
         }
+        $this->determineAdvicesAndPointcuts();
     }
     
     /**
@@ -55,7 +86,7 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
      */
     public function getPointcuts()
     {
-        
+        return array_values($this->pointcuts);
     }
     
     /**
@@ -91,7 +122,7 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
      */
     public function getAdvices()
     {
-        
+        return array_values($this->advices);
     }
     
     /**
@@ -115,6 +146,151 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
     public function hasAdvice($name)
     {
     
+    }
+    
+    /**
+     * Searches for pointcut/advice methods and stores them in the
+     * corresponding object attribute.
+     */
+    protected function determineAdvicesAndPointcuts()
+    {
+        foreach ($this->getMethods() as $method) {
+            /* @var $method ReflectionMethod */
+            if ($this->isPointcut($method)) {
+                $this->addPointcut($method);
+                continue;
+            }
+            if ($this->isAdvice($method)) {
+                $this->addAdvice($method);
+                continue;
+            }
+        }
+    }
+    
+    /**
+     * Adds the method to the pointcut list.
+     *
+     * @param ReflectionMethod $method
+     */
+    protected function addPointcut(ReflectionMethod $method)
+    {
+        $this->pointcuts[$method->getName()] = $method;
+    }
+    
+    /**
+     * Adds the method to the advice list.
+     *
+     * @param ReflectionMethod $method
+     * @throws AspectPHP_Reflection_Exception If a referenced pointcut method does not exist.
+     */
+    protected function addAdvice(ReflectionMethod $method)
+    {
+        $annotations = $this->getAdviceAnnotations($method->getDocComment());
+        foreach ($annotations as $type => $pointcuts) {
+            /* @var $type string */
+            /* @var $pointcuts array(string) */
+            foreach ($pointcuts as $pointcut) {
+                /* @var $pointcut string */
+                if (!$this->hasMethod($pointcut)) {
+                    $message = 'Pointcut method %s referenced by advice %s does not exist.';
+                    $message = sprintf($message, $pointcut, $method->getName());
+                    throw new AspectPHP_Reflection_Exception($message);
+                }
+                $this->addPointcut($this->getMethod($pointcut));
+            }
+        }
+        $this->advices[$method->getName()] = $method;
+    }
+    
+    /**
+     * Checks if the provided method is considered as advice.
+     *
+     * @param ReflectionMethod $method
+     * @return boolean True if the method is considered as advice, false otherwise.
+     */
+    protected function isAdvice(ReflectionMethod $method)
+    {
+        $docComment = $method->getDocComment();
+        if ($docComment === false) {
+            // Advices must contain a doc comment.
+            return false;
+        }
+        if ($this->containsAdviceAnnotation($docComment)) {
+            // No advice annotations found.
+            return false;
+        }
+        return true;
+    }
+    
+    /**
+     * Checks if the method is marked as pointcut.
+     *
+     * Methods that start with "pointcut" are considered as pointcuts.
+     *
+     * @param ReflectionMethod $method
+     * @return boolean True if the method is considered as pointcut, false otherwise.
+     */
+    protected function isPointcut(ReflectionMethod $method)
+    {
+        return strpos($method->getName(), 'pointcut') === 0;
+    }
+    
+    /**
+     * Checks if the provided doc block contains an advice annotation.
+     *
+     * @param string $docComment
+     * @return boolean True if an advice annotation was found, false otherwise.
+     */
+    protected function containsAdviceAnnotation($docComment)
+    {
+        return count($this->getAdviceAnnotations($docComment)) > 0;
+    }
+    
+    /**
+     * Returns the advice annotations from the given doc comment.
+     *
+     * The advice type (for example "before") is used as key.
+     * The value is an array of pointcut methods that are connected
+     * to the advice type.
+     *
+     * The array contains just the advice  annotations that are present.
+     * If no advice annotations were found then the array will be
+     * empty.
+     *
+     * @param string $docComment
+     * @return array(string=>array(string))
+     */
+    protected function getAdviceAnnotations($docComment)
+    {
+        $annotations = array();
+        $lines       = explode("\n", $docComment);
+        foreach ($lines as $line) {
+            /* @var $line string */
+            if (strpos($line, '@') === false) {
+                // Line does not contain a tag.
+                continue;
+            }
+            // Line may contain an annotation.
+            $line = trim($line);
+            $line = ltrim($line, '* ');
+            foreach ($this->supportedTags as $tag) {
+                /* @var $tag string */
+                if (strpos($line, '@' . $tag . ' ') !== 0) {
+                    // Line does not start with tag.
+                    continue;
+                }
+                // Tag found, extract information.
+                $parts = explode(' ', $line, 2);
+                if (!isset($annotations[$tag])) {
+                    $annotations[$tag] = array();
+                }
+                $pointcut = $parts[1];
+                $pointcut = ltrim($pointcut);
+                $pointcut = rtrim($pointcut, '()');
+                $annotations[$tag][] = $pointcut;
+            }
+        }
+        return $annotations;
     }
     
 }
