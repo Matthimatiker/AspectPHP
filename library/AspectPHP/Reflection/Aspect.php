@@ -200,7 +200,7 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
             foreach ($pointcuts as $pointcut) {
                 /* @var $pointcut string */
                 if (!$this->hasMethod($pointcut)) {
-                    $message = 'Pointcut method %s referenced by advice %s does not exist.';
+                    $message = 'Pointcut method %s() referenced by advice %s() does not exist.';
                     $message = sprintf($message, $pointcut, $method->getName());
                     throw new AspectPHP_Reflection_Exception($message);
                 }
