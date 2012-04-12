@@ -325,36 +325,62 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($exists);
     }
     
+    /**
+     * Ensures that getPointcuts() returns the correct number of pointcut methods, even if a
+     * pointcut is referenced by multiple advices.
+     */
     public function testGetPointcutsReturnsCorrectNumberOfMethodsEvenIfPointcutIsReferencedMultipleTimes()
     {
         
     }
     
+    /**
+     * Checks if the reflection class is able to handle methods without doc block.
+     */
     public function testAspectReflectionSkipsMethodsWithoutDocBlock()
     {
         
     }
     
+    /**
+     * Ensures that an exception is thrown if a referenced pointcut does not exist.
+     */
     public function testAspectReflectionThrowsExceptionIfReferencedPointcutDoesNotExist()
     {
         
     }
     
+    /**
+     * Ensures that an exception is thrown if an advice tag is used but no pointcut
+     * is specified.
+     */
     public function testAspectReflectionThrowsExceptionIfTagWithoutPointcutInformationIsUsed()
     {
         
     }
     
+    /**
+     * Ensures that the reflection class skips internal methods of AspectPHP.
+     *
+     * Internal methods are the ones that are weaved into classes. Aspects may
+     * contain internal methods if the aspect class was accidentially compiled.
+     */
     public function testAspectReflectionSkipsInternalMethods()
     {
         
     }
     
+    /**
+     * Ensures that an exception is thrown if a pointcut method is not public.
+     */
     public function testAspectReflectionThrowsExceptionIfPointcutIsNotPublic()
     {
     
     }
     
+    /**
+     * Ensures that an exception is thrown if an advice method is not public.
+     */
     public function testAspectReflectionThrowsExceptionIfAdviceIsNotPublic()
     {
     
