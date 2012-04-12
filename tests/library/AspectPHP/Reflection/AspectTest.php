@@ -387,6 +387,15 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * Checks if the reflection class accepts pointcut references without optional
+     * braces that indicate the usage of a method.
+     */
+    public function testAspectReflectionAcceptsPointcutReferencesWithoutBraces()
+    {
+        
+    }
+    
+    /**
      * Creates a reflection aspect for the provided aspect
      * object or class.
      *
