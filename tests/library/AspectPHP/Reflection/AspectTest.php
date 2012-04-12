@@ -328,6 +328,7 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
     // TODO: pointcut referenced multiple times
     // TODO: no doc block
     // TODO: referenced pointcut does not exist
+    // TODO: tag without pointcut
     
     /**
      * Creates a reflection aspect for the provided aspect
