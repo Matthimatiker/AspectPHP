@@ -326,7 +326,8 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testGetPointcutsReturnsCorrectNumberOfMethodsEvenIfPointcutIsReferencedMultipleTimes()
     {
-        $this->markTestIncomplete();
+        $pointcuts = $this->createReflection('Reflection_MultiplePointcutReferencesAspect')->getPointcuts();
+        $this->assertEquals(1, count($pointcuts));
     }
     
     /**
