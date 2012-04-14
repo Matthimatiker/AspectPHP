@@ -366,7 +366,8 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testAspectReflectionSkipsInternalMethods()
     {
-        $this->markTestIncomplete();
+        $this->setExpectedException(null);
+        $this->createReflection('Reflection_InternalMethodAspect');
     }
     
     /**
