@@ -202,6 +202,14 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
      */
     protected function addAdvice(ReflectionMethod $method)
     {
+        if (!$method->isPublic()) {
+            $message = 'Advice methods must be public.';
+            throw new AspectPHP_Reflection_Exception($message);
+        }
+        if ($method->getNumberOfRequiredParameters() > 1) {
+            $message = 'Only a join point parameter is allowed for advices.';
+            throw new AspectPHP_Reflection_Exception($message);
+        }
         $annotations = $this->getAdviceAnnotations($method->getDocComment());
         foreach ($annotations as $type => $pointcuts) {
             /* @var $type string */
