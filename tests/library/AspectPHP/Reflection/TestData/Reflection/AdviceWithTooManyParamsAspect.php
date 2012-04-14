@@ -41,6 +41,8 @@ class Reflection_AdviceWithTooManyParamsAspect implements AspectPHP_Aspect
     /**
      * An advice that requires too many parameters.
      *
+     * @param AspectPHP_JoinPoint $joinPoint
+     * @param mixed $context
      * @after pointcut()
      */
     public function afterAdvice($joinPoint, $context)
