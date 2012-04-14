@@ -417,7 +417,14 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
         $this->markTestIncomplete();
     }
     
-    // TODO: advice with joinpoint parameter
+    /**
+     * Checks if the reflection class accepts advices with a single (join point)
+     * parameter.
+     */
+    public function testAspectReflectionAcceptsAdviceWithSingleParameter()
+    {
+        $this->markTestIncomplete();
+    }
     
     /**
      * Creates a reflection aspect for the provided aspect
