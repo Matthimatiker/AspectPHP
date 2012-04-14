@@ -424,7 +424,7 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testAspectReflectionAcceptsAdviceWithSingleParameter()
     {
-        $this->setExpectedException('AspectPHP_Reflection_Exception');
+        $this->setExpectedException(null);
         $this->createReflection('Reflection_AdviceWithJoinPointParamAspect');
     }
     
