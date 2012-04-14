@@ -4,7 +4,7 @@
  * Reflection_MultipleReferencedPointcutAspect
  *
  * @category PHP
- * @package AspectPHP_Advice
+ * @package AspectPHP_Reflection
  * @subpackage Tests
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
@@ -17,7 +17,7 @@
  * Aspect with a pointcut that is referenced by multiple advices.
  *
  * @category PHP
- * @package AspectPHP_Advice
+ * @package AspectPHP_Reflection
  * @subpackage Tests
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor

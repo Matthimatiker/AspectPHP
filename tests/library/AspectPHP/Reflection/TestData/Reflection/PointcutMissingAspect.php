@@ -4,7 +4,7 @@
  * Reflection_PointcutMissingAspect
  *
  * @category PHP
- * @package AspectPHP_Advice
+ * @package AspectPHP_Reflection
  * @subpackage Tests
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
@@ -17,7 +17,7 @@
  * An aspect with reference to a missing pointcut.
  *
  * @category PHP
- * @package AspectPHP_Advice
+ * @package AspectPHP_Reflection
  * @subpackage Tests
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
