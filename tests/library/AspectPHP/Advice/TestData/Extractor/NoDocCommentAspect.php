@@ -43,7 +43,7 @@ class Extractor_NoDocCommentAspect implements AspectPHP_Aspect
     }
     
     /**
-     * An advice that is not public.
+     * A dummy advice.
      *
      * @before pointcut()
      */
