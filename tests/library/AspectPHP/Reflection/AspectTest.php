@@ -375,7 +375,8 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testAspectReflectionThrowsExceptionIfPointcutIsNotPublic()
     {
-        $this->markTestIncomplete();
+        $this->setExpectedException('AspectPHP_Reflection_Exception');
+        $this->createReflection('Reflection_PointcutNotPublicAspect');
     }
     
     /**
@@ -383,7 +384,8 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testAspectReflectionThrowsExceptionIfAdviceIsNotPublic()
     {
-        $this->markTestIncomplete();
+        $this->setExpectedException('AspectPHP_Reflection_Exception');
+        $this->createReflection('Reflection_AdviceNotPublicAspect');
     }
     
     /**
