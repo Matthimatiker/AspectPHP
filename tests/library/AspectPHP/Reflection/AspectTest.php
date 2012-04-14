@@ -417,6 +417,8 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
         $this->markTestIncomplete();
     }
     
+    // TODO: advice with joinpoint parameter
+    
     /**
      * Creates a reflection aspect for the provided aspect
      * object or class.
