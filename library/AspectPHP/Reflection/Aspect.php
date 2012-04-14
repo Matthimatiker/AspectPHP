@@ -174,7 +174,7 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
             }
         }
     }
-    
+    // TODO: improve exception messages
     /**
      * Adds the method to the pointcut list.
      *
