@@ -179,9 +179,18 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
      * Adds the method to the pointcut list.
      *
      * @param ReflectionMethod $method
+     * @throws AspectPHP_Reflection_Exception If the method does not meet the pointcut requirements.
      */
     protected function addPointcut(ReflectionMethod $method)
     {
+        if (!$method->isPublic()) {
+            $message = 'Pointcut methods must be public.';
+            throw new AspectPHP_Reflection_Exception($message);
+        }
+        if ($method->getNumberOfRequiredParameters() > 0) {
+            $message = 'Pointcut methods must not require any parameter.';
+            throw new AspectPHP_Reflection_Exception($message);
+        }
         $this->pointcuts[$method->getName()] = $method;
     }
     
