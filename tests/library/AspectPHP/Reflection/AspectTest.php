@@ -354,7 +354,8 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
      */
     public function testAspectReflectionThrowsExceptionIfTagWithoutPointcutInformationIsUsed()
     {
-        $this->markTestIncomplete();
+        $this->setExpectedException('AspectPHP_Reflection_Exception');
+        $this->createReflection('Reflection_NoPointcutReferenceAspect');
     }
     
     /**
