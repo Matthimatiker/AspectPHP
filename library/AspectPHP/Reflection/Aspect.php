@@ -164,6 +164,10 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
     {
         foreach ($this->getMethods() as $method) {
             /* @var $method ReflectionMethod */
+            if ($this->isFrameworkMethod($method)) {
+                // Skips internal methods of the AspectPHP framework.
+                continue;
+            }
             if ($this->isPointcut($method)) {
                 $this->addPointcut($method);
                 continue;
@@ -258,6 +262,21 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
     protected function isPointcut(ReflectionMethod $method)
     {
         return strpos($method->getName(), 'pointcut') === 0;
+    }
+    
+    /**
+     * Checks if the given method is an internal method of the AspectPHP framework.
+     *
+     * Internal methods are those that are weaved into classes. These methods
+     * often keep the doc comment of their prototype, but they are not marked
+     * as public.
+     *
+     * @param ReflectionMethod $method
+     * @return boolean True if the method is internal, false otherwise.
+     */
+    protected function isFrameworkMethod(ReflectionMethod $method)
+    {
+        return strpos($method->getName(), '_aspectPHP') === 0;
     }
     
     /**
