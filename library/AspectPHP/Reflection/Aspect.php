@@ -306,11 +306,12 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
      *
      * @param string $docComment
      * @return array(string=>array(string))
+     * @throws AspectPHP_Reflection_Exception If no valid pointcut identifier is provided.
      */
     protected function getAdviceAnnotations($docComment)
     {
         $tagList = implode('|', $this->supportedTags);
-        $pattern = '/^\s*\* @(?<type>' . $tagList . ')( )+(?<pointcut>.*)?$/um';
+        $pattern = '/^\s*\* @(?<type>' . $tagList . ')(( )+(?<pointcut>.*))?$/um';
         
         $references = array();
         preg_match_all($pattern, $docComment, $references, PREG_SET_ORDER);
@@ -318,9 +319,14 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
         $annotations = array();
         foreach ($references as $reference) {
             /* @var $reference array(integer|string=>string) */
-            $type     = $reference['type'];
+            $type = $reference['type'];
+            if (!isset($reference['pointcut'])) {
+                $message = 'No pointcut reference provided for tag @' . $type . '.';
+                throw new AspectPHP_Reflection_Exception($message);
+            }
             $pointcut = rtrim($reference['pointcut']);
             $pointcut = rtrim($pointcut, '()');
+            
             if (!isset($annotations[$type])) {
                 $annotations[$type] = array();
             }
