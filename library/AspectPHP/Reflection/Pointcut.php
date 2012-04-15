@@ -23,15 +23,8 @@
  * @link https://github.com/Matthimatiker/AspectPHP
  * @since 15.04.2012
  */
-class AspectPHP_Reflection_Pointcut extends ReflectionMethod
+class AspectPHP_Reflection_Pointcut extends AspectPHP_Reflection_AspectMethod
 {
-    
-    /**
-     * The aspect that contains the pointcut.
-     *
-     * @var AspectPHP_Reflection_Aspect
-     */
-    protected $aspect = null;
     
     /**
      * Creates already created pointcut objects.
@@ -51,19 +44,8 @@ class AspectPHP_Reflection_Pointcut extends ReflectionMethod
      */
     public function __construct($aspect, $name)
     {
-        $this->aspect = $this->toReflection($aspect);
-        parent::__construct($this->aspect->getName(), $name);
+        parent::__construct($aspect, $name);
         $this->assertIsPointcut();
-    }
-    
-    /**
-     * Returns information about the aspect that declares this pointcut.
-     *
-     * @return AspectPHP_Reflection_Aspect
-     */
-    public function getAspect()
-    {
-        return $this->aspect;
     }
     
     /**
@@ -107,26 +89,6 @@ class AspectPHP_Reflection_Pointcut extends ReflectionMethod
     }
     
     /**
-     * Adds infos to the given message.
-     *
-     * Adds the following parameters (in this order):
-     * # pointcut name
-     * # aspect name
-     *
-     * Example:
-     * <code>
-     * $message = $this->message('Pointcut %s in aspect %s.');
-     * </code>
-     *
-     * @param string $message
-     * @return string
-     */
-    protected function message($message)
-    {
-        return sprintf($message, $this->getName(), $this->aspect->getName());
-    }
-    
-    /**
      * Creates an id for the given aspect object,
      *
      * @param AspectPHP_Aspect $aspect
@@ -135,22 +97,6 @@ class AspectPHP_Reflection_Pointcut extends ReflectionMethod
     protected function id(AspectPHP_Aspect $aspect)
     {
         return spl_object_hash($aspect);
-    }
-    
-    /**
-     * Returns a reflection object for the provided aspect.
-     *
-     * @param AspectPHP_Reflection_Aspect|AspectPHP_Aspect|string $aspect
-     * @return AspectPHP_Reflection_Aspect
-     * @throws AspectPHP_Reflection_Exception If invalid aspect data is provided.
-     */
-    protected function toReflection($aspect)
-    {
-        if ($aspect instanceof AspectPHP_Reflection_Aspect) {
-            // Use existing reflection object.
-            return $aspect;
-        }
-        return new AspectPHP_Reflection_Aspect($aspect);
     }
     
 }
