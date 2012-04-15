@@ -187,6 +187,10 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
      */
     protected function addPointcut(ReflectionMethod $method)
     {
+        if (isset($this->pointcuts[$method->getName()])) {
+            // Pointcut is already known, do not overwrite it.
+            return;
+        }
         if (!$method->isPublic()) {
             $message = 'Pointcut methods must be public.';
             throw new AspectPHP_Reflection_Exception($message);
