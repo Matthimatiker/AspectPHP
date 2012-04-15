@@ -33,4 +33,69 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
 class AspectPHP_Reflection_PointcutTest extends PHPUnit_Framework_TestCase
 {
     
+    public function testConstructorAcceptsAspectName()
+    {
+        
+    }
+    
+    public function testConstructorAcceptsAspectObject()
+    {
+    
+    }
+    
+    public function testConstructorAcceptsAspectReflection()
+    {
+    
+    }
+    
+    public function testConstructorThrowsExceptionIfInvalidClassNameIsProvided()
+    {
+        
+    }
+    
+    public function testConstructorThrowsExceptionIfInvalidObjectIsProvided()
+    {
+    
+    }
+    
+    public function testConstructorThrowsExceptionIfPointcutIsNotPublic()
+    {
+        
+    }
+    
+    public function testConstructorThrowsExceptionIfPointcutRequiresParameters()
+    {
+    
+    }
+    
+    public function testGetAspectReturnsReflectionObject()
+    {
+        
+    }
+    
+    public function testGetAspectReturnsObjectThatWasPassedToConstructor()
+    {
+        
+    }
+    
+    public function testCreatePointcutThrowsExceptionIfMethodDoesNotReturnPointcutObject()
+    {
+        
+    }
+    
+    public function testCreatePointcutReturnsPointcutObject()
+    {
+        
+    }
+    
+    public function testCreatePointcutReturnsDifferentPointcutsForDifferentAspects()
+    {
+        
+    }
+    
+    public function testCreatePointcutReturnsSamePointcutForSameAspect()
+    {
+        
+    }
+    
 }
