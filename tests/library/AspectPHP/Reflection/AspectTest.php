@@ -429,6 +429,16 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * Ensures that getPointcuts() returns AspectPHP_Reflection_Pointcut objects.
+     */
+    public function testGetPointcutsReturnsPointcutObjects()
+    {
+        $pointcuts = $this->createReflection('Reflection_SimpleAspect')->getPointcuts();
+        $this->assertInternalType('array', $pointcuts);
+        $this->assertContainsOnly('AspectPHP_Reflection_Pointcut', $pointcuts);
+    }
+    
+    /**
      * Creates a reflection aspect for the provided aspect
      * object or class.
      *
