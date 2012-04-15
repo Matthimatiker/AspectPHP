@@ -38,7 +38,8 @@ class AspectPHP_Reflection_PointcutTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorAcceptsAspectName()
     {
-        
+        $this->setExpectedException(null);
+        $this->createReflection('Reflection_SimpleAspect', 'pointcutOne');
     }
     
     /**
@@ -46,7 +47,10 @@ class AspectPHP_Reflection_PointcutTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorAcceptsAspectObject()
     {
-    
+        $this->setExpectedException(null);
+        $this->loadIfNecessary('Reflection_SimpleAspect');
+        $aspect = new Reflection_SimpleAspect();
+        $this->createReflection($aspect, 'pointcutOne');
     }
     
     /**
@@ -54,7 +58,10 @@ class AspectPHP_Reflection_PointcutTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorAcceptsAspectReflection()
     {
-    
+        $this->setExpectedException(null);
+        $this->loadIfNecessary('Reflection_SimpleAspect');
+        $reflection = new AspectPHP_Reflection_Aspect('Reflection_SimpleAspect');
+        $this->createReflection($reflection, 'pointcutOne');
     }
     
     /**
@@ -63,7 +70,8 @@ class AspectPHP_Reflection_PointcutTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorThrowsExceptionIfInvalidClassNameIsProvided()
     {
-        
+        $this->setExpectedException('AspectPHP_Reflection_Exception');
+        $this->createReflection('ArrayObject', 'count');
     }
     
     /**
@@ -72,7 +80,8 @@ class AspectPHP_Reflection_PointcutTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorThrowsExceptionIfInvalidObjectIsProvided()
     {
-    
+        $this->setExpectedException('AspectPHP_Reflection_Exception');
+        $this->createReflection(new ArrayObject(array()), 'count');
     }
     
     /**
@@ -80,7 +89,8 @@ class AspectPHP_Reflection_PointcutTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorThrowsExceptionIfPointcutIsNotPublic()
     {
-        
+        $this->setExpectedException('AspectPHP_Reflection_Exception');
+        $this->createReflection('Reflection_PointcutNotPublicAspect', 'protectedPointcut');
     }
     
     /**
@@ -88,7 +98,8 @@ class AspectPHP_Reflection_PointcutTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorThrowsExceptionIfPointcutRequiresParameters()
     {
-    
+        $this->setExpectedException('AspectPHP_Reflection_Exception');
+        $this->createReflection('Reflection_PointcutWithParameterAspect', 'pointcut');
     }
     
     /**
@@ -96,7 +107,8 @@ class AspectPHP_Reflection_PointcutTest extends PHPUnit_Framework_TestCase
      */
     public function testGetAspectReturnsReflectionObject()
     {
-        
+        $aspect = $this->createReflection('Reflection_SimpleAspect', 'pointcutOne')->getAspect();
+        $this->assertInstanceOf('AspectPHP_Reflection_Aspect', $aspect);
     }
     
     /**
@@ -105,7 +117,10 @@ class AspectPHP_Reflection_PointcutTest extends PHPUnit_Framework_TestCase
      */
     public function testGetAspectReturnsObjectThatWasPassedToConstructor()
     {
-        
+        $this->loadIfNecessary('Reflection_SimpleAspect');
+        $reflection = new AspectPHP_Reflection_Aspect('Reflection_SimpleAspect');
+        $aspect     = $this->createReflection($reflection, 'pointcutOne')->getAspect();
+        $this->assertSame($reflection, $aspect);
     }
     
     /**
@@ -114,7 +129,9 @@ class AspectPHP_Reflection_PointcutTest extends PHPUnit_Framework_TestCase
      */
     public function testCreatePointcutThrowsExceptionIfMethodDoesNotReturnPointcutObject()
     {
-        
+        $this->setExpectedException('AspectPHP_Reflection_Exception');
+        $reflection = $this->createReflection('Reflection_InvalidPointcutReturnValueAspect', 'pointcutInvalid');
+        $reflection->createPointcut(new Reflection_InvalidPointcutReturnValueAspect());
     }
     
     /**
@@ -122,7 +139,10 @@ class AspectPHP_Reflection_PointcutTest extends PHPUnit_Framework_TestCase
      */
     public function testCreatePointcutReturnsPointcutObject()
     {
-        
+        $reflection = $this->createReflection('Reflection_SimpleAspect', 'pointcutOne');
+        $aspect     = new Reflection_SimpleAspect();
+        $pointcut   = $reflection->createPointcut($aspect);
+        $this->assertInstanceOf('AspectPHP_Pointcut', $pointcut);
     }
     
     /**
@@ -131,7 +151,10 @@ class AspectPHP_Reflection_PointcutTest extends PHPUnit_Framework_TestCase
      */
     public function testCreatePointcutReturnsDifferentPointcutsForDifferentAspects()
     {
-        
+        $reflection    = $this->createReflection('Reflection_SimpleAspect', 'pointcutOne');
+        $aspect        = new Reflection_SimpleAspect();
+        $anotherAspect = new Reflection_SimpleAspect();
+        $this->assertNotSame($reflection->createPointcut($aspect), $reflection->createPointcut($anotherAspect));
     }
     
     /**
@@ -140,7 +163,40 @@ class AspectPHP_Reflection_PointcutTest extends PHPUnit_Framework_TestCase
      */
     public function testCreatePointcutReturnsSamePointcutForSameAspect()
     {
-        
+        $reflection = $this->createReflection('Reflection_SimpleAspect', 'pointcutOne');
+        $aspect     = new Reflection_SimpleAspect();
+        $pointcut   = $reflection->createPointcut($aspect);
+        $this->assertSame($pointcut, $reflection->createPointcut($aspect));
+    }
+    
+    /**
+     * Creates a reflection object for the pointcut.
+     *
+     * @param mixed $classOrAspect
+     * @param string $name The name of the pointcut method.
+     * @return AspectPHP_Reflection_Pointcut
+     */
+    protected function createReflection($classOrAspect, $name)
+    {
+        if (is_string($classOrAspect)) {
+            $this->loadIfNecessary($classOrAspect);
+        }
+        return new AspectPHP_Reflection_Pointcut($classOrAspect, $name);
+    }
+    
+    /**
+     * Loads the provided test class if it is not already available.
+     *
+     * @param string $class
+     */
+    protected function loadIfNecessary($class)
+    {
+        if (class_exists($class, false)) {
+            // Class is already loaded.
+            return;
+        }
+        $pathSegment = str_replace('_', '/', $class);
+        require_once(dirname(__FILE__) . '/TestData/'. $pathSegment . '.php');
     }
     
 }
