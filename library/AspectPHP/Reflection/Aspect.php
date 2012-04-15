@@ -70,6 +70,7 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
     {
         parent::__construct($classOrAspect);
         if (!$this->implementsInterface('AspectPHP_Aspect')) {
+            // TODO: add class name to message
             $message = 'Provided class/object is not an aspect.';
             throw new AspectPHP_Reflection_Exception($message);
         }
