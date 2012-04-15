@@ -27,6 +27,22 @@ class AspectPHP_Reflection_Pointcut extends ReflectionMethod
 {
     
     /**
+     * The aspect that contains the pointcut.
+     *
+     * @var AspectPHP_Reflection_Aspect
+     */
+    protected $aspect = null;
+    
+    /**
+     * Creates already created pointcut objects.
+     *
+     * The object identifier of the aspect is used as key.
+     *
+     * @var array(string=>AspectPHP_Pointcut)
+     */
+    protected $pointcutsByAspect = array();
+    
+    /**
      * Creates a pointcut reflection object.
      *
      * @param AspectPHP_Reflection_Aspect|AspectPHP_Aspect|string $aspect
@@ -35,7 +51,8 @@ class AspectPHP_Reflection_Pointcut extends ReflectionMethod
      */
     public function __construct($aspect, $name)
     {
-        
+        $this->aspect = $this->toReflection($aspect);
+        parent::__construct($this->aspect->getName(), $name);
     }
     
     /**
@@ -45,7 +62,7 @@ class AspectPHP_Reflection_Pointcut extends ReflectionMethod
      */
     public function getAspect()
     {
-        
+        return $this->aspect;
     }
     
     /**
@@ -55,10 +72,48 @@ class AspectPHP_Reflection_Pointcut extends ReflectionMethod
      *
      * @param AspectPHP_Aspect $aspect
      * @return AspectPHP_Pointcut
+     * @throws AspectPHP_Reflection_Exception If the method does not return pointcut.
      */
     public function createPointcut(AspectPHP_Aspect $aspect)
     {
-        
+        $id = $this->id($aspect);
+        if (!isset($this->pointcutsByAspect[$id])) {
+            $pointcut = $this->invoke($aspect, array());
+            if (!($pointcut instanceof AspectPHP_Pointcut)) {
+                $message = 'Pointcut %s in aspect %s must return an instance of AspectPHP_Pointcut.';
+                $message = sprintf($message, $this->getName(), $this->aspect->getName());
+                throw new AspectPHP_Reflection_Exception($message);
+            }
+            $this->pointcutsByAspect[$id] = $pointcut;
+        }
+        return $this->pointcutsByAspect[$id];
+    }
+    
+    /**
+     * Creates an id for the given aspect object,
+     *
+     * @param AspectPHP_Aspect $aspect
+     * @return string
+     */
+    protected function id(AspectPHP_Aspect $aspect)
+    {
+        return spl_object_hash($aspect);
+    }
+    
+    /**
+     * Returns a reflection object for the provided aspect.
+     *
+     * @param AspectPHP_Reflection_Aspect|AspectPHP_Aspect|string $aspect
+     * @return AspectPHP_Reflection_Aspect
+     * @throws AspectPHP_Reflection_Exception If invalid aspect data is provided.
+     */
+    protected function toReflection($aspect)
+    {
+        if ($aspect instanceof AspectPHP_Reflection_Aspect) {
+            // Use existing reflection object.
+            return $aspect;
+        }
+        return new AspectPHP_Reflection_Aspect($aspect);
     }
     
 }
