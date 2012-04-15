@@ -27,7 +27,7 @@ class AspectPHP_Reflection_Pointcut extends ReflectionMethod
 {
     
     /**
-     *
+     * Creates a pointcut reflection object.
      *
      * @param AspectPHP_Reflection_Aspect|AspectPHP_Aspect|string $aspect
      * @param string $name
@@ -39,6 +39,8 @@ class AspectPHP_Reflection_Pointcut extends ReflectionMethod
     }
     
     /**
+     * Returns information about the aspect that declares this pointcut.
+     *
      * @return AspectPHP_Reflection_Aspect
      */
     public function getAspect()
@@ -47,7 +49,9 @@ class AspectPHP_Reflection_Pointcut extends ReflectionMethod
     }
     
     /**
+     * Creates a pointcut object for the given aspect.
      *
+     * The pointcut object is created only once per aspect object.
      *
      * @param AspectPHP_Aspect $aspect
      * @return AspectPHP_Pointcut
