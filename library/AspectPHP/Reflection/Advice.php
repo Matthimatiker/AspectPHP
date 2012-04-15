@@ -26,4 +26,15 @@
 class AspectPHP_Reflection_Advice extends AspectPHP_Reflection_Method
 {
     
+    /**
+     * Returns the referenced pointcuts for the given advice type.
+     *
+     * @param string $type
+     * @return array(AspectPHP_Reflection_Pointcut)
+     */
+    public function getPointcutsByType($type)
+    {
+        
+    }
+    
 }
