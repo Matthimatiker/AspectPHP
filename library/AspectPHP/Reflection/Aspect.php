@@ -192,15 +192,19 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
             // Pointcut is already known, do not overwrite it.
             return;
         }
-        if (!$method->isPublic()) {
-            $message = 'Pointcut methods must be public.';
-            throw new AspectPHP_Reflection_Exception($message);
-        }
-        if ($method->getNumberOfRequiredParameters() > 0) {
-            $message = 'Pointcut methods must not require any parameter.';
-            throw new AspectPHP_Reflection_Exception($message);
-        }
-        $this->pointcuts[$method->getName()] = $method;
+        $this->pointcuts[$method->getName()] = $this->toPointcut($method);
+    }
+    
+    /**
+     * Converts the provided method into a pointcut reflection object.
+     *
+     * @param ReflectionMethod $method
+     * @return AspectPHP_Reflection_Pointcut
+     * @throws AspectPHP_Reflection_Exception If the method does not meet the pointcut requirements.
+     */
+    protected function toPointcut(ReflectionMethod $method)
+    {
+        return new AspectPHP_Reflection_Pointcut($this, $method->getName());
     }
     
     /**
