@@ -29,11 +29,11 @@ class AspectPHP_Reflection_Pointcut extends ReflectionMethod
     /**
      *
      *
-     * @param string $name
      * @param AspectPHP_Reflection_Aspect $aspect
+     * @param string $name
      * @throws AspectPHP_Reflection_Exception If the method is not a valid pointcut.
      */
-    public function __construct($name, AspectPHP_Reflection_Aspect $aspect)
+    public function __construct(AspectPHP_Reflection_Aspect $aspect, $name)
     {
         
     }
