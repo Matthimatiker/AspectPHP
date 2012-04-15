@@ -309,33 +309,22 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
      */
     protected function getAdviceAnnotations($docComment)
     {
+        $tagList = implode('|', $this->supportedTags);
+        $pattern = '/^\s*\* @(?<type>' . $tagList . ')( )+(?<pointcut>.*)?$/um';
+        
+        $references = array();
+        preg_match_all($pattern, $docComment, $references, PREG_SET_ORDER);
+        
         $annotations = array();
-        $lines       = explode("\n", $docComment);
-        foreach ($lines as $line) {
-            /* @var $line string */
-            if (strpos($line, '@') === false) {
-                // Line does not contain a tag.
-                continue;
+        foreach ($references as $reference) {
+            /* @var $reference array(integer|string=>string) */
+            $type     = $reference['type'];
+            $pointcut = rtrim($reference['pointcut']);
+            $pointcut = rtrim($pointcut, '()');
+            if (!isset($annotations[$type])) {
+                $annotations[$type] = array();
             }
-            // Line may contain an annotation.
-            $line = trim($line);
-            $line = ltrim($line, '* ');
-            foreach ($this->supportedTags as $tag) {
-                /* @var $tag string */
-                if (strpos($line, '@' . $tag . ' ') !== 0) {
-                    // Line does not start with tag.
-                    continue;
-                }
-                // Tag found, extract information.
-                $parts = explode(' ', $line, 2);
-                if (!isset($annotations[$tag])) {
-                    $annotations[$tag] = array();
-                }
-                $pointcut = $parts[1];
-                $pointcut = ltrim($pointcut);
-                $pointcut = rtrim($pointcut, '()');
-                $annotations[$tag][] = $pointcut;
-            }
+            $annotations[$type][] = $pointcut;
         }
         return $annotations;
     }
