@@ -53,6 +53,7 @@ class AspectPHP_Reflection_Pointcut extends ReflectionMethod
     {
         $this->aspect = $this->toReflection($aspect);
         parent::__construct($this->aspect->getName(), $name);
+        $this->assertIsPointcut();
     }
     
     /**
@@ -80,13 +81,49 @@ class AspectPHP_Reflection_Pointcut extends ReflectionMethod
         if (!isset($this->pointcutsByAspect[$id])) {
             $pointcut = $this->invoke($aspect, array());
             if (!($pointcut instanceof AspectPHP_Pointcut)) {
-                $message = 'Pointcut %s in aspect %s must return an instance of AspectPHP_Pointcut.';
-                $message = sprintf($message, $this->getName(), $this->aspect->getName());
-                throw new AspectPHP_Reflection_Exception($message);
+                $message = 'Pointcut %s() in aspect %s must return an instance of AspectPHP_Pointcut.';
+                throw new AspectPHP_Reflection_Exception($this->message($message));
             }
             $this->pointcutsByAspect[$id] = $pointcut;
         }
         return $this->pointcutsByAspect[$id];
+    }
+    
+    /**
+     * Asserts that this method meets the pointcut requirements.
+     *
+     * @throws AspectPHP_Reflection_Exception If the method is not a valid pointcut.
+     */
+    protected function assertIsPointcut()
+    {
+        if (!$this->isPublic()) {
+            $message = 'Pointcut %s() in aspect %s must be public.';
+            throw new AspectPHP_Reflection_Exception($this->message($message));
+        }
+        if ($this->getNumberOfRequiredParameters() > 0) {
+            $message = 'Pointcut %s() in aspect %s must not require any parameter.';
+            throw new AspectPHP_Reflection_Exception($this->message($message));
+        }
+    }
+    
+    /**
+     * Adds infos to the given message.
+     *
+     * Adds the following parameters (in this order):
+     * # pointcut name
+     * # aspect name
+     *
+     * Example:
+     * <code>
+     * $message = $this->message('Pointcut %s in aspect %s.');
+     * </code>
+     *
+     * @param string $message
+     * @return string
+     */
+    protected function message($message)
+    {
+        return sprintf($message, $this->getName(), $this->aspect->getName());
     }
     
     /**
