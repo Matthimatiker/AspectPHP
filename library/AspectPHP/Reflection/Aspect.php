@@ -319,7 +319,7 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
     protected function getAdviceAnnotations($docComment)
     {
         $tagList = implode('|', $this->supportedTags);
-        $pattern = '/^\s*\* @(?<type>' . $tagList . ')(( )+(?<pointcut>.*))?$/um';
+        $pattern = '/^\s*\* @(?P<type>' . $tagList . ')(( )+(?P<pointcut>.*))?$/um';
         
         $references = array();
         preg_match_all($pattern, $docComment, $references, PREG_SET_ORDER);
