@@ -43,7 +43,7 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
      *
      * The method name is used as key to provided fast access by name.
      *
-     * @var array(string=>ReflectionMethod)
+     * @var array(string=>AspectPHP_Reflection_Pointcut)
      */
     protected $pointcuts = array();
     
@@ -83,7 +83,7 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
      * A method is considered as pointcut if it starts with the
      * prefix "pointcut" or if it is referenced by an advice.
      *
-     * @return array(ReflectionMethod)
+     * @return array(AspectPHP_Reflection_Pointcut)
      */
     public function getPointcuts()
     {
@@ -94,7 +94,7 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
      * Returns the pointcut method with the provided name.
      *
      * @param string $name
-     * @return ReflectionMethod
+     * @return AspectPHP_Reflection_Pointcut
      * @throws AspectPHP_Reflection_Exception If the requested method is not considered as pointcut.
      */
     public function getPointcut($name)
