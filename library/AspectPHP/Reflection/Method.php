@@ -1,7 +1,7 @@
 <?php
 
 /**
- * AspectPHP_Reflection_AspectMethod
+ * AspectPHP_Reflection_Method
  *
  * @category PHP
  * @package AspectPHP_Reflection
@@ -23,7 +23,7 @@
  * @link https://github.com/Matthimatiker/AspectPHP
  * @since 15.04.2012
  */
-class AspectPHP_Reflection_AspectMethod extends ReflectionMethod
+class AspectPHP_Reflection_Method extends ReflectionMethod
 {
     
     /**

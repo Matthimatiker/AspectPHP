@@ -23,7 +23,7 @@
  * @link https://github.com/Matthimatiker/AspectPHP
  * @since 15.04.2012
  */
-class AspectPHP_Reflection_Pointcut extends AspectPHP_Reflection_AspectMethod
+class AspectPHP_Reflection_Pointcut extends AspectPHP_Reflection_Method
 {
     
     /**
