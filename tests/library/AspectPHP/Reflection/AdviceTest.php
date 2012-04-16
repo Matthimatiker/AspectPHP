@@ -33,4 +33,49 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
 class AspectPHP_Reflection_AdviceTest extends PHPUnit_Framework_TestCase
 {
     
+    public function testConstructorThrowsExceptionIfAdviceIsNotPublic()
+    {
+        
+    }
+    
+    public function testConstructorThrowsExceptionIfMoreThanOneParameterIsRequired()
+    {
+        
+    }
+    
+    public function testConstructorAcceptsAdviceWithOneParameter()
+    {
+        
+    }
+    
+    public function testConstructorThrowsExceptionIfMethodDoesNotProvideDocComment()
+    {
+        
+    }
+    
+    public function testConstructorThrowsExceptionIfDocCommentContainsTagWithoutPointcutReference()
+    {
+        
+    }
+    
+    public function testConstructorThrowsExceptionIfMethodDoesNotReferenceAnyPointcuts()
+    {
+        
+    }
+    
+    public function testGetPointcutsByTypeReturnsArray()
+    {
+        
+    }
+    
+    public function testGetPointcutsByTypeReturnsPointcutReflectionObjects()
+    {
+        
+    }
+    
+    public function testGetPointcutsByTypeThrowsExceptionIfInvalidTypeIsProvided()
+    {
+        
+    }
+    
 }
