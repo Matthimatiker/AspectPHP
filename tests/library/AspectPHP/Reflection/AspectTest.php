@@ -439,6 +439,16 @@ class AspectPHP_Reflection_AspectTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * Ensures that getAdvices() returns AspectPHP_Reflection_Advice objects.
+     */
+    public function testGetAdvicesReturnsAdviceObjects()
+    {
+        $advices = $this->createReflection('Reflection_SimpleAspect')->getAdvices();
+        $this->assertInternalType('array', $advices);
+        $this->assertContainsOnly('AspectPHP_Reflection_Advice', $advices);
+    }
+    
+    /**
      * Creates a reflection aspect for the provided aspect
      * object or class.
      *
