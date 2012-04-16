@@ -28,4 +28,14 @@
 class AspectPHP_Reflection_DocComment
 {
     
+    /**
+     * Returns the comment.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        
+    }
+    
 }
