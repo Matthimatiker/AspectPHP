@@ -33,4 +33,106 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
 class AspectPHP_Reflection_MethodTest extends PHPUnit_Framework_TestCase
 {
     
+    /**
+     * Ensures that the constructor accepts the name of an aspect class.
+     */
+    public function testConstructorAcceptsAspectName()
+    {
+        $this->setExpectedException(null);
+        $this->createReflection('Reflection_SimpleAspect', 'anotherMethod');
+    }
+    
+    /**
+     * Ensures that the constructor accepts an aspect object.
+     */
+    public function testConstructorAcceptsAspectObject()
+    {
+        $this->setExpectedException(null);
+        $this->loadIfNecessary('Reflection_SimpleAspect');
+        $aspect = new Reflection_SimpleAspect();
+        $this->createReflection($aspect, 'anotherMethod');
+    }
+    
+    /**
+     * Ensures that the constructor accepts an aspect reflection object.
+     */
+    public function testConstructorAcceptsAspectReflection()
+    {
+        $this->setExpectedException(null);
+        $this->loadIfNecessary('Reflection_SimpleAspect');
+        $reflection = new AspectPHP_Reflection_Aspect('Reflection_SimpleAspect');
+        $this->createReflection($reflection, 'anotherMethod');
+    }
+    
+    /**
+     * Ensures that the constructor throws an exception if the name of a class
+     * that is not an aspect is provided.
+     */
+    public function testConstructorThrowsExceptionIfInvalidClassNameIsProvided()
+    {
+        $this->setExpectedException('AspectPHP_Reflection_Exception');
+        $this->createReflection('ArrayObject', 'count');
+    }
+    
+    /**
+     * Ensures that the constructor throws an exception if a non-aspect object
+     * is provided.
+     */
+    public function testConstructorThrowsExceptionIfInvalidObjectIsProvided()
+    {
+        $this->setExpectedException('AspectPHP_Reflection_Exception');
+        $this->createReflection(new ArrayObject(array()), 'count');
+    }
+    
+    /**
+     * Checks if getAspect() returns an aspect reflection object.
+     */
+    public function testGetAspectReturnsReflectionObject()
+    {
+        $aspect = $this->createReflection('Reflection_SimpleAspect', 'anotherMethod')->getAspect();
+        $this->assertInstanceOf('AspectPHP_Reflection_Aspect', $aspect);
+    }
+    
+    /**
+     * Ensures that getAspect() returns the aspect reflection object that was provided
+     * to the constructor.
+     */
+    public function testGetAspectReturnsObjectThatWasPassedToConstructor()
+    {
+        $this->loadIfNecessary('Reflection_SimpleAspect');
+        $reflection = new AspectPHP_Reflection_Aspect('Reflection_SimpleAspect');
+        $aspect     = $this->createReflection($reflection, 'anotherMethod')->getAspect();
+        $this->assertSame($reflection, $aspect);
+    }
+    
+    /**
+     * Creates a reflection object for the method.
+     *
+     * @param mixed $classOrAspect
+     * @param string $name The name of the method.
+     * @return AspectPHP_Reflection_Method
+     */
+    protected function createReflection($classOrAspect, $name)
+    {
+        if (is_string($classOrAspect)) {
+            $this->loadIfNecessary($classOrAspect);
+        }
+        return new AspectPHP_Reflection_Method($classOrAspect, $name);
+    }
+    
+    /**
+     * Loads the provided test class if it is not already available.
+     *
+     * @param string $class
+     */
+    protected function loadIfNecessary($class)
+    {
+        if (class_exists($class, false)) {
+            // Class is already loaded.
+            return;
+        }
+        $pathSegment = str_replace('_', '/', $class);
+        require_once(dirname(__FILE__) . '/TestData/'. $pathSegment . '.php');
+    }
+    
 }
