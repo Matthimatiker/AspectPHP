@@ -39,7 +39,7 @@ class Reflection_AdviceWithJoinPointParamAspect implements AspectPHP_Aspect
     }
     
     /**
-     * An advice that requires too many parameters.
+     * An advice that requires a join point parameter.
      *
      * @param AspectPHP_JoinPoint $joinPoint
      * @after pointcut()
