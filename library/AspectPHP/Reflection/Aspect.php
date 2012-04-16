@@ -52,7 +52,7 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
      *
      * The method name is used as key to provided fast access by name.
      *
-     * @var array(string=>ReflectionMethod)
+     * @var array(string=>AspectPHP_Reflection_Advice)
      */
     protected $advices = array();
     
@@ -122,7 +122,7 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
      * A method is considered as advice method if it references
      * a pointcut via annotations.
      *
-     * @return array(ReflectionMethod)
+     * @return array(AspectPHP_Reflection_Advice)
      */
     public function getAdvices()
     {
@@ -133,7 +133,7 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
      * Returns the advice method with the provided name.
      *
      * @param string $name
-     * @return ReflectionMethod
+     * @return AspectPHP_Reflection_Advice
      * @throws AspectPHP_Reflection_Exception If the requested method is not considered as advice.
      */
     public function getAdvice($name)
