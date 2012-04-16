@@ -214,29 +214,21 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
      */
     protected function addAdvice(ReflectionMethod $method)
     {
-        if (!$method->isPublic()) {
-            $message = 'Advice methods must be public.';
-            throw new AspectPHP_Reflection_Exception($message);
-        }
-        if ($method->getNumberOfRequiredParameters() > 1) {
-            $message = 'Only a join point parameter is allowed for advices.';
-            throw new AspectPHP_Reflection_Exception($message);
-        }
-        $annotations = $this->getAdviceAnnotations($method->getDocComment());
-        foreach ($annotations as $type => $pointcuts) {
-            /* @var $type string */
+        $advice      = new AspectPHP_Reflection_Advice($this, $method->getName());
+        $annotations = $this->getAdviceAnnotations($advice->getDocComment());
+        foreach ($annotations as $pointcuts) {
             /* @var $pointcuts array(string) */
             foreach ($pointcuts as $pointcut) {
                 /* @var $pointcut string */
                 if (!$this->hasMethod($pointcut)) {
                     $message = 'Pointcut method %s() referenced by advice %s() does not exist.';
-                    $message = sprintf($message, $pointcut, $method->getName());
+                    $message = sprintf($message, $pointcut, $advice->getName());
                     throw new AspectPHP_Reflection_Exception($message);
                 }
                 $this->addPointcut($this->getMethod($pointcut));
             }
         }
-        $this->advices[$method->getName()] = $method;
+        $this->advices[$advice->getName()] = $advice;
     }
     
     /**
