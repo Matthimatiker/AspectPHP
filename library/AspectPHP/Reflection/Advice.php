@@ -68,7 +68,27 @@ class AspectPHP_Reflection_Advice extends AspectPHP_Reflection_Method
             $message = 'Invalid type provided. Valid types are: ' . implode(', ', $this->supportedTags);
             throw new InvalidArgumentException($message);
         }
-        return array();
+        $annotations = $this->getAdviceAnnotations();
+        if (!isset($annotations[$type])) {
+            return array();
+        }
+        return $this->getPointcutsByName($annotations[$type]);
+    }
+    
+    /**
+     * Returns the pointcuts with the provided names.
+     *
+     * @param array(string) $names
+     * @return array(AspectPHP_Reflection_Pointcut)
+     */
+    protected function getPointcutsByName(array $names)
+    {
+        $pointcuts = array();
+        foreach ($names as $name) {
+            /* @var $name string */
+            $pointcuts[] = $this->getAspect()->getPointcut($name);
+        }
+        return $pointcuts;
     }
     
     /**
@@ -107,6 +127,47 @@ class AspectPHP_Reflection_Advice extends AspectPHP_Reflection_Method
         $tagList = implode('|', $this->supportedTags);
         $pattern = '/\* @(' . $tagList . ')\s/u';
         return preg_match($pattern, $this->getDocComment()) !== 0;
+    }
+    
+    /**
+     * Returns the advice annotations from the doc comment.
+     *
+     * The advice type (for example "before") is used as key.
+     * The value is an array of pointcut methods that are connected
+     * to the advice type.
+     *
+     * The array contains just the advice  annotations that are present.
+     * If no advice annotations were found then the array will be
+     * empty.
+     *
+     * @return array(string=>array(string))
+     * @throws AspectPHP_Reflection_Exception If no valid pointcut identifier is provided.
+     */
+    protected function getAdviceAnnotations()
+    {
+        $tagList = implode('|', $this->supportedTags);
+        $pattern = '/^\s*\* @(?P<type>' . $tagList . ')(( )+(?P<pointcut>.*))?$/um';
+        
+        $references = array();
+        preg_match_all($pattern, $this->getDocComment(), $references, PREG_SET_ORDER);
+    
+        $annotations = array();
+        foreach ($references as $reference) {
+            /* @var $reference array(integer|string=>string) */
+            $type = $reference['type'];
+            if (!isset($reference['pointcut'])) {
+                $message = 'No pointcut reference provided for tag @' . $type . '.';
+                throw new AspectPHP_Reflection_Exception($message);
+            }
+            $pointcut = rtrim($reference['pointcut']);
+            $pointcut = rtrim($pointcut, '()');
+    
+            if (!isset($annotations[$type])) {
+                $annotations[$type] = array();
+            }
+            $annotations[$type][] = $pointcut;
+        }
+        return $annotations;
     }
     
 }
