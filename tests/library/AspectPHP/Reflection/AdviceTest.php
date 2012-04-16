@@ -128,4 +128,13 @@ class AspectPHP_Reflection_AdviceTest extends PHPUnit_Framework_TestCase
         
     }
     
+    /**
+     * Ensures that getPointcutsByType() throws an exception if a referenced pointcut
+     * is not declared in the corresponding aspect.
+     */
+    public function testGetPointcutsByTypeThrowsExceptionIfReferencedPointcutDoesNotExist()
+    {
+        
+    }
+    
 }
