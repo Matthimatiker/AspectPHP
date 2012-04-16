@@ -73,6 +73,16 @@ class AspectPHP_Reflection_AdviceTest extends PHPUnit_Framework_TestCase
         
     }
     
+    public function testGetPointcutsByTypeReturnsCorrectNumberOfPointcuts()
+    {
+        
+    }
+    
+    public function testGetPointcutsByTypeReturnsEmptyArrayIfNoPointcutOfThatTypeWasReferenced()
+    {
+        
+    }
+    
     public function testGetPointcutsByTypeThrowsExceptionIfInvalidTypeIsProvided()
     {
         
