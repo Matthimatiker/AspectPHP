@@ -39,7 +39,8 @@ class AspectPHP_Reflection_AdviceTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorThrowsExceptionIfAdviceIsNotPublic()
     {
-        
+        $this->setExpectedException('AspectPHP_Reflection_Exception');
+        $this->createReflection('Reflection_AdviceNotPublicAspect', 'protectedBeforeAdvice');
     }
     
     /**
@@ -48,7 +49,8 @@ class AspectPHP_Reflection_AdviceTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorThrowsExceptionIfMoreThanOneParameterIsRequired()
     {
-        
+        $this->setExpectedException('AspectPHP_Reflection_Exception');
+        $this->createReflection('Reflection_AdviceWithTooManyParamsAspect', 'afterAdvice');
     }
     
     /**
@@ -56,7 +58,8 @@ class AspectPHP_Reflection_AdviceTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorAcceptsAdviceWithOneParameter()
     {
-        
+        $this->setExpectedException(null);
+        $this->createReflection('Reflection_AdviceWithJoinPointParamAspect', 'afterAdvice');
     }
     
     /**
@@ -65,7 +68,8 @@ class AspectPHP_Reflection_AdviceTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorThrowsExceptionIfMethodDoesNotProvideDocComment()
     {
-        
+        $this->setExpectedException('AspectPHP_Reflection_Exception');
+        $this->createReflection('Reflection_NoDocBlockAspect', 'notDocumentedMethod');
     }
     
     /**
@@ -74,16 +78,18 @@ class AspectPHP_Reflection_AdviceTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorThrowsExceptionIfDocCommentContainsTagWithoutPointcutReference()
     {
-        
+        $this->setExpectedException('AspectPHP_Reflection_Exception');
+        $this->createReflection('Reflection_NoPointcutReferenceAspect', 'noValidReference');
     }
     
     /**
      * Ensures that the constructor throws an exception if the doc comment of the method
-     * does not reference any poimtcut.
+     * does not reference any pointcut.
      */
     public function testConstructorThrowsExceptionIfMethodDoesNotReferenceAnyPointcuts()
     {
-        
+        $this->setExpectedException('AspectPHP_Reflection_Exception');
+        $this->createReflection('Reflection_SimpleAspect', 'anotherMethod');
     }
     
     /**
@@ -91,16 +97,21 @@ class AspectPHP_Reflection_AdviceTest extends PHPUnit_Framework_TestCase
      */
     public function testGetPointcutsByTypeReturnsArray()
     {
-        
+        $reflection = $this->createReflection('Reflection_SimpleAspect', 'beforeAdvice');
+        $pointcuts  = $reflection->getPointcutsByType('before');
+        $this->assertInternalType('array', $pointcuts);
     }
     
     /**
-     * Checks if the array that is returned ny getPointcutsByType() contains only
+     * Checks if the array that is returned by getPointcutsByType() contains only
      * objects of type AspectPHP_Reflection_Pointcut.
      */
     public function testGetPointcutsByTypeReturnsPointcutReflectionObjects()
     {
-        
+        $reflection = $this->createReflection('Reflection_SimpleAspect', 'beforeAdvice');
+        $pointcuts  = $reflection->getPointcutsByType('before');
+        $this->assertInternalType('array', $pointcuts);
+        $this->assertContainsOnly('AspectPHP_Reflection_Pointcut', $pointcuts);
     }
     
     /**
@@ -108,7 +119,10 @@ class AspectPHP_Reflection_AdviceTest extends PHPUnit_Framework_TestCase
      */
     public function testGetPointcutsByTypeReturnsCorrectNumberOfPointcuts()
     {
-        
+        $reflection = $this->createReflection('Reflection_SimpleAspect', 'beforeAdvice');
+        $pointcuts  = $reflection->getPointcutsByType('before');
+        $this->assertInternalType('array', $pointcuts);
+        $this->assertEquals(1, count($pointcuts));
     }
     
     /**
@@ -117,7 +131,10 @@ class AspectPHP_Reflection_AdviceTest extends PHPUnit_Framework_TestCase
      */
     public function testGetPointcutsByTypeReturnsEmptyArrayIfNoPointcutOfThatTypeWasReferenced()
     {
-        
+        $reflection = $this->createReflection('Reflection_SimpleAspect', 'beforeAdvice');
+        $pointcuts  = $reflection->getPointcutsByType('after');
+        $this->assertInternalType('array', $pointcuts);
+        $this->assertEquals(0, count($pointcuts));
     }
     
     /**
@@ -125,7 +142,9 @@ class AspectPHP_Reflection_AdviceTest extends PHPUnit_Framework_TestCase
      */
     public function testGetPointcutsByTypeThrowsExceptionIfInvalidTypeIsProvided()
     {
-        
+        $this->setExpectedException('InvalidArgumentException');
+        $reflection = $this->createReflection('Reflection_SimpleAspect', 'beforeAdvice');
+        $reflection->getPointcutsByType('invalid');
     }
     
     /**
@@ -134,7 +153,39 @@ class AspectPHP_Reflection_AdviceTest extends PHPUnit_Framework_TestCase
      */
     public function testGetPointcutsByTypeThrowsExceptionIfReferencedPointcutDoesNotExist()
     {
-        
+        $this->setExpectedException('AspectPHP_Reflection_Exception');
+        $reflection = $this->createReflection('Reflection_PointcutMissingAspect', 'beforeAdvice');
+        $reflection->getPointcutsByType('before');
+    }
+    
+    /**
+     * Creates a reflection object for the advice.
+     *
+     * @param mixed $classOrAspect
+     * @param string $name The name of the advice method.
+     * @return AspectPHP_Reflection_Advice
+     */
+    protected function createReflection($classOrAspect, $name)
+    {
+        if (is_string($classOrAspect)) {
+            $this->loadIfNecessary($classOrAspect);
+        }
+        return new AspectPHP_Reflection_Advice($classOrAspect, $name);
+    }
+    
+    /**
+     * Loads the provided test class if it is not already available.
+     *
+     * @param string $class
+     */
+    protected function loadIfNecessary($class)
+    {
+        if (class_exists($class, false)) {
+            // Class is already loaded.
+            return;
+        }
+        $pathSegment = str_replace('_', '/', $class);
+        require_once(dirname(__FILE__) . '/TestData/'. $pathSegment . '.php');
     }
     
 }
