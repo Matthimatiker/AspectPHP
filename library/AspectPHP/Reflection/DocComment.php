@@ -29,13 +29,30 @@ class AspectPHP_Reflection_DocComment
 {
     
     /**
+     * The comment block.
+     *
+     * @var string
+     */
+    protected $comment = null;
+    
+    /**
+     * Creates a comment object.
+     *
+     * @param string $comment The doc block comment.
+     */
+    public function __construct($comment)
+    {
+        $this->comment = $comment;
+    }
+    
+    /**
      * Returns the comment.
      *
      * @return string
      */
     public function __toString()
     {
-        
+        return $this->comment;
     }
     
 }
