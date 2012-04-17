@@ -39,9 +39,13 @@ class AspectPHP_Reflection_DocComment
      * Creates a comment object.
      *
      * @param string $comment The doc block comment.
+     * @throws InvalidArgumentException If no string is passed.
      */
     public function __construct($comment)
     {
+        if (!is_string($comment)) {
+            throw new InvalidArgumentException('Comment must be a string.');
+        }
         $this->comment = $comment;
     }
     
