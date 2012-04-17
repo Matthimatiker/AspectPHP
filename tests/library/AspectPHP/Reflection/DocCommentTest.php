@@ -59,6 +59,16 @@ class AspectPHP_Reflection_DocCommentTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * Ensures that the constructor throws an exception if no string is passed
+     * to the constructor.
+     */
+    public function testConstructorThrowsExceptionIfInvalidArgumentIsPassed()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        new AspectPHP_Reflection_DocComment(new stdClass());
+    }
+    
+    /**
      * Checks if the magic __toString() method returns the original comment
      * that was used to create the object.
      */
