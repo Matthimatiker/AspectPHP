@@ -59,6 +59,15 @@ class AspectPHP_Reflection_DocCommentTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * Checks if the magic __toString() method returns the original comment
+     * that was used to create the object.
+     */
+    public function testToStringReturnsOriginalComment()
+    {
+        $this->assertEquals($this->getComment(), (string)$this->docComment);
+    }
+    
+    /**
      * Returns a comment string for testing.
      *
      * @return string
