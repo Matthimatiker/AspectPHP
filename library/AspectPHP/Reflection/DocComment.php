@@ -36,6 +36,13 @@ class AspectPHP_Reflection_DocComment
     protected $comment = null;
     
     /**
+     * Contains cached tag values grouped by tag name.
+     *
+     * @var array(string=>array(string))|null
+     */
+    protected $valuesByTagName = null;
+    
+    /**
      * Creates a comment object.
      *
      * @param string $comment The doc block comment.
@@ -109,7 +116,10 @@ class AspectPHP_Reflection_DocComment
      */
     protected function getValuesByTagName()
     {
-        return $this->findValuesByTagName();
+        if ($this->valuesByTagName === null) {
+            $this->valuesByTagName = $this->findValuesByTagName();
+        }
+        return $this->valuesByTagName;
     }
     
     /**
