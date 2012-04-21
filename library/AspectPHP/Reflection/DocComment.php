@@ -29,6 +29,13 @@ class AspectPHP_Reflection_DocComment
 {
     
     /**
+     * Pattern that matches tags and their values.
+     *
+     * @var string
+     */
+    const TAGS_PATTERN = '/^\s*\* @(?P<name>[a-zA-Z]+)([ ]+(?P<value>.*))?\r?$/um';
+    
+    /**
      * The comment block.
      *
      * @var string
@@ -132,9 +139,8 @@ class AspectPHP_Reflection_DocComment
      */
     protected function findValuesByTagName()
     {
-        $pattern = '/^\s*\* @(?P<name>[a-zA-Z]+)([ ]+(?P<value>.*))?\r?$/um';
-        $tags    = array();
-        preg_match_all($pattern, $this->comment, $tags, PREG_SET_ORDER);
+        $tags = array();
+        preg_match_all(self::TAGS_PATTERN, $this->comment, $tags, PREG_SET_ORDER);
         
         $valuesByTag = array();
         foreach ($tags as $tag) {
