@@ -31,6 +31,19 @@ class AspectPHP_Reflection_DocComment
     /**
      * Pattern that matches tags and their values.
      *
+     * This pattern checks each line individually (anchored via ^ and $).
+     *
+     * The pattern matches lines with (in this order):
+     * # any number of whitespace
+     * # a "*" character
+     * # a blank
+     * # an "@" character
+     * # any valid tag name, consisting of alphabetical characters only
+     * # an optional tag value, consisting of
+     *   # a blank
+     *   # a value that contains arbitrary characters
+     * # an optional carriage return (to be compatible to new line values on Windows)
+     *
      * @var string
      */
     const TAGS_PATTERN = '/^\s*\* @(?P<name>[a-zA-Z]+)([ ]+(?P<value>.*))?\r?$/um';
