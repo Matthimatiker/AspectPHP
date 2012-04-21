@@ -119,17 +119,17 @@ class AspectPHP_Reflection_DocCommentTest extends PHPUnit_Framework_TestCase
      */
     protected function getComment()
     {
-        $comment = '/**'
-                 . ' * This is a comment.'
-                 . ' *'
-                 . ' * This is the long description.'
-                 . ' *'
-                 . ' * @param JoinPoint $joinPoint'
-                 . ' * @param mixed|null $context'
-                 . ' * @return string'
-                 . ' * @afterThrowing myPointcut()'
-                 . ' * @tagged'
-                 . ' */';
+        $comment = '/**'                              . PHP_EOL
+                 . ' * This is a comment.'            . PHP_EOL
+                 . ' *'                               . PHP_EOL
+                 . ' * This is the long description.' . PHP_EOL
+                 . ' *'                               . PHP_EOL
+                 . ' * @param JoinPoint $joinPoint'   . PHP_EOL
+                 . ' * @param mixed|null $context'    . PHP_EOL
+                 . ' * @return string'                . PHP_EOL
+                 . ' * @afterThrowing myPointcut()'   . PHP_EOL
+                 . ' * @tagged'                       . PHP_EOL
+                 . ' */'                              . PHP_EOL;
         return $comment;
     }
     
