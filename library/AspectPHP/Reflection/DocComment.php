@@ -62,7 +62,8 @@ class AspectPHP_Reflection_DocComment
      */
     public function hasTag($name)
     {
-        
+        $tags = $this->getValuesByTagName();
+        return isset($tags[$name]);
     }
     
     /**
@@ -81,7 +82,11 @@ class AspectPHP_Reflection_DocComment
      */
     public function getTags($name)
     {
-        
+        if (!$this->hasTag($name)) {
+            return array();
+        }
+        $tags = $this->getValuesByTagName();
+        return $tags[$name];
     }
     
     /**
@@ -92,6 +97,57 @@ class AspectPHP_Reflection_DocComment
     public function __toString()
     {
         return $this->comment;
+    }
+    
+    /**
+     * Returns the values grouped by tag name.
+     *
+     * The tag name is used as key, the assigned value
+     * is an array of tag values.
+     *
+     * @return array(string=>array(string))
+     */
+    protected function getValuesByTagName()
+    {
+        return $this->findValuesByTagName();
+    }
+    
+    /**
+     * Extracts the tags from the comment.
+     *
+     * The tag name is used as key, the assigned value
+     * is an array of tag values.
+     *
+     * @return array(string=>array(string))
+     */
+    protected function findValuesByTagName()
+    {
+        $pattern = '/^\s*\* @(?P<name>[a-zA-Z]+)([ ]+(?P<value>.*))?\r?$/um';
+        $tags    = array();
+        preg_match_all($pattern, $this->comment, $tags, PREG_SET_ORDER);
+        
+        $valuesByTag = array();
+        foreach ($tags as $tag) {
+            /* @var $tag array(string=>string) */
+            $name = $tag['name'];
+            if (!isset($valuesByTag[$name])) {
+                $valuesByTag[$name] = array();
+            }
+            $value = isset($tag['value']) ? $this->sanitizeTagValue($tag['value']) : '';
+            $valuesByTag[$name][] = $value;
+        }
+        return $valuesByTag;
+    }
+    
+    /**
+     * Sanitizes the provided tag value.
+     *
+     * @param string $value
+     * @return string The sanitized value.
+     */
+    protected function sanitizeTagValue($value)
+    {
+        return rtrim($value);
     }
     
 }
