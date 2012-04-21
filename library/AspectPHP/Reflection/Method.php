@@ -34,6 +34,18 @@ class AspectPHP_Reflection_Method extends ReflectionMethod
     protected $aspect = null;
     
     /**
+     * The cached doc comment.
+     *
+     * Contains...
+     * # null if the doc comment was not cached yet.
+     * # false if no doc comment is available.
+     * # the cached object otherwise.
+     *
+     * @var AspectPHP_Reflection_DocComment|false|null
+     */
+    protected $docComment = null;
+    
+    /**
      * Creates a method reflection object.
      *
      * @param AspectPHP_Reflection_Aspect|AspectPHP_Aspect|string $aspect
@@ -53,6 +65,38 @@ class AspectPHP_Reflection_Method extends ReflectionMethod
     public function getAspect()
     {
         return $this->aspect;
+    }
+    
+    /**
+     * Returns a doc comment object or false if no doc block exists.
+     *
+     * Notice:
+     * The return value false is used to be compatible to the overwritten
+     * method ReflectionMethod::getDocComment(). Usually null would
+     * be the preferred return value if an object is not available.
+     *
+     * @return AspectPHP_Reflection_DocComment|false
+     */
+    public function getDocComment()
+    {
+        if ($this->docComment === null) {
+            $this->docComment = $this->createDocComment();
+        }
+        return $this->docComment;
+    }
+    
+    /**
+     * Creates the doc comment object.
+     *
+     * @return AspectPHP_Reflection_DocComment|false
+     */
+    protected function createDocComment()
+    {
+        $comment = parent::getDocComment();
+        if ($comment === false) {
+            return false;
+        }
+        return new AspectPHP_Reflection_DocComment($comment);
     }
     
     /**
