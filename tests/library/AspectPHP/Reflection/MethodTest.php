@@ -110,7 +110,8 @@ class AspectPHP_Reflection_MethodTest extends PHPUnit_Framework_TestCase
      */
     public function testGetDocCommentReturnsFalseIfNoCommentIsAvailable()
     {
-        
+        $method = $this->createReflection('Reflection_NoDocBlockAspect', 'notDocumentedMethod');
+        $this->assertFalse($method->getDocComment());
     }
     
     /**
@@ -118,7 +119,8 @@ class AspectPHP_Reflection_MethodTest extends PHPUnit_Framework_TestCase
      */
     public function testGetDocCommentReturnsCommentObject()
     {
-        
+        $method = $this->createReflection('Reflection_SimpleAspect', 'anotherMethod');
+        $this->assertInstanceOf('AspectPHP_Reflection_DocComment', $method->getDocComment());
     }
     
     /**
@@ -126,7 +128,8 @@ class AspectPHP_Reflection_MethodTest extends PHPUnit_Framework_TestCase
      */
     public function testEachCallToGetDocCommentReturnsSameObject()
     {
-        
+        $method = $this->createReflection('Reflection_SimpleAspect', 'anotherMethod');
+        $this->assertSame($method->getDocComment(), $method->getDocComment());
     }
     
     /**
