@@ -83,7 +83,7 @@ class AspectPHP_Reflection_DocCommentTest extends PHPUnit_Framework_TestCase
      */
     public function testHasTagReturnsFalseIfCommentDoesNotContainTag()
     {
-        
+        $this->assertFalse($this->docComment->hasTag('missing'));
     }
     
     /**
@@ -92,7 +92,7 @@ class AspectPHP_Reflection_DocCommentTest extends PHPUnit_Framework_TestCase
      */
     public function testHasTagReturnsTrueIfCommentContainsTag()
     {
-    
+        $this->assertTrue($this->docComment->hasTag('return'));
     }
     
     /**
@@ -101,7 +101,7 @@ class AspectPHP_Reflection_DocCommentTest extends PHPUnit_Framework_TestCase
      */
     public function testHasTagReturnsTrueIfCommentContainsTagWithoutValue()
     {
-        
+        $this->assertTrue($this->docComment->hasTag('tagged'));
     }
     
     /**
@@ -109,7 +109,8 @@ class AspectPHP_Reflection_DocCommentTest extends PHPUnit_Framework_TestCase
      */
     public function testGetTagsReturnsArray()
     {
-        
+        $tags = $this->docComment->getTags('param');
+        $this->assertInternalType('array', $tags);
     }
     
     /**
@@ -118,7 +119,9 @@ class AspectPHP_Reflection_DocCommentTest extends PHPUnit_Framework_TestCase
      */
     public function testGetTagsReturnsEmptyArrayIfCommentDoesNotContainTags()
     {
-        
+        $tags = $this->docComment->getTags('missing');
+        $this->assertInternalType('array', $tags);
+        $this->assertEquals(0, count($tags));
     }
     
     /**
@@ -127,7 +130,9 @@ class AspectPHP_Reflection_DocCommentTest extends PHPUnit_Framework_TestCase
      */
     public function testGetTagsReturnsArrayWithCorrectNumberOfElements()
     {
-    
+        $tags = $this->docComment->getTags('param');
+        $this->assertInternalType('array', $tags);
+        $this->assertEquals(2, count($tags));
     }
     
     /**
@@ -136,7 +141,12 @@ class AspectPHP_Reflection_DocCommentTest extends PHPUnit_Framework_TestCase
      */
     public function testGetTagsReturnsArrayWithEmptyStringIfTagDoesNotContainAnyValue()
     {
-        
+        $tags = $this->docComment->getTags('tagged');
+        $this->assertInternalType('array', $tags);
+        $this->assertEquals(1, count($tags));
+        $value = current($tags);
+        $this->assertInternalType('string', $value);
+        $this->assertEmpty($value);
     }
     
     /**
@@ -144,7 +154,10 @@ class AspectPHP_Reflection_DocCommentTest extends PHPUnit_Framework_TestCase
      */
     public function testGetTagsReturnsArrayWithCorrectValues()
     {
-        
+        $tags = $this->docComment->getTags('param');
+        $this->assertInternalType('array', $tags);
+        $this->assertContains('JoinPoint $joinPoint', $tags);
+        $this->assertContains('mixed|null $context', $tags);
     }
     
     /**
