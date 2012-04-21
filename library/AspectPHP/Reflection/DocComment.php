@@ -77,7 +77,7 @@ class AspectPHP_Reflection_DocComment
      * </code>
      *
      * @param string $name
-     * @return array(string|boolean)
+     * @return array(string)
      */
     public function getTags($name)
     {
