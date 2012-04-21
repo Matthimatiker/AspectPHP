@@ -161,6 +161,20 @@ class AspectPHP_Reflection_DocCommentTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * Ensures that getTags() always returns the same results if equal
+     * parameters are provided.
+     *
+     * This test guarantees that optimizations like internal caching
+     * do not influence the correctness of the result.
+     */
+    public function testGetTagsIsDeterministic()
+    {
+        $first  = $this->docComment->getTags('param');
+        $second = $this->docComment->getTags('param');
+        $this->assertEquals($first, $second);
+    }
+    
+    /**
      * Returns a comment string for testing.
      *
      * @return string
