@@ -77,36 +77,62 @@ class AspectPHP_Reflection_DocCommentTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->getComment(), (string)$this->docComment);
     }
     
+    /**
+     * Ensures that hasTag() returns false if the comment does not contain a
+     * tag with the provided name.
+     */
     public function testHasTagReturnsFalseIfCommentDoesNotContainTag()
     {
         
     }
     
+    /**
+     * Ensures that hasTag() returns true if the comment contains a tag with
+     * the provided name.
+     */
     public function testHasTagReturnsTrueIfCommentContainsTag()
     {
     
     }
     
+    /**
+     * Checks if getTags() returns an array.
+     */
     public function testGetTagsReturnsArray()
     {
         
     }
     
+    /**
+     * Ensures that getTags() returns an empty array if the comment does not
+     * contain any tag with the provided name.
+     */
     public function testGetTagsReturnsEmptyArrayIfCommentDoesNotContainTags()
     {
         
     }
     
+    /**
+     * Checks if getTags() returns an array that contains as many elements as
+     * there are tags in the comment.
+     */
     public function testGetTagsReturnsArrayWithCorrectNumberOfElements()
     {
     
     }
     
+    /**
+     * Ensures that getTags() returns an empty string as tag value if no value
+     * was assigned to the tag with the provided name.
+     */
     public function testGetTagsReturnsArrayWithEmptyStringIfTagDoesNotContainAnyValue()
     {
         
     }
     
+    /**
+     * Checks if the array from getTags() contains the correct values.
+     */
     public function testGetTagsReturnsArrayWithCorrectValues()
     {
         
