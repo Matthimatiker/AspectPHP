@@ -77,6 +77,41 @@ class AspectPHP_Reflection_DocCommentTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->getComment(), (string)$this->docComment);
     }
     
+    public function testHasTagReturnsFalseIfCommentDoesNotContainTag()
+    {
+        
+    }
+    
+    public function testHasTagReturnsTrueIfCommentContainsTag()
+    {
+    
+    }
+    
+    public function testGetTagsReturnsArray()
+    {
+        
+    }
+    
+    public function testGetTagsReturnsEmptyArrayIfCommentDoesNotContainTags()
+    {
+        
+    }
+    
+    public function testGetTagsReturnsArrayWithCorrectNumberOfElements()
+    {
+    
+    }
+    
+    public function testGetTagsReturnsArrayWithEmptyStringIfTagDoesNotContainAnyValue()
+    {
+        
+    }
+    
+    public function testGetTagsReturnsArrayWithCorrectValues()
+    {
+        
+    }
+    
     /**
      * Returns a comment string for testing.
      *
