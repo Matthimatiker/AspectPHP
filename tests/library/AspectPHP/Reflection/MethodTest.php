@@ -105,16 +105,25 @@ class AspectPHP_Reflection_MethodTest extends PHPUnit_Framework_TestCase
         $this->assertSame($reflection, $aspect);
     }
     
+    /**
+     * Ensures that getDocComment() returns false if no comment is available.
+     */
     public function testGetDocCommentReturnsFalseIfNoCommentIsAvailable()
     {
         
     }
     
+    /**
+     * Checks if getDocComment() returns an object of type AspectPHP_Reflection_DocComment.
+     */
     public function testGetDocCommentReturnsCommentObject()
     {
         
     }
     
+    /**
+     * Ensures that each call to getDocComment() returns the same object.
+     */
     public function testEachCallToGetDocCommentReturnsSameObject()
     {
         
