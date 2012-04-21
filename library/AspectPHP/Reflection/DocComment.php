@@ -50,6 +50,41 @@ class AspectPHP_Reflection_DocComment
     }
     
     /**
+     * Checks if the comment contains a tag with the provided name.
+     *
+     * Example:
+     * <code>
+     * $isAvailable = $comment->hasTag('return');
+     * </code>
+     *
+     * @param string $name
+     * @return boolean True if the tag exists, false otherwise.
+     */
+    public function hasTag($name)
+    {
+        
+    }
+    
+    /**
+     * Returns the values that are assigned to the tags
+     * with the provided name.
+     *
+     * Returns an array of values as each tag may occur more than once.
+     *
+     * Example:
+     * <code>
+     * $values = $comment->getTags('param');
+     * </code>
+     *
+     * @param string $name
+     * @return array(string|boolean)
+     */
+    public function getTags($name)
+    {
+        
+    }
+    
+    /**
      * Returns the comment.
      *
      * @return string
