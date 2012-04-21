@@ -96,6 +96,15 @@ class AspectPHP_Reflection_DocCommentTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * Ensures that hasTag() returns true if the comment contains a tag with
+     * the provided name, even if no tag value is assigned.
+     */
+    public function testHasTagReturnsTrueIfCommentContainsTagWithoutValue()
+    {
+        
+    }
+    
+    /**
      * Checks if getTags() returns an array.
      */
     public function testGetTagsReturnsArray()
