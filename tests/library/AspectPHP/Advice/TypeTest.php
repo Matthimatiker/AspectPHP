@@ -92,4 +92,15 @@ class AspectPHP_Advice_TypeTest extends PHPUnit_Framework_TestCase
         $this->assertContains(AspectPHP_Advice_Type::AFTER, $types);
     }
     
+    /**
+     * Checks if each call to all() returns the same result.
+     *
+     * Ensures that mechanisms like caching do not influence the correctness
+     * of the method.
+     */
+    public function testEachCallReturnsSameResult()
+    {
+        $this->assertEquals(AspectPHP_Advice_Type::all(), AspectPHP_Advice_Type::all());
+    }
+    
 }
