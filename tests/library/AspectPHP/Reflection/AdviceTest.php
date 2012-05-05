@@ -163,7 +163,14 @@ class AspectPHP_Reflection_AdviceTest extends PHPUnit_Framework_TestCase
      */
     public function testReferencesPointcutReturnsTrueIfCommentContainsPointcutReference()
     {
-        
+        $comment = '/**'               . PHP_EOL
+                 . ' * Hello'          . PHP_EOL
+                 . ' *'                . PHP_EOL
+                 . ' * World!'         . PHP_EOL
+                 . ' *'                . PHP_EOL
+                 . ' * @before test()' . PHP_EOL
+                 . ' */';
+        $this->assertTrue(AspectPHP_Reflection_Advice::referencesPointcut($comment));
     }
     
     /**
@@ -172,7 +179,14 @@ class AspectPHP_Reflection_AdviceTest extends PHPUnit_Framework_TestCase
      */
     public function testReferencesPointcutReturnsFalseIfCommentDoesNotContainPointcutReference()
     {
-        
+        $comment = '/**'                    . PHP_EOL
+                 . ' * Hello'               . PHP_EOL
+                 . ' *'                     . PHP_EOL
+                 . ' * World!'              . PHP_EOL
+                 . ' *'                     . PHP_EOL
+                 . ' * @param string $name' . PHP_EOL
+                 . ' */';
+        $this->assertFalse(AspectPHP_Reflection_Advice::referencesPointcut($comment));
     }
     
     /**
