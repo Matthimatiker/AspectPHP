@@ -27,18 +27,6 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
 {
     
     /**
-     * Contains a list of supported annotation tags.
-     *
-     * @var array(string)
-     */
-    protected $supportedTags = array(
-        'before',
-        'afterReturning',
-        'afterThrowing',
-        'after'
-    );
-    
-    /**
      * A list of methods that are considered as pointcut.
      *
      * The method name is used as key to provided fast access by name.
@@ -218,7 +206,7 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
     protected function addAdvice(ReflectionMethod $method)
     {
         $advice = new AspectPHP_Reflection_Advice($this, $method->getName());
-        foreach ($this->supportedTags as $type) {
+        foreach (AspectPHP_Advice_Type::all() as $type) {
             /* @var $type string */
             foreach ($advice->getPointcutsByType($type) as $pointcut) {
                 /* @var $pointcut AspectPHP_Reflection_Pointcut */
