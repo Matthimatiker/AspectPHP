@@ -49,12 +49,12 @@ class AspectPHP_Reflection_Advice extends AspectPHP_Reflection_Method
     protected $pointcuts = array();
     
     /**
-     * Checks if the doc block contains an advice annotation.
+     * Checks if the doc block contains an advice annotation that references a pointcut.
      *
      * @param AspectPHP_Reflection_DocComment|string $comment
      * @return boolean True if an advice annotation was found, false otherwise.
      */
-    public static function containsAdviceAnnotation($comment)
+    public static function referencesPointcut($comment)
     {
         if (!($comment instanceof AspectPHP_Reflection_DocComment)) {
             $comment = new AspectPHP_Reflection_DocComment($comment);
@@ -151,7 +151,7 @@ class AspectPHP_Reflection_Advice extends AspectPHP_Reflection_Method
             $message = 'Method %s() in aspect %s does not provide a doc comment.';
             throw new AspectPHP_Reflection_Exception($this->message($message));
         }
-        if (!self::containsAdviceAnnotation($this->getDocComment())) {
+        if (!self::referencesPointcut($this->getDocComment())) {
             $message = 'Method %s() in aspect %s does not declare pointcut references.';
             throw new AspectPHP_Reflection_Exception($this->message($message));
         }
