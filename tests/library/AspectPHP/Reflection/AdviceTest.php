@@ -158,6 +158,16 @@ class AspectPHP_Reflection_AdviceTest extends PHPUnit_Framework_TestCase
         $reflection->getPointcutsByType('before');
     }
     
+    public function testContainsAdviceAnnotationReturnsTrueIfCommentContainsPointcutReference()
+    {
+        
+    }
+    
+    public function testContainsAdviceAnnotationReturnsFalseIfCommentDoesNotContainPointcutReference()
+    {
+        
+    }
+    
     /**
      * Creates a reflection object for the advice.
      *
