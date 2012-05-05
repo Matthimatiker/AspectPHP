@@ -98,7 +98,7 @@ class AspectPHP_Reflection_Advice extends AspectPHP_Reflection_Method
             $message = 'Invalid type provided. Valid types are: ' . implode(', ', self::$supportedTags);
             throw new InvalidArgumentException($message);
         }
-        $annotations = $this->getAdviceAnnotations();
+        $annotations = $this->getReferencedPointcutsByType();
         if (!isset($annotations[$type])) {
             return array();
         }
@@ -166,20 +166,20 @@ class AspectPHP_Reflection_Advice extends AspectPHP_Reflection_Method
     }
     
     /**
-     * Returns the advice annotations from the doc comment.
+     * Returns the names of the referenced pointcuts from the doc comment.
      *
      * The advice type (for example "before") is used as key.
      * The value is an array of pointcut methods that are connected
      * to the advice type.
      *
-     * The array contains just the advice  annotations that are present.
+     * The array contains just the advice annotations that are present.
      * If no advice annotations were found then the array will be
      * empty.
      *
      * @return array(string=>array(string))
-     * @throws AspectPHP_Reflection_Exception If no valid pointcut identifier is provided.
+     * @throws AspectPHP_Reflection_Exception If a tag value is not a valid pointcut identifier.
      */
-    protected function getAdviceAnnotations()
+    protected function getReferencedPointcutsByType()
     {
         $annotations = array();
         foreach (self::$supportedTags as $tag) {
