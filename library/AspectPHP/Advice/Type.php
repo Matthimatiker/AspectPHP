@@ -1,7 +1,7 @@
 <?php
 
 /**
- * AspectPHP_Advice_Types
+ * AspectPHP_Advice_Type
  *
  * @category PHP
  * @package AspectPHP_Advice
@@ -23,7 +23,7 @@
  * @link https://github.com/Matthimatiker/AspectPHP
  * @since 05.05.2012
  */
-class AspectPHP_Advice_Types
+class AspectPHP_Advice_Type
 {
     
     /**
