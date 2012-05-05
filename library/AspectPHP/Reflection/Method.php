@@ -92,7 +92,7 @@ class AspectPHP_Reflection_Method extends ReflectionMethod
      */
     public function hasDocComment()
     {
-        
+        return parent::getDocComment() !== false;
     }
     
     /**
