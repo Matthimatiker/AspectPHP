@@ -27,18 +27,6 @@ class AspectPHP_Advice_Extractor
 {
     
     /**
-     * Contains a list of supported annotation tags.
-     *
-     * @var array(string)
-     */
-    protected $supportedTags = array(
-        'before',
-        'afterReturning',
-        'afterThrowing',
-        'after'
-    );
-    
-    /**
      * Extracts the advices from the given aspect.
      *
      * @param AspectPHP_Aspect $aspect
@@ -51,7 +39,7 @@ class AspectPHP_Advice_Extractor
         $aspectInfo = new AspectPHP_Reflection_Aspect($aspect);
         foreach ($aspectInfo->getAdvices() as $advice) {
             /* @var $advice AspectPHP_Reflection_Advice */
-            foreach ($this->supportedTags as $type) {
+            foreach (AspectPHP_Advice_Type::all() as $type) {
                 /* @var $type string */
                 foreach ($advice->getPointcutsByType($type) as $pointcutMethod) {
                     /* @var $pointcutMethod AspectPHP_Reflection_Pointcut */
