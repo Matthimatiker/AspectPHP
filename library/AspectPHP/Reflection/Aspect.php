@@ -276,22 +276,4 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
         return strpos($method->getName(), '_aspectPHP') === 0;
     }
     
-    /**
-     * Checks if the provided doc block contains an advice annotation.
-     *
-     * @param string $docComment
-     * @return boolean True if an advice annotation was found, false otherwise.
-     */
-    protected function containsAdviceAnnotation($docComment)
-    {
-        $comment = new AspectPHP_Reflection_DocComment($docComment);
-        foreach ($this->supportedTags as $tag) {
-            /* @var $tag string */
-            if ($comment->hasTag($tag)) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
 }
