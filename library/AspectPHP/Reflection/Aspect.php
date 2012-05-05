@@ -294,42 +294,4 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
         return false;
     }
     
-    /**
-     * Returns the advice annotations from the given doc comment.
-     *
-     * The advice type (for example "before") is used as key.
-     * The value is an array of pointcut methods that are connected
-     * to the advice type.
-     *
-     * The array contains just the advice  annotations that are present.
-     * If no advice annotations were found then the array will be
-     * empty.
-     *
-     * @param AspectPHP_Reflection_DocComment $docComment
-     * @return array(string=>array(string))
-     * @throws AspectPHP_Reflection_Exception If no valid pointcut identifier is provided.
-     */
-    protected function getAdviceAnnotations(AspectPHP_Reflection_DocComment $docComment)
-    {
-        $annotations = array();
-        foreach ($this->supportedTags as $tag) {
-            /* @var $tag string */
-            $tagValues = $docComment->getTags($tag);
-            if (count($tagValues) === 0) {
-                continue;
-            }
-            $annotations[$tag] = array();
-            foreach ($tagValues as $pointcutReference) {
-                /* @var $pointcutReference string */
-                $pointcutReference = rtrim($pointcutReference, '()');
-                if (empty($pointcutReference)) {
-                    $message = 'No pointcut reference provided for tag @' . $tag . '.';
-                    throw new AspectPHP_Reflection_Exception($message);
-                }
-                $annotations[$tag][] = $pointcutReference;
-            }
-        }
-        return $annotations;
-    }
-    
 }
