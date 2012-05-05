@@ -42,12 +42,7 @@ class AspectPHP_Advice_Container implements Countable
      *
      * @var array(string=>AspectPHP_Advice_Composite)
      */
-    protected $advicesByType = array(
-        'before'         => null,
-        'afterReturning' => null,
-        'afterThrowing'  => null,
-        'after'          => null
-    );
+    protected $advicesByType = array();
     
     /**
      * Creates the container.
@@ -55,7 +50,7 @@ class AspectPHP_Advice_Container implements Countable
     public function __construct()
     {
         // Initialize the composite objects.
-        foreach (array_keys($this->advicesByType) as $type) {
+        foreach (AspectPHP_Advice_Type::all() as $type) {
             /* @var $type string */
             $this->advicesByType[$type] = new AspectPHP_Advice_Composite();
         }
@@ -68,7 +63,7 @@ class AspectPHP_Advice_Container implements Countable
      */
     public function before()
     {
-        return $this->advicesByType[__FUNCTION__];
+        return $this->advicesByType[AspectPHP_Advice_Type::BEFORE];
     }
     
     /**
@@ -78,7 +73,7 @@ class AspectPHP_Advice_Container implements Countable
      */
     public function afterReturning()
     {
-        return $this->advicesByType[__FUNCTION__];
+        return $this->advicesByType[AspectPHP_Advice_Type::AFTER_RETURNING];
     }
     
     /**
@@ -88,7 +83,7 @@ class AspectPHP_Advice_Container implements Countable
      */
     public function afterThrowing()
     {
-        return $this->advicesByType[__FUNCTION__];
+        return $this->advicesByType[AspectPHP_Advice_Type::AFTER_THROWING];
     }
     
     /**
@@ -98,7 +93,7 @@ class AspectPHP_Advice_Container implements Countable
      */
     public function after()
     {
-        return $this->advicesByType[__FUNCTION__];
+        return $this->advicesByType[AspectPHP_Advice_Type::AFTER];
     }
     
     /**
