@@ -107,10 +107,9 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager
     public function getAdvicesFor($method)
     {
         $container = new AspectPHP_Advice_Container();
-        $types     = array('before', 'afterReturning', 'afterThrowing', 'after');
         foreach ($this->advicesByAspect as $advices) {
             /* @var $advices AspectPHP_Advice_Container */
-            foreach ($types as $type) {
+            foreach (AspectPHP_Advice_Type::all() as $type) {
                 /* @var $type string */
                 foreach ($advices->{$type}() as $advice) {
                     /* @var $advice AspectPHP_Advice */
