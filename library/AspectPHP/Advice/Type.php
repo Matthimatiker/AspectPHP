@@ -55,13 +55,35 @@ class AspectPHP_Advice_Type
     const AFTER = 'after';
     
     /**
+     * Contains the cached names of all types.
+     *
+     * @var array(string)|null
+     */
+    protected static $types = null;
+    
+    /**
      * Returns all available types.
      *
      * @return array(string)
      */
     public static function all()
     {
+        if (self::$types === null) {
+            self::$types = self::determineTypes();
+        }
+        return self::$types;
         
+    }
+    
+    /**
+     * Creates a list of all existing advice types.
+     *
+     * @return array(string)
+     */
+    protected static function determineTypes()
+    {
+        $reflection = new ReflectionClass(__CLASS__);
+        return array_values($reflection->getConstants());
     }
     
     /**
@@ -72,7 +94,7 @@ class AspectPHP_Advice_Type
      */
     public static function isValid($type)
     {
-        
+        return in_array($type, self::all(), true);
     }
     
     /**
@@ -85,7 +107,11 @@ class AspectPHP_Advice_Type
      */
     public static function assertValid($type)
     {
-        
+        if (!self::isValid($type)) {
+            $template = '%s is not a valid name of an advice type. Valid type names are: %s';
+            $message  = sprintf($template, $type, implode(', ', self::all()));
+            throw new InvalidArgumentException($message);
+        }
     }
     
 }
