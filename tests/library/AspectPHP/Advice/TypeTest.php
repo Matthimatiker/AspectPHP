@@ -38,7 +38,7 @@ class AspectPHP_Advice_TypeTest extends PHPUnit_Framework_TestCase
      */
     public function testIsValidAcceptsValidType()
     {
-        
+        $this->assertTrue(AspectPHP_Advice_Type::isValid(AspectPHP_Advice_Type::BEFORE));
     }
     
     /**
@@ -46,7 +46,7 @@ class AspectPHP_Advice_TypeTest extends PHPUnit_Framework_TestCase
      */
     public function testIsValidRejectsInvalidType()
     {
-        
+        $this->assertFalse(AspectPHP_Advice_Type::isValid('invalid'));
     }
     
     /**
@@ -55,7 +55,8 @@ class AspectPHP_Advice_TypeTest extends PHPUnit_Framework_TestCase
      */
     public function testAssertValidDoesNotThrowExceptionIfTypeIsValid()
     {
-        
+        $this->setExpectedException(null);
+        AspectPHP_Advice_Type::assertValid(AspectPHP_Advice_Type::AFTER);
     }
     
     /**
@@ -64,7 +65,8 @@ class AspectPHP_Advice_TypeTest extends PHPUnit_Framework_TestCase
      */
     public function testAssertValidThrowsExceptionIfInvalidTypeIsProvided()
     {
-        
+        $this->setExpectedException('InvalidArgumentException');
+        AspectPHP_Advice_Type::assertValid('invalid');
     }
     
     /**
@@ -72,7 +74,8 @@ class AspectPHP_Advice_TypeTest extends PHPUnit_Framework_TestCase
      */
     public function testAllReturnsArray()
     {
-        
+        $types = AspectPHP_Advice_Type::all();
+        $this->assertInternalType('array', $types);
     }
     
     /**
@@ -81,7 +84,12 @@ class AspectPHP_Advice_TypeTest extends PHPUnit_Framework_TestCase
      */
     public function testAllReturnsAllAvailableTypes()
     {
-        
+        $types = AspectPHP_Advice_Type::all();
+        $this->assertInternalType('array', $types);
+        $this->assertContains(AspectPHP_Advice_Type::BEFORE, $types);
+        $this->assertContains(AspectPHP_Advice_Type::AFTER_RETURNING, $types);
+        $this->assertContains(AspectPHP_Advice_Type::AFTER_THROWING, $types);
+        $this->assertContains(AspectPHP_Advice_Type::AFTER, $types);
     }
     
 }
