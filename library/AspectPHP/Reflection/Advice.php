@@ -73,7 +73,7 @@ class AspectPHP_Reflection_Advice extends AspectPHP_Reflection_Method
      *
      * Example:
      * <code>
-     * $pointcuts = $advice->getPointcutsByType('before');
+     * $pointcuts = $advice->getPointcutsByType(AspectPHP_Advice_Type::BEFORE);
      * </code>
      *
      * @param string $type
