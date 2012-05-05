@@ -27,18 +27,6 @@ class AspectPHP_Reflection_Advice extends AspectPHP_Reflection_Method
 {
     
     /**
-     * Contains a list of supported annotation tags.
-     *
-     * @var array(string)
-     */
-    protected static $supportedTags = array(
-        'before',
-        'afterReturning',
-        'afterThrowing',
-        'after'
-    );
-    
-    /**
      * Contains pointcut objects that were already created.
      *
      * The name of the pointcut method is used as key, the
@@ -59,7 +47,7 @@ class AspectPHP_Reflection_Advice extends AspectPHP_Reflection_Method
         if (!($comment instanceof AspectPHP_Reflection_DocComment)) {
             $comment = new AspectPHP_Reflection_DocComment($comment);
         }
-        foreach (self::$supportedTags as $tag) {
+        foreach (AspectPHP_Advice_Type::all() as $tag) {
             /* @var $tag string */
             if ($comment->hasTag($tag)) {
                 return true;
@@ -94,10 +82,7 @@ class AspectPHP_Reflection_Advice extends AspectPHP_Reflection_Method
      */
     public function getPointcutsByType($type)
     {
-        if (!in_array($type, self::$supportedTags)) {
-            $message = 'Invalid type provided. Valid types are: ' . implode(', ', self::$supportedTags);
-            throw new InvalidArgumentException($message);
-        }
+        AspectPHP_Advice_Type::assertValid($type);
         $referencedPointcuts = $this->getReferencedPointcutsByType();
         return $this->getPointcutsByName($referencedPointcuts[$type]);
     }
@@ -175,7 +160,7 @@ class AspectPHP_Reflection_Advice extends AspectPHP_Reflection_Method
     protected function getReferencedPointcutsByType()
     {
         $annotations = array();
-        foreach (self::$supportedTags as $tag) {
+        foreach (AspectPHP_Advice_Type::all() as $tag) {
             /* @var $tag string */
             $tagValues = $this->getDocComment()->getTags($tag);
             $annotations[$tag] = array();
