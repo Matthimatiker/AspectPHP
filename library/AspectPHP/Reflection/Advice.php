@@ -152,7 +152,6 @@ class AspectPHP_Reflection_Advice extends AspectPHP_Reflection_Method
      */
     protected function containsAdviceAnnotation()
     {
-    
         $tagList = implode('|', $this->supportedTags);
         $pattern = '/\* @(' . $tagList . ')\s/u';
         return preg_match($pattern, $this->getDocComment()) !== 0;
