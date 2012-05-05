@@ -109,9 +109,26 @@ class AspectPHP_Advice_Type
     {
         if (!self::isValid($type)) {
             $template = '%s is not a valid name of an advice type. Valid type names are: %s';
-            $message  = sprintf($template, $type, implode(', ', self::all()));
+            $message  = sprintf($template, self::toString($type), implode(', ', self::all()));
             throw new InvalidArgumentException($message);
         }
+    }
+    
+    /**
+     * Creates a string value that represents the provided value.
+     *
+     * Returns the value itself if it is already a string or the
+     * type if no string is provided.
+     *
+     * @param mixed $value
+     * @return string
+     */
+    protected static function toString($value)
+    {
+        if (is_string($value)) {
+            return $value;
+        }
+        return '<' . gettype($value) . '>';
     }
     
 }
