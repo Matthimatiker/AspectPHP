@@ -132,6 +132,16 @@ class AspectPHP_Reflection_MethodTest extends PHPUnit_Framework_TestCase
         $this->assertSame($method->getDocComment(), $method->getDocComment());
     }
     
+    public function testHasDocCommentReturnsFalseIfCommentIsNotAvailable()
+    {
+        
+    }
+    
+    public function testHasDocCommentReturnsTrueIfCommentIsAvailable()
+    {
+        
+    }
+    
     /**
      * Creates a reflection object for the method.
      *
