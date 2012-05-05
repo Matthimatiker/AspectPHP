@@ -31,7 +31,7 @@ class AspectPHP_Reflection_Advice extends AspectPHP_Reflection_Method
      *
      * @var array(string)
      */
-    protected $supportedTags = array(
+    protected static $supportedTags = array(
         'before',
         'afterReturning',
         'afterThrowing',
@@ -47,6 +47,23 @@ class AspectPHP_Reflection_Advice extends AspectPHP_Reflection_Method
      * @var array(string=>AspectPHP_Reflection_Pointcut)
      */
     protected $pointcuts = array();
+    
+    /**
+     * Checks if the doc block contains an advice annotation.
+     *
+     * @param AspectPHP_Reflection_DocComment $comment
+     * @return boolean True if an advice annotation was found, false otherwise.
+     */
+    public static function containsAdviceAnnotation(AspectPHP_Reflection_DocComment $comment)
+    {
+        foreach (self::$supportedTags as $tag) {
+            /* @var $tag string */
+            if ($comment->hasTag($tag)) {
+                return true;
+            }
+        }
+        return false;
+    }
     
     /**
      * Creates an advice reflection object.
@@ -74,8 +91,8 @@ class AspectPHP_Reflection_Advice extends AspectPHP_Reflection_Method
      */
     public function getPointcutsByType($type)
     {
-        if (!in_array($type, $this->supportedTags)) {
-            $message = 'Invalid type provided. Valid types are: ' . implode(', ', $this->supportedTags);
+        if (!in_array($type, self::$supportedTags)) {
+            $message = 'Invalid type provided. Valid types are: ' . implode(', ', self::$supportedTags);
             throw new InvalidArgumentException($message);
         }
         $annotations = $this->getAdviceAnnotations();
@@ -131,7 +148,7 @@ class AspectPHP_Reflection_Advice extends AspectPHP_Reflection_Method
             $message = 'Method %s() in aspect %s does not provide a doc comment.';
             throw new AspectPHP_Reflection_Exception($this->message($message));
         }
-        if (!$this->containsAdviceAnnotation()) {
+        if (!self::containsAdviceAnnotation($this->getDocComment())) {
             $message = 'Method %s() in aspect %s does not declare pointcut references.';
             throw new AspectPHP_Reflection_Exception($this->message($message));
         }
@@ -143,23 +160,6 @@ class AspectPHP_Reflection_Advice extends AspectPHP_Reflection_Method
             $message = 'Advice %s() in aspect %s must not require at most one join point parameter.';
             throw new AspectPHP_Reflection_Exception($this->message($message));
         }
-    }
-    
-    /**
-     * Checks if the doc block contains an advice annotation.
-     *
-     * @return boolean True if an advice annotation was found, false otherwise.
-     */
-    protected function containsAdviceAnnotation()
-    {
-        $comment = $this->getDocComment();
-        foreach ($this->supportedTags as $tag) {
-            /* @var $tag string */
-            if ($comment->hasTag($tag)) {
-                return true;
-            }
-        }
-        return false;
     }
     
     /**
@@ -179,7 +179,7 @@ class AspectPHP_Reflection_Advice extends AspectPHP_Reflection_Method
     protected function getAdviceAnnotations()
     {
         $annotations = array();
-        foreach ($this->supportedTags as $tag) {
+        foreach (self::$supportedTags as $tag) {
             /* @var $tag string */
             $tagValues = $this->getDocComment()->getTags($tag);
             if (count($tagValues) === 0) {
