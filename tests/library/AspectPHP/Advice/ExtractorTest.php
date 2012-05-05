@@ -67,7 +67,7 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
      */
     public function testGetAdvicesFromThrowsExceptionIfAdviceMethodIsNotPublic()
     {
-        $this->setExpectedException('RuntimeException');
+        $this->setExpectedException('AspectPHP_Reflection_Exception');
         $this->extractor->getAdvicesFrom(new Extractor_AdviceNotPublicAspect());
     }
     
@@ -77,7 +77,7 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
      */
     public function testGetAdvicesFromThrowsExceptionIfReferencedPointcutMethodIsNotPublic()
     {
-        $this->setExpectedException('RuntimeException');
+        $this->setExpectedException('AspectPHP_Reflection_Exception');
         $this->extractor->getAdvicesFrom(new Extractor_PointcutNotPublicAspect());
     }
     
@@ -87,7 +87,7 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
      */
     public function testGetAdvicesFromThrowsExceptionIfReferencedPointcutMethodDoesNotExist()
     {
-        $this->setExpectedException('RuntimeException');
+        $this->setExpectedException('AspectPHP_Reflection_Exception');
         $this->extractor->getAdvicesFrom(new Extractor_PointcutMissingAspect());
     }
     
@@ -97,7 +97,7 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
      */
     public function testGetAdvicesFromThrowsExceptionIfReferencedPointcutMethodDoesNotReturnPointcutObject()
     {
-        $this->setExpectedException('RuntimeException');
+        $this->setExpectedException('AspectPHP_Reflection_Exception');
         $this->extractor->getAdvicesFrom(new Extractor_PointcutInvalidAspect());
     }
     
