@@ -197,12 +197,15 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
     /**
      * Converts the provided method into a pointcut reflection object.
      *
-     * @param ReflectionMethod $method
+     * @param ReflectionMethod|AspectPHP_Reflection_Pointcut $method
      * @return AspectPHP_Reflection_Pointcut
      * @throws AspectPHP_Reflection_Exception If the method does not meet the pointcut requirements.
      */
     protected function toPointcut(ReflectionMethod $method)
     {
+        if ($method instanceof AspectPHP_Reflection_Pointcut) {
+            return $method;
+        }
         return new AspectPHP_Reflection_Pointcut($this, $method->getName());
     }
     
@@ -214,18 +217,12 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
      */
     protected function addAdvice(ReflectionMethod $method)
     {
-        $advice      = new AspectPHP_Reflection_Advice($this, $method->getName());
-        $annotations = $this->getAdviceAnnotations($advice->getDocComment());
-        foreach ($annotations as $pointcuts) {
-            /* @var $pointcuts array(string) */
-            foreach ($pointcuts as $pointcut) {
-                /* @var $pointcut string */
-                if (!$this->hasMethod($pointcut)) {
-                    $message = 'Pointcut method %s() referenced by advice %s() does not exist.';
-                    $message = sprintf($message, $pointcut, $advice->getName());
-                    throw new AspectPHP_Reflection_Exception($message);
-                }
-                $this->addPointcut($this->getMethod($pointcut));
+        $advice = new AspectPHP_Reflection_Advice($this, $method->getName());
+        foreach ($this->supportedTags as $type) {
+            /* @var $type string */
+            foreach ($advice->getPointcutsByType($type) as $pointcut) {
+                /* @var $pointcut AspectPHP_Reflection_Pointcut */
+                $this->addPointcut($pointcut);
             }
         }
         $this->advices[$advice->getName()] = $advice;

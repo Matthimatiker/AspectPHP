@@ -106,10 +106,15 @@ class AspectPHP_Reflection_Advice extends AspectPHP_Reflection_Method
      *
      * @param string $name
      * @return AspectPHP_Reflection_Pointcut
+     * @throws AspectPHP_Reflection_Exception If the aspect does not contain the requested pointcut.
      */
     protected function getPointcutByName($name)
     {
         if (!isset($this->pointcuts[$name])) {
+            if (!$this->getAspect()->hasMethod($name)) {
+                $message = 'Pointcut method ' . $name . '() referenced by advice %s() does not exist in aspect %s.';
+                throw new AspectPHP_Reflection_Exception($this->message($message));
+            }
             $this->pointcuts[$name] = new AspectPHP_Reflection_Pointcut($this->getAspect(), $name);
         }
         return $this->pointcuts[$name];
