@@ -98,7 +98,7 @@ class AspectPHP_Reflection_AdviceTest extends PHPUnit_Framework_TestCase
     public function testGetPointcutsByTypeReturnsArray()
     {
         $reflection = $this->createReflection('Reflection_SimpleAspect', 'beforeAdvice');
-        $pointcuts  = $reflection->getPointcutsByType('before');
+        $pointcuts  = $reflection->getPointcutsByType(AspectPHP_Advice_Type::BEFORE);
         $this->assertInternalType('array', $pointcuts);
     }
     
@@ -109,7 +109,7 @@ class AspectPHP_Reflection_AdviceTest extends PHPUnit_Framework_TestCase
     public function testGetPointcutsByTypeReturnsPointcutReflectionObjects()
     {
         $reflection = $this->createReflection('Reflection_SimpleAspect', 'beforeAdvice');
-        $pointcuts  = $reflection->getPointcutsByType('before');
+        $pointcuts  = $reflection->getPointcutsByType(AspectPHP_Advice_Type::BEFORE);
         $this->assertInternalType('array', $pointcuts);
         $this->assertContainsOnly('AspectPHP_Reflection_Pointcut', $pointcuts);
     }
@@ -120,7 +120,7 @@ class AspectPHP_Reflection_AdviceTest extends PHPUnit_Framework_TestCase
     public function testGetPointcutsByTypeReturnsCorrectNumberOfPointcuts()
     {
         $reflection = $this->createReflection('Reflection_SimpleAspect', 'beforeAdvice');
-        $pointcuts  = $reflection->getPointcutsByType('before');
+        $pointcuts  = $reflection->getPointcutsByType(AspectPHP_Advice_Type::BEFORE);
         $this->assertInternalType('array', $pointcuts);
         $this->assertEquals(1, count($pointcuts));
     }
@@ -132,7 +132,7 @@ class AspectPHP_Reflection_AdviceTest extends PHPUnit_Framework_TestCase
     public function testGetPointcutsByTypeReturnsEmptyArrayIfNoPointcutOfThatTypeWasReferenced()
     {
         $reflection = $this->createReflection('Reflection_SimpleAspect', 'beforeAdvice');
-        $pointcuts  = $reflection->getPointcutsByType('after');
+        $pointcuts  = $reflection->getPointcutsByType(AspectPHP_Advice_Type::AFTER);
         $this->assertInternalType('array', $pointcuts);
         $this->assertEquals(0, count($pointcuts));
     }
@@ -155,7 +155,7 @@ class AspectPHP_Reflection_AdviceTest extends PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('AspectPHP_Reflection_Exception');
         $reflection = $this->createReflection('Reflection_PointcutMissingAspect', 'beforeAdvice');
-        $reflection->getPointcutsByType('before');
+        $reflection->getPointcutsByType(AspectPHP_Advice_Type::BEFORE);
     }
     
     /**
