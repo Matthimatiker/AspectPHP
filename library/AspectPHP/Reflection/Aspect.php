@@ -287,10 +287,14 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
      */
     protected function containsAdviceAnnotation($docComment)
     {
-        
-        $tagList = implode('|', $this->supportedTags);
-        $pattern = '/\* @(' . $tagList . ')\s/u';
-        return preg_match($pattern, $docComment) !== 0;
+        $comment = new AspectPHP_Reflection_DocComment($docComment);
+        foreach ($this->supportedTags as $tag) {
+            /* @var $tag string */
+            if ($comment->hasTag($tag)) {
+                return true;
+            }
+        }
+        return false;
     }
     
     /**
@@ -304,33 +308,29 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
      * If no advice annotations were found then the array will be
      * empty.
      *
-     * @param string $docComment
+     * @param AspectPHP_Reflection_DocComment $docComment
      * @return array(string=>array(string))
      * @throws AspectPHP_Reflection_Exception If no valid pointcut identifier is provided.
      */
-    protected function getAdviceAnnotations($docComment)
+    protected function getAdviceAnnotations(AspectPHP_Reflection_DocComment $docComment)
     {
-        $tagList = implode('|', $this->supportedTags);
-        $pattern = '/^\s*\* @(?P<type>' . $tagList . ')(( )+(?P<pointcut>.*))?$/um';
-        
-        $references = array();
-        preg_match_all($pattern, $docComment, $references, PREG_SET_ORDER);
-        
         $annotations = array();
-        foreach ($references as $reference) {
-            /* @var $reference array(integer|string=>string) */
-            $type = $reference['type'];
-            if (!isset($reference['pointcut'])) {
-                $message = 'No pointcut reference provided for tag @' . $type . '.';
-                throw new AspectPHP_Reflection_Exception($message);
+        foreach ($this->supportedTags as $tag) {
+            /* @var $tag string */
+            $tagValues = $docComment->getTags($tag);
+            if (count($tagValues) === 0) {
+                continue;
             }
-            $pointcut = rtrim($reference['pointcut']);
-            $pointcut = rtrim($pointcut, '()');
-            
-            if (!isset($annotations[$type])) {
-                $annotations[$type] = array();
+            $annotations[$tag] = array();
+            foreach ($tagValues as $pointcutReference) {
+                /* @var $pointcutReference string */
+                $pointcutReference = rtrim($pointcutReference, '()');
+                if (empty($pointcutReference)) {
+                    $message = 'No pointcut reference provided for tag @' . $tag . '.';
+                    throw new AspectPHP_Reflection_Exception($message);
+                }
+                $annotations[$tag][] = $pointcutReference;
             }
-            $annotations[$type][] = $pointcut;
         }
         return $annotations;
     }
