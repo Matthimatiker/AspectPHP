@@ -86,6 +86,16 @@ class AspectPHP_Reflection_Method extends ReflectionMethod
     }
     
     /**
+     * Checks if the method has a doc block.
+     *
+     * @return boolean True if a doc comment is available, false otherwise.
+     */
+    public function hasDocComment()
+    {
+        
+    }
+    
+    /**
      * Creates the doc comment object.
      *
      * @return AspectPHP_Reflection_DocComment|false
