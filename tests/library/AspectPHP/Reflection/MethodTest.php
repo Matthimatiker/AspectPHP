@@ -137,7 +137,8 @@ class AspectPHP_Reflection_MethodTest extends PHPUnit_Framework_TestCase
      */
     public function testHasDocCommentReturnsFalseIfCommentIsNotAvailable()
     {
-        
+        $method = $this->createReflection('Reflection_NoDocBlockAspect', 'notDocumentedMethod');
+        $this->assertFalse($method->hasDocComment());
     }
     
     /**
@@ -145,7 +146,8 @@ class AspectPHP_Reflection_MethodTest extends PHPUnit_Framework_TestCase
      */
     public function testHasDocCommentReturnsTrueIfCommentIsAvailable()
     {
-        
+        $method = $this->createReflection('Reflection_SimpleAspect', 'anotherMethod');
+        $this->assertTrue($method->hasDocComment());
     }
     
     /**
