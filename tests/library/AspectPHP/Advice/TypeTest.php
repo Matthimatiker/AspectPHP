@@ -33,6 +33,34 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
 class AspectPHP_Advice_TypeTest extends PHPUnit_Framework_TestCase
 {
     
+    public function testIsValidAcceptsValidType()
+    {
+        
+    }
     
+    public function testIsValidRejectsInvalidType()
+    {
+        
+    }
+    
+    public function testAssertValidDoesNotThrowExceptionIfTypeIsValid()
+    {
+        
+    }
+    
+    public function testAssertValidThrowsExceptionIfInvalidTypeIsProvided()
+    {
+        
+    }
+    
+    public function testAllReturnsArray()
+    {
+        
+    }
+    
+    public function testAllReturnsAllAvailableTypes()
+    {
+        
+    }
     
 }
