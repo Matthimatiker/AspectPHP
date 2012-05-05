@@ -241,7 +241,7 @@ class AspectPHP_Reflection_Aspect extends ReflectionClass
             // Advices must contain a doc comment.
             return false;
         }
-        if (!$this->containsAdviceAnnotation($docComment)) {
+        if (!AspectPHP_Reflection_Advice::containsAdviceAnnotation($docComment)) {
             // No advice annotations found.
             return false;
         }

@@ -51,11 +51,14 @@ class AspectPHP_Reflection_Advice extends AspectPHP_Reflection_Method
     /**
      * Checks if the doc block contains an advice annotation.
      *
-     * @param AspectPHP_Reflection_DocComment $comment
+     * @param AspectPHP_Reflection_DocComment|string $comment
      * @return boolean True if an advice annotation was found, false otherwise.
      */
-    public static function containsAdviceAnnotation(AspectPHP_Reflection_DocComment $comment)
+    public static function containsAdviceAnnotation($comment)
     {
+        if (!($comment instanceof AspectPHP_Reflection_DocComment)) {
+            $comment = new AspectPHP_Reflection_DocComment($comment);
+        }
         foreach (self::$supportedTags as $tag) {
             /* @var $tag string */
             if ($comment->hasTag($tag)) {
