@@ -39,6 +39,16 @@ class AspectPHP_Reflection_Advice extends AspectPHP_Reflection_Method
     );
     
     /**
+     * Contains pointcut objects that were already created.
+     *
+     * The name of the pointcut method is used as key, the
+     * pointcut object as value.
+     *
+     * @var array(string=>AspectPHP_Reflection_Pointcut)
+     */
+    protected $pointcuts = array();
+    
+    /**
      * Creates an advice reflection object.
      *
      * @param AspectPHP_Reflection_Aspect|AspectPHP_Aspect|string $aspect
@@ -86,9 +96,23 @@ class AspectPHP_Reflection_Advice extends AspectPHP_Reflection_Method
         $pointcuts = array();
         foreach ($names as $name) {
             /* @var $name string */
-            $pointcuts[] = $this->getAspect()->getPointcut($name);
+            $pointcuts[] = $this->getPointcutByName($name);
         }
         return $pointcuts;
+    }
+    
+    /**
+     * Returns the pointcut with the provided name.
+     *
+     * @param string $name
+     * @return AspectPHP_Reflection_Pointcut
+     */
+    protected function getPointcutByName($name)
+    {
+        if (!isset($this->pointcuts[$name])) {
+            $this->pointcuts[$name] = new AspectPHP_Reflection_Pointcut($this->getAspect(), $name);
+        }
+        return $this->pointcuts[$name];
     }
     
     /**
