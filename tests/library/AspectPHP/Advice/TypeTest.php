@@ -50,6 +50,14 @@ class AspectPHP_Advice_TypeTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * Ensures that isValid() does not accept objects.
+     */
+    public function testIsValidReturnsFalseIfObjectIsProvided()
+    {
+        $this->assertFalse(AspectPHP_Advice_Type::isValid(new stdClass()));
+    }
+    
+    /**
      * Ensures that assertValid() does not throw an exception if the
      * provided type is valid.
      */
@@ -67,6 +75,15 @@ class AspectPHP_Advice_TypeTest extends PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('InvalidArgumentException');
         AspectPHP_Advice_Type::assertValid('invalid');
+    }
+    
+    /**
+     * Ensures that assertValid() is able to handle object parameters.
+     */
+    public function testAssertValidWorksWithObjects()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        AspectPHP_Advice_Type::assertValid(new stdClass());
     }
     
     /**
