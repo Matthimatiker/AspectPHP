@@ -44,58 +44,21 @@ class AspectPHP_Advice_Extractor
      *
      * @param AspectPHP_Aspect $aspect
      * @return AspectPHP_Advice_Container A container that contains the advices grouped by type.
-     * @throws RuntimeException If advices or pointcuts are not valid.
+     * @throws AspectPHP_Reflection_Exception If advices or pointcuts are not valid.
      */
     public function getAdvicesFrom(AspectPHP_Aspect $aspect)
     {
         $advices    = new AspectPHP_Advice_Container();
-        $aspectInfo = new ReflectionClass($aspect);
-        foreach ($aspectInfo->getMethods() as $method) {
-            /* @var $method ReflectionMethod */
-            if ($this->isInternal($method)) {
-                continue;
-            }
-            $docComment = $method->getDocComment();
-            if ($docComment === false) {
-                // Method does not provide a doc comment.
-                continue;
-            }
-            $annotations = $this->getAdviceAnnotations($docComment);
-            if (count($annotations) === 0) {
-                // No advice annotations found.
-                continue;
-            }
-            // Advice method found, perform further checks.
-            if (!$method->isPublic()) {
-                throw new RuntimeException('Advice '. $method->getName() . ' must be public.');
-            }
-            foreach ($annotations as $type => $pointcuts) {
+        $aspectInfo = new AspectPHP_Reflection_Aspect($aspect);
+        foreach ($aspectInfo->getAdvices() as $advice) {
+            /* @var $advice AspectPHP_Reflection_Advice */
+            foreach ($this->supportedTags as $type) {
                 /* @var $type string */
-                /* @var $pointcuts array(string) */
-                foreach ($pointcuts as $pointcut) {
-                    /* @var $pointcut string */
-                    if (!$aspectInfo->hasMethod($pointcut)) {
-                        $message = 'Pointcut method %s referenced by advice %s does not exist.';
-                        $message = sprintf($message, $pointcut, $method->getName());
-                        throw new RuntimeException($message);
-                    }
-                    /* @var $pointcutMethod ReflectionMethod */
-                    $pointcutMethod = $aspectInfo->getMethod($pointcut);
-                    if (!$pointcutMethod->isPublic()) {
-                        $message = 'Pointcut method %s referenced by advice %s must be public.';
-                        $message = sprintf($message, $pointcut, $method->getName());
-                        throw new RuntimeException($message);
-                    }
-                    $pointcutObject = $pointcutMethod->invoke($aspect);
-                    if (!($pointcutObject instanceof AspectPHP_Pointcut)) {
-                        $message = 'Pointcut method %s referenced by advice %s must return an instance '
-                                 . 'of AspectPHP_Pointcut.';
-                        $message = sprintf($message, $pointcut, $method->getName());
-                        throw new RuntimeException($message);
-                    }
-                    // Advice and pointcut method are valid, therefore create and add an advice object.
-                    $advice = new AspectPHP_Advice_Callback($pointcutObject, array($aspect, $method->getName()));
-                    $advices->{$type}()->add($advice);
+                foreach ($advice->getPointcutsByType($type) as $pointcutMethod) {
+                    /* @var $pointcutMethod AspectPHP_Reflection_Pointcut */
+                    $pointcut = $pointcutMethod->createPointcut($aspect);
+                    $advisor  = new AspectPHP_Advice_Callback($pointcut, array($aspect, $advice->getName()));
+                    $advices->{$type}()->add($advisor);
                 }
             }
         }
