@@ -147,7 +147,7 @@ class AspectPHP_Reflection_Advice extends AspectPHP_Reflection_Method
      */
     protected function assertIsAdvice()
     {
-        if ($this->getDocComment() === false) {
+        if (!$this->hasDocComment()) {
             $message = 'Method %s() in aspect %s does not provide a doc comment.';
             throw new AspectPHP_Reflection_Exception($this->message($message));
         }
