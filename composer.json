@@ -2,6 +2,7 @@
 	"name": "Matthimatiker/AspectPHP",
 	"description": "Aspect oriented programming for PHP.",
 	"keywords": ["PHP", "AOP", "aspect"],
+	"homepage": "https://github.com/Matthimatiker/AspectPHP",
 	"type": "library",
 	"license": "BSD",
 	"authors": [
