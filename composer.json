@@ -2,6 +2,7 @@
 	"name": "Matthimatiker/AspectPHP",
 	"description": "Aspect oriented programming for PHP.",
 	"keywords": ["PHP", "AOP", "aspect"],
+	"type": "library",
 	"require": {
 		"php": ">=5.3.0"
 	}
