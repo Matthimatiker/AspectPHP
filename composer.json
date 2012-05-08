@@ -4,6 +4,11 @@
 	"keywords": ["PHP", "AOP", "aspect"],
 	"type": "library",
 	"license": "BSD",
+	"authors": [
+	    {
+	        "name": "Matthias Molitor"
+	    }
+    ],
 	"require": {
 		"php": ">=5.3.0"
 	}
