@@ -4,7 +4,7 @@
 	"keywords": ["PHP", "AOP", "aspect"],
 	"homepage": "https://github.com/Matthimatiker/AspectPHP",
 	"type": "library",
-	"license": "BSD",
+	"license": "BSD-3",
 	"authors": [
 	    {
 	        "name": "Matthias Molitor"
