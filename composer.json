@@ -1,23 +1,23 @@
 {
-	"name": "Matthimatiker/AspectPHP",
-	"description": "Aspect oriented programming for PHP.",
-	"keywords": ["PHP", "AOP", "aspect"],
-	"homepage": "https://github.com/Matthimatiker/AspectPHP",
-	"type": "library",
-	"license": "BSD-3",
-	"authors": [
-	    {
-	        "name": "Matthias Molitor",
-	        "email": "matthias@matthimatiker.de",
-	        "homepage": "http://www.matthimatiker.de"
-	    }
+    "name": "Matthimatiker/AspectPHP",
+    "description": "Aspect oriented programming for PHP.",
+    "keywords": ["PHP", "AOP", "aspect"],
+    "homepage": "https://github.com/Matthimatiker/AspectPHP",
+    "type": "library",
+    "license": "BSD-3",
+    "authors": [
+        {
+            "name": "Matthias Molitor",
+            "email": "matthias@matthimatiker.de",
+            "homepage": "http://www.matthimatiker.de"
+        }
     ],
-	"require": {
-		"php": ">=5.3.0"
-	},
-	"autoload": {
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
         "psr-0": { 
-        	"AspectPHP": "library/" 
-		}
+            "AspectPHP": "library/"
+        }
     }
 }
