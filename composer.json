@@ -7,7 +7,9 @@
 	"license": "BSD-3",
 	"authors": [
 	    {
-	        "name": "Matthias Molitor"
+	        "name": "Matthias Molitor",
+	        "email": "matthias@matthimatiker.de",
+	        "homepage": "http://www.matthimatiker.de"
 	    }
     ],
 	"require": {
