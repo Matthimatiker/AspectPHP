@@ -7,7 +7,7 @@ provided by the PHP Core.
 
 ## Requirements ##
 
-AspectPHP requires at least PHP 5.3. No additional packages or 
+AspectPHP requires at least *PHP 5.3*. No additional packages or 
 extensions are required.
 
 ## Concept ##
@@ -36,5 +36,14 @@ Install AspectPHP via
     php composer.phar install
 
 ## Configuration ##
+
+Before using AspectPHP the environment must be initialized.
+
+Add the following lines after setting the include path:
+
+    // Set up your include path here.
+    
+    $environment = new AspectPHP_Environment();
+    $environment->initialize();
 
 ## Usage ##
