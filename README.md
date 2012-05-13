@@ -10,8 +10,6 @@ provided by the PHP Core.
 AspectPHP requires at least *PHP 5.3*. No additional packages or 
 extensions are required.
 
-## Concept ##
-
 ## Installation ##
 
 ### Composer ###
@@ -104,3 +102,21 @@ to the method that triggered it:
                    or an exception.
 
 ### Register Aspect ###
+
+To activate an aspect an instance of the class must be registered at the 
+aspect manager.
+
+The manager can be retrieved from the environment:
+
+    $manager = $environment->getManager();
+    
+The *register()* method is used to add the aspect:
+
+    $manager->register(new DemoAspect());
+    
+Afterwards each call to a *Demo* method triggers the *beforeExecution()*
+advice:
+
+    $demo = new Demo();
+    // Displays "before sayHello" and executes sayHello() afterwards.
+    $demo->sayHello();
