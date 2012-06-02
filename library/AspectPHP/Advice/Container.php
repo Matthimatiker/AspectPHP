@@ -1,10 +1,10 @@
 <?php
 
 /**
- * AspectPHP_Advice_Container
+ * AspectPHP_Advisor_Container
  *
  * @category PHP
- * @package AspectPHP_Advice
+ * @package AspectPHP_Advisor
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @license http://www.opensource.org/licenses/BSD-3-Clause BSD License
@@ -13,30 +13,30 @@
  */
 
 /**
- * Container class that holds an arbitrary number of advices grouped by type.
+ * Container class that holds an arbitrary number of advisors grouped by advice type.
  *
  * The container provides a composite object for each advice type. An arbitrary
- * number of advices may be added for each type:
+ * number of advisors may be added for each type:
  * <code>
- * $container = new AspectPHP_Advice_Container();
- * $container->before()->add($myAdvice);
+ * $container = new AspectPHP_Advisor_Container();
+ * $container->before()->add($myAdvisor);
  * </code>
  *
  * @category PHP
- * @package AspectPHP_Advice
+ * @package AspectPHP_Advisor
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @license http://www.opensource.org/licenses/BSD-3-Clause BSD License
  * @link https://github.com/Matthimatiker/AspectPHP
  * @since 29.03.2012
  */
-class AspectPHP_Advice_Container implements Countable
+class AspectPHP_Advisor_Container implements Countable
 {
     
     /**
      * Contains a composite object for each advice type.
      *
-     * The composites contain the added advices.
+     * The composites contain the added advisors.
      * The name of the advice type (for example "before")
      * is used as key.
      *
@@ -57,7 +57,7 @@ class AspectPHP_Advice_Container implements Countable
     }
     
     /**
-     * Returns a composite that holds the before advices.
+     * Returns a composite that holds the before advisors.
      *
      * @return AspectPHP_Advisor_Composite
      */
@@ -67,7 +67,7 @@ class AspectPHP_Advice_Container implements Countable
     }
     
     /**
-     * Returns a composite that holds the afterReturning advices.
+     * Returns a composite that holds the afterReturning advisors.
      *
      * @return AspectPHP_Advisor_Composite
      */
@@ -77,7 +77,7 @@ class AspectPHP_Advice_Container implements Countable
     }
     
     /**
-     * Returns a composite that holds the afterThrowing advices.
+     * Returns a composite that holds the afterThrowing advisors.
      *
      * @return AspectPHP_Advisor_Composite
      */
@@ -87,7 +87,7 @@ class AspectPHP_Advice_Container implements Countable
     }
     
     /**
-     * Returns a composite that holds the after advices.
+     * Returns a composite that holds the after advisors.
      *
      * @return AspectPHP_Advisor_Composite
      */
@@ -97,12 +97,12 @@ class AspectPHP_Advice_Container implements Countable
     }
     
     /**
-     * Merges all advices of the given container into this container.
+     * Merges all advisors of the given container into this container.
      *
-     * The given container is not modified.
+     * The provided container is not modified.
      *
-     * @param AspectPHP_Advice_Container $container
-     * @return AspectPHP_Advice_Container
+     * @param AspectPHP_Advisor_Container $container
+     * @return AspectPHP_Advisor_Container
      */
     public function merge(AspectPHP_Advice_Container $container)
     {
