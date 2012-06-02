@@ -40,7 +40,7 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager
      *
      * A string that identifies an aspect object is used as key.
      *
-     * @var array(string=>AspectPHP_Advice_Container)
+     * @var array(string=>AspectPHP_Advisor_Container)
      */
     protected $advicesByAspect = array();
     
