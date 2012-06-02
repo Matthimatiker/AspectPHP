@@ -42,7 +42,7 @@ class AspectPHP_Advisor_Container implements Countable
      *
      * @var array(string=>AspectPHP_Advisor_Composite)
      */
-    protected $advicesByType = array();
+    protected $advisorsByType = array();
     
     /**
      * Creates the container.
@@ -52,7 +52,7 @@ class AspectPHP_Advisor_Container implements Countable
         // Initialize the composite objects.
         foreach (AspectPHP_Advice_Type::all() as $type) {
             /* @var $type string */
-            $this->advicesByType[$type] = new AspectPHP_Advisor_Composite();
+            $this->advisorsByType[$type] = new AspectPHP_Advisor_Composite();
         }
     }
     
@@ -63,7 +63,7 @@ class AspectPHP_Advisor_Container implements Countable
      */
     public function before()
     {
-        return $this->advicesByType[AspectPHP_Advice_Type::BEFORE];
+        return $this->advisorsByType[AspectPHP_Advice_Type::BEFORE];
     }
     
     /**
@@ -73,7 +73,7 @@ class AspectPHP_Advisor_Container implements Countable
      */
     public function afterReturning()
     {
-        return $this->advicesByType[AspectPHP_Advice_Type::AFTER_RETURNING];
+        return $this->advisorsByType[AspectPHP_Advice_Type::AFTER_RETURNING];
     }
     
     /**
@@ -83,7 +83,7 @@ class AspectPHP_Advisor_Container implements Countable
      */
     public function afterThrowing()
     {
-        return $this->advicesByType[AspectPHP_Advice_Type::AFTER_THROWING];
+        return $this->advisorsByType[AspectPHP_Advice_Type::AFTER_THROWING];
     }
     
     /**
@@ -93,7 +93,7 @@ class AspectPHP_Advisor_Container implements Countable
      */
     public function after()
     {
-        return $this->advicesByType[AspectPHP_Advice_Type::AFTER];
+        return $this->advisorsByType[AspectPHP_Advice_Type::AFTER];
     }
     
     /**
@@ -106,10 +106,10 @@ class AspectPHP_Advisor_Container implements Countable
      */
     public function merge(AspectPHP_Advice_Container $container)
     {
-        foreach ($this->advicesByType as $type => $composite) {
+        foreach ($this->advisorsByType as $type => $composite) {
             /* @var $type string */
             /* @var $composite AspectPHP_Advisor_Composite */
-            $composite->merge($container->advicesByType[$type]);
+            $composite->merge($container->advisorsByType[$type]);
         }
         return $this;
     }
@@ -122,7 +122,7 @@ class AspectPHP_Advisor_Container implements Countable
     public function count()
     {
         $numberOfAdvices = 0;
-        foreach ($this->advicesByType as $composite) {
+        foreach ($this->advisorsByType as $composite) {
             /* @var $composite AspectPHP_Advisor_Composite */
             $numberOfAdvices += count($composite);
         }
