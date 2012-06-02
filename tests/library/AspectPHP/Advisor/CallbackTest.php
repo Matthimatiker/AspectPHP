@@ -46,8 +46,8 @@ class AspectPHP_Advisor_CallbackTest extends PHPUnit_Framework_TestCase
     public function testAdvisorImplementsInterface()
     {
         $callback = $this->createCallbackObject();
-        $advice   = new AspectPHP_Advice_Callback($this->createPointcut(), $this->toCallback($callback));
-        $this->assertInstanceOf('AspectPHP_Advisor', $advice);
+        $advisor  = new AspectPHP_Advice_Callback($this->createPointcut(), $this->toCallback($callback));
+        $this->assertInstanceOf('AspectPHP_Advisor', $advisor);
     }
     
     /**
