@@ -23,7 +23,7 @@
  * @link https://github.com/Matthimatiker/AspectPHP
  * @since 27.03.2012
  */
-class AspectPHP_Advice_Callback implements AspectPHP_Advice
+class AspectPHP_Advice_Callback implements AspectPHP_Advisor
 {
     
     /**

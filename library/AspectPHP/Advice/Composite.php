@@ -23,7 +23,7 @@
  * @link https://github.com/Matthimatiker/AspectPHP
  * @since 28.03.2012
  */
-class AspectPHP_Advice_Composite implements AspectPHP_Advice, AspectPHP_Pointcut, IteratorAggregate, Countable
+class AspectPHP_Advice_Composite implements AspectPHP_Advisor, AspectPHP_Pointcut, IteratorAggregate, Countable
 {
     
     /**
