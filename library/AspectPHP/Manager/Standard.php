@@ -56,7 +56,6 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager
      */
     public function __construct()
     {
-        $this->advices   = new AspectPHP_Advice_Container();
         $this->extractor = new AspectPHP_Advice_Extractor();
     }
     
