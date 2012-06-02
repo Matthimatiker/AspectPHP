@@ -29,13 +29,16 @@ class AspectPHP_Advice_Extractor
     /**
      * Extracts the advices from the given aspect.
      *
+     * Advices are represented by advisor objects, a combination of
+     * pointcut and advice.
+     *
      * @param AspectPHP_Aspect $aspect
-     * @return AspectPHP_Advice_Container A container that contains the advices grouped by type.
+     * @return AspectPHP_Advisor_Container A container that contains advisors grouped by type.
      * @throws AspectPHP_Reflection_Exception If advices or pointcuts are not valid.
      */
     public function getAdvicesFrom(AspectPHP_Aspect $aspect)
     {
-        $advices    = new AspectPHP_Advice_Container();
+        $advisors   = new AspectPHP_Advisor_Container();
         $aspectInfo = new AspectPHP_Reflection_Aspect($aspect);
         foreach ($aspectInfo->getAdvices() as $advice) {
             /* @var $advice AspectPHP_Reflection_Advice */
@@ -44,12 +47,12 @@ class AspectPHP_Advice_Extractor
                 foreach ($advice->getPointcutsByType($type) as $pointcutMethod) {
                     /* @var $pointcutMethod AspectPHP_Reflection_Pointcut */
                     $pointcut = $pointcutMethod->createPointcut($aspect);
-                    $advisor  = new AspectPHP_Advice_Callback($pointcut, array($aspect, $advice->getName()));
-                    $advices->{$type}()->add($advisor);
+                    $advisor  = new AspectPHP_Advisor_Callback($pointcut, array($aspect, $advice->getName()));
+                    $advisors->{$type}()->add($advisor);
                 }
             }
         }
-        return $advices;
+        return $advisors;
     }
     
 }
