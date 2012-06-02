@@ -36,7 +36,7 @@ class AspectPHP_Advisor_ContainerTest extends PHPUnit_Framework_TestCase
     /**
      * System under test.
      *
-     * @var AspectPHP_Advice_Container
+     * @var AspectPHP_Advisor_Container
      */
     protected $container = null;
     
@@ -46,7 +46,7 @@ class AspectPHP_Advisor_ContainerTest extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->container = new AspectPHP_Advice_Container();
+        $this->container = new AspectPHP_Advisor_Container();
     }
     
     /**
@@ -59,35 +59,35 @@ class AspectPHP_Advisor_ContainerTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * Checks if before() returns an AspectPHP_Advice_Composite object.
+     * Checks if before() returns an AspectPHP_Advisor_Composite object.
      */
     public function testBeforeReturnsComposite()
     {
-        $this->assertInstanceOf('AspectPHP_Advice_Composite', $this->container->before());
+        $this->assertInstanceOf('AspectPHP_Advisor_Composite', $this->container->before());
     }
     
     /**
-     * Checks if afterReturning() returns an AspectPHP_Advice_Composite object.
+     * Checks if afterReturning() returns an AspectPHP_Advisor_Composite object.
      */
     public function testAfterReturningReturnsComposite()
     {
-        $this->assertInstanceOf('AspectPHP_Advice_Composite', $this->container->afterReturning());
+        $this->assertInstanceOf('AspectPHP_Advisor_Composite', $this->container->afterReturning());
     }
     
     /**
-     * Checks if afterThrowing() returns an AspectPHP_Advice_Composite object.
+     * Checks if afterThrowing() returns an AspectPHP_Advisor_Composite object.
      */
     public function testAfterThrowingReturnsComposite()
     {
-        $this->assertInstanceOf('AspectPHP_Advice_Composite', $this->container->afterThrowing());
+        $this->assertInstanceOf('AspectPHP_Advisor_Composite', $this->container->afterThrowing());
     }
     
     /**
-     * Checks if after() returns an AspectPHP_Advice_Composite object.
+     * Checks if after() returns an AspectPHP_Advisor_Composite object.
      */
     public function testAfterReturnsComposite()
     {
-        $this->assertInstanceOf('AspectPHP_Advice_Composite', $this->container->after());
+        $this->assertInstanceOf('AspectPHP_Advisor_Composite', $this->container->after());
     }
     
     /**
@@ -148,22 +148,22 @@ class AspectPHP_Advisor_ContainerTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * Ensures that count() returns 0 if no advice was added.
+     * Ensures that count() returns 0 if no advisor was added.
      */
-    public function testCountReturnsZeroIfNoAdviceWasAdded()
+    public function testCountReturnsZeroIfNoAdvisorWasAdded()
     {
         $this->assertEquals(0, $this->container->count());
     }
     
     /**
-     * Checks if count() returns the number of added advices.
+     * Checks if count() returns the number of added advisors.
      */
-    public function testCountReturnsNumberOfAllAddedAdvices()
+    public function testCountReturnsNumberOfAllAddedAdvisors()
     {
-        $this->container->before()->add($this->createAdvice());
-        $this->container->afterReturning()->add($this->createAdvice());
-        $this->container->afterThrowing()->add($this->createAdvice());
-        $this->container->after()->add($this->createAdvice());
+        $this->container->before()->add($this->createAdvisor());
+        $this->container->afterReturning()->add($this->createAdvisor());
+        $this->container->afterThrowing()->add($this->createAdvisor());
+        $this->container->after()->add($this->createAdvisor());
         $this->assertEquals(4, $this->container->count());
     }
     
@@ -172,38 +172,38 @@ class AspectPHP_Advisor_ContainerTest extends PHPUnit_Framework_TestCase
      */
     public function testMergeProvidesFluentInterface()
     {
-        $anotherContainer = new AspectPHP_Advice_Container();
+        $anotherContainer = new AspectPHP_Advisor_Container();
         $this->assertSame($this->container, $this->container->merge($anotherContainer));
     }
     
     /**
-     * Ensures that merge() adds all advices from the given container.
+     * Ensures that merge() adds all advisors from the given container.
      */
-    public function testMergeAddsAllAdvicesFromProvidedContainer()
+    public function testMergeAddsAllAdvisorsFromProvidedContainer()
     {
-        $anotherContainer = new AspectPHP_Advice_Container();
-        $anotherContainer->before()->add($this->createAdvice());
-        $anotherContainer->afterReturning()->add($this->createAdvice());
-        $anotherContainer->afterThrowing()->add($this->createAdvice());
-        $anotherContainer->after()->add($this->createAdvice());
+        $anotherContainer = new AspectPHP_Advisor_Container();
+        $anotherContainer->before()->add($this->createAdvisor());
+        $anotherContainer->afterReturning()->add($this->createAdvisor());
+        $anotherContainer->afterThrowing()->add($this->createAdvisor());
+        $anotherContainer->after()->add($this->createAdvisor());
         
-        $this->container->before()->add($this->createAdvice());
-        $this->container->afterReturning()->add($this->createAdvice());
-        $this->container->afterThrowing()->add($this->createAdvice());
-        $this->container->after()->add($this->createAdvice());
+        $this->container->before()->add($this->createAdvisor());
+        $this->container->afterReturning()->add($this->createAdvisor());
+        $this->container->afterThrowing()->add($this->createAdvisor());
+        $this->container->after()->add($this->createAdvisor());
         
         $this->container->merge($anotherContainer);
         $this->assertEquals(8, $this->container->count());
     }
     
     /**
-     * Creates a mocked advice for testing.
+     * Creates a mocked advisor for testing.
      *
-     * @return AspectPHP_Advice
+     * @return AspectPHP_Advisor
      */
-    protected function createAdvice()
+    protected function createAdvisor()
     {
-        $mock = $this->getMock('AspectPHP_Advice');
+        $mock = $this->getMock('AspectPHP_Advisor');
         $mock->expects($this->any())
              ->method('getPointcut')
              ->will($this->returnValue(new AspectPHP_Pointcut_All()));
