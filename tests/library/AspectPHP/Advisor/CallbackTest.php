@@ -43,7 +43,7 @@ class AspectPHP_Advisor_CallbackTest extends PHPUnit_Framework_TestCase
     /**
      * Checks if the class implements the advisor interface.
      */
-    public function testAdviceImplementsInterface()
+    public function testAdvisorImplementsInterface()
     {
         $callback = $this->createCallbackObject();
         $advice   = new AspectPHP_Advice_Callback($this->createPointcut(), $this->toCallback($callback));
@@ -54,7 +54,7 @@ class AspectPHP_Advisor_CallbackTest extends PHPUnit_Framework_TestCase
      * Ensures that the constructor throws an exception if an invalid
      * callback argument is provided.
      */
-    public function testAdviceThrowsExceptionIfInvalidCallbackIsProvided()
+    public function testAdvisorThrowsExceptionIfInvalidCallbackIsProvided()
     {
         $this->setExpectedException('InvalidArgumentException');
         new AspectPHP_Advice_Callback($this->createPointcut(), null);
@@ -65,7 +65,7 @@ class AspectPHP_Advisor_CallbackTest extends PHPUnit_Framework_TestCase
      * callback seems valid, but it is not callable (for example if the
      * callback references a private method).
      */
-    public function testAdviceThrowsExceptionIfProvidedCallbackIsNotCallable()
+    public function testAdvisorThrowsExceptionIfProvidedCallbackIsNotCallable()
     {
         $this->setExpectedException('InvalidArgumentException');
         // The createPointcut() method is protected and cannot be called by the advice object.
@@ -75,7 +75,7 @@ class AspectPHP_Advisor_CallbackTest extends PHPUnit_Framework_TestCase
     /**
      * Checks if invoke() calls the callback method.
      */
-    public function testAdviceInvokesCallbackMethod()
+    public function testAdvisorInvokesCallbackMethod()
     {
         $callback = $this->createCallbackObject();
         $callback->expects($this->once())
@@ -88,7 +88,7 @@ class AspectPHP_Advisor_CallbackTest extends PHPUnit_Framework_TestCase
      * Ensures that invoke() passes the provided join point
      * to the callback method.
      */
-    public function testAdvicePassesJoinPointToCallbackMethod()
+    public function testAdvisorPassesJoinPointToCallbackMethod()
     {
         $callback = $this->createCallbackObject();
         $callback->expects($this->any())
