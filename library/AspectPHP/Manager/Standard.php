@@ -102,6 +102,7 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager
      * @param string $method
      * @return AspectPHP_Advisor_Container
      * @todo Refactoring: move parts of method to container
+     * @todo Return just advices, update type in interface
      */
     public function getAdvicesFor($method)
     {
