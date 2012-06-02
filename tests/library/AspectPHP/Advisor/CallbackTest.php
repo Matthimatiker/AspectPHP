@@ -68,7 +68,7 @@ class AspectPHP_Advisor_CallbackTest extends PHPUnit_Framework_TestCase
     public function testAdvisorThrowsExceptionIfProvidedCallbackIsNotCallable()
     {
         $this->setExpectedException('InvalidArgumentException');
-        // The createPointcut() method is protected and cannot be called by the advice object.
+        // The createPointcut() method is protected and cannot be called by the advisor object.
         new AspectPHP_Advisor_Callback($this->createPointcut(), array($this, 'createPointcut'));
     }
     
@@ -80,8 +80,8 @@ class AspectPHP_Advisor_CallbackTest extends PHPUnit_Framework_TestCase
         $callback = $this->createCallbackObject();
         $callback->expects($this->once())
                  ->method(self::CALLBACK_NAME);
-        $advice = new AspectPHP_Advice_Callback($this->createPointcut(), $this->toCallback($callback));
-        $advice->invoke($this->createJoinPoint());
+        $advisor = new AspectPHP_Advisor_Callback($this->createPointcut(), $this->toCallback($callback));
+        $advisor->invoke($this->createJoinPoint());
     }
     
     /**
@@ -94,8 +94,8 @@ class AspectPHP_Advisor_CallbackTest extends PHPUnit_Framework_TestCase
         $callback->expects($this->any())
                  ->method(self::CALLBACK_NAME)
                  ->with($this->isInstanceOf('AspectPHP_JoinPoint'));
-        $advice = new AspectPHP_Advice_Callback($this->createPointcut(), $this->toCallback($callback));
-        $advice->invoke($this->createJoinPoint());
+        $advisor = new AspectPHP_Advisor_Callback($this->createPointcut(), $this->toCallback($callback));
+        $advisor->invoke($this->createJoinPoint());
     }
     
     /**
@@ -105,8 +105,8 @@ class AspectPHP_Advisor_CallbackTest extends PHPUnit_Framework_TestCase
     public function testGetPointcutReturnsProvidedPointcut()
     {
         $pointcut = $this->createPointcut();
-        $advice   = new AspectPHP_Advisor_Callback($pointcut, $this->toCallback($this->createCallbackObject()));
-        $this->assertSame($pointcut, $advice->getPointcut());
+        $advisor  = new AspectPHP_Advisor_Callback($pointcut, $this->toCallback($this->createCallbackObject()));
+        $this->assertSame($pointcut, $advisor->getPointcut());
     }
     
     /**
