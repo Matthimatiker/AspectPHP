@@ -590,13 +590,13 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
     }
     
     /**
-     * Creates an empty advice container for testing.
+     * Creates an empty advisor container for testing.
      *
-     * @return AspectPHP_Advice_Container
+     * @return AspectPHP_Advisor_Container
      */
     protected function createContainer()
     {
-        return new AspectPHP_Advice_Container();
+        return new AspectPHP_Advisor_Container();
     }
     
     /**
@@ -621,14 +621,14 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
     }
     
     /**
-     * Creates an advice that invokes the provided callback mock.
+     * Creates an advisor that invokes the provided callback mock.
      *
      * @param PHPUnit_Framework_MockObject_MockObject $mock
-     * @return AspectPHP_Advice
+     * @return AspectPHP_Advisor
      */
     protected function toAdvice(PHPUnit_Framework_MockObject_MockObject $mock)
     {
-        return new AspectPHP_Advice_Callback(new AspectPHP_Pointcut_All(), $this->toCallback($mock));
+        return new AspectPHP_Advisor_Callback(new AspectPHP_Pointcut_All(), $this->toCallback($mock));
     }
     
     /**
