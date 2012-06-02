@@ -101,18 +101,18 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager
      * See {@link AspectPHP_Manager::getAdvicesFor()} for details.
      *
      * @param string $method
-     * @return AspectPHP_Advice_Container
+     * @return AspectPHP_Advisor_Container
      * @todo Refactoring: move parts of method to container
      */
     public function getAdvicesFor($method)
     {
-        $container = new AspectPHP_Advice_Container();
+        $container = new AspectPHP_Advisor_Container();
         foreach ($this->advicesByAspect as $advices) {
             /* @var $advices AspectPHP_Advice_Container */
             foreach (AspectPHP_Advice_Type::all() as $type) {
                 /* @var $type string */
                 foreach ($advices->{$type}() as $advice) {
-                    /* @var $advice AspectPHP_Advice */
+                    /* @var $advice AspectPHP_Advisor */
                     if ($advice->getPointcut()->matches($method)) {
                         $container->{$type}()->add($advice);
                     }
