@@ -4,7 +4,7 @@
  * AspectPHP_Advice_CompositeTest
  *
  * @category PHP
- * @package AspectPHP_Advice
+ * @package AspectPHP_Advisor
  * @subpackage Tests
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
@@ -22,7 +22,7 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
  * Tests the composite advice.
  *
  * @category PHP
- * @package AspectPHP_Advice
+ * @package AspectPHP_Advisor
  * @subpackage Tests
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor

@@ -4,7 +4,7 @@
  * AspectPHP_Advice_ContainerTest
  *
  * @category PHP
- * @package AspectPHP_Advice
+ * @package AspectPHP_Advisor
  * @subpackage Tests
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
@@ -22,7 +22,7 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
  * Tests the advice container implementation.
  *
  * @category PHP
- * @package AspectPHP_Advice
+ * @package AspectPHP_Advisor
  * @subpackage Tests
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
