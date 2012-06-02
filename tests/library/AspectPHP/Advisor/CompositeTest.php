@@ -38,7 +38,7 @@ class AspectPHP_Advisor_CompositeTest extends PHPUnit_Framework_TestCase
      *
      * @var AspectPHP_Advice_Composite
      */
-    protected $advice = null;
+    protected $advisor = null;
     
     /**
      * See {@link PHPUnit_Framework_TestCase::setUp()} for details.
@@ -46,7 +46,7 @@ class AspectPHP_Advisor_CompositeTest extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->advice = new AspectPHP_Advice_Composite();
+        $this->advisor = new AspectPHP_Advice_Composite();
     }
     
     /**
@@ -54,7 +54,7 @@ class AspectPHP_Advisor_CompositeTest extends PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        $this->advice = null;
+        $this->advisor = null;
         parent::tearDown();
     }
     
@@ -63,7 +63,7 @@ class AspectPHP_Advisor_CompositeTest extends PHPUnit_Framework_TestCase
      */
     public function testImplementsAdviceInterface()
     {
-        $this->assertInstanceOf('AspectPHP_Advice', $this->advice);
+        $this->assertInstanceOf('AspectPHP_Advice', $this->advisor);
     }
     
     /**
@@ -72,7 +72,7 @@ class AspectPHP_Advisor_CompositeTest extends PHPUnit_Framework_TestCase
      */
     public function testGetPointcutReturnsPointcutObjectEvenIfNoAdviceWasAdded()
     {
-        $this->assertInstanceOf('AspectPHP_Pointcut', $this->advice->getPointcut());
+        $this->assertInstanceOf('AspectPHP_Pointcut', $this->advisor->getPointcut());
     }
     
     /**
@@ -81,7 +81,7 @@ class AspectPHP_Advisor_CompositeTest extends PHPUnit_Framework_TestCase
      */
     public function testPointcutDoesNotMatchIfNoAdviceWasAdded()
     {
-        $pointcut = $this->advice->getPointcut();
+        $pointcut = $this->advisor->getPointcut();
         $this->assertInstanceOf('AspectPHP_Pointcut', $pointcut);
         $this->assertFalse($pointcut->matches(__METHOD__));
     }
@@ -92,7 +92,7 @@ class AspectPHP_Advisor_CompositeTest extends PHPUnit_Framework_TestCase
     public function testInvokeDoesNothingIfNoAdviceWasAdded()
     {
         $this->setExpectedException(null);
-        $this->advice->invoke($this->createJoinPoint());
+        $this->advisor->invoke($this->createJoinPoint());
     }
     
     /**
@@ -101,7 +101,7 @@ class AspectPHP_Advisor_CompositeTest extends PHPUnit_Framework_TestCase
     public function testAddProvidesFluentInterface()
     {
         $innerAdvice = $this->createAdvice(new AspectPHP_Pointcut_None());
-        $this->assertSame($this->advice, $this->advice->add($innerAdvice));
+        $this->assertSame($this->advisor, $this->advisor->add($innerAdvice));
     }
     
     /**
@@ -116,9 +116,9 @@ class AspectPHP_Advisor_CompositeTest extends PHPUnit_Framework_TestCase
         $secondAdvice = $this->createAdvice(new AspectPHP_Pointcut_None());
         $secondAdvice->expects($this->once())
                      ->method('invoke');
-        $this->advice->add($firstAdvice);
-        $this->advice->add($secondAdvice);
-        $this->advice->invoke($this->createJoinPoint());
+        $this->advisor->add($firstAdvice);
+        $this->advisor->add($secondAdvice);
+        $this->advisor->invoke($this->createJoinPoint());
     }
     
     /**
@@ -126,7 +126,7 @@ class AspectPHP_Advisor_CompositeTest extends PHPUnit_Framework_TestCase
      */
     public function testCompositeImplementsCountable()
     {
-        $this->assertInstanceOf('Countable', $this->advice);
+        $this->assertInstanceOf('Countable', $this->advisor);
     }
     
     /**
@@ -134,7 +134,7 @@ class AspectPHP_Advisor_CompositeTest extends PHPUnit_Framework_TestCase
      */
     public function testCountReturnsZeroIfNoAdviceWasAdded()
     {
-        $this->assertEquals(0, $this->advice->count());
+        $this->assertEquals(0, $this->advisor->count());
     }
     
     /**
@@ -142,9 +142,9 @@ class AspectPHP_Advisor_CompositeTest extends PHPUnit_Framework_TestCase
      */
     public function testCountReturnsNumberOfAddedAdvices()
     {
-        $this->advice->add($this->createAdvice(new AspectPHP_Pointcut_None()));
-        $this->advice->add($this->createAdvice(new AspectPHP_Pointcut_None()));
-        $this->assertEquals(2, $this->advice->count());
+        $this->advisor->add($this->createAdvice(new AspectPHP_Pointcut_None()));
+        $this->advisor->add($this->createAdvice(new AspectPHP_Pointcut_None()));
+        $this->assertEquals(2, $this->advisor->count());
     }
     
     /**
@@ -153,9 +153,9 @@ class AspectPHP_Advisor_CompositeTest extends PHPUnit_Framework_TestCase
      */
     public function testPointcutMatchesIfAllInnerAdvicePointcutsMatch()
     {
-        $this->advice->add($this->createAdvice(new AspectPHP_Pointcut_All()));
-        $this->advice->add($this->createAdvice(new AspectPHP_Pointcut_All()));
-        $pointcut = $this->advice->getPointcut();
+        $this->advisor->add($this->createAdvice(new AspectPHP_Pointcut_All()));
+        $this->advisor->add($this->createAdvice(new AspectPHP_Pointcut_All()));
+        $pointcut = $this->advisor->getPointcut();
         $this->assertInstanceOf('AspectPHP_Pointcut', $pointcut);
         $this->assertTrue($pointcut->matches(__METHOD__));
     }
@@ -166,9 +166,9 @@ class AspectPHP_Advisor_CompositeTest extends PHPUnit_Framework_TestCase
      */
     public function testPointcutDoesNotMatchIfOneInnerAdvicePointcutDoesNotMatch()
     {
-        $this->advice->add($this->createAdvice(new AspectPHP_Pointcut_All()));
-        $this->advice->add($this->createAdvice(new AspectPHP_Pointcut_None()));
-        $pointcut = $this->advice->getPointcut();
+        $this->advisor->add($this->createAdvice(new AspectPHP_Pointcut_All()));
+        $this->advisor->add($this->createAdvice(new AspectPHP_Pointcut_None()));
+        $pointcut = $this->advisor->getPointcut();
         $this->assertInstanceOf('AspectPHP_Pointcut', $pointcut);
         $this->assertFalse($pointcut->matches(__METHOD__));
     }
@@ -179,7 +179,7 @@ class AspectPHP_Advisor_CompositeTest extends PHPUnit_Framework_TestCase
     public function testMergeProvidesFluentInterface()
     {
         $anotherComposite = new AspectPHP_Advice_Composite();
-        $this->assertSame($this->advice, $this->advice->merge($anotherComposite));
+        $this->assertSame($this->advisor, $this->advisor->merge($anotherComposite));
     }
     
     /**
@@ -189,9 +189,9 @@ class AspectPHP_Advisor_CompositeTest extends PHPUnit_Framework_TestCase
     {
         $anotherComposite = new AspectPHP_Advice_Composite();
         $anotherComposite->add($this->createAdvice(new AspectPHP_Pointcut_All()));
-        $this->advice->add($this->createAdvice(new AspectPHP_Pointcut_All()));
-        $this->advice->merge($anotherComposite);
-        $this->assertEquals(2, $this->advice->count());
+        $this->advisor->add($this->createAdvice(new AspectPHP_Pointcut_All()));
+        $this->advisor->merge($anotherComposite);
+        $this->assertEquals(2, $this->advisor->count());
     }
     
     /**
@@ -199,7 +199,7 @@ class AspectPHP_Advisor_CompositeTest extends PHPUnit_Framework_TestCase
      */
     public function testCompositeIsTraversable()
     {
-        $this->assertInstanceOf('Traversable', $this->advice);
+        $this->assertInstanceOf('Traversable', $this->advisor);
     }
     
     /**
@@ -208,9 +208,9 @@ class AspectPHP_Advisor_CompositeTest extends PHPUnit_Framework_TestCase
      */
     public function testIterationReturnsNothingIfNoAdviceWasAdded()
     {
-        $this->assertInstanceOf('Traversable', $this->advice);
+        $this->assertInstanceOf('Traversable', $this->advisor);
         $numberOfItems = 0;
-        foreach ($this->advice as $advice) {
+        foreach ($this->advisor as $advice) {
             $numberOfItems++;
         }
         $this->assertEquals(0, $numberOfItems);
@@ -221,8 +221,8 @@ class AspectPHP_Advisor_CompositeTest extends PHPUnit_Framework_TestCase
      */
     public function testIterationReturnsOnlyAdvices()
     {
-        $this->assertInstanceOf('Traversable', $this->advice);
-        $this->assertContainsOnly('AspectPHP_Advice', $this->advice);
+        $this->assertInstanceOf('Traversable', $this->advisor);
+        $this->assertContainsOnly('AspectPHP_Advice', $this->advisor);
     }
     
     /**
@@ -233,10 +233,10 @@ class AspectPHP_Advisor_CompositeTest extends PHPUnit_Framework_TestCase
     {
         $first  = $this->createAdvice(new AspectPHP_Pointcut_All());
         $second = $this->createAdvice(new AspectPHP_Pointcut_None());
-        $this->advice->add($first);
-        $this->advice->add($second);
-        $this->assertInstanceOf('Traversable', $this->advice);
-        foreach ($this->advice as $advice) {
+        $this->advisor->add($first);
+        $this->advisor->add($second);
+        $this->assertInstanceOf('Traversable', $this->advisor);
+        foreach ($this->advisor as $advice) {
             $this->assertContains($advice, array($first, $second));
         }
     }
