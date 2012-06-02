@@ -1,7 +1,7 @@
 <?php
 
 /**
- * AspectPHP_Advice_Callback
+ * AspectPHP_Advisor_CallbackTest
  *
  * @category PHP
  * @package AspectPHP_Advisor
