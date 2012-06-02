@@ -119,7 +119,7 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
     {
         $aspect  = new Extractor_MockAspect();
         $advices = $this->extractor->getAdvicesFrom($aspect);
-        $this->assertInstanceOf('AspectPHP_Advice_Container', $advices);
+        $this->assertInstanceOf('AspectPHP_Advisor_Container', $advices);
         $this->assertEquals(2, count($advices->afterReturning()));
     }
     
@@ -130,7 +130,7 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
     {
         $aspect  = new Extractor_MockAspect();
         $advices = $this->extractor->getAdvicesFrom($aspect);
-        $this->assertInstanceOf('AspectPHP_Advice_Container', $advices);
+        $this->assertInstanceOf('AspectPHP_Advisor_Container', $advices);
         $this->assertEquals(2, count($advices->afterThrowing()));
     }
     
@@ -141,7 +141,7 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
     {
         $aspect  = new Extractor_MockAspect();
         $advices = $this->extractor->getAdvicesFrom($aspect);
-        $this->assertInstanceOf('AspectPHP_Advice_Container', $advices);
+        $this->assertInstanceOf('AspectPHP_Advisor_Container', $advices);
         $this->assertEquals(2, count($advices->after()));
     }
     
@@ -153,7 +153,7 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
     {
         $aspect  = new Extractor_MultipleReferencedPointcutAspect();
         $advices = $this->extractor->getAdvicesFrom($aspect);
-        $this->assertInstanceOf('AspectPHP_Advice_Container', $advices);
+        $this->assertInstanceOf('AspectPHP_Advisor_Container', $advices);
         $this->assertEquals(1, count($advices->before()), 'Unexpected number of before advices.');
         $this->assertEquals(1, count($advices->after()), 'Unexpected number of after advices.');
     }
@@ -165,7 +165,7 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
     {
         $aspect  = new Extractor_MockAspect();
         $advices = $this->extractor->getAdvicesFrom($aspect);
-        $this->assertInstanceOf('AspectPHP_Advice_Container', $advices);
+        $this->assertInstanceOf('AspectPHP_Advisor_Container', $advices);
         $advices->before()->invoke($this->createJoinPoint());
         $this->assertContains('adviceBeforeOne', $aspect->getCalledMethods());
         $this->assertContains('adviceBeforeTwo', $aspect->getCalledMethods());
@@ -178,7 +178,7 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
     {
         $aspect  = new Extractor_MockAspect();
         $advices = $this->extractor->getAdvicesFrom($aspect);
-        $this->assertInstanceOf('AspectPHP_Advice_Container', $advices);
+        $this->assertInstanceOf('AspectPHP_Advisor_Container', $advices);
         $advices->afterReturning()->invoke($this->createJoinPoint());
         $this->assertContains('adviceAfterReturningOne', $aspect->getCalledMethods());
         $this->assertContains('adviceAfterReturningTwo', $aspect->getCalledMethods());
@@ -191,7 +191,7 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
     {
         $aspect  = new Extractor_MockAspect();
         $advices = $this->extractor->getAdvicesFrom($aspect);
-        $this->assertInstanceOf('AspectPHP_Advice_Container', $advices);
+        $this->assertInstanceOf('AspectPHP_Advisor_Container', $advices);
         $advices->afterThrowing()->invoke($this->createJoinPoint());
         $this->assertContains('adviceAfterThrowingOne', $aspect->getCalledMethods());
         $this->assertContains('adviceAfterThrowingTwo', $aspect->getCalledMethods());
@@ -204,7 +204,7 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
     {
         $aspect  = new Extractor_MockAspect();
         $advices = $this->extractor->getAdvicesFrom($aspect);
-        $this->assertInstanceOf('AspectPHP_Advice_Container', $advices);
+        $this->assertInstanceOf('AspectPHP_Advisor_Container', $advices);
         $advices->after()->invoke($this->createJoinPoint());
         $this->assertContains('adviceAfterOne', $aspect->getCalledMethods());
         $this->assertContains('adviceAfterTwo', $aspect->getCalledMethods());
@@ -229,7 +229,7 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
     {
         $aspect  = new Extractor_MultiplePointcutsForSameTypeAspect();
         $advices = $this->extractor->getAdvicesFrom($aspect);
-        $this->assertInstanceOf('AspectPHP_Advice_Container', $advices);
+        $this->assertInstanceOf('AspectPHP_Advisor_Container', $advices);
         // One advice for each reference is expected.
         $this->assertEquals(2, count($advices->before()));
     }
