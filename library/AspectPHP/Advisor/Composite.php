@@ -60,7 +60,7 @@ class AspectPHP_Advisor_Composite implements AspectPHP_Advisor, AspectPHP_Pointc
      * Adds the provided advice to the composite.
      *
      * @param AspectPHP_Advice $advice
-     * @return AspectPHP_Advice_Composite Provides a fluent interface.
+     * @return AspectPHP_Advisor_Composite Provides a fluent interface.
      */
     public function add(AspectPHP_Advice $advice)
     {
@@ -73,8 +73,8 @@ class AspectPHP_Advisor_Composite implements AspectPHP_Advisor, AspectPHP_Pointc
      *
      * The given composite is not modified.
      *
-     * @param AspectPHP_Advice_Composite $composite
-     * @return AspectPHP_Advice_Composite Provides a fluent interface.
+     * @param AspectPHP_Advisor_Composite $composite
+     * @return AspectPHP_Advisor_Composite Provides a fluent interface.
      */
     public function merge(AspectPHP_Advice_Composite $composite)
     {
@@ -115,7 +115,7 @@ class AspectPHP_Advisor_Composite implements AspectPHP_Advisor, AspectPHP_Pointc
             return false;
         }
         foreach ($this->advices as $advice) {
-            /* @var $advice AspectPHP_Advice */
+            /* @var $advice AspectPHP_Advisor */
             if (!$advice->getPointcut()->matches($method)) {
                 return false;
             }

@@ -40,7 +40,7 @@ class AspectPHP_Advice_Container implements Countable
      * The name of the advice type (for example "before")
      * is used as key.
      *
-     * @var array(string=>AspectPHP_Advice_Composite)
+     * @var array(string=>AspectPHP_Advisor_Composite)
      */
     protected $advicesByType = array();
     
@@ -52,14 +52,14 @@ class AspectPHP_Advice_Container implements Countable
         // Initialize the composite objects.
         foreach (AspectPHP_Advice_Type::all() as $type) {
             /* @var $type string */
-            $this->advicesByType[$type] = new AspectPHP_Advice_Composite();
+            $this->advicesByType[$type] = new AspectPHP_Advisor_Composite();
         }
     }
     
     /**
      * Returns a composite that holds the before advices.
      *
-     * @return AspectPHP_Advice_Composite
+     * @return AspectPHP_Advisor_Composite
      */
     public function before()
     {
@@ -69,7 +69,7 @@ class AspectPHP_Advice_Container implements Countable
     /**
      * Returns a composite that holds the afterReturning advices.
      *
-     * @return AspectPHP_Advice_Composite
+     * @return AspectPHP_Advisor_Composite
      */
     public function afterReturning()
     {
@@ -79,7 +79,7 @@ class AspectPHP_Advice_Container implements Countable
     /**
      * Returns a composite that holds the afterThrowing advices.
      *
-     * @return AspectPHP_Advice_Composite
+     * @return AspectPHP_Advisor_Composite
      */
     public function afterThrowing()
     {
@@ -89,7 +89,7 @@ class AspectPHP_Advice_Container implements Countable
     /**
      * Returns a composite that holds the after advices.
      *
-     * @return AspectPHP_Advice_Composite
+     * @return AspectPHP_Advisor_Composite
      */
     public function after()
     {
@@ -108,7 +108,7 @@ class AspectPHP_Advice_Container implements Countable
     {
         foreach ($this->advicesByType as $type => $composite) {
             /* @var $type string */
-            /* @var $composite AspectPHP_Advice_Composite */
+            /* @var $composite AspectPHP_Advisor_Composite */
             $composite->merge($container->advicesByType[$type]);
         }
         return $this;
@@ -123,7 +123,7 @@ class AspectPHP_Advice_Container implements Countable
     {
         $numberOfAdvices = 0;
         foreach ($this->advicesByType as $composite) {
-            /* @var $composite AspectPHP_Advice_Composite */
+            /* @var $composite AspectPHP_Advisor_Composite */
             $numberOfAdvices += count($composite);
         }
         return $numberOfAdvices;
