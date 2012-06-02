@@ -1,39 +1,38 @@
 <?php
 
 /**
- * AspectPHP_Advisor
+ * AspectPHP_Advice
  *
  * @category PHP
- * @package AspectPHP_Advisor
+ * @package AspectPHP_Advice
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @license http://www.opensource.org/licenses/BSD-3-Clause BSD License
  * @link https://github.com/Matthimatiker/AspectPHP
- * @since 27.03.2012
+ * @since 02.06.2012
  */
 
 /**
- * Interface for advisors.
+ * Interface for advices.
  *
- * An advisor consists of a pointcut and advice code that is executed if
- * the specified join point occurs.
+ * An advice is a piece of code that can be executed if a join point occurs.
  *
  * @category PHP
- * @package AspectPHP_Advisor
+ * @package AspectPHP_Advice
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @license http://www.opensource.org/licenses/BSD-3-Clause BSD License
  * @link https://github.com/Matthimatiker/AspectPHP
- * @since 27.03.2012
+ * @since 02.06.2012
  */
-interface AspectPHP_Advisor extends AspectPHP_Advice
+interface AspectPHP_Advice
 {
     
     /**
-     * Returns the pointcut.
+     * Executes the advice code.
      *
-     * @return AspectPHP_Pointcut
+     * @param AspectPHP_JoinPoint $joinPoint
      */
-    public function getPointcut();
+    public function invoke(AspectPHP_JoinPoint $joinPoint);
     
 }
