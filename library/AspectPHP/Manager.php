@@ -49,11 +49,11 @@ interface AspectPHP_Manager
     public function getAspects();
     
     /**
-     * Returns a container with all advices that are registered for the
-     * given method.
+     * Returns a container with all advices (represented by advisor objects) that
+     * are registered for the given method.
      *
      * @param string $method
-     * @return AspectPHP_Advice_Container
+     * @return AspectPHP_Advisor_Container
      */
     public function getAdvicesFor($method);
     
