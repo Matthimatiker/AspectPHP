@@ -30,7 +30,7 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
  * @link https://github.com/Matthimatiker/AspectPHP
  * @since 27.03.2012
  */
-class AspectPHP_Advice_CallbackTest extends PHPUnit_Framework_TestCase
+class AspectPHP_Advisor_CallbackTest extends PHPUnit_Framework_TestCase
 {
     
     /**
