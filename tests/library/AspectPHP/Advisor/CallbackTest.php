@@ -46,7 +46,7 @@ class AspectPHP_Advisor_CallbackTest extends PHPUnit_Framework_TestCase
     public function testAdvisorImplementsInterface()
     {
         $callback = $this->createCallbackObject();
-        $advisor  = new AspectPHP_Advice_Callback($this->createPointcut(), $this->toCallback($callback));
+        $advisor  = new AspectPHP_Advisor_Callback($this->createPointcut(), $this->toCallback($callback));
         $this->assertInstanceOf('AspectPHP_Advisor', $advisor);
     }
     
@@ -57,7 +57,7 @@ class AspectPHP_Advisor_CallbackTest extends PHPUnit_Framework_TestCase
     public function testAdvisorThrowsExceptionIfInvalidCallbackIsProvided()
     {
         $this->setExpectedException('InvalidArgumentException');
-        new AspectPHP_Advice_Callback($this->createPointcut(), null);
+        new AspectPHP_Advisor_Callback($this->createPointcut(), null);
     }
     
     /**
@@ -69,7 +69,7 @@ class AspectPHP_Advisor_CallbackTest extends PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('InvalidArgumentException');
         // The createPointcut() method is protected and cannot be called by the advice object.
-        new AspectPHP_Advice_Callback($this->createPointcut(), array($this, 'createPointcut'));
+        new AspectPHP_Advisor_Callback($this->createPointcut(), array($this, 'createPointcut'));
     }
     
     /**
@@ -105,7 +105,7 @@ class AspectPHP_Advisor_CallbackTest extends PHPUnit_Framework_TestCase
     public function testGetPointcutReturnsProvidedPointcut()
     {
         $pointcut = $this->createPointcut();
-        $advice   = new AspectPHP_Advice_Callback($pointcut, $this->toCallback($this->createCallbackObject()));
+        $advice   = new AspectPHP_Advisor_Callback($pointcut, $this->toCallback($this->createCallbackObject()));
         $this->assertSame($pointcut, $advice->getPointcut());
     }
     
