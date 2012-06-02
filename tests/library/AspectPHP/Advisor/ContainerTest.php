@@ -1,7 +1,7 @@
 <?php
 
 /**
- * AspectPHP_Advice_ContainerTest
+ * AspectPHP_Advisor_ContainerTest
  *
  * @category PHP
  * @package AspectPHP_Advisor
