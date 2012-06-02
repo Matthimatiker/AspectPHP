@@ -34,7 +34,7 @@ class AspectPHP_Advisor_Composite implements AspectPHP_Advisor, AspectPHP_Pointc
     protected $advisors = array();
     
     /**
-     * See {@link AspectPHP_Advice::getPointcut()} for details.
+     * See {@link AspectPHP_Advisor::getPointcut()} for details.
      *
      * @return AspectPHP_Pointcut
      */
@@ -44,7 +44,7 @@ class AspectPHP_Advisor_Composite implements AspectPHP_Advisor, AspectPHP_Pointc
     }
     
     /**
-     * See {@link AspectPHP_Advice::invoke()} for details.
+     * See {@link AspectPHP_Advisor::invoke()} for details.
      *
      * @param AspectPHP_JoinPoint $joinPoint
      */

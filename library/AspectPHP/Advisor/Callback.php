@@ -58,7 +58,7 @@ class AspectPHP_Advisor_Callback implements AspectPHP_Advisor
     }
     
     /**
-     * See {@link AspectPHP_Advice::getPointcut()} for details.
+     * See {@link AspectPHP_Advisor::getPointcut()} for details.
      *
      * @return AspectPHP_Pointcut
      */
@@ -68,7 +68,7 @@ class AspectPHP_Advisor_Callback implements AspectPHP_Advisor
     }
     
     /**
-     * See {@link AspectPHP_Advice::invoke()} for details.
+     * See {@link AspectPHP_Advisor::invoke()} for details.
      *
      * @param AspectPHP_JoinPoint $joinPoint
      */
