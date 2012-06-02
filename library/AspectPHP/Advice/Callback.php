@@ -4,7 +4,7 @@
  * AspectPHP_Advice_Callback
  *
  * @category PHP
- * @package AspectPHP_Advice
+ * @package AspectPHP_Advisor
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @license http://www.opensource.org/licenses/BSD-3-Clause BSD License
@@ -16,7 +16,7 @@
  * Encapsulates a pointcut and a callback that is used to execute advice code.
  *
  * @category PHP
- * @package AspectPHP_Advice
+ * @package AspectPHP_Advisor
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @license http://www.opensource.org/licenses/BSD-3-Clause BSD License

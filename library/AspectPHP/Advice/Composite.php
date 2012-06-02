@@ -4,7 +4,7 @@
  * AspectPHP_Advice_Composite
  *
  * @category PHP
- * @package AspectPHP_Advice
+ * @package AspectPHP_Advisor
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @license http://www.opensource.org/licenses/BSD-3-Clause BSD License
@@ -16,7 +16,7 @@
  * Class that encapsulates multiple advices and behaves like a single advice.
  *
  * @category PHP
- * @package AspectPHP_Advice
+ * @package AspectPHP_Advisor
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2012 Matthias Molitor
  * @license http://www.opensource.org/licenses/BSD-3-Clause BSD License
