@@ -67,7 +67,7 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager
     public function register(AspectPHP_Aspect $aspect)
     {
         $this->aspects[] = $aspect;
-        $this->advisorsByAspect[spl_object_hash($aspect)] = $this->extractAdvices($aspect);
+        $this->advisorsByAspect[spl_object_hash($aspect)] = $this->extractAdvisors($aspect);
     }
     
     /**
@@ -122,12 +122,12 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager
     }
     
     /**
-     * Extracts all advices from the given aspect.
+     * Extracts all advisors from the given aspect.
      *
      * @param AspectPHP_Aspect $aspect
      * @return AspectPHP_Advisor_Container
      */
-    protected function extractAdvices(AspectPHP_Aspect $aspect)
+    protected function extractAdvisors(AspectPHP_Aspect $aspect)
     {
         return $this->extractor->getAdvicesFrom($aspect);
     }
