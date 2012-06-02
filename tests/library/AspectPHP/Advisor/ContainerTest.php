@@ -19,7 +19,7 @@
 require_once(dirname(__FILE__) . '/bootstrap.php');
 
 /**
- * Tests the advice container implementation.
+ * Tests the advisor container implementation.
  *
  * @category PHP
  * @package AspectPHP_Advisor

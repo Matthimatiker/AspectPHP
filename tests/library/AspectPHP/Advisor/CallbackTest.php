@@ -19,7 +19,7 @@
 require_once(dirname(__FILE__) . '/bootstrap.php');
 
 /**
- * Tests the callback advice implementation.
+ * Tests the callback advisor implementation.
  *
  * @category PHP
  * @package AspectPHP_Advisor

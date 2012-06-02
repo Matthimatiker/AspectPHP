@@ -19,7 +19,7 @@
 require_once(dirname(__FILE__) . '/bootstrap.php');
 
 /**
- * Tests the composite advice.
+ * Tests the composite advisor.
  *
  * @category PHP
  * @package AspectPHP_Advisor
