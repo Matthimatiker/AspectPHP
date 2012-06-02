@@ -1,7 +1,7 @@
 <?php
 
 /**
- * AspectPHP_Advice_Composite
+ * AspectPHP_Advisor_Composite
  *
  * @category PHP
  * @package AspectPHP_Advisor
@@ -13,7 +13,7 @@
  */
 
 /**
- * Class that encapsulates multiple advices and behaves like a single advice.
+ * Class that encapsulates multiple advisors and behaves like a single advisor.
  *
  * @category PHP
  * @package AspectPHP_Advisor
@@ -23,7 +23,7 @@
  * @link https://github.com/Matthimatiker/AspectPHP
  * @since 28.03.2012
  */
-class AspectPHP_Advice_Composite implements AspectPHP_Advisor, AspectPHP_Pointcut, IteratorAggregate, Countable
+class AspectPHP_Advisor_Composite implements AspectPHP_Advisor, AspectPHP_Pointcut, IteratorAggregate, Countable
 {
     
     /**

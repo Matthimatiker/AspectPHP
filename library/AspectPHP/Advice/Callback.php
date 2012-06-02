@@ -1,7 +1,7 @@
 <?php
 
 /**
- * AspectPHP_Advice_Callback
+ * AspectPHP_Advisor_Callback
  *
  * @category PHP
  * @package AspectPHP_Advisor
@@ -23,7 +23,7 @@
  * @link https://github.com/Matthimatiker/AspectPHP
  * @since 27.03.2012
  */
-class AspectPHP_Advice_Callback implements AspectPHP_Advisor
+class AspectPHP_Advisor_Callback implements AspectPHP_Advisor
 {
     
     /**
