@@ -36,13 +36,13 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager
     protected $aspects = array();
     
     /**
-     * Contains the advices of each registered aspect.
+     * Contains the advices (represented by advisor objects) of each registered aspect.
      *
      * A string that identifies an aspect object is used as key.
      *
      * @var array(string=>AspectPHP_Advisor_Container)
      */
-    protected $advicesByAspect = array();
+    protected $advisorsByAspect = array();
     
     /**
      * Helper object that is used to extract advices from aspects.
@@ -67,7 +67,7 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager
     public function register(AspectPHP_Aspect $aspect)
     {
         $this->aspects[] = $aspect;
-        $this->advicesByAspect[spl_object_hash($aspect)] = $this->extractAdvices($aspect);
+        $this->advisorsByAspect[spl_object_hash($aspect)] = $this->extractAdvices($aspect);
     }
     
     /**
@@ -83,7 +83,7 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager
             return;
         }
         unset($this->aspects[$index]);
-        unset($this->advicesByAspect[spl_object_hash($aspect)]);
+        unset($this->advisorsByAspect[spl_object_hash($aspect)]);
     }
     
     /**
@@ -106,7 +106,7 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager
     public function getAdvicesFor($method)
     {
         $container = new AspectPHP_Advisor_Container();
-        foreach ($this->advicesByAspect as $advices) {
+        foreach ($this->advisorsByAspect as $advices) {
             /* @var $advices AspectPHP_Advisor_Container */
             foreach (AspectPHP_Advice_Type::all() as $type) {
                 /* @var $type string */
