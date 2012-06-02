@@ -107,7 +107,7 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager
     {
         $container = new AspectPHP_Advisor_Container();
         foreach ($this->advicesByAspect as $advices) {
-            /* @var $advices AspectPHP_Advice_Container */
+            /* @var $advices AspectPHP_Advisor_Container */
             foreach (AspectPHP_Advice_Type::all() as $type) {
                 /* @var $type string */
                 foreach ($advices->{$type}() as $advice) {
@@ -125,7 +125,7 @@ class AspectPHP_Manager_Standard implements AspectPHP_Manager
      * Extracts all advices from the given aspect.
      *
      * @param AspectPHP_Aspect $aspect
-     * @return AspectPHP_Advice_Container
+     * @return AspectPHP_Advisor_Container
      */
     protected function extractAdvices(AspectPHP_Aspect $aspect)
     {

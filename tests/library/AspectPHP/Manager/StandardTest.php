@@ -114,7 +114,7 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase
     public function testGetAdvicesForReturnsContainer()
     {
         $advices = $this->manager->getAdvicesFor(__METHOD__);
-        $this->assertInstanceOf('AspectPHP_Advice_Container', $advices);
+        $this->assertInstanceOf('AspectPHP_Advisor_Container', $advices);
     }
     
     /**
@@ -125,7 +125,7 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase
     {
         $this->manager->register($this->createAspect());
         $advices = $this->manager->getAdvicesFor(__METHOD__);
-        $this->assertInstanceOf('AspectPHP_Advice_Container', $advices);
+        $this->assertInstanceOf('AspectPHP_Advisor_Container', $advices);
         $this->assertEquals(0, count($advices));
     }
     
@@ -137,7 +137,7 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase
     {
         $this->manager->register($this->createAspect());
         $advices = $this->manager->getAdvicesFor('User::save');
-        $this->assertInstanceOf('AspectPHP_Advice_Container', $advices);
+        $this->assertInstanceOf('AspectPHP_Advisor_Container', $advices);
         // The beforeLogMethodsAdvice() should not match the method.
         $this->assertEquals(0, count($advices->before()));
     }
@@ -149,7 +149,7 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase
     {
         $this->manager->register($this->createAspect());
         $advices = $this->manager->getAdvicesFor('User::save');
-        $this->assertInstanceOf('AspectPHP_Advice_Container', $advices);
+        $this->assertInstanceOf('AspectPHP_Advisor_Container', $advices);
         // The afterUserMethodAdvice() should match the method.
         $this->assertEquals(1, count($advices->after()));
     }
@@ -164,8 +164,8 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase
         $first  = $this->manager->getAdvicesFor('User::save');
         $second = $this->manager->getAdvicesFor('User::save');
         
-        $this->assertInstanceOf('AspectPHP_Advice_Container', $first);
-        $this->assertInstanceOf('AspectPHP_Advice_Container', $second);
+        $this->assertInstanceOf('AspectPHP_Advisor_Container', $first);
+        $this->assertInstanceOf('AspectPHP_Advisor_Container', $second);
         
         $message = 'Different number of before advices.';
         $this->assertEquals(count($first->before()), count($second->before()), $message);
@@ -187,12 +187,12 @@ class AspectPHP_Manager_StandardTest extends PHPUnit_Framework_TestCase
         $this->manager->register($this->createAspect());
         
         $advices = $this->manager->getAdvicesFor('User::save');
-        $this->assertInstanceOf('AspectPHP_Advice_Container', $advices);
+        $this->assertInstanceOf('AspectPHP_Advisor_Container', $advices);
         $advicesBeforeUnregistration = count($advices);
         
         $this->manager->unregister($aspect);
         $advices = $this->manager->getAdvicesFor('User::save');
-        $this->assertInstanceOf('AspectPHP_Advice_Container', $advices);
+        $this->assertInstanceOf('AspectPHP_Advisor_Container', $advices);
         $this->assertEquals($advicesBeforeUnregistration/2, count($advices));
     }
     

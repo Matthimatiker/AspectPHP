@@ -104,7 +104,7 @@ class AspectPHP_Advisor_Container implements Countable
      * @param AspectPHP_Advisor_Container $container
      * @return AspectPHP_Advisor_Container
      */
-    public function merge(AspectPHP_Advice_Container $container)
+    public function merge(AspectPHP_Advisor_Container $container)
     {
         foreach ($this->advisorsByType as $type => $composite) {
             /* @var $type string */

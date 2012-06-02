@@ -48,9 +48,9 @@ class AspectPHP_Transformation_Template_JoinPointHandlerTest extends PHPUnit_Fra
     protected $previousManager = null;
     
     /**
-     * Contains simulated advices.
+     * Contains simulated advisors.
      *
-     * @var AspectPHP_Advice_Container
+     * @var AspectPHP_Advisor_Container
      */
     protected $advices = null;
     

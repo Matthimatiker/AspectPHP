@@ -108,7 +108,7 @@ class AspectPHP_Advice_ExtractorTest extends PHPUnit_Framework_TestCase
     {
         $aspect  = new Extractor_MockAspect();
         $advices = $this->extractor->getAdvicesFrom($aspect);
-        $this->assertInstanceOf('AspectPHP_Advice_Container', $advices);
+        $this->assertInstanceOf('AspectPHP_Advisor_Container', $advices);
         $this->assertEquals(2, count($advices->before()));
     }
     
