@@ -41,7 +41,7 @@ class AspectPHP_Advisor_Callback implements AspectPHP_Advisor
     protected $callback = null;
     
     /**
-     * Creates an advice whose invoke() method will invoke the given callback.
+     * Creates an advisor whose invoke() method will invoke the given callback.
      *
      * @param AspectPHP_Pointcut $pointcut
      * @param mixed $callback A valid callback.

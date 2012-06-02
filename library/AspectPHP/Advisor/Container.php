@@ -115,18 +115,18 @@ class AspectPHP_Advisor_Container implements Countable
     }
     
     /**
-     * Returns the number of added advices.
+     * Returns the number of added advisors.
      *
      * @return integer
      */
     public function count()
     {
-        $numberOfAdvices = 0;
+        $numberOfAdvisors = 0;
         foreach ($this->advisorsByType as $composite) {
             /* @var $composite AspectPHP_Advisor_Composite */
-            $numberOfAdvices += count($composite);
+            $numberOfAdvisors += count($composite);
         }
-        return $numberOfAdvices;
+        return $numberOfAdvisors;
     }
     
 }
