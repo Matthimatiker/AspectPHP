@@ -27,11 +27,11 @@ class AspectPHP_Advisor_Composite implements AspectPHP_Advisor, AspectPHP_Pointc
 {
     
     /**
-     * A list of all added advices.
+     * A list of all added advisors.
      *
-     * @var array(AspectPHP_Advice)
+     * @var array(AspectPHP_Advisor)
      */
-    protected $advices = array();
+    protected $advisors = array();
     
     /**
      * See {@link AspectPHP_Advice::getPointcut()} for details.
@@ -50,57 +50,57 @@ class AspectPHP_Advisor_Composite implements AspectPHP_Advisor, AspectPHP_Pointc
      */
     public function invoke(AspectPHP_JoinPoint $joinPoint)
     {
-        foreach ($this->advices as $advice) {
-            /* @var $advice AspectPHP_Advice */
-            $advice->invoke($joinPoint);
+        foreach ($this->advisors as $advisor) {
+            /* @var $advisor AspectPHP_Advisor */
+            $advisor->invoke($joinPoint);
         }
     }
     
     /**
-     * Adds the provided advice to the composite.
+     * Adds the provided advisor to the composite.
      *
-     * @param AspectPHP_Advice $advice
+     * @param AspectPHP_Advisor $advisor
      * @return AspectPHP_Advisor_Composite Provides a fluent interface.
      */
-    public function add(AspectPHP_Advice $advice)
+    public function add(AspectPHP_Advisor $advisor)
     {
-        $this->advices[] = $advice;
+        $this->advisors[] = $advisor;
         return $this;
     }
     
     /**
-     * Merges all advices of the given composite into this composite.
+     * Merges all advisors of the given composite into this composite.
      *
      * The given composite is not modified.
      *
      * @param AspectPHP_Advisor_Composite $composite
      * @return AspectPHP_Advisor_Composite Provides a fluent interface.
      */
-    public function merge(AspectPHP_Advice_Composite $composite)
+    public function merge(AspectPHP_Advisor_Composite $composite)
     {
-        $this->advices = array_merge($this->advices, $composite->advices);
+        $this->advisors = array_merge($this->advisors, $composite->advisors);
         return $this;
     }
     
     /**
-     * Returns the number of registered advices.
+     * Returns the number of registered advisors.
      *
      * @return integer
      */
     public function count()
     {
-        return count($this->advices);
+        return count($this->advisors);
     }
     
     /**
-     * Returns an iterator that is used to iterate over all advices
+     * Returns an iterator that is used to iterate over all advisors
      * in this composite.
      *
      * @return Iterator
      */
     public function getIterator()
     {
-        return new ArrayIterator($this->advices);
+        return new ArrayIterator($this->advisors);
     }
     
     /**
@@ -114,9 +114,9 @@ class AspectPHP_Advisor_Composite implements AspectPHP_Advisor, AspectPHP_Pointc
         if (count($this) === 0) {
             return false;
         }
-        foreach ($this->advices as $advice) {
-            /* @var $advice AspectPHP_Advisor */
-            if (!$advice->getPointcut()->matches($method)) {
+        foreach ($this->advisors as $advisor) {
+            /* @var $advisor AspectPHP_Advisor */
+            if (!$advisor->getPointcut()->matches($method)) {
                 return false;
             }
         }
