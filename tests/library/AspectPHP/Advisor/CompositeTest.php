@@ -36,7 +36,7 @@ class AspectPHP_Advisor_CompositeTest extends PHPUnit_Framework_TestCase
     /**
      * System under test.
      *
-     * @var AspectPHP_Advice_Composite
+     * @var AspectPHP_Advisor_Composite
      */
     protected $advisor = null;
     
@@ -46,7 +46,7 @@ class AspectPHP_Advisor_CompositeTest extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->advisor = new AspectPHP_Advice_Composite();
+        $this->advisor = new AspectPHP_Advisor_Composite();
     }
     
     /**
@@ -59,27 +59,27 @@ class AspectPHP_Advisor_CompositeTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * Checks if the advice implements the AspectPHP_Advice interface.
+     * Checks if the advisor implements the AspectPHP_Advisor interface.
      */
-    public function testImplementsAdviceInterface()
+    public function testImplementsAdvisorInterface()
     {
-        $this->assertInstanceOf('AspectPHP_Advice', $this->advisor);
+        $this->assertInstanceOf('AspectPHP_Advisor', $this->advisor);
     }
     
     /**
-     * Ensures that getPointcut() returns a pointcut object even if no advice
+     * Ensures that getPointcut() returns a pointcut object even if no advisor
      * was added.
      */
-    public function testGetPointcutReturnsPointcutObjectEvenIfNoAdviceWasAdded()
+    public function testGetPointcutReturnsPointcutObjectEvenIfNoAdvisorWasAdded()
     {
         $this->assertInstanceOf('AspectPHP_Pointcut', $this->advisor->getPointcut());
     }
     
     /**
      * Ensures that getPointcut() returns a pointcut that does not match
-     * if no advice was added.
+     * if no advisor was added.
      */
-    public function testPointcutDoesNotMatchIfNoAdviceWasAdded()
+    public function testPointcutDoesNotMatchIfNoAdvisorWasAdded()
     {
         $pointcut = $this->advisor->getPointcut();
         $this->assertInstanceOf('AspectPHP_Pointcut', $pointcut);
@@ -87,9 +87,9 @@ class AspectPHP_Advisor_CompositeTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * Ensures that invoke() does nothing if no advice was added.
+     * Ensures that invoke() does nothing if no advisor was added.
      */
-    public function testInvokeDoesNothingIfNoAdviceWasAdded()
+    public function testInvokeDoesNothingIfNoAdvisorWasAdded()
     {
         $this->setExpectedException(null);
         $this->advisor->invoke($this->createJoinPoint());
@@ -100,24 +100,24 @@ class AspectPHP_Advisor_CompositeTest extends PHPUnit_Framework_TestCase
      */
     public function testAddProvidesFluentInterface()
     {
-        $innerAdvice = $this->createAdvice(new AspectPHP_Pointcut_None());
-        $this->assertSame($this->advisor, $this->advisor->add($innerAdvice));
+        $innerAdvisor = $this->createAdvisor(new AspectPHP_Pointcut_None());
+        $this->assertSame($this->advisor, $this->advisor->add($innerAdvisor));
     }
     
     /**
      * Ensures that invoke() calls the invoke() method of all
-     * added advices.
+     * added advisors.
      */
-    public function testInvokeCallsAllAddedAdvices()
+    public function testInvokeCallsAllAddedAdvisors()
     {
-        $firstAdvice = $this->createAdvice(new AspectPHP_Pointcut_None());
-        $firstAdvice->expects($this->once())
-                    ->method('invoke');
-        $secondAdvice = $this->createAdvice(new AspectPHP_Pointcut_None());
-        $secondAdvice->expects($this->once())
+        $firstAdvisor = $this->createAdvisor(new AspectPHP_Pointcut_None());
+        $firstAdvisor->expects($this->once())
                      ->method('invoke');
-        $this->advisor->add($firstAdvice);
-        $this->advisor->add($secondAdvice);
+        $secondAdvisor = $this->createAdvisor(new AspectPHP_Pointcut_None());
+        $secondAdvisor->expects($this->once())
+                      ->method('invoke');
+        $this->advisor->add($firstAdvisor);
+        $this->advisor->add($secondAdvisor);
         $this->advisor->invoke($this->createJoinPoint());
     }
     
@@ -130,31 +130,31 @@ class AspectPHP_Advisor_CompositeTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * Ensures that count() returns 0 if no advice was added.
+     * Ensures that count() returns 0 if no advisor was added.
      */
-    public function testCountReturnsZeroIfNoAdviceWasAdded()
+    public function testCountReturnsZeroIfNoAdvisorWasAdded()
     {
         $this->assertEquals(0, $this->advisor->count());
     }
     
     /**
-     * Checks if count() returns the number of registered advices.
+     * Checks if count() returns the number of registered advisors.
      */
-    public function testCountReturnsNumberOfAddedAdvices()
+    public function testCountReturnsNumberOfAddedAdvisors()
     {
-        $this->advisor->add($this->createAdvice(new AspectPHP_Pointcut_None()));
-        $this->advisor->add($this->createAdvice(new AspectPHP_Pointcut_None()));
+        $this->advisor->add($this->createAdvisor(new AspectPHP_Pointcut_None()));
+        $this->advisor->add($this->createAdvisor(new AspectPHP_Pointcut_None()));
         $this->assertEquals(2, $this->advisor->count());
     }
     
     /**
      * Ensures that the pointcut that is provided by getPointcut() matches
-     * if the pointcuts of all added advices match.
+     * if the pointcuts of all added advisors match.
      */
-    public function testPointcutMatchesIfAllInnerAdvicePointcutsMatch()
+    public function testPointcutMatchesIfAllInnerAdvisorsPointcutsMatch()
     {
-        $this->advisor->add($this->createAdvice(new AspectPHP_Pointcut_All()));
-        $this->advisor->add($this->createAdvice(new AspectPHP_Pointcut_All()));
+        $this->advisor->add($this->createAdvisor(new AspectPHP_Pointcut_All()));
+        $this->advisor->add($this->createAdvisor(new AspectPHP_Pointcut_All()));
         $pointcut = $this->advisor->getPointcut();
         $this->assertInstanceOf('AspectPHP_Pointcut', $pointcut);
         $this->assertTrue($pointcut->matches(__METHOD__));
@@ -162,12 +162,12 @@ class AspectPHP_Advisor_CompositeTest extends PHPUnit_Framework_TestCase
     
     /**
      * Ensures that the pointcut that is provided by getPointcut() does not match
-     * if at least one of the inner advice pointcuts does not match.
+     * if at least one of the inner advisor pointcuts does not match.
      */
-    public function testPointcutDoesNotMatchIfOneInnerAdvicePointcutDoesNotMatch()
+    public function testPointcutDoesNotMatchIfOneInnerAdvisorPointcutDoesNotMatch()
     {
-        $this->advisor->add($this->createAdvice(new AspectPHP_Pointcut_All()));
-        $this->advisor->add($this->createAdvice(new AspectPHP_Pointcut_None()));
+        $this->advisor->add($this->createAdvisor(new AspectPHP_Pointcut_All()));
+        $this->advisor->add($this->createAdvisor(new AspectPHP_Pointcut_None()));
         $pointcut = $this->advisor->getPointcut();
         $this->assertInstanceOf('AspectPHP_Pointcut', $pointcut);
         $this->assertFalse($pointcut->matches(__METHOD__));
@@ -178,18 +178,18 @@ class AspectPHP_Advisor_CompositeTest extends PHPUnit_Framework_TestCase
      */
     public function testMergeProvidesFluentInterface()
     {
-        $anotherComposite = new AspectPHP_Advice_Composite();
+        $anotherComposite = new AspectPHP_Advisor_Composite();
         $this->assertSame($this->advisor, $this->advisor->merge($anotherComposite));
     }
     
     /**
-     * Ensures that merge() adds all advices from the given composite.
+     * Ensures that merge() adds all advisors from the given composite.
      */
-    public function testMergeAddsAllAdvicesFromProvidedComposite()
+    public function testMergeAddsAllAdvisorsFromProvidedComposite()
     {
-        $anotherComposite = new AspectPHP_Advice_Composite();
-        $anotherComposite->add($this->createAdvice(new AspectPHP_Pointcut_All()));
-        $this->advisor->add($this->createAdvice(new AspectPHP_Pointcut_All()));
+        $anotherComposite = new AspectPHP_Advisor_Composite();
+        $anotherComposite->add($this->createAdvisor(new AspectPHP_Pointcut_All()));
+        $this->advisor->add($this->createAdvisor(new AspectPHP_Pointcut_All()));
         $this->advisor->merge($anotherComposite);
         $this->assertEquals(2, $this->advisor->count());
     }
@@ -204,52 +204,52 @@ class AspectPHP_Advisor_CompositeTest extends PHPUnit_Framework_TestCase
     
     /**
      * Ensures that iterating over the composite does not return any value
-     * if no advice was added.
+     * if no advisor was added.
      */
-    public function testIterationReturnsNothingIfNoAdviceWasAdded()
+    public function testIterationReturnsNothingIfNoAdvisorWasAdded()
     {
         $this->assertInstanceOf('Traversable', $this->advisor);
         $numberOfItems = 0;
-        foreach ($this->advisor as $advice) {
+        foreach ($this->advisor as $advisor) {
             $numberOfItems++;
         }
         $this->assertEquals(0, $numberOfItems);
     }
     
     /**
-     * Ensures that iterating over the composite returns only advices.
+     * Ensures that iterating over the composite returns only advisors.
      */
-    public function testIterationReturnsOnlyAdvices()
+    public function testIterationReturnsOnlyAdvisors()
     {
         $this->assertInstanceOf('Traversable', $this->advisor);
-        $this->assertContainsOnly('AspectPHP_Advice', $this->advisor);
+        $this->assertContainsOnly('AspectPHP_Advisor', $this->advisor);
     }
     
     /**
-     * Ensures that iterating over the composite returns the advices that
+     * Ensures that iterating over the composite returns the advisors that
      * were added before.
      */
-    public function testIterationReturnsAddedAdvices()
+    public function testIterationReturnsAddedAdvisors()
     {
-        $first  = $this->createAdvice(new AspectPHP_Pointcut_All());
-        $second = $this->createAdvice(new AspectPHP_Pointcut_None());
+        $first  = $this->createAdvisor(new AspectPHP_Pointcut_All());
+        $second = $this->createAdvisor(new AspectPHP_Pointcut_None());
         $this->advisor->add($first);
         $this->advisor->add($second);
         $this->assertInstanceOf('Traversable', $this->advisor);
-        foreach ($this->advisor as $advice) {
-            $this->assertContains($advice, array($first, $second));
+        foreach ($this->advisor as $advisor) {
+            $this->assertContains($advisor, array($first, $second));
         }
     }
     
     /**
-     * Creates a mocked advice for testing.
+     * Creates a mocked advisor for testing.
      *
      * @param AspectPHP_Pointcut $pointcut
      * @return PHPUnit_Framework_MockObject_MockObject
      */
-    protected function createAdvice(AspectPHP_Pointcut $pointcut)
+    protected function createAdvisor(AspectPHP_Pointcut $pointcut)
     {
-        $mock = $this->getMock('AspectPHP_Advice');
+        $mock = $this->getMock('AspectPHP_Advisor');
         $mock->expects($this->any())
              ->method('getPointcut')
              ->will($this->returnValue($pointcut));
