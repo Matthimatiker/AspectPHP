@@ -108,6 +108,8 @@ class AspectPHP_Advisor_Composite implements AspectPHP_Advisor, AspectPHP_Pointc
      *
      * @param string $method
      * @return boolean
+     * @todo Is this method ever used? Perhaps it makes sense to create an advice collection
+     *       instead of an advisor composite.
      */
     public function matches($method)
     {
