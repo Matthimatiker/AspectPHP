@@ -26,4 +26,27 @@
 interface AspectPHP_IJoinPoint
 {
     
+    /**
+     * Returns the object whose method is executed.
+     *
+     * Returns null if a static method was called.
+     *
+     * @return object|null
+     */
+    public function getThis();
+    
+    /**
+     * Returns the type of this join point.
+     *
+     * @return string One of the AspectPHP_Advice_Type::* constants.
+     */
+    public function getType();
+    
+    /**
+     * Returns the arguments that were used to call the method.
+     *
+     * @return array(mixed)
+     */
+    public function getArguments();
+    
 }
