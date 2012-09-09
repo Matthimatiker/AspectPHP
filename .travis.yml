@@ -9,4 +9,4 @@ before_script:
   - php composer.phar install --dev --no-interaction
   
 script:
-  - phpunit --configuration tests/phpunit.xml
+  - phpunit --configuration tests/phpunit.xml.dist
