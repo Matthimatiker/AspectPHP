@@ -17,7 +17,7 @@ extensions are required.
 ### Composer ###
 
 Add the github repository to your composer config and require
-*Matthimatiker/AspectPHP*:
+*matthimatiker/aspectphp*:
 
     {
         "repositories": [
@@ -27,7 +27,7 @@ Add the github repository to your composer config and require
              }
         ],
         "require": {
-            "Matthimatiker/AspectPHP" : "dev-master"
+            "matthimatiker/aspectphp" : "dev-master"
         }
     }
     
