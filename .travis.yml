@@ -9,4 +9,4 @@ before_script:
   - php composer.phar install --dev --no-interaction
   
 script:
-  - phpunit --configuration tests --coverage-text
+  - phpunit --configuration tests --coverage-text --colors
