@@ -24,7 +24,7 @@ class StreamCheck_Modification_LineNumber {
      */
     public function lineNumber()
     {
-        throw new RuntimeException('This exception was thrown in line 29.');
+        throw new RuntimeException('This exception was thrown in line 27.');
     }
     
 }
