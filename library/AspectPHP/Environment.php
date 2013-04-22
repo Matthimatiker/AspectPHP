@@ -49,6 +49,20 @@ class AspectPHP_Environment
     }
     
     /**
+     * Activates AspectPHP.
+     *
+     * Returns the manager that can be used to register aspects.
+     *
+     * @return AspectPHP_Manager
+     */
+    public function initialize()
+    {
+        $this->registerStream();
+        $this->exposeManager();
+        $this->prepareIncludePath();
+    }
+    
+    /**
      * Pepares the class loader to ensure that it loads
      * weaved classes.
      *
@@ -67,28 +81,31 @@ class AspectPHP_Environment
     }
     
     /**
-     * Activates AspectPHP.
-     *
-     * Returns the manager that can be used to register aspects.
-     *
-     * @return AspectPHP_Manager
-     */
-    public function initialize()
-    {
-        AspectPHP_Stream::register();
-        AspectPHP_Container::setManager($this->getManager());
-        $this->modifyIncludePath();
-    }
-    
-    /**
      * Modifies the include path and ensures that the classes
      * are loaded with the AspectPHP stream.
      */
-    protected function modifyIncludePath()
+    public function prepareIncludePath()
     {
         $paths = explode(PATH_SEPARATOR, get_include_path());
         $paths = array_map($this->getSchemeCallback(), $paths);
         set_include_path(implode(PATH_SEPARATOR, $paths));
+    }
+    
+    /**
+     * Registers the AspectPHP stream.
+     */
+    public function registerStream()
+    {
+        AspectPHP_Stream::register();
+        
+    }
+    
+    /**
+     * Exposes the manager and ensures that it is available globally.
+     */
+    public function exposeManager()
+    {
+        AspectPHP_Container::setManager($this->getManager());
     }
     
     /**
