@@ -69,15 +69,30 @@ class AspectPHP_EnvironmentTest extends PHPUnit_Framework_TestCase
      */
     public function testPrepareClassLoaderAddsProtocolToNamespacePaths()
     {
+        $this->environment->prepareClassLoader($this->loader);
         
+        $namespacePaths = $this->loader->getPrefixes();
+        $this->assertArrayHasKey('AspectPHP', $namespacePaths);
+        $paths = $namespacePaths['AspectPHP'];
+        $path  = current($paths);
+        $this->assertStringStartsWith(AspectPHP_Stream::NAME . '://', $path);
     }
     
     /**
      * Ensures that prepareClassLoader() does not change the number of namespace paths.
      */
-    public function testPrepareClassLoaderDoesNotChangeNumberOfRegsiteredNamespacePaths()
+    public function testPrepareClassLoaderDoesNotChangeNumberOfRegisteredNamespacePaths()
     {
+        $namespacePaths         = $this->loader->getPrefixes();
+        $numberOfNamespaces     = count($namespacePaths);
+        $numberOfAspectPhpPaths = count($namespacePaths['AspectPHP']);
         
+        $this->environment->prepareClassLoader($this->loader);
+        
+        $namespacePaths = $this->loader->getPrefixes();
+        $this->assertCount($numberOfNamespaces, $namespacePaths);
+        $this->assertArrayHasKey('AspectPHP', $namespacePaths);
+        $this->assertCount($numberOfAspectPhpPaths, $namespacePaths['AspectPHP']);
     }
     
     /**
@@ -86,7 +101,10 @@ class AspectPHP_EnvironmentTest extends PHPUnit_Framework_TestCase
      */
     public function testPrepareClassLoaderAddsProtocolToClassMapPaths()
     {
-        
+        $this->environment->prepareClassLoader($this->loader);
+        $map  = $this->loader->getClassMap();
+        $path = current($map);
+        $this->assertStringStartsWith(AspectPHP_Stream::NAME . '://', $path);
     }
     
     /**
@@ -95,7 +113,11 @@ class AspectPHP_EnvironmentTest extends PHPUnit_Framework_TestCase
      */
     public function testPrepareClassLoaderAddsDoesNotChangeSizeOfClassMap()
     {
+        $numberOfClasses = count($this->loader->getClassMap());
         
+        $this->environment->prepareClassLoader($this->loader);
+        
+        $this->assertCount($numberOfClasses, $this->loader->getClassMap());
     }
     
     /**
