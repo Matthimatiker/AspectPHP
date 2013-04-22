@@ -64,21 +64,35 @@ class AspectPHP_EnvironmentTest extends PHPUnit_Framework_TestCase
         parent::tearDown();
     }
     
+    /**
+     * Checks if prepareClassLoader() adds the AspectPHP protocol to namespace paths.
+     */
     public function testPrepareClassLoaderAddsProtocolToNamespacePaths()
     {
         
     }
     
+    /**
+     * Ensures that prepareClassLoader() does not change the number of namespace paths.
+     */
     public function testPrepareClassLoaderDoesNotChangeNumberOfRegsiteredNamespacePaths()
     {
         
     }
     
+    /**
+     * Checks if prepareClassLoader() adds the AspectPHP protocol to file paths
+     * in the class map.
+     */
     public function testPrepareClassLoaderAddsProtocolToClassMapPaths()
     {
         
     }
     
+    /**
+     * Ensures that prepareClassLoader() does not change the number of paths
+     * in the class map.
+     */
     public function testPrepareClassLoaderAddsDoesNotChangeSizeOfClassMap()
     {
         
