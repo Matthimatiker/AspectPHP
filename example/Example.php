@@ -17,14 +17,7 @@
  */
 require_once(dirname(__FILE__) . '/../Environment.config.php');
 
-// Add example directory to include path.
-set_include_path(dirname(__FILE__) . PATH_SEPARATOR . get_include_path());
-
-// Initialize the AspectPHP environment.
-$environment = new AspectPHP_Environment();
-$environment->initialize();
-
-$manager = $environment->getManager();
+$manager = AspectPHP_Container::getManager();
 $manager->register(new DemoAspect());
 
 $demo = new Demo();
