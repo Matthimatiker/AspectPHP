@@ -16,6 +16,11 @@
 use Composer\Autoload\ClassLoader;
 
 /**
+ * Initializes the test environment.
+ */
+require_once(dirname(__FILE__) . '/bootstrap.php');
+
+/**
  * Tests the environment intializer.
  *
  * @category PHP
