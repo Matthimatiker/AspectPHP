@@ -106,7 +106,12 @@ class AspectPHP_Stream
      */
     public static function addSchemeToPath($path)
     {
-        
+        $scheme = self::NAME . '://';
+        if (strpos($path, $scheme) === 0) {
+            // Path already uses the stream scheme.
+            return $path;
+        }
+        return $scheme . $path;
     }
     
     /**
