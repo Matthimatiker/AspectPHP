@@ -56,7 +56,14 @@ class AspectPHP_Environment
      */
     public function prepareClassLoader($loader)
     {
-        
+        $pathsByNamespace = $loader->getPrefixes();
+        foreach ($pathsByNamespace as $namespace => $paths) {
+            /* @var $namspace string */
+            /* @var $paths array(string) */
+            $loader->set($namespace, array_map(array($this, 'toStream'), $paths));
+        }
+        $map = array_map(array($this, 'toStream'), $loader->getClassMap());
+        $loader->addClassMap($map);
     }
     
     /**
