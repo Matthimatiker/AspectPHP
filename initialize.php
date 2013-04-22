@@ -11,7 +11,7 @@
  * @author Matthias Molitor <matthias@matthimatiker.de>
  * @copyright 2013 Matthias Molitor
  * @license http://www.opensource.org/licenses/BSD-3-Clause BSD License
- * @link https://github.com/Matthimatiker/*
+ * @link https://github.com/Matthimatiker/AspectPHP
  * @since 22.04.2013
  */
 
