@@ -20,7 +20,7 @@
             "AspectPHP": "library/"
         },
         "classmap": [
-            
+            "example"
         ],
         "files": [
             "initialize.php"
