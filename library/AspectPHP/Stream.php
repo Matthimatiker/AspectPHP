@@ -99,6 +99,17 @@ class AspectPHP_Stream
     }
     
     /**
+     * Adds the stream protocol to the given path.
+     *
+     * @param string $path
+     * @return string
+     */
+    public static function addProtocolToPath($path)
+    {
+        
+    }
+    
+    /**
      * Opens the code file and adds extension points.
      *
      * @param string $path

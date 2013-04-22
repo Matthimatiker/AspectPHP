@@ -470,6 +470,25 @@ class AspectPHP_StreamTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * Checks if addProtocolToPath() adds the stream protocol to the given path.
+     */
+    public function testAddProtocolToPathAddsStreamProtocol()
+    {
+        $path = '/srv/www';
+        $this->assertEquals(AspectPHP_Stream::NAME . '://' . $path, AspectPHP_Stream::addProtocolToPath($path));
+    }
+    
+    /**
+     * Ensures that addProtocolToPath() does not modify the provided path if it already
+     * uses the protocol.
+     */
+    public function testAddProtocolToPathDoesNotModifyPathIfProtocolIsAlreadyUsed()
+    {
+        $path = AspectPHP_Stream::NAME . ':///srv/www';
+        $this->assertEquals($path, AspectPHP_Stream::addProtocolToPath($path));
+    }
+    
+    /**
      * Asserts that the class $class has the method with the provided name.
      *
      * @param string $class
