@@ -18,7 +18,13 @@
     "autoload": {
         "psr-0": {
             "AspectPHP": "library/"
-        }
+        },
+        "classmap": [
+            
+        ],
+        "files": [
+            "initialize.php"
+        ]
     },
     "config": {
         "use-include-path": true
