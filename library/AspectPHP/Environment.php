@@ -12,6 +12,8 @@
  * @since 12.01.2012
  */
 
+use Composer\Autoload\ClassLoader;
+
 /**
  * Helper class that is able to configure the AspectPHP environment.
  *
@@ -47,6 +49,31 @@ class AspectPHP_Environment
     }
     
     /**
+     * Pepares the class loader to ensure that it loads
+     * weaved classes.
+     *
+     * @param Composer\Autoload\ClassLoader $loader
+     */
+    public function prepareClassLoader($loader)
+    {
+        
+    }
+    
+    /**
+     * Activates AspectPHP.
+     *
+     * Returns the manager that can be used to register aspects.
+     *
+     * @return AspectPHP_Manager
+     */
+    public function initialize()
+    {
+        AspectPHP_Stream::register();
+        AspectPHP_Container::setManager($this->getManager());
+        $this->modifyIncludePath();
+    }
+    
+    /**
      * Modifies the include path and ensures that the classes
      * are loaded with the AspectPHP stream.
      */
@@ -69,20 +96,6 @@ class AspectPHP_Environment
     protected function toStream($path)
     {
         return AspectPHP_Stream::NAME . '://' . $path;
-    }
-    
-    /**
-     * Activates AspectPHP.
-     *
-     * Returns the manager that can be used to register aspects.
-     *
-     * @return AspectPHP_Manager
-     */
-    public function initialize()
-    {
-        AspectPHP_Stream::register();
-        AspectPHP_Container::setManager($this->getManager());
-        $this->modifyIncludePath();
     }
     
 }
