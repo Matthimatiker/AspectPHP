@@ -24,5 +24,7 @@ $loader = call_user_func(array($loaderInitializer, 'getLoader'));
 
 // Hook into class loader and include path.
 $environment = new AspectPHP_Environment();
-//$environment->prepareClassLoader($loader);
-//$environment->initialize();
+$environment->exposeManager();
+$environment->registerStream();
+$environment->prepareClassLoader($loader);
+//$environment->prepareIncludePath();
