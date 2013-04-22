@@ -99,12 +99,12 @@ class AspectPHP_Stream
     }
     
     /**
-     * Adds the stream protocol to the given path.
+     * Adds the stream scheme to the given path.
      *
      * @param string $path
      * @return string
      */
-    public static function addProtocolToPath($path)
+    public static function addSchemeToPath($path)
     {
         
     }
