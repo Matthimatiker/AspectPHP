@@ -60,9 +60,9 @@ class AspectPHP_Environment
         foreach ($pathsByNamespace as $namespace => $paths) {
             /* @var $namspace string */
             /* @var $paths array(string) */
-            $loader->set($namespace, array_map(array($this, 'toStream'), $paths));
+            $loader->set($namespace, array_map($this->getSchemeCallback(), $paths));
         }
-        $map = array_map(array($this, 'toStream'), $loader->getClassMap());
+        $map = array_map($this->getSchemeCallback(), $loader->getClassMap());
         $loader->addClassMap($map);
     }
     
@@ -86,23 +86,19 @@ class AspectPHP_Environment
      */
     protected function modifyIncludePath()
     {
-        $paths         = explode(PATH_SEPARATOR, get_include_path());
-        $numberOfPaths = count($paths);
-        for ($i = 0; $i < $numberOfPaths; $i++) {
-            $paths[$i] = $this->toStream($paths[$i]);
-        }
+        $paths = explode(PATH_SEPARATOR, get_include_path());
+        $paths = array_map($this->getSchemeCallback(), $paths);
         set_include_path(implode(PATH_SEPARATOR, $paths));
     }
     
     /**
-     * Adds the AspectPHP stream scheme to the given path.
+     * Returns a callback that is used to add the AspectPHP stream scheme to paths.
      *
-     * @param string $path
-     * @return string
+     * @return callback
      */
-    protected function toStream($path)
+    protected function getSchemeCallback()
     {
-        return AspectPHP_Stream::NAME . '://' . $path;
+        return array('AspectPHP_Stream', 'addSchemeToPath');
     }
     
 }
