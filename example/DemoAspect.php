@@ -27,7 +27,7 @@ class DemoAspect implements AspectPHP_Aspect
 {
     
     /**
-     * Returns a pointcut that matches all method in the Demo class.
+     * Returns a pointcut that matches all methods in the Demo class.
      *
      * @return AspectPHP_Pointcut
      */
