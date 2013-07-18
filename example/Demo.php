@@ -27,9 +27,10 @@ class Demo
 {
     
     /**
-     * Outputs the given name.
+     * Outputs the provided name.
      *
      * @param string $name
+     * @return string The name.
      */
     public function sayHello($name)
     {
