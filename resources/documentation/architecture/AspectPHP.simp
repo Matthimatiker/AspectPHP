@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<sim-project version="6" multi-file="no">
+  <meta>
+    <name>AspectPHP</name>
+    <authors> Matthias Molitor</authors>
+    <description />
+  </meta>
+  <management>
+    <persons>
+      <person id="Pd605eea8e42f4592ad1cad3eef9b5eb2">
+        <first-name />
+        <last-name />
+        <role />
+        <e-mail />
+        <phone-number />
+        <description />
+        <color>#00000000</color>
+      </person>
+    </persons>
+    <tasks />
+    <requirements />
+    <issues />
+    <to-dos />
+  </management>
+  <glossary />
+  <types>
+    <type-sets>
+      <type-set file="UmlTypes.xml" />
+    </type-sets>
+    <custom-types />
+  </types>
+  <filters />
+  <items />
+  <models />
+  <documents />
+  <document-templates />
+</sim-project>
