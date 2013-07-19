@@ -3,5 +3,6 @@
 .settings
 .idea
 /build
+/resources/documentation/architecture/*.simp.bak
 /vendor
 composer.phar
